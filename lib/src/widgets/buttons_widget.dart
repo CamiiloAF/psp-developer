@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:psp_developer/generated/l10n.dart';
 
-Widget raisedButton(BuildContext context,
-    {String buttonText, Function onPress}) {
-  return RaisedButton(
-    child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-        child: Text(buttonText)),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-    color: Theme.of(context).primaryColor,
-    textColor: Colors.white,
-    onPressed: onPress,
-  );
+class CustomRaisedButton extends StatelessWidget {
+  final String buttonText;
+  final Function onPress;
+  final double paddingHorizontal;
+  final double paddingVertical;
+
+  const CustomRaisedButton({
+    this.buttonText,
+    this.onPress,
+    this.paddingHorizontal = 80,
+    this.paddingVertical = 15,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: paddingHorizontal, vertical: paddingVertical),
+          child: Text(buttonText)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      color: Theme.of(context).primaryColor,
+      textColor: Colors.white,
+      onPressed: onPress,
+    );
+  }
 }
 
 class FAB extends StatelessWidget {

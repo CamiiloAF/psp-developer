@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/time_logs_bloc.dart';
 import 'package:psp_developer/src/models/time_logs_model.dart';
+import 'package:psp_developer/src/pages/time_logs/time_log_edit_page.dart';
 import 'package:psp_developer/src/utils/searchs/search_delegate.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 
+import '../constants.dart';
+
 class SearchTimeLogs extends DataSearch {
   final TimeLogsBloc _timeLogsBloc;
+  final int _programId;
 
-  SearchTimeLogs(this._timeLogsBloc);
+  SearchTimeLogs(this._timeLogsBloc, this._programId);
 
   @override
   Widget buildSuggestions(BuildContext context) {
@@ -22,17 +26,29 @@ class SearchTimeLogs extends DataSearch {
             .where((timeLog) => _areItemContainQuery(timeLog, query))
             .map((timeLog) {
           return CustomListTile(
-            title: 'id: ${timeLog.id}',
-            onTap: () {
-              close(context, null);
-            },
-            subtitle: timeLog.comments,
-          );
+              title: 'id: ${timeLog.id}',
+              onTap: () {
+                close(context, null);
+                navigateToProjectEditPage(context, timeLog);
+              },
+              subtitle: Constants.format.format(
+                  DateTime.fromMillisecondsSinceEpoch(timeLog.startDate)));
         }).toList(),
       ));
     } else {
       return super.textNoResults(context);
     }
+  }
+
+  void navigateToProjectEditPage(BuildContext context, TimeLogModel timeLog) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => TimeLogEditPage(
+            programId: _programId,
+            timeLog: timeLog,
+          ),
+        ));
   }
 
   bool _areItemContainQuery(TimeLogModel timeLog, String query) {

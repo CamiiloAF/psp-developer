@@ -1,6 +1,12 @@
+import 'package:intl/intl.dart';
+import 'package:psp_developer/src/models/phases_model.dart';
+import 'package:psp_developer/src/models/standard_defects_model.dart';
+
 class Constants {
   static const baseUrl = 'https://psp-sena.herokuapp.com/api';
   static const httpCsrfToken = '998c9b2e73529d4015f2c2204eb56201';
+
+  static final format = DateFormat('d MMM yyyy / h:mm a');
 
   //Table names
   static const PROJECTS_TABLE_NAME = 'projects';
@@ -88,4 +94,27 @@ class Constants {
       'current_result TEXT NULL,'
       'description TEXT NULL,'
       'objective TEXT NOT NULL);';
+
+  static final PHASES = [
+    PhasesModel(id: 1, name: 'PLAN'),
+    PhasesModel(id: 2, name: 'DLD'),
+    PhasesModel(id: 3, name: 'CODE'),
+    PhasesModel(id: 4, name: 'COMPILE'),
+    PhasesModel(id: 5, name: 'UT'),
+    PhasesModel(id: 6, name: 'PM')
+  ];
+
+  static final STANDARD_DEFECTS = [
+    StandardDefectsModel(id: 1, name: 'DOCUMENTATION'),
+    StandardDefectsModel(id: 2, name: 'SYNTAX'),
+    StandardDefectsModel(id: 3, name: 'BUILD'),
+    StandardDefectsModel(id: 4, name: 'PACKAGE'),
+    StandardDefectsModel(id: 5, name: 'ASSIGNMENT'),
+    StandardDefectsModel(id: 6, name: 'INTERFACE'),
+    StandardDefectsModel(id: 7, name: 'CHECKING'),
+    StandardDefectsModel(id: 8, name: 'DATA'),
+    StandardDefectsModel(id: 9, name: 'FUNCTION'),
+    StandardDefectsModel(id: 10, name: 'SYSTEM'),
+    StandardDefectsModel(id: 11, name: 'ENVIRONMENT')
+  ];
 }

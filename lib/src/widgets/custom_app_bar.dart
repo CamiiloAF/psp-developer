@@ -26,11 +26,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   List<Widget> appBarActions(BuildContext context) {
     return [
-      IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {
-            showSearch(context: context, delegate: searchDelegate);
-          }),
+      (searchDelegate != null)
+          ? IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: searchDelegate);
+              })
+          : Container(),
       PopupMenuButton(
           onSelected: (value) {
             onItemMenuSelected(value, context);

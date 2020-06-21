@@ -3,6 +3,7 @@ import 'package:psp_developer/src/models/test_reports_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
+import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
@@ -19,6 +20,20 @@ class TestReportsRepository {
     } else {
       return response;
     }
+  }
+
+  Future<Tuple2<int, TestReportModel>> insertTestReport(
+      TestReportModel testReport) async {
+    final url = '${Constants.baseUrl}/test-reports';
+
+    return await _TestReportsInsertBoundResource()
+        .executeInsert(testReportModelToJson(testReport), url);
+  }
+
+  Future<int> updateTestReport(TestReportModel testReport) async {
+    final url = '${Constants.baseUrl}/test-reports/${testReport.id}';
+    return await _TestReportsUpdateBoundResource()
+        .executeUpdate(testReportModelToJson(testReport), testReport, url);
   }
 }
 
@@ -64,7 +79,7 @@ class _TestReportsNetworkBoundResource
   List<TestReportModel> _getTestReportsFromJson(
       List<Map<String, dynamic>> res) {
     return res.isNotEmpty
-        ? res.map((timeLog) => TestReportModel.fromJson(timeLog)).toList()
+        ? res.map((testReport) => TestReportModel.fromJson(testReport)).toList()
         : [];
   }
 
@@ -76,4 +91,24 @@ class _TestReportsNetworkBoundResource
   @override
   List<TestReportModel> decodeData(List<dynamic> payload) =>
       TestReportsModel.fromJsonList(payload).testReports;
+}
+
+class _TestReportsInsertBoundResource
+    extends InsertAndUpdateBoundResource<TestReportModel> {
+  @override
+  TestReportModel buildNewModel(payload) => TestReportModel.fromJson(payload);
+
+  @override
+  void doOperationInDb(TestReportModel model) async =>
+      await DBProvider.db.insert(model, Constants.TEST_REPORTS_TABLE_NAME);
+}
+
+class _TestReportsUpdateBoundResource
+    extends InsertAndUpdateBoundResource<TestReportModel> {
+  @override
+  TestReportModel buildNewModel(payload) => null;
+
+  @override
+  void doOperationInDb(TestReportModel model) async =>
+      await DBProvider.db.update(model, Constants.TEST_REPORTS_TABLE_NAME);
 }

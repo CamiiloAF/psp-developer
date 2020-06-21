@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
+import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
+import 'package:psp_developer/src/pages/test_reports/test_reports_page.dart';
+import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 
 import 'custom_list_tile.dart';
@@ -32,18 +35,16 @@ class DrawerProgramItems extends StatelessWidget {
             ),
             CustomListTile(
                 title: S.of(context).appBarTitleTimeLogs,
-                onTap: () => Navigator.pushReplacementNamed(context, 'timeLogs',
-                    arguments: programId)),
+                onTap: () =>
+                    navigateTo(context, TimeLogsPage(programId: programId))),
             CustomListTile(
                 title: S.of(context).appBarTitleDefectLogs,
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'defectLogs',
-                    arguments: programId)),
+                onTap: () =>
+                    navigateTo(context, DefectLogsPage(programId: programId))),
             CustomListTile(
                 title: S.of(context).appBarTitleTestReports,
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'testReports',
-                    arguments: programId)),
+                onTap: () =>
+                    navigateTo(context, TestReportsPage(programId: programId))),
             Divider(),
             ListTile(
               leading: Icon(Icons.brightness_4),
@@ -58,4 +59,8 @@ class DrawerProgramItems extends StatelessWidget {
       ),
     );
   }
+
+  void navigateTo(BuildContext context, dynamic page) =>
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => page));
 }

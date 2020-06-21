@@ -4,23 +4,49 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
 class TimeLogsBloc {
-  final _timeLogProvider = TimeLogsRepository();
+  final _timeLogsProvider = TimeLogsRepository();
 
-  final _timeLogController = BehaviorSubject<Tuple2<int, List<TimeLogModel>>>();
+  final _timeLogsController =
+      BehaviorSubject<Tuple2<int, List<TimeLogModel>>>();
 
   Stream<Tuple2<int, List<TimeLogModel>>> get timeLogStream =>
-      _timeLogController.stream;
+      _timeLogsController.stream;
 
   Tuple2<int, List<TimeLogModel>> get lastValueTimeLogsController =>
-      _timeLogController.value;
+      _timeLogsController.value;
 
   void getTimeLogs(bool isRefresing, int programId) async {
     final timeLogWithStatusCode =
-        await _timeLogProvider.getAllTimeLogs(isRefresing, programId);
-    _timeLogController.sink.add(timeLogWithStatusCode);
+        await _timeLogsProvider.getAllTimeLogs(isRefresing, programId);
+    _timeLogsController.sink.add(timeLogWithStatusCode);
+  }
+
+  Future<int> insertTimeLog(TimeLogModel timeLog) async {
+    final result = await _timeLogsProvider.insertTimeLog(timeLog);
+    final statusCode = result.item1;
+
+    if (statusCode == 201) {
+      final tempTimeLogs = lastValueTimeLogsController.item2;
+      tempTimeLogs.add(result.item2);
+      _timeLogsController.sink.add(Tuple2(200, tempTimeLogs));
+    }
+    return statusCode;
+  }
+
+  Future<int> updateTimeLog(TimeLogModel timeLog) async {
+    final statusCode = await _timeLogsProvider.updateTimeLog(timeLog);
+
+    if (statusCode == 204) {
+      final tempTimeLogs = lastValueTimeLogsController.item2;
+      final indexOfOldTimeLog =
+          tempTimeLogs.indexWhere((element) => element.id == timeLog.id);
+      tempTimeLogs[indexOfOldTimeLog] = timeLog;
+      _timeLogsController.sink.add(Tuple2(200, tempTimeLogs));
+    }
+    return statusCode;
   }
 
   void dispose() {
-    _timeLogController.sink.add(null);
+    _timeLogsController.sink.add(null);
   }
 }

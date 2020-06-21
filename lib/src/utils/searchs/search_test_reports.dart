@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/test_reports_bloc.dart';
 import 'package:psp_developer/src/models/test_reports_model.dart';
+import 'package:psp_developer/src/pages/test_reports/test_report_edit_page.dart';
 import 'package:psp_developer/src/utils/searchs/search_delegate.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 
 class SearchTestReports extends DataSearch {
   final TestReportsBloc _testReportsBloc;
+  final int programId;
 
-  SearchTestReports(this._testReportsBloc);
+  SearchTestReports(this._testReportsBloc, this.programId);
 
   @override
   Widget buildSuggestions(BuildContext context) {
@@ -27,9 +29,7 @@ class SearchTestReports extends DataSearch {
             title: testReport.testName,
             trailing:
                 Text('${S.of(context).labelNumber} ${testReport.testNumber}'),
-            onTap: () => {
-              // Navigator.pushNamed(context, 'programItems', arguments: testReports[i])
-            },
+            onTap: () => navigateToEditPage(context, testReport),
             subtitle: testReport.objective,
           );
         }).toList(),
@@ -37,6 +37,17 @@ class SearchTestReports extends DataSearch {
     } else {
       return super.textNoResults(context);
     }
+  }
+
+  void navigateToEditPage(BuildContext context, TestReportModel testReport) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => TestReportEditPage(
+            programId: programId,
+            testReport: testReport,
+          ),
+        ));
   }
 
   bool _areItemContainQuery(TestReportModel testReport, String query) {

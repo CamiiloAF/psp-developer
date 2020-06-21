@@ -3,6 +3,7 @@ import 'package:psp_developer/src/models/defect_logs_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
+import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
@@ -19,6 +20,20 @@ class DefectLogsRepository {
     } else {
       return response;
     }
+  }
+
+  Future<Tuple2<int, DefectLogModel>> insertDefectLog(
+      DefectLogModel defectLog) async {
+    final url = '${Constants.baseUrl}/defect-logs';
+
+    return await _DefectLogsInsertBoundResource()
+        .executeInsert(defectLogsModelToJson(defectLog), url);
+  }
+
+  Future<int> updateDefectLog(DefectLogModel defectLog) async {
+    final url = '${Constants.baseUrl}/defect-logs/${defectLog.id}';
+    return await _DefectLogsUpdateBoundResource()
+        .executeUpdate(defectLogsModelToJson(defectLog), defectLog, url);
   }
 }
 
@@ -75,4 +90,24 @@ class _DefectLogsNetworkBoundResource
   @override
   List<DefectLogModel> decodeData(List<dynamic> payload) =>
       DefectLogsModel.fromJsonList(payload).defectLogs;
+}
+
+class _DefectLogsInsertBoundResource
+    extends InsertAndUpdateBoundResource<DefectLogModel> {
+  @override
+  DefectLogModel buildNewModel(payload) => DefectLogModel.fromJson(payload);
+
+  @override
+  void doOperationInDb(DefectLogModel model) async =>
+      await DBProvider.db.insert(model, Constants.DEFECT_LOGS_TABLE_NAME);
+}
+
+class _DefectLogsUpdateBoundResource
+    extends InsertAndUpdateBoundResource<DefectLogModel> {
+  @override
+  DefectLogModel buildNewModel(payload) => null;
+
+  @override
+  void doOperationInDb(DefectLogModel model) async =>
+      await DBProvider.db.update(model, Constants.DEFECT_LOGS_TABLE_NAME);
 }

@@ -153,7 +153,7 @@ class LoginPage extends StatelessWidget {
       stream: bloc.formValidateStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
-          child: raisedButton(context,
+          child: CustomRaisedButton(
               buttonText: S.of(context).loginButton,
               onPress: () => _doLogin(bloc, context)),
         );

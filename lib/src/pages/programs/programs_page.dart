@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
+import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/utils/searchs/search_programs.dart';
 import 'package:psp_developer/src/utils/utils.dart';
@@ -84,8 +85,12 @@ class ProgramsPage extends StatelessWidget {
     return CustomListTile(
       title: programs[i].name,
       trailing: Icon(Icons.keyboard_arrow_right),
-      onTap: () =>
-          {Navigator.pushNamed(context, 'timeLogs', arguments: programs[i].id)},
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => TimeLogsPage(
+                    programId: programs[i].id,
+                  ))),
       subtitle: programs[i].description,
     );
   }

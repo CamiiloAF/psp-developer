@@ -80,3 +80,8 @@ bool isValidToken() {
   if (token == null || token.isEmpty) return false;
   return true;
 }
+
+int getMinutesBetweenTwoDates(DateTime startDate, DateTime finishDate) =>
+    (startDate != null && finishDate != null)
+        ? finishDate.difference(startDate).inMinutes
+        : null;

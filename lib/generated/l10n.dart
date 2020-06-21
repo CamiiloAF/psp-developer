@@ -353,10 +353,10 @@ class S {
     );
   }
 
-  /// `Description`
+  /// `Descripción`
   String get labelDescription {
     return Intl.message(
-      'Description',
+      'Descripción',
       name: 'labelDescription',
       desc: '',
       args: [],
@@ -413,6 +413,186 @@ class S {
     );
   }
 
+  /// `Tiempo Delta`
+  String get labelDeltaTime {
+    return Intl.message(
+      'Tiempo Delta',
+      name: 'labelDeltaTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interrupción`
+  String get labelInterruption {
+    return Intl.message(
+      'Interrupción',
+      name: 'labelInterruption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Número:`
+  String get labelNumber {
+    return Intl.message(
+      'Número:',
+      name: 'labelNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fase:`
+  String get labelPhase {
+    return Intl.message(
+      'Fase:',
+      name: 'labelPhase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lo desencadenó:`
+  String get labelChainedDefectLog {
+    return Intl.message(
+      'Lo desencadenó:',
+      name: 'labelChainedDefectLog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Añadido en:`
+  String get labelPhaseAdded {
+    return Intl.message(
+      'Añadido en:',
+      name: 'labelPhaseAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Removido en:`
+  String get labelPhaseRemoved {
+    return Intl.message(
+      'Removido en:',
+      name: 'labelPhaseRemoved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Defecto estándar:`
+  String get labelStandardDefect {
+    return Intl.message(
+      'Defecto estándar:',
+      name: 'labelStandardDefect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No aplica`
+  String get labelNone {
+    return Intl.message(
+      'No aplica',
+      name: 'labelNone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comentarios`
+  String get labelComments {
+    return Intl.message(
+      'Comentarios',
+      name: 'labelComments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Solución`
+  String get labelSolution {
+    return Intl.message(
+      'Solución',
+      name: 'labelSolution',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inicio de la interrupción`
+  String get labelInterruptionStartAt {
+    return Intl.message(
+      'Inicio de la interrupción',
+      name: 'labelInterruptionStartAt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tiempo en reparar`
+  String get labelTimeForRepair {
+    return Intl.message(
+      'Tiempo en reparar',
+      name: 'labelTimeForRepair',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Condiciones`
+  String get labelConditions {
+    return Intl.message(
+      'Condiciones',
+      name: 'labelConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resultado esperado`
+  String get labelExpectedResult {
+    return Intl.message(
+      'Resultado esperado',
+      name: 'labelExpectedResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resultado actual`
+  String get labelCurrentResult {
+    return Intl.message(
+      'Resultado actual',
+      name: 'labelCurrentResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Objetivo`
+  String get labelObjective {
+    return Intl.message(
+      'Objetivo',
+      name: 'labelObjective',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Número del test`
+  String get labelTestNumber {
+    return Intl.message(
+      'Número del test',
+      name: 'labelTestNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Número inválido`
   String get inputPhoneError {
     return Intl.message(
@@ -428,6 +608,36 @@ class S {
     return Intl.message(
       'Mantenga presionado el icono para poner la fecha y hora actual',
       name: 'helperInputDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tiempo en minutos`
+  String get helperTimeInMinutes {
+    return Intl.message(
+      'Tiempo en minutos',
+      name: 'helperTimeInMinutes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Iniciar la interrupción`
+  String get buttonStartInterruption {
+    return Intl.message(
+      'Iniciar la interrupción',
+      name: 'buttonStartInterruption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detener la interrupción`
+  String get buttonStopInterruption {
+    return Intl.message(
+      'Detener la interrupción',
+      name: 'buttonStopInterruption',
       desc: '',
       args: [],
     );
@@ -468,16 +678,6 @@ class S {
     return Intl.message(
       'Modo oscuro',
       name: 'darkMode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Número:`
-  String get labelNumber {
-    return Intl.message(
-      'Número:',
-      name: 'labelNumber',
       desc: '',
       args: [],
     );

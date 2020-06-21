@@ -3,6 +3,7 @@ import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
+import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
@@ -19,6 +20,19 @@ class TimeLogsRepository {
     } else {
       return response;
     }
+  }
+
+  Future<Tuple2<int, TimeLogModel>> insertTimeLog(TimeLogModel timeLog) async {
+    final url = '${Constants.baseUrl}/time-logs';
+
+    return await _TimeLogsInsertBoundResource()
+        .executeInsert(timeLogModelToJson(timeLog), url);
+  }
+
+  Future<int> updateTimeLog(TimeLogModel timeLog) async {
+    final url = '${Constants.baseUrl}/time-logs/${timeLog.id}';
+    return await _TimeLogsUpdateBoundResource()
+        .executeUpdate(timeLogModelToJson(timeLog), timeLog, url);
   }
 }
 
@@ -75,4 +89,24 @@ class _TimeLogsNetworkBoundResource
   @override
   List<TimeLogModel> decodeData(List<dynamic> payload) =>
       TimeLogsModel.fromJsonList(payload).timeLogs;
+}
+
+class _TimeLogsInsertBoundResource
+    extends InsertAndUpdateBoundResource<TimeLogModel> {
+  @override
+  TimeLogModel buildNewModel(payload) => TimeLogModel.fromJson(payload);
+
+  @override
+  void doOperationInDb(TimeLogModel model) async =>
+      await DBProvider.db.insert(model, Constants.TIME_LOGS_TABLE_NAME);
+}
+
+class _TimeLogsUpdateBoundResource
+    extends InsertAndUpdateBoundResource<TimeLogModel> {
+  @override
+  TimeLogModel buildNewModel(payload) => null;
+
+  @override
+  void doOperationInDb(TimeLogModel model) async =>
+      await DBProvider.db.update(model, Constants.TIME_LOGS_TABLE_NAME);
 }

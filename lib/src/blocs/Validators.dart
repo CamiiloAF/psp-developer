@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:psp_developer/generated/l10n.dart';
+
 class Validators {
   final validateEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
@@ -39,4 +42,9 @@ class Validators {
               password == confirmPassword)
           ? true
           : false;
+
+  String validateRequiredInput(BuildContext context, String value) =>
+      (value == null || value.isEmpty)
+          ? S.of(context).inputRequiredError
+          : null;
 }

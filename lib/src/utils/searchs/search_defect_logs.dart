@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/defect_logs_bloc.dart';
 import 'package:psp_developer/src/models/defect_logs_model.dart';
+import 'package:psp_developer/src/pages/defect_logs/defect_log_edit_page.dart';
 import 'package:psp_developer/src/utils/searchs/search_delegate.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 
 class SearchDefectLogs extends DataSearch {
   final DefectLogsBloc _defectLogsBloc;
+  final int programId;
 
-  SearchDefectLogs(this._defectLogsBloc);
+  SearchDefectLogs(this._defectLogsBloc, this.programId);
 
   @override
   Widget buildSuggestions(BuildContext context) {
@@ -24,9 +26,8 @@ class SearchDefectLogs extends DataSearch {
             .map((defectLog) {
           return CustomListTile(
             title: 'id: ${defectLog.id}',
-            onTap: () {
-              close(context, null);
-            },
+            trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () => navigateToEditPage(context, defectLog),
             subtitle: defectLog.description,
           );
         }).toList(),
@@ -34,6 +35,17 @@ class SearchDefectLogs extends DataSearch {
     } else {
       return super.textNoResults(context);
     }
+  }
+
+  void navigateToEditPage(BuildContext context, DefectLogModel defectLog) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => DefectLogEditPage(
+            programId: programId,
+            defectLog: defectLog,
+          ),
+        ));
   }
 
   bool _areItemContainQuery(DefectLogModel defectLog, String query) {
