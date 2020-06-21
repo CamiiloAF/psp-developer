@@ -21,9 +21,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "appBarTitleBaseParts" : MessageLookupByLibrary.simpleMessage("Partes base"),
+    "appBarTitleDefectLogs" : MessageLookupByLibrary.simpleMessage("Log de Defectos"),
     "appBarTitleModules" : MessageLookupByLibrary.simpleMessage("Modulos"),
+    "appBarTitleNewParts" : MessageLookupByLibrary.simpleMessage("Partes nuevas"),
     "appBarTitlePrograms" : MessageLookupByLibrary.simpleMessage("Programas"),
     "appBarTitleProjects" : MessageLookupByLibrary.simpleMessage("Proyectos"),
+    "appBarTitleReusableParts" : MessageLookupByLibrary.simpleMessage("Partes reutilizables"),
+    "appBarTitleTestReports" : MessageLookupByLibrary.simpleMessage("Reportes de prueba"),
+    "appBarTitleTimeLogs" : MessageLookupByLibrary.simpleMessage("Log de tiempos"),
+    "darkMode" : MessageLookupByLibrary.simpleMessage("Modo oscuro"),
     "dialogButtonOk" : MessageLookupByLibrary.simpleMessage("Aceptar"),
     "dialogTitleLoginFailed" : MessageLookupByLibrary.simpleMessage("Falló el login"),
     "helperInputDate" : MessageLookupByLibrary.simpleMessage("Mantenga presionado el icono para poner la fecha y hora actual"),
@@ -38,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelEmail" : MessageLookupByLibrary.simpleMessage("Correo electrónico"),
     "labelFinishDate" : MessageLookupByLibrary.simpleMessage("Fecha de finalización"),
     "labelName" : MessageLookupByLibrary.simpleMessage("Nombre"),
+    "labelNumber" : MessageLookupByLibrary.simpleMessage("Número:"),
     "labelPassword" : MessageLookupByLibrary.simpleMessage("Contraseña"),
     "labelPhone" : MessageLookupByLibrary.simpleMessage("Teléfono"),
     "labelPlanningDate" : MessageLookupByLibrary.simpleMessage("Fecha de planeación"),

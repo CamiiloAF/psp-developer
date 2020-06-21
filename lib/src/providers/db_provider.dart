@@ -26,6 +26,11 @@ class DBProvider {
       await db.execute(Constants.SQL_CREATE_TABLE_PROJECTS);
       await db.execute(Constants.SQL_CREATE_TABLE_MODULES);
       await db.execute(Constants.SQL_CREATE_TABLE_PROGRAMS);
+
+      await db.execute(Constants.SQL_CREATE_TABLE_DEFECT_LOGS);
+      await db.execute(Constants.SQL_CREATE_TABLE_TIME_LOGS);
+
+      await db.execute(Constants.SQL_CREATE_TABLE_TEST_REPORTS);
     });
   }
 

@@ -163,6 +163,66 @@ class S {
     );
   }
 
+  /// `Partes base`
+  String get appBarTitleBaseParts {
+    return Intl.message(
+      'Partes base',
+      name: 'appBarTitleBaseParts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Partes nuevas`
+  String get appBarTitleNewParts {
+    return Intl.message(
+      'Partes nuevas',
+      name: 'appBarTitleNewParts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Partes reutilizables`
+  String get appBarTitleReusableParts {
+    return Intl.message(
+      'Partes reutilizables',
+      name: 'appBarTitleReusableParts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log de Defectos`
+  String get appBarTitleDefectLogs {
+    return Intl.message(
+      'Log de Defectos',
+      name: 'appBarTitleDefectLogs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log de tiempos`
+  String get appBarTitleTimeLogs {
+    return Intl.message(
+      'Log de tiempos',
+      name: 'appBarTitleTimeLogs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reportes de prueba`
+  String get appBarTitleTestReports {
+    return Intl.message(
+      'Reportes de prueba',
+      name: 'appBarTitleTestReports',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NO ESTÁS AUTORIZADO`
   String get titleNotAutorized {
     return Intl.message(
@@ -398,6 +458,26 @@ class S {
     return Intl.message(
       'Ajustes',
       name: 'optionSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modo oscuro`
+  String get darkMode {
+    return Intl.message(
+      'Modo oscuro',
+      name: 'darkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Número:`
+  String get labelNumber {
+    return Intl.message(
+      'Número:',
+      name: 'labelNumber',
       desc: '',
       args: [],
     );

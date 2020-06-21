@@ -84,9 +84,8 @@ class ProgramsPage extends StatelessWidget {
     return CustomListTile(
       title: programs[i].name,
       trailing: Icon(Icons.keyboard_arrow_right),
-      onTap: () => {
-        // Navigator.pushNamed(context, 'programItems', arguments: programs[i])
-      },
+      onTap: () =>
+          {Navigator.pushNamed(context, 'timeLogs', arguments: programs[i].id)},
       subtitle: programs[i].description,
     );
   }
