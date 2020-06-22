@@ -5,6 +5,9 @@ import 'package:psp_developer/src/blocs/time_logs_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
+import 'package:psp_developer/src/providers/models/fab_model.dart';
+import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
+import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
@@ -15,8 +18,6 @@ import 'package:psp_developer/src/widgets/spinner_widget.dart';
 class TimeLogEditPage extends StatefulWidget {
   final int programId;
   final TimeLogModel timeLog;
-
-  //TODO: Implementar la funcionalidad de la interrupción
 
   TimeLogEditPage({@required this.programId, @required this.timeLog});
 
@@ -33,9 +34,13 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   final TimeLogModel _timeLogModel;
 
   final _inputDeltaTimeController = TextEditingController();
+  final _inputInterruptionController = TextEditingController();
+
   int _currentPhaseId;
 
   int _deltaTime;
+
+  bool isSubmiteButtonEnabled = true;
 
   _TimeLogEditPageState(this._timeLogModel);
 
@@ -44,6 +49,9 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
     _currentPhaseId = _timeLogModel?.phasesId ?? 1;
     _timeLogsBloc = context.read<BlocProvider>().timeLogsBloc;
 
+    isSubmiteButtonEnabled = Preferences().pendingInterruptionStartAt == null;
+
+    _inputInterruptionController.text = '${_timeLogModel?.interruption ?? 0}';
     super.initState();
   }
 
@@ -72,7 +80,8 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
               _buildInputInterruptionStartAt(),
               _buildStartInterruptionButton(),
               _buildInputComments(),
-              SubmitButton(onPressed: () => _submit())
+              SubmitButton(
+                  onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
             ],
           ),
         ),
@@ -83,7 +92,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   Widget _buildPhaseDropdownButton() {
     return Spinner(
       label: S.of(context).labelPhase,
-      items: getDropDownMenuItems(),
+      items: _getDropDownMenuItems(),
       value: _currentPhaseId,
       onChanged: (value) {
         setState(() {
@@ -93,7 +102,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
     );
   }
 
-  List<DropdownMenuItem<int>> getDropDownMenuItems() {
+  List<DropdownMenuItem<int>> _getDropDownMenuItems() {
     var items = <DropdownMenuItem<int>>[];
     Constants.PHASES.forEach((phase) {
       items.add(DropdownMenuItem(value: phase.id, child: Text(phase.name)));
@@ -111,7 +120,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
         labelAndHint: S.of(context).labelStartDate,
         onChanged: (value) {
           _timeLogModel.startDate = value?.millisecondsSinceEpoch;
-          setDeltaTime();
+          _setDeltaTime();
         },
         onSaved: (DateTime value) =>
             _timeLogModel.startDate = value?.millisecondsSinceEpoch);
@@ -125,14 +134,14 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
         labelAndHint: S.of(context).labelFinishDate,
         onChanged: (value) {
           _timeLogModel.finishDate = value?.millisecondsSinceEpoch;
-          setDeltaTime();
+          _setDeltaTime();
         },
         onSaved: (DateTime value) =>
             _timeLogModel.finishDate = value?.millisecondsSinceEpoch);
   }
 
   Widget _buildInputDeltaTime() {
-    setDeltaTime();
+    _setDeltaTime();
     return Container(
       margin: EdgeInsets.only(top: 20),
       child: TextFormField(
@@ -146,7 +155,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
 
   Widget _buildInputInterruption() {
     return InputForm(
-        initialValue: '${_timeLogModel?.interruption ?? 0}',
+        controller: _inputInterruptionController,
         onSaved: (value) => (value == null || value.isEmpty)
             ? _timeLogModel.interruption = 0
             : _timeLogModel.interruption = int.tryParse(value),
@@ -155,10 +164,23 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _buildInputInterruptionStartAt() {
+    if (_timeLogModel.id == null) return Container();
+
+    final pendingInterruptionStartAt = Preferences().pendingInterruptionStartAt;
+    final timeLogIdWithPendingInterruption =
+        Preferences().timeLogIdWithPendingInterruption;
+
+    final initialValue = (pendingInterruptionStartAt != null &&
+            timeLogIdWithPendingInterruption == _timeLogModel.id)
+        ? Constants.format.format(
+            DateTime.fromMillisecondsSinceEpoch(pendingInterruptionStartAt))
+        : '';
+
     return Container(
-      width: null,
-      height: null,
+      width: (initialValue.isEmpty) ? 0 : null,
+      height: (initialValue.isEmpty) ? 0 : null,
       child: InputForm(
+          initialValue: initialValue,
           onSaved: (value) {},
           label: S.of(context).labelInterruptionStartAt,
           isReadOnly: true),
@@ -166,19 +188,57 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _buildStartInterruptionButton() {
+    if (_timeLogModel.id == null) return Container(height: 10);
+
+    final pendingInterruptionStartAt = Preferences().pendingInterruptionStartAt;
+
+    final buttonText = (pendingInterruptionStartAt == null)
+        ? S.of(context).buttonStartInterruption
+        : S.of(context).buttonStopInterruption;
+
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: Row(
         children: [
           CustomRaisedButton(
-            paddingHorizontal: 0,
-            paddingVertical: 0,
-            buttonText: S.of(context).buttonStartInterruption,
-            onPress: () {},
-          ),
+              paddingHorizontal: 0,
+              paddingVertical: 0,
+              buttonText: buttonText,
+              onPress: () {
+                _onPressInterruptionButton(pendingInterruptionStartAt);
+              }),
         ],
       ),
     );
+  }
+
+  void _onPressInterruptionButton(int pendingInterruptionStartAt) {
+    setState(() {
+      if (pendingInterruptionStartAt == null) {
+        Preferences().pendingInterruptionStartAt =
+            DateTime.now().millisecondsSinceEpoch;
+        Preferences().timeLogIdWithPendingInterruption = _timeLogModel.id;
+
+        isSubmiteButtonEnabled = false;
+        Provider.of<FabModel>(context, listen: false).isShowing = false;
+      } else {
+        final currentInterruption = getMinutesBetweenTwoDates(
+            DateTime.fromMillisecondsSinceEpoch(pendingInterruptionStartAt),
+            DateTime.now());
+
+        final totalInterruption =
+            currentInterruption + _timeLogModel.interruption;
+
+        _inputInterruptionController.text = '$totalInterruption';
+
+        Preferences().removePendingInterruptionAndTimeLogId();
+
+        isSubmiteButtonEnabled = true;
+        Provider.of<FabModel>(context, listen: false).isShowing = true;
+      }
+    });
+    Provider.of<TimelogPendingInterruptionModel>(context, listen: false)
+        .isListItemsEnable = Preferences().pendingInterruptionStartAt == null;
   }
 
   Widget _buildInputComments() {
@@ -190,7 +250,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
     );
   }
 
-  void setDeltaTime() async {
+  void _setDeltaTime() async {
     final startDate = (_timeLogModel.startDate != null)
         ? DateTime.fromMillisecondsSinceEpoch(_timeLogModel.startDate)
         : null;
@@ -230,6 +290,8 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
       statusCode = await _timeLogsBloc.updateTimeLog(_timeLogModel);
       await progressDialog.hide();
     }
+
+    Provider.of<FabModel>(context, listen: false).isShowing = true;
 
     if (statusCode == 201) {
       Navigator.pop(context);

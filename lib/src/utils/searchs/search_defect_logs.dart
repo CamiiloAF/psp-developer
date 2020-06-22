@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/defect_logs_bloc.dart';
 import 'package:psp_developer/src/models/defect_logs_model.dart';
 import 'package:psp_developer/src/pages/defect_logs/defect_log_edit_page.dart';
+import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/searchs/search_delegate.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 
@@ -24,8 +25,11 @@ class SearchDefectLogs extends DataSearch {
         children: defectLogs
             .where((defectLog) => _areItemContainQuery(defectLog, query))
             .map((defectLog) {
+          final isEnable = Preferences().pendingInterruptionStartAt == null;
+
           return CustomListTile(
             title: 'id: ${defectLog.id}',
+            isEnable: isEnable,
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () => navigateToEditPage(context, defectLog),
             subtitle: defectLog.description,

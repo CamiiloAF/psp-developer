@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
+import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
 import 'package:psp_developer/src/routes/routes.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
@@ -22,6 +23,9 @@ void main() async {
     ),
     ChangeNotifierProvider(
       create: (_) => ThemeChanger(1),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => TimelogPendingInterruptionModel(),
     )
   ], child: MyApp()));
 }

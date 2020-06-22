@@ -4,6 +4,7 @@ import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/test_reports_bloc.dart';
 import 'package:psp_developer/src/models/test_reports_model.dart';
 import 'package:psp_developer/src/pages/test_reports/test_report_edit_page.dart';
+import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/searchs/search_delegate.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 
@@ -25,12 +26,15 @@ class SearchTestReports extends DataSearch {
         children: testReports
             .where((testReport) => _areItemContainQuery(testReport, query))
             .map((testReport) {
+          final isEnable = Preferences().pendingInterruptionStartAt == null;
+
           return CustomListTile(
             title: testReport.testName,
+            subtitle: testReport.objective,
+            isEnable: isEnable,
             trailing:
                 Text('${S.of(context).labelNumber} ${testReport.testNumber}'),
             onTap: () => navigateToEditPage(context, testReport),
-            subtitle: testReport.objective,
           );
         }).toList(),
       ));

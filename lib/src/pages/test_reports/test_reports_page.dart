@@ -6,6 +6,7 @@ import 'package:psp_developer/src/models/test_reports_model.dart';
 import 'package:psp_developer/src/pages/test_reports/test_report_edit_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
+import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/searchs/search_test_reports.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
@@ -26,7 +27,7 @@ class TestReportsPage extends StatefulWidget {
 
 class _TestReportsPageState extends State<TestReportsPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final ScrollController _fabController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   double _lastScroll = 0;
 
   TestReportsBloc _testReportsBloc;
@@ -35,15 +36,20 @@ class _TestReportsPageState extends State<TestReportsPage> {
   void initState() {
     _lastScroll = 0;
 
-    _fabController.addListener(() {
-      if (_fabController.offset > _lastScroll && _fabController.offset > 150) {
-        Provider.of<FabModel>(context, listen: false).isShowing = false;
-      } else {
-        Provider.of<FabModel>(context, listen: false).isShowing = true;
-      }
+    if (Preferences().pendingInterruptionStartAt != null) {
+      _scrollController.addListener(() {
+        if (_scrollController.offset > _lastScroll &&
+            _scrollController.offset > 150) {
+          Provider.of<FabModel>(context, listen: false).isShowing = false;
+        } else {
+          Provider.of<FabModel>(context, listen: false).isShowing = true;
+        }
 
-      _lastScroll = _fabController.offset;
-    });
+        _lastScroll = _scrollController.offset;
+      });
+      Provider.of<FabModel>(context, listen: false).isShowing = false;
+    }
+
     super.initState();
 
     _testReportsBloc = context.read<BlocProvider>().testReportsBloc;
@@ -52,14 +58,19 @@ class _TestReportsPageState extends State<TestReportsPage> {
 
   @override
   void dispose() {
-    _fabController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     if (!isValidToken()) return NotAutorizedScreen();
-    final isShowing = Provider.of<FabModel>(context).isShowing;
+
+    var isShowing = Provider.of<FabModel>(context).isShowing;
+
+    if (Preferences().pendingInterruptionStartAt != null) {
+      isShowing = false;
+    }
 
     return ChangeNotifierProvider(
       create: (_) => FabModel(),
@@ -120,6 +131,7 @@ class _TestReportsPageState extends State<TestReportsPage> {
 
   ListView _buildListView(List<TestReportModel> testReports) {
     return ListView.separated(
+        controller: _scrollController,
         itemCount: testReports.length,
         physics: AlwaysScrollableScrollPhysics(),
         itemBuilder: (context, i) => _buildItemList(testReports, i, context),
@@ -130,11 +142,14 @@ class _TestReportsPageState extends State<TestReportsPage> {
 
   Widget _buildItemList(
       List<TestReportModel> testReports, int i, BuildContext context) {
+    final isEnable = (Preferences().pendingInterruptionStartAt == null);
+
     return CustomListTile(
       title: testReports[i].testName,
       trailing:
           Text('${S.of(context).labelNumber} ${testReports[i].testNumber}'),
       onTap: () => navigateToEditPage(testReports[i]),
+      isEnable: isEnable,
       subtitle: testReports[i].objective,
     );
   }

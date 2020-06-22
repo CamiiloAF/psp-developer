@@ -6,6 +6,8 @@ import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/pages/time_logs/time_log_edit_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
+import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
+import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/searchs/search_time_logs.dart';
 import 'package:psp_developer/src/utils/utils.dart';
@@ -28,7 +30,7 @@ class TimeLogsPage extends StatefulWidget {
 class _TimeLogsPageState extends State<TimeLogsPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final ScrollController _fabController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   double _lastScroll = 0;
 
   TimeLogsBloc _timeLogsBloc;
@@ -37,24 +39,32 @@ class _TimeLogsPageState extends State<TimeLogsPage> {
   void initState() {
     _lastScroll = 0;
 
-    _fabController.addListener(() {
-      if (_fabController.offset > _lastScroll && _fabController.offset > 150) {
+    _timeLogsBloc = context.read<BlocProvider>().timeLogsBloc;
+    _timeLogsBloc.getTimeLogs(false, widget.programId);
+
+    if (_timeLogsBloc.allowCreateTimeLog) {
+      addListenerToScrollController();
+    }
+
+    super.initState();
+  }
+
+  void addListenerToScrollController() {
+    _scrollController.addListener(() {
+      if (_scrollController.offset > _lastScroll &&
+          _scrollController.offset > 150) {
         Provider.of<FabModel>(context, listen: false).isShowing = false;
       } else {
         Provider.of<FabModel>(context, listen: false).isShowing = true;
       }
 
-      _lastScroll = _fabController.offset;
+      _lastScroll = _scrollController.offset;
     });
-    super.initState();
-
-    _timeLogsBloc = context.read<BlocProvider>().timeLogsBloc;
-    _timeLogsBloc.getTimeLogs(false, widget.programId);
   }
 
   @override
   void dispose() {
-    _fabController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -62,7 +72,12 @@ class _TimeLogsPageState extends State<TimeLogsPage> {
   Widget build(BuildContext context) {
     if (!isValidToken()) return NotAutorizedScreen();
 
-    final isShowing = Provider.of<FabModel>(context).isShowing;
+    var isShowing = (Provider.of<FabModel>(context).isShowing &&
+        _timeLogsBloc.allowCreateTimeLog);
+
+    if (Preferences().pendingInterruptionStartAt != null) {
+      isShowing = false;
+    }
 
     return ChangeNotifierProvider(
       create: (_) => FabModel(),
@@ -112,6 +127,9 @@ class _TimeLogsPageState extends State<TimeLogsPage> {
           );
         }
 
+        _timeLogsBloc.verifyIfAllowCreateTimeLogs(timeLogs);
+        Provider.of<FabModel>(context).isShowing = true;
+
         return RefreshIndicator(
           onRefresh: () =>
               _refreshTimeLogs(context, timeLogsBloc, widget.programId),
@@ -125,6 +143,7 @@ class _TimeLogsPageState extends State<TimeLogsPage> {
     return ListView.separated(
         itemCount: timeLogs.length,
         physics: AlwaysScrollableScrollPhysics(),
+        controller: _scrollController,
         itemBuilder: (context, i) => _buildItemList(timeLogs, i, context),
         separatorBuilder: (BuildContext context, int index) => Divider(
               thickness: 1.0,
@@ -133,13 +152,26 @@ class _TimeLogsPageState extends State<TimeLogsPage> {
 
   Widget _buildItemList(
       List<TimeLogModel> timeLogs, int i, BuildContext context) {
-    return CustomListTile(
-      title: 'id: ${timeLogs[i].id}',
-      trailing: Icon(Icons.keyboard_arrow_right),
-      onTap: () => navigateToEditPage(timeLogs[i]),
-      // subtitle: timeLogs[i].comments ?? '',
-      subtitle: Constants.format
-          .format(DateTime.fromMillisecondsSinceEpoch(timeLogs[i].startDate)),
+    final timeLog = timeLogs[i];
+
+    var isEnabled =
+        Provider.of<TimelogPendingInterruptionModel>(context).isListItemsEnable;
+
+    if (!isEnabled &&
+        Preferences().timeLogIdWithPendingInterruption == timeLog.id) {
+      isEnabled = true;
+    }
+
+    return ChangeNotifierProvider(
+      create: (_) => TimelogPendingInterruptionModel(),
+      child: CustomListTile(
+        title: 'id: ${timeLog.id}',
+        trailing: Icon(Icons.keyboard_arrow_right),
+        onTap: () => navigateToEditPage(timeLog),
+        isEnable: isEnabled,
+        subtitle: Constants.format
+            .format(DateTime.fromMillisecondsSinceEpoch(timeLog.startDate)),
+      ),
     );
   }
 

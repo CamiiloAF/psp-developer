@@ -6,6 +6,7 @@ import 'package:psp_developer/src/models/defect_logs_model.dart';
 import 'package:psp_developer/src/pages/defect_logs/defect_log_edit_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
+import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/searchs/search_defect_logs.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
@@ -27,7 +28,7 @@ class DefectLogsPage extends StatefulWidget {
 class _DefectLogsPageState extends State<DefectLogsPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final ScrollController _fabController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   double _lastScroll = 0;
 
   DefectLogsBloc _defectLogsBloc;
@@ -36,15 +37,20 @@ class _DefectLogsPageState extends State<DefectLogsPage> {
   void initState() {
     _lastScroll = 0;
 
-    _fabController.addListener(() {
-      if (_fabController.offset > _lastScroll && _fabController.offset > 150) {
-        Provider.of<FabModel>(context, listen: false).isShowing = false;
-      } else {
-        Provider.of<FabModel>(context, listen: false).isShowing = true;
-      }
+    if (Preferences().pendingInterruptionStartAt != null) {
+      _scrollController.addListener(() {
+        if (_scrollController.offset > _lastScroll &&
+            _scrollController.offset > 150) {
+          Provider.of<FabModel>(context, listen: false).isShowing = false;
+        } else {
+          Provider.of<FabModel>(context, listen: false).isShowing = true;
+        }
 
-      _lastScroll = _fabController.offset;
-    });
+        _lastScroll = _scrollController.offset;
+      });
+      Provider.of<FabModel>(context, listen: false).isShowing = false;
+    }
+
     super.initState();
 
     _defectLogsBloc = context.read<BlocProvider>().defectLogsBloc;
@@ -53,7 +59,7 @@ class _DefectLogsPageState extends State<DefectLogsPage> {
 
   @override
   void dispose() {
-    _fabController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -61,7 +67,11 @@ class _DefectLogsPageState extends State<DefectLogsPage> {
   Widget build(BuildContext context) {
     if (!isValidToken()) return NotAutorizedScreen();
 
-    final isShowing = Provider.of<FabModel>(context).isShowing;
+    var isShowing = Provider.of<FabModel>(context).isShowing;
+
+    if (Preferences().pendingInterruptionStartAt != null) {
+      isShowing = false;
+    }
 
     return ChangeNotifierProvider(
       create: (_) => FabModel(),
@@ -122,6 +132,7 @@ class _DefectLogsPageState extends State<DefectLogsPage> {
 
   ListView _buildListView(List<DefectLogModel> defectLogs) {
     return ListView.separated(
+        controller: _scrollController,
         itemCount: defectLogs.length,
         physics: AlwaysScrollableScrollPhysics(),
         itemBuilder: (context, i) => _buildItemList(defectLogs, i, context),
@@ -132,8 +143,11 @@ class _DefectLogsPageState extends State<DefectLogsPage> {
 
   Widget _buildItemList(
       List<DefectLogModel> defectLogs, int i, BuildContext context) {
+    final isEnable = (Preferences().pendingInterruptionStartAt == null);
+
     return CustomListTile(
       title: 'id: ${defectLogs[i].id}',
+      isEnable: isEnable,
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () => navigateToEditPage(defectLogs[i]),
       subtitle: defectLogs[i].description,

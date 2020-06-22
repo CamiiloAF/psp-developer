@@ -326,6 +326,7 @@ class InputForm extends StatelessWidget {
   final String label;
   final bool isEnabled;
   final bool isReadOnly;
+  final TextEditingController controller;
   final TextInputType keyboardType;
   final Function(String value) onSaved;
   final String Function(String value) onChanged;
@@ -337,6 +338,7 @@ class InputForm extends StatelessWidget {
     this.maxLenght,
     this.isEnabled = true,
     this.isReadOnly = false,
+    this.controller,
     this.keyboardType,
     this.onChanged,
   });
@@ -347,6 +349,7 @@ class InputForm extends StatelessWidget {
       margin: EdgeInsets.only(top: 20),
       child: TextFormField(
         initialValue: initialValue,
+        controller: controller,
         keyboardType: keyboardType,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(

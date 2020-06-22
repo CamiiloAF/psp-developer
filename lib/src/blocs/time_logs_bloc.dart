@@ -15,10 +15,29 @@ class TimeLogsBloc {
   Tuple2<int, List<TimeLogModel>> get lastValueTimeLogsController =>
       _timeLogsController.value;
 
+  bool allowCreateTimeLog = true;
+
   void getTimeLogs(bool isRefresing, int programId) async {
     final timeLogWithStatusCode =
         await _timeLogsProvider.getAllTimeLogs(isRefresing, programId);
+
+    verifyIfAllowCreateTimeLogs(timeLogWithStatusCode.item2);
+
     _timeLogsController.sink.add(timeLogWithStatusCode);
+  }
+
+  void verifyIfAllowCreateTimeLogs(List<TimeLogModel> timeLogs) {
+    if (timeLogs != null && timeLogs.isNotEmpty) {
+      for (var timeLog in timeLogs) {
+        if (!isAllowCreateNewTimeLog(timeLog.finishDate)) {
+          allowCreateTimeLog = false;
+          break;
+        } else {
+          allowCreateTimeLog = true;
+        }
+      }
+      ;
+    }
   }
 
   Future<int> insertTimeLog(TimeLogModel timeLog) async {
@@ -26,6 +45,7 @@ class TimeLogsBloc {
     final statusCode = result.item1;
 
     if (statusCode == 201) {
+      allowCreateTimeLog = isAllowCreateNewTimeLog(timeLog.finishDate);
       final tempTimeLogs = lastValueTimeLogsController.item2;
       tempTimeLogs.add(result.item2);
       _timeLogsController.sink.add(Tuple2(200, tempTimeLogs));
@@ -37,6 +57,8 @@ class TimeLogsBloc {
     final statusCode = await _timeLogsProvider.updateTimeLog(timeLog);
 
     if (statusCode == 204) {
+      allowCreateTimeLog = isAllowCreateNewTimeLog(timeLog.finishDate);
+
       final tempTimeLogs = lastValueTimeLogsController.item2;
       final indexOfOldTimeLog =
           tempTimeLogs.indexWhere((element) => element.id == timeLog.id);
@@ -45,6 +67,8 @@ class TimeLogsBloc {
     }
     return statusCode;
   }
+
+  bool isAllowCreateNewTimeLog(int finishDate) => finishDate != null;
 
   void dispose() {
     _timeLogsController.sink.add(null);
