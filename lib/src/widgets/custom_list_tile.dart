@@ -9,6 +9,7 @@ class CustomListTile extends StatelessWidget {
   final Widget trailing;
 
   final bool isEnable;
+  final bool isAnimated;
 
   final Function() onTap;
 
@@ -18,25 +19,30 @@ class CustomListTile extends StatelessWidget {
     this.leading,
     this.trailing,
     this.isEnable = true,
+    this.isAnimated = true,
     @required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return FadeInLeft(
-      child: ListTile(
-        enabled: isEnable,
-        title: Text(title),
-        leading: leading,
-        trailing: trailing,
-        subtitle: (subtitle.isNotEmpty)
-            ? Text(
-                subtitle,
-                overflow: TextOverflow.ellipsis,
-              )
-            : null,
-        onTap: onTap,
-      ),
+    var listTile = ListTile(
+      enabled: isEnable,
+      title: Text(title),
+      leading: leading,
+      trailing: trailing,
+      subtitle: (subtitle.isNotEmpty)
+          ? Text(
+              subtitle,
+              overflow: TextOverflow.ellipsis,
+            )
+          : null,
+      onTap: onTap,
     );
+
+    return (isAnimated)
+        ? FadeInLeft(
+            child: listTile,
+          )
+        : listTile;
   }
 }

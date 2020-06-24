@@ -7,6 +7,7 @@
     "labelConfirmPassword": "Confirmar Contraseña",
     "invalidEmail": "Email inválido",
     "invalidPassword": "Se requieren 8 o más caractéres",
+    "invalidNumber": "Número inválido",
     "dialogTitleLoginFailed": "Falló el login",
     "dialogButtonOk": "Aceptar",
     "appBarTitleProjects": "Proyectos",
@@ -18,6 +19,7 @@
     "appBarTitleDefectLogs": "Log de Defectos",
     "appBarTitleTimeLogs": "Log de tiempos",
     "appBarTitleTestReports": "Reportes de prueba",
+    "appBarTitleProgramParts": "Partes del programa",
     "titleNotAutorized": "NO ESTÁS AUTORIZADO",
     "progressDialogLoading": "Cargando",
     "progressDialogSaving": "Guardando",
@@ -56,6 +58,10 @@
     "labelObjective": "Objetivo",
     "labelTestNumber": "Número del test",
     "inputPhoneError": "Número inválido",
+    "labelPlannedLinesBase": "Líneas base planeadas",
+    "labelPlannedLinesDeleted": "Líneas borradas planeadas",
+    "labelPlannedLinesEdits": "Líneas editadas planeadas",
+    "labelPlannedLinesAdded": "Líneas añadidas planeadas",
     "helperInputDate": "Mantenga presionado el icono para poner la fecha y hora actual",
     "helperTimeInMinutes": "Tiempo en minutos",
     "buttonStartInterruption": "Iniciar la interrupción",
@@ -64,5 +70,5 @@
     "optionLogOut": "Cerrar sesión",
     "optionSettings": "Ajustes",
     "darkMode": "Modo oscuro"
-
+    
 }

@@ -113,6 +113,16 @@ class S {
     );
   }
 
+  /// `Número inválido`
+  String get invalidNumber {
+    return Intl.message(
+      'Número inválido',
+      name: 'invalidNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Falló el login`
   String get dialogTitleLoginFailed {
     return Intl.message(
@@ -218,6 +228,16 @@ class S {
     return Intl.message(
       'Reportes de prueba',
       name: 'appBarTitleTestReports',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Partes del programa`
+  String get appBarTitleProgramParts {
+    return Intl.message(
+      'Partes del programa',
+      name: 'appBarTitleProgramParts',
       desc: '',
       args: [],
     );
@@ -598,6 +618,46 @@ class S {
     return Intl.message(
       'Número inválido',
       name: 'inputPhoneError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas base planeadas`
+  String get labelPlannedLinesBase {
+    return Intl.message(
+      'Líneas base planeadas',
+      name: 'labelPlannedLinesBase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas borradas planeadas`
+  String get labelPlannedLinesDeleted {
+    return Intl.message(
+      'Líneas borradas planeadas',
+      name: 'labelPlannedLinesDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas editadas planeadas`
+  String get labelPlannedLinesEdits {
+    return Intl.message(
+      'Líneas editadas planeadas',
+      name: 'labelPlannedLinesEdits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas añadidas planeadas`
+  String get labelPlannedLinesAdded {
+    return Intl.message(
+      'Líneas añadidas planeadas',
+      name: 'labelPlannedLinesAdded',
       desc: '',
       args: [],
     );

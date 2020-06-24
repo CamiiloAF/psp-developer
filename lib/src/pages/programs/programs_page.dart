@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
+import 'package:psp_developer/src/pages/programs/program_parts/program_parts_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/utils/searchs/search_programs.dart';
@@ -85,12 +86,7 @@ class ProgramsPage extends StatelessWidget {
     return CustomListTile(
       title: programs[i].name,
       trailing: Icon(Icons.keyboard_arrow_right),
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => TimeLogsPage(
-                    programId: programs[i].id,
-                  ))),
+      onTap: () => onTapItemList(context, programs[i]),
       subtitle: programs[i].description,
     );
   }
@@ -99,4 +95,16 @@ class ProgramsPage extends StatelessWidget {
       BuildContext context, ProgramsBloc programsBloc, int moduleId) async {
     await programsBloc.getPrograms(true, moduleId);
   }
+}
+
+void onTapItemList(BuildContext context, ProgramModel program) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => (program.totalLines == null)
+              // ? ProgramPartsPage(program: program)
+              ? ProgramPartsPage()
+              : TimeLogsPage(
+                  programId: program.id,
+                )));
 }

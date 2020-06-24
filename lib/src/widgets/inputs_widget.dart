@@ -328,8 +328,10 @@ class InputForm extends StatelessWidget {
   final bool isReadOnly;
   final TextEditingController controller;
   final TextInputType keyboardType;
+  final EdgeInsetsGeometry margin;
   final Function(String value) onSaved;
   final String Function(String value) onChanged;
+  final String Function(String value) validator;
 
   InputForm({
     @required this.onSaved,
@@ -341,12 +343,14 @@ class InputForm extends StatelessWidget {
     this.controller,
     this.keyboardType,
     this.onChanged,
+    this.margin,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: (margin == null) ? EdgeInsets.only(top: 20) : margin,
       child: TextFormField(
         initialValue: initialValue,
         controller: controller,
@@ -360,7 +364,7 @@ class InputForm extends StatelessWidget {
         maxLength: maxLenght,
         readOnly: isReadOnly,
         onChanged: onChanged,
-        validator: onChanged,
+        validator: (validator != null) ? validator : onChanged,
       ),
     );
   }

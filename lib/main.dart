@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:psp_developer/src/pages/programs/program_parts/program_parts_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: (preferences.token != '') ? 'projects' : 'login',
         routes: getApplicationRoutes(),
+        // home: ProgramPartsPage(),
         theme: Provider.of<ThemeChanger>(context).currentTheme,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
