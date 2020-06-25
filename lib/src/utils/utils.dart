@@ -65,14 +65,15 @@ void showSnackBar(
   int statusCode,
 ) async {
   if (statusCode != 404) {
-    final snackBar = SnackBar(
-      content: Text(getRequestResponseMessage(context, statusCode)),
-      duration: Duration(milliseconds: 1500),
-    );
-
+    final snackBar = buildSnackBar(context, statusCode);
     scaffoldState.showSnackBar(snackBar);
   }
 }
+
+SnackBar buildSnackBar(BuildContext context, int statusCode) => SnackBar(
+      content: Text(getRequestResponseMessage(context, statusCode)),
+      duration: Duration(milliseconds: 1500),
+    );
 
 bool isValidToken() {
   final token = Preferences().token;
@@ -85,3 +86,5 @@ int getMinutesBetweenTwoDates(DateTime startDate, DateTime finishDate) =>
     (startDate != null && finishDate != null)
         ? finishDate.difference(startDate).inMinutes
         : null;
+
+bool isNullOrEmpty(List list) => list == null || list.isEmpty;

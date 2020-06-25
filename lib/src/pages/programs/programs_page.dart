@@ -37,7 +37,7 @@ class ProgramsPage extends StatelessWidget {
 
   Widget _body(ProgramsBloc programsBloc, int moduleId) {
     return StreamBuilder(
-      stream: programsBloc.programsStream,
+      stream: programsBloc.programsByModuleIdStream,
       builder: (BuildContext context,
           AsyncSnapshot<Tuple2<int, List<ProgramModel>>> snapshot) {
         if (!snapshot.hasData) {

@@ -7,12 +7,26 @@ import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
 
 class ProgramsRepository {
-  Future<Tuple2<int, List<ProgramModel>>> getAllPrograms(
+  Future<Tuple2<int, List<ProgramModel>>> getAllProgramsByModulesId(
       bool isRefresing, int moduleId) async {
     final networkBoundResource =
         _ProgramsNetworkBoundResource(RateLimiter(), '$moduleId');
 
     final response = await networkBoundResource.execute(isRefresing);
+
+    if (response.item2 == null) {
+      return Tuple2(response.item1, []);
+    } else {
+      return response;
+    }
+  }
+
+  Future<Tuple2<int, List<Tuple2<int, String>>>> getAllProgramsByOrganization(
+      int currentProgramId) async {
+    final networkBoundResource =
+        _ProgramsByOrganizationNetworkBoundResource(currentProgramId);
+
+    final response = await networkBoundResource.execute(true);
 
     if (response.item2 == null) {
       return Tuple2(response.item1, []);
@@ -71,4 +85,48 @@ class _ProgramsNetworkBoundResource
   @override
   List<ProgramModel> decodeData(List<dynamic> payload) =>
       ProgramsModel.fromJsonList(payload).programs;
+}
+
+class _ProgramsByOrganizationNetworkBoundResource
+    extends NetworkBoundResource<List<Tuple2<int, String>>> {
+  List<Tuple2<int, String>> callResult;
+
+  final int _currentProgramId;
+  _ProgramsByOrganizationNetworkBoundResource(this._currentProgramId);
+
+  @override
+  Future<http.Response> createCall() async {
+    final url = '${Constants.baseUrl}/programs/by-organization';
+    return await http.get(url, headers: Constants.getHeaders());
+  }
+
+  @override
+  Future saveCallResult(List<dynamic> item) async => callResult = item;
+
+  @override
+  bool shouldFetch(List<dynamic> data) => true;
+
+  @override
+  Future<List<Tuple2<int, String>>> loadFromDb() async =>
+      (callResult == null) ? null : callResult;
+
+  @override
+  void onFetchFailed() {}
+
+  @override
+  List<Tuple2<int, String>> decodeData(List<dynamic> payload) {
+    final items = <Tuple2<int, String>>[];
+
+    if (payload != null && payload.isNotEmpty) {
+      payload.forEach((element) {
+        final int elementId = element['id'];
+        if (elementId != _currentProgramId &&
+            (items.indexWhere((element) => element.item1 == elementId) == -1)) {
+          items.add(Tuple2(elementId, element['name']));
+        }
+      });
+    }
+
+    return items;
+  }
 }

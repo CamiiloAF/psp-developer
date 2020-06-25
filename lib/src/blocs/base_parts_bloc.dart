@@ -1,4 +1,5 @@
 import 'package:psp_developer/src/blocs/Validators.dart';
+import 'package:psp_developer/src/models/base_parts_model.dart';
 import 'package:psp_developer/src/models/defect_logs_model.dart';
 import 'package:psp_developer/src/repositories/defect_logs_repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -6,6 +7,8 @@ import 'package:tuple/tuple.dart';
 
 class BasePartsBloc with Validators {
   // final _defectLogsProvider = DefectLogsRepository();
+
+  final List<BasePartModel> addedBaseParts = [];
 
   // final _defectLogsController =
   //     BehaviorSubject<Tuple2<int, List<DefectLogModel>>>();

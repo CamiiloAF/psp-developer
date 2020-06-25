@@ -96,6 +96,7 @@ class InputName extends StatelessWidget {
   final String errorText;
   final String initialValue;
   final String label;
+  final TextEditingController controller;
 
   final String Function(String value) onChanged;
   final Function(String value) onSaved;
@@ -107,6 +108,7 @@ class InputName extends StatelessWidget {
     this.onChanged,
     this.initialValue,
     this.label,
+    this.controller,
   });
 
   @override
@@ -116,6 +118,7 @@ class InputName extends StatelessWidget {
       child: TextFormField(
         initialValue: initialValue,
         textCapitalization: TextCapitalization.sentences,
+        controller: controller,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             labelText: (label == null) ? S.of(context).labelName : label,

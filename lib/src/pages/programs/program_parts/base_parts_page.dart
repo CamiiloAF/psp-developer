@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/base_parts_bloc.dart';
+import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/models/base_parts_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
+import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
+import 'package:psp_developer/src/widgets/spinner_widget.dart';
+import 'package:tuple/tuple.dart';
 
 class BasePartsPage extends StatefulWidget {
   final int programId;
@@ -17,8 +21,10 @@ class BasePartsPage extends StatefulWidget {
   _BasePartsPageState createState() => _BasePartsPageState();
 }
 
-class _BasePartsPageState extends State<BasePartsPage> {
+class _BasePartsPageState extends State<BasePartsPage>
+    with AutomaticKeepAliveClientMixin {
   BasePartsBloc _basePartBloc;
+  int programBaseId = 1;
 
   @override
   void initState() {
@@ -28,7 +34,12 @@ class _BasePartsPageState extends State<BasePartsPage> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return ChangeNotifierProvider(
       create: (context) => _AddedBasePartsModel(),
       builder: (ctx, child) => Column(
@@ -61,9 +72,6 @@ class _BasePartsPageState extends State<BasePartsPage> {
 
   Widget _buildItemList(
       List<BasePartModel> baseParts, int i, BuildContext ctx) {
-    final addedBasePartsModel =
-        Provider.of<_AddedBasePartsModel>(ctx, listen: false);
-
     return CustomListTile(
         title:
             '${baseParts.length - i} - ${S.of(context).labelPlannedLinesBase}: ${baseParts[i].plannedLinesBase}',
@@ -74,29 +82,43 @@ class _BasePartsPageState extends State<BasePartsPage> {
             children: [
               IconButton(
                 icon: Icon(Icons.delete),
-                onPressed: () =>
-                    addedBasePartsModel.removeBasePart(baseParts[i]),
+                onPressed: () => _removeBasePart(ctx, baseParts[i]),
               ),
               IconButton(
                   icon: Icon(Icons.edit),
-                  onPressed: () {
-                    addedBasePartsModel.currentBasePart = baseParts[i];
-                    addedBasePartsModel.removeBasePart(baseParts[i]);
-                  }),
+                  onPressed: () => _editBasePart(ctx, baseParts[i])),
             ],
           ),
         ),
         isAnimated: false,
         onTap: () {});
   }
+
+  void _removeBasePart(BuildContext ctx, BasePartModel basePart) {
+    final addedBasePartsModel =
+        Provider.of<_AddedBasePartsModel>(ctx, listen: false);
+
+    _basePartBloc.addedBaseParts.remove(basePart);
+
+    addedBasePartsModel.removeBasePart(basePart);
+  }
+
+  void _editBasePart(BuildContext ctx, BasePartModel basePart) {
+    final addedBasePartsModel =
+        Provider.of<_AddedBasePartsModel>(ctx, listen: false);
+
+    addedBasePartsModel.currentBasePart = basePart;
+
+    _removeBasePart(ctx, basePart);
+  }
 }
 
 class _Form extends StatefulWidget {
   final int programsId;
-  final BasePartsBloc _basePartBloc;
+  final BasePartsBloc basePartBloc;
   final BuildContext ctx;
 
-  _Form(this._basePartBloc, this.ctx, this.programsId);
+  _Form(this.basePartBloc, this.ctx, this.programsId);
 
   @override
   __FormState createState() => __FormState();
@@ -104,8 +126,29 @@ class _Form extends StatefulWidget {
 
 class __FormState extends State<_Form> {
   final _formKey = GlobalKey<FormState>();
-
   BasePartModel _basePart = BasePartModel();
+
+  bool isUIDisable;
+  int _currentBaseProgramId;
+
+  List<Tuple2<int, String>> programsTuple;
+
+  @override
+  void initState() {
+    _basePart = context.read<_AddedBasePartsModel>().currentBasePart;
+
+    _currentBaseProgramId = _basePart?.programsBaseId ?? -1;
+
+    programsTuple = context
+        .read<BlocProvider>()
+        .programsBloc
+        .lastValueProgramsByOrganizationController
+        ?.item2;
+
+    isUIDisable = isNullOrEmpty(programsTuple);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,29 +159,67 @@ class __FormState extends State<_Form> {
         child: Column(
           children: [
             SizedBox(height: 10),
+            _buildBaseProgramDropdownButton(),
             _builNumericInput(
                 context,
                 S.of(context).labelPlannedLinesBase,
                 '${_basePart?.plannedLinesBase ?? ''}',
-                (value) => _basePart.plannedLinesBase = int.parse(value)),
+                (value) => _basePart?.plannedLinesBase = int.tryParse(value)),
             _builNumericInput(
                 context,
                 S.of(context).labelPlannedLinesDeleted,
                 '${_basePart?.plannedLinesDeleted ?? ''}',
-                (value) => _basePart.plannedLinesDeleted = int.parse(value)),
+                (value) =>
+                    _basePart?.plannedLinesDeleted = int.tryParse(value)),
             _builNumericInput(
                 context,
                 S.of(context).labelPlannedLinesEdits,
                 '${_basePart?.plannedLinesEdits ?? ''}',
-                (value) => _basePart.plannedLinesEdits = int.parse(value)),
+                (value) => _basePart?.plannedLinesEdits = int.tryParse(value)),
             _builNumericInput(
                 context,
                 S.of(context).labelPlannedLinesAdded,
                 '${_basePart?.plannedLinesAdded ?? ''}',
-                (value) => _basePart.plannedLinesAdded = int.parse(value)),
-            SubmitButton(onPressed: _saveBasePart)
+                (value) => _basePart?.plannedLinesAdded = int.tryParse(value)),
+            SubmitButton(onPressed: (isUIDisable) ? null : _saveBasePart)
           ],
         ));
+  }
+
+  Widget _buildBaseProgramDropdownButton() {
+    _basePart = Provider.of<_AddedBasePartsModel>(context).currentBasePart;
+
+    return Spinner(
+      label: S.of(context).labelBaseProgram,
+      items: _getDropDownMenuItems(),
+      value: _basePart?.programsBaseId ?? -1,
+      onChanged: (value) {
+        setState(() {
+          _formKey.currentState.save();
+          _basePart.programsBaseId = value;
+          _currentBaseProgramId = value;
+        });
+      },
+    );
+  }
+
+  List<DropdownMenuItem<int>> _getDropDownMenuItems() {
+    final items = <DropdownMenuItem<int>>[
+      DropdownMenuItem(
+          value: -1,
+          child: Text((isNullOrEmpty(programsTuple))
+              ? S.of(context).labelDoNotHavePrograms
+              : S.of(context).labelNone))
+    ];
+
+    if (!isNullOrEmpty(programsTuple)) {
+      programsTuple.forEach((programTuple) {
+        items.add(DropdownMenuItem(
+            value: programTuple.item1, child: Text(programTuple.item2)));
+      });
+    }
+
+    return items;
   }
 
   Widget _builNumericInput(BuildContext context, String label, String text,
@@ -149,10 +230,11 @@ class __FormState extends State<_Form> {
     return InputForm(
       label: label,
       controller: controller,
+      isEnabled: !isUIDisable,
       margin: EdgeInsets.only(top: 10),
       onSaved: onSaved,
       validator: (value) {
-        return (widget._basePartBloc.isValidNumber(value)
+        return (widget.basePartBloc.isValidNumber(value)
             ? null
             : S.of(context).invalidNumber);
       },
@@ -166,11 +248,15 @@ class __FormState extends State<_Form> {
 
     _formKey.currentState.save();
 
-//TODO: Agrear el spinner para los programas base
     _basePart.programsId = widget.programsId;
+    _basePart.programsBaseId =
+        (_currentBaseProgramId == -1) ? null : _currentBaseProgramId;
+
     Provider.of<_AddedBasePartsModel>(widget.ctx, listen: false)
       ..addBaseParts(_basePart)
       ..currentBasePart = BasePartModel();
+
+    widget.basePartBloc.addedBaseParts.add(_basePart);
 
     _basePart = BasePartModel();
 
@@ -187,7 +273,7 @@ class _AddedBasePartsModel with ChangeNotifier {
 
   List<BasePartModel> get addedBaseParts => _addedBaseParts;
 
-  BasePartModel _currentBasePart;
+  BasePartModel _currentBasePart = BasePartModel();
 
   void addBaseParts(BasePartModel value) {
     _addedBaseParts.add(value);

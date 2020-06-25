@@ -14,7 +14,8 @@ class SearchPrograms extends DataSearch {
   Widget buildSuggestions(BuildContext context) {
     if (query.isEmpty) return super.textNoResults(context);
 
-    final programs = _programsBloc?.lastValueProgramsController?.item2 ?? [];
+    final programs =
+        _programsBloc?.lastValueProgramsByModuleIdController?.item2 ?? [];
     if (programs.isNotEmpty && programs != null) {
       return Container(
           child: ListView(

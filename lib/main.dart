@@ -39,8 +39,9 @@ class MyApp extends StatelessWidget {
         title: 'PSP - DEVELOPER',
         debugShowCheckedModeBanner: false,
         initialRoute: (preferences.token != '') ? 'projects' : 'login',
+        // initialRoute: (preferences.token != '') ? 'p' : 'login',
         routes: getApplicationRoutes(),
-        // home: ProgramPartsPage(),
+        home: ProgramPartsPage(),
         theme: Provider.of<ThemeChanger>(context).currentTheme,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

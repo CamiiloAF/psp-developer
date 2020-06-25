@@ -117,4 +117,54 @@ class Constants {
     StandardDefectsModel(id: 10, name: 'SYSTEM'),
     StandardDefectsModel(id: 11, name: 'ENVIRONMENT')
   ];
+
+  static final NEW_PART_TYPE = [
+    'calculation',
+    'data',
+    'i/o',
+    'logic',
+    'setup',
+    'text',
+  ];
+
+  static final NEW_PART_SIZE = [
+    'vs',
+    's',
+    'm',
+    'l',
+    'vl',
+  ];
+
+  static const NEW_PART_TYPES_SIZE = {
+    'calculation-vs': 1,
+    'calculation-s': 2,
+    'calculation-m': 3,
+    'calculation-l': 4,
+    'calculation-vl': 5,
+    'data-vs': 6,
+    'data-s': 7,
+    'data-m': 8,
+    'data-l': 9,
+    'data-vl': 10,
+    'i/o-vs': 11,
+    'i/o-s': 12,
+    'i/o-m': 13,
+    'i/o-l': 14,
+    'i/o-vl': 15,
+    'logic-vs': 16,
+    'logic-s': 17,
+    'logic-m': 18,
+    'logic-l': 19,
+    'logic-vl': 20,
+    'setup-vs': 21,
+    'setup-s': 22,
+    'setup-m': 23,
+    'setup-l': 24,
+    'setup-vl': 25,
+    'text-vs': 26,
+    'text-s': 27,
+    'text-m': 28,
+    'text-l': 29,
+    'text-vl': 30,
+  };
 }

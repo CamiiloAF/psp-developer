@@ -613,16 +613,6 @@ class S {
     );
   }
 
-  /// `Número inválido`
-  String get inputPhoneError {
-    return Intl.message(
-      'Número inválido',
-      name: 'inputPhoneError',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Líneas base planeadas`
   String get labelPlannedLinesBase {
     return Intl.message(
@@ -658,6 +648,76 @@ class S {
     return Intl.message(
       'Líneas añadidas planeadas',
       name: 'labelPlannedLinesAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Programa Base:`
+  String get labelBaseProgram {
+    return Intl.message(
+      'Programa Base:',
+      name: 'labelBaseProgram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Programa Reutilizable:`
+  String get labelReusableProgram {
+    return Intl.message(
+      'Programa Reutilizable:',
+      name: 'labelReusableProgram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No hay otros programas`
+  String get labelDoNotHavePrograms {
+    return Intl.message(
+      'No hay otros programas',
+      name: 'labelDoNotHavePrograms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Métodos planeados`
+  String get labelMethodsPlanned {
+    return Intl.message(
+      'Métodos planeados',
+      name: 'labelMethodsPlanned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tipo`
+  String get labelType {
+    return Intl.message(
+      'Tipo',
+      name: 'labelType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tamaño`
+  String get labelSize {
+    return Intl.message(
+      'Tamaño',
+      name: 'labelSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Número inválido`
+  String get inputPhoneError {
+    return Intl.message(
+      'Número inválido',
+      name: 'inputPhoneError',
       desc: '',
       args: [],
     );
