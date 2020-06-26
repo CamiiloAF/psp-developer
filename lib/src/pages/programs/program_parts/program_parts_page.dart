@@ -6,16 +6,18 @@ import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/base_parts_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/reusable_parts_page.dart';
+import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
+import 'package:psp_developer/src/providers/models/added_new_parts_model.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 
 class ProgramPartsPage extends StatelessWidget {
-  // final ProgramModel program;
+  final ProgramModel program;
 
-  // ProgramPartsPage({@required this.program});
+  ProgramPartsPage({@required this.program});
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -23,59 +25,103 @@ class ProgramPartsPage extends StatelessWidget {
     Constants.token = Preferences().token;
 
     final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
-    programsBloc.getProgramsByOrganization(1);
+    programsBloc.getProgramsByOrganization(program.id);
 
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-          key: _scaffoldKey,
-          appBar: CustomAppBar(
-            bottom: TabBar(
-              indicatorColor: Theme.of(context).accentColor,
-              tabs: [
-                Tab(
-                  text: S.of(context).appBarTitleBaseParts,
-                ),
-                Tab(
-                  text: S.of(context).appBarTitleReusableParts,
-                ),
-                Tab(
-                  text: S.of(context).appBarTitleNewParts,
-                ),
-              ],
-            ),
-            title: S.of(context).appBarTitleProgramParts,
-          ),
-          body: StreamBuilder(
-            stream: programsBloc.programsByOrganizationStream,
-            builder: (BuildContext ctx, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
-              }
-
-              final statusCode = snapshot.data.item1;
-
-              if (statusCode != 200) {
-                showSnackBar(context, _scaffoldKey.currentState, statusCode);
-              }
-
-              return TabBarView(
-                children: [
-                  // BasePartsPage(programId: program.id),
-                  BasePartsPage(programId: 1),
-                  ReusablePartsPage(programId: 1),
-                  NewPartsPage(programId: 1),
-                  // ModulesPage(projectId: '$projectId'),
-                ],
-              );
-            },
-          )),
+      child: ChangeNotifierProvider(
+        create: (BuildContext context) => AddedNewPartsModel(),
+        builder: (ctx, child) => buildScaffold(ctx, programsBloc),
+      ),
     );
   }
 
-  Future<void> _refreshPrograms(
-      BuildContext context, ProgramsBloc programsBloc) async {
-    //TODO : Cambiar ese 1 por el id del programa actual
-    await programsBloc.getProgramsByOrganization(1);
+  Scaffold buildScaffold(BuildContext context, ProgramsBloc programsBloc) {
+    return Scaffold(
+        key: _scaffoldKey,
+        appBar: CustomAppBar(
+          moreActions: [
+            IconButton(
+              icon: Icon(Icons.check),
+              onPressed: (Provider.of<AddedNewPartsModel>(context)
+                      .addedNewParts
+                      .isEmpty)
+                  ? null
+                  : () => updateProgramWithProgramParts(context),
+            )
+          ],
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).accentColor,
+            tabs: [
+              Tab(
+                text: S.of(context).appBarTitleBaseParts,
+              ),
+              Tab(
+                text: S.of(context).appBarTitleReusableParts,
+              ),
+              Tab(
+                text: S.of(context).appBarTitleNewParts,
+              ),
+            ],
+          ),
+          title: S.of(context).appBarTitleProgramParts,
+        ),
+        body: StreamBuilder(
+          stream: programsBloc.programsByOrganizationStream,
+          builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            final statusCode = snapshot.data.item1;
+
+            if (statusCode != 200) {
+              showSnackBar(context, _scaffoldKey.currentState, statusCode);
+            }
+
+            return TabBarView(
+              children: [
+                BasePartsPage(programId: program.id),
+                ReusablePartsPage(programId: program.id),
+                NewPartsPage(programId: program.id),
+              ],
+            );
+          },
+        ));
+  }
+
+  void updateProgramWithProgramParts(BuildContext context) async {
+    final progressDialog =
+        getProgressDialog(context, S.of(context).progressDialogSaving);
+
+    await progressDialog.show();
+
+    var statusCode = -1;
+
+    final blocProvider = Provider.of<BlocProvider>(context, listen: false);
+    final baseParts = blocProvider.basePartsBloc.addedBaseParts;
+    final reusableParts = blocProvider.reusablePartsBloc.addedReusableParts;
+    final newParts = blocProvider.newPartsBloc.addedNewParts;
+
+    program
+      ..baseParts = baseParts
+      ..reusableParts = reusableParts
+      ..newParts = newParts;
+
+    statusCode =
+        await blocProvider.programsBloc.updateProgramWithProgramParts(program);
+
+    await progressDialog.hide();
+
+    if (statusCode == 204) {
+      await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => TimeLogsPage(
+                    programId: program.id,
+                  )));
+    } else {
+      showSnackBar(context, _scaffoldKey.currentState, statusCode);
+    }
   }
 }

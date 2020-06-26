@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/base_parts_bloc.dart';
-import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/models/base_parts_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/utils/utils.dart';
@@ -31,6 +30,12 @@ class _BasePartsPageState extends State<BasePartsPage>
     _basePartBloc = context.read<BlocProvider>().basePartsBloc;
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _basePartBloc.dispose();
+    super.dispose();
   }
 
   @override

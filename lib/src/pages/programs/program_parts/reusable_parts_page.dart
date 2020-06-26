@@ -33,6 +33,12 @@ class _ReusablePartsPageState extends State<ReusablePartsPage>
   }
 
   @override
+  void dispose() {
+    _reusablePartBloc.dispose();
+    super.dispose();
+  }
+
+  @override
   bool get wantKeepAlive => true;
 
   @override
@@ -133,14 +139,11 @@ class __FormState extends State<_Form> {
   int _currentReusableProgramId;
 
   List<Tuple2<int, String>> programsTuple;
-  int programsFirstId;
 
   @override
   void initState() {
     _reusablePart =
         context.read<_AddedReusablePartsModel>().currentReusablePart;
-
-    _currentReusableProgramId = _reusablePart?.programsReusablesId ?? -1;
 
     programsTuple = context
         .read<BlocProvider>()
@@ -148,7 +151,7 @@ class __FormState extends State<_Form> {
         .lastValueProgramsByOrganizationController
         ?.item2;
 
-    programsFirstId =
+    _currentReusableProgramId =
         (isNullOrEmpty(programsTuple)) ? -1 : programsTuple[0].item1;
 
     isUIDisable = isNullOrEmpty(programsTuple);
@@ -184,9 +187,10 @@ class __FormState extends State<_Form> {
     return Spinner(
       label: S.of(context).labelReusableProgram,
       items: _getDropDownMenuItems(),
-      value: _reusablePart?.programsReusablesId ?? programsFirstId,
+      value: _reusablePart?.programsReusablesId ?? _currentReusableProgramId,
       onChanged: (value) {
         setState(() {
+          _formKey.currentState.save();
           _reusablePart.programsReusablesId = value;
           _currentReusableProgramId = value;
         });

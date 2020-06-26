@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
+import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 
 class CustomRaisedButton extends StatelessWidget {
   final String buttonText;
@@ -61,14 +63,19 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<ThemeChanger>(context).isDarkTheme;
+    final theme = Theme.of(context);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 40.0),
       width: double.infinity,
-      child: RaisedButton.icon(
+      child: OutlineButton.icon(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        color: Theme.of(context).accentColor,
-        textColor: Colors.white,
+        color: theme.accentColor,
+        highlightedBorderColor: theme.accentColor,
+        textColor:
+            (!isDarkTheme) ? Theme.of(context).accentColor : Colors.white,
         label: Text(S.of(context).save),
         icon: Icon(Icons.save),
         onPressed: onPressed,

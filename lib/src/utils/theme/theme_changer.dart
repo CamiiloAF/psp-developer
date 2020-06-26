@@ -37,16 +37,19 @@ class ThemeChanger with ChangeNotifier {
     notifyListeners();
   }
 
+  static const _ACCENT_COLOR = Color(0xFF607d8b);
+  static const _PRIMARY_COLOR = Color(0xffff7043);
+
   ThemeData _darkThemeData() => ThemeData.dark().copyWith(
-      accentColor: Color(0xffff7043),
+      accentColor: _ACCENT_COLOR,
       floatingActionButtonTheme:
-          FloatingActionButtonThemeData(backgroundColor: Color(0xffff7043)),
+          FloatingActionButtonThemeData(backgroundColor: _ACCENT_COLOR),
       inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()));
 
   ThemeData _lightThemeData() => ThemeData.light().copyWith(
-      accentColor: Color(0xffff7043),
-      primaryColor: Color(0xFF607d8b),
+      accentColor: _ACCENT_COLOR,
+      primaryColor: _PRIMARY_COLOR,
       floatingActionButtonTheme:
-          FloatingActionButtonThemeData(backgroundColor: Color(0xffff7043)),
+          FloatingActionButtonThemeData(backgroundColor: _ACCENT_COLOR),
       inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()));
 }

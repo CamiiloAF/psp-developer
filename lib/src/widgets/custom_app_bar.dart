@@ -7,13 +7,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final SearchDelegate searchDelegate;
   final String title;
   final PreferredSizeWidget bottom;
+  final List<Widget> moreActions;
 
   final _sessionProvider = SessionRepository();
 
   final _optionSettingsIndex = 1;
   final _optionLogOutIndex = 2;
 
-  CustomAppBar({this.searchDelegate, @required this.title, this.bottom});
+  CustomAppBar(
+      {this.searchDelegate,
+      @required this.title,
+      this.bottom,
+      this.moreActions = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   List<Widget> appBarActions(BuildContext context) {
     return [
+      if (moreActions.isNotEmpty) ...moreActions,
       (searchDelegate != null)
           ? IconButton(
               icon: Icon(Icons.search),

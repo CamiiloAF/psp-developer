@@ -1,8 +1,10 @@
 import 'package:http/http.dart' as http;
+
 import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
+import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
 
@@ -33,6 +35,12 @@ class ProgramsRepository {
     } else {
       return response;
     }
+  }
+
+  Future<int> updateProgramWithProgramParts(ProgramModel program) async {
+    final url = '${Constants.baseUrl}/programs/${program.id}';
+    return await _ProgramsUpdateBoundResource()
+        .executeUpdate(programModelToJson(program), program, url);
   }
 }
 
@@ -129,4 +137,13 @@ class _ProgramsByOrganizationNetworkBoundResource
 
     return items;
   }
+}
+
+class _ProgramsUpdateBoundResource
+    extends InsertAndUpdateBoundResource<ProgramModel> {
+  @override
+  ProgramModel buildNewModel(payload) => null;
+
+  @override
+  void doOperationInDb(ProgramModel model) => null;
 }

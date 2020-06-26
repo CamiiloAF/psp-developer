@@ -38,6 +38,27 @@ class ProgramsBloc {
     _programsByOrganizationController.sink.add(programsWithStatusCode);
   }
 
+  Future<int> updateProgramWithProgramParts(ProgramModel program) async {
+    final statusCode =
+        await _programsRepository.updateProgramWithProgramParts(program);
+
+    if (statusCode == 204) {
+      final tempProgramsByModuleId =
+          lastValueProgramsByModuleIdController.item2;
+
+      final indexOfOldProgramByModuleId = tempProgramsByModuleId
+          .indexWhere((element) => element.id == program.id);
+
+      if (indexOfOldProgramByModuleId != -1) {
+        tempProgramsByModuleId[indexOfOldProgramByModuleId] = program;
+      }
+
+      _programsByModuleIdController.sink
+          .add(Tuple2(200, tempProgramsByModuleId));
+    }
+    return statusCode;
+  }
+
   void dispose() {
     _programsByModuleIdController.sink.add(null);
   }

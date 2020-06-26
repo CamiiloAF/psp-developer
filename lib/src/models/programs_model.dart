@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:psp_developer/src/models/base_parts_model.dart';
+import 'package:psp_developer/src/models/new_parts_model.dart';
+import 'package:psp_developer/src/models/reusable_parts_model.dart';
+
 class ProgramsModel {
   List<ProgramModel> programs = [];
 
@@ -48,6 +52,10 @@ class ProgramModel {
   int updateDate;
   int deliveryDate;
 
+  List<BasePartModel> baseParts = [];
+  List<ReusablePartModel> reusableParts = [];
+  List<NewPartModel> newParts = [];
+
   factory ProgramModel.fromJson(Map<String, dynamic> json) => ProgramModel(
         id: json['id'],
         usersId: json['users_id'],
@@ -80,9 +88,9 @@ class ProgramModel {
               'start_date': startDate,
               'update_date': updateDate,
               'delivery_date': deliveryDate,
-              'base_parts': [],
-              'reusable_parts': [],
-              'new_parts': [],
+              'base_parts': baseParts,
+              'reusable_parts': reusableParts,
+              'new_parts': newParts,
             }
           : {
               'id': id,

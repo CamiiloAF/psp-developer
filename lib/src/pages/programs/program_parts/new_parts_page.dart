@@ -3,14 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/new_parts_bloc.dart';
 import 'package:psp_developer/src/models/new_parts_model.dart';
+import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
+import 'package:psp_developer/src/providers/models/added_new_parts_model.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
 import 'package:psp_developer/src/widgets/spinner_widget.dart';
-import 'package:tuple/tuple.dart';
 
 class NewPartsPage extends StatefulWidget {
   final int programId;
@@ -34,43 +35,48 @@ class _NewPartsPageState extends State<NewPartsPage>
   }
 
   @override
+  void dispose() {
+    _newPartBloc.dispose();
+    super.dispose();
+  }
+
+  @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ChangeNotifierProvider(
-      create: (context) => _AddedNewPartsModel(),
-      builder: (ctx, child) => Column(
-        children: [
-          Expanded(
-            flex: 3,
-            child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: _Form(_newPartBloc, ctx, widget.programId),
-              ),
+    return Column(
+      children: [
+        Expanded(
+          flex: 3,
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              child: _Form(_newPartBloc, widget.programId),
             ),
           ),
-          Expanded(child: _buildAddedNewPartsList(ctx)),
-        ],
-      ),
+        ),
+        Expanded(child: _buildAddedNewPartsList()),
+      ],
     );
   }
 
-  Widget _buildAddedNewPartsList(BuildContext ctx) {
-    final newParts =
-        Provider.of<_AddedNewPartsModel>(ctx).addedNewParts.reversed.toList();
+  Widget _buildAddedNewPartsList() {
+    final newParts = Provider.of<AddedNewPartsModel>(context)
+        .addedNewParts
+        .reversed
+        .toList();
 
     return ListView.separated(
         itemCount: newParts.length,
-        itemBuilder: (context, i) => _buildItemList(newParts, i, ctx),
+        itemBuilder: (context, i) => _buildItemList(newParts, i),
         separatorBuilder: (BuildContext context, int index) => Divider(
               thickness: 1.0,
             ));
   }
 
-  Widget _buildItemList(List<NewPartModel> newParts, int i, BuildContext ctx) {
+  Widget _buildItemList(List<NewPartModel> newParts, int i) {
     return CustomListTile(
         title:
             '${newParts.length - i} - ${S.of(context).labelName}: ${newParts[i].name}',
@@ -81,11 +87,11 @@ class _NewPartsPageState extends State<NewPartsPage>
             children: [
               IconButton(
                 icon: Icon(Icons.delete),
-                onPressed: () => _removeNewPart(ctx, newParts[i]),
+                onPressed: () => _removeNewPart(newParts[i]),
               ),
               IconButton(
                   icon: Icon(Icons.edit),
-                  onPressed: () => _editNewPart(ctx, newParts[i])),
+                  onPressed: () => _editNewPart(newParts[i])),
             ],
           ),
         ),
@@ -93,32 +99,31 @@ class _NewPartsPageState extends State<NewPartsPage>
         onTap: () {});
   }
 
-  void _removeNewPart(BuildContext ctx, NewPartModel newPart) {
+  void _removeNewPart(NewPartModel newPart) {
     final addedNewPartsModel =
-        Provider.of<_AddedNewPartsModel>(ctx, listen: false);
+        Provider.of<AddedNewPartsModel>(context, listen: false);
 
     _newPartBloc.addedNewParts.remove(newPart);
 
     addedNewPartsModel.removeNewPart(newPart);
   }
 
-  void _editNewPart(BuildContext ctx, NewPartModel newPart) {
+  void _editNewPart(NewPartModel newPart) {
     final addedNewPartsModel =
-        Provider.of<_AddedNewPartsModel>(ctx, listen: false);
+        Provider.of<AddedNewPartsModel>(context, listen: false);
 
     addedNewPartsModel.currentNewPart = newPart;
     addedNewPartsModel.setNewPartTypeAndSizeById(newPart.typesSizesId);
 
-    _removeNewPart(ctx, newPart);
+    _removeNewPart(newPart);
   }
 }
 
 class _Form extends StatefulWidget {
-  final int programsId;
   final NewPartsBloc newPartBloc;
-  final BuildContext ctx;
+  final int programId;
 
-  _Form(this.newPartBloc, this.ctx, this.programsId);
+  _Form(this.newPartBloc, this.programId);
 
   @override
   __FormState createState() => __FormState();
@@ -130,14 +135,14 @@ class __FormState extends State<_Form> {
 
   @override
   void initState() {
-    _newPart = context.read<_AddedNewPartsModel>().currentNewPart;
+    _newPart = context.read<AddedNewPartsModel>().currentNewPart;
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _newPart = Provider.of<_AddedNewPartsModel>(context).currentNewPart;
+    _newPart = Provider.of<AddedNewPartsModel>(context).currentNewPart;
 
     return Form(
         key: _formKey,
@@ -166,7 +171,7 @@ class __FormState extends State<_Form> {
   }
 
   Widget _buildSizeTypeDropdownButton(bool isForType) {
-    final addedNewPartsModel = Provider.of<_AddedNewPartsModel>(context);
+    final addedNewPartsModel = Provider.of<AddedNewPartsModel>(context);
     _newPart = addedNewPartsModel.currentNewPart;
 
     return Spinner(
@@ -245,15 +250,15 @@ class __FormState extends State<_Form> {
   void _saveNewPart() {
     if (!_formKey.currentState.validate()) return;
     final addedNewPartsModel =
-        Provider.of<_AddedNewPartsModel>(context, listen: false);
+        Provider.of<AddedNewPartsModel>(context, listen: false);
 
     _formKey.currentState.save();
 
-    _newPart.programsId = widget.programsId;
+    _newPart.programsId = widget.programId;
     _newPart.typesSizesId = Constants.NEW_PART_TYPES_SIZE[
         '${addedNewPartsModel.newPartType}-${addedNewPartsModel.newPartSize}'];
 
-    Provider.of<_AddedNewPartsModel>(widget.ctx, listen: false)
+    Provider.of<AddedNewPartsModel>(context, listen: false)
       ..addNewParts(_newPart)
       ..currentNewPart = NewPartModel();
 
@@ -266,68 +271,5 @@ class __FormState extends State<_Form> {
 
   void clearInputs() {
     setState(() {});
-  }
-}
-
-class _AddedNewPartsModel with ChangeNotifier {
-  final List<NewPartModel> _addedNewParts = [];
-
-  List<NewPartModel> get addedNewParts => _addedNewParts;
-
-  NewPartModel _currentNewPart = NewPartModel();
-
-  String _newPartType = Constants.NEW_PART_TYPE[0];
-  String _newPartSize = Constants.NEW_PART_SIZE[0];
-
-  void addNewParts(NewPartModel value) {
-    _addedNewParts.add(value);
-    notifyListeners();
-  }
-
-  void removeNewPart(NewPartModel value) {
-    _addedNewParts.remove(value);
-    notifyListeners();
-  }
-
-  NewPartModel get currentNewPart => _currentNewPart;
-  set currentNewPart(value) {
-    _currentNewPart = value;
-    notifyListeners();
-  }
-
-  String get newPartType => _newPartType;
-  String get newPartSize => _newPartSize;
-
-  set newPartType(String value) {
-    _newPartType = value;
-    notifyListeners();
-  }
-
-  set newPartSize(String value) {
-    _newPartSize = value;
-    notifyListeners();
-  }
-
-  void setNewPartTypeAndSizeById(int partTypesSizeId) {
-    String partTypes;
-    String partSize;
-
-    Constants.NEW_PART_TYPES_SIZE.forEach((key, value) {
-      if (value == partTypesSizeId) {
-        final partTypesSize = key.split('-');
-        partTypes = partTypesSize[0];
-        partSize = partTypesSize[1];
-      }
-    });
-    _newPartType = partTypes;
-    _newPartSize = partSize;
-    notifyListeners();
-  }
-
-  void resetValues() {
-    _newPartType = Constants.NEW_PART_TYPE[0];
-    _newPartSize = Constants.NEW_PART_SIZE[0];
-    _currentNewPart = NewPartModel();
-    notifyListeners();
   }
 }
