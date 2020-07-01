@@ -54,24 +54,28 @@ String getRequestResponseMessage(BuildContext context, int statusCode) {
     case 403:
       return S.of(context).message403;
       break;
+    case 404:
+      return S.of(context).message404;
+      break;
+
     default:
       return S.of(context).messageUnexpectedError;
   }
 }
 
 void showSnackBar(
-  BuildContext context,
-  ScaffoldState scaffoldState,
-  int statusCode,
-) async {
-  if (statusCode != 404) {
-    final snackBar = buildSnackBar(context, statusCode);
+    BuildContext context, ScaffoldState scaffoldState, int statusCode,
+    {bool allow404Message = false}) async {
+  if (allow404Message || statusCode != 404) {
+    final snackBar =
+        buildSnackbar(Text(getRequestResponseMessage(context, statusCode)));
+
     scaffoldState.showSnackBar(snackBar);
   }
 }
 
-SnackBar buildSnackBar(BuildContext context, int statusCode) => SnackBar(
-      content: Text(getRequestResponseMessage(context, statusCode)),
+SnackBar buildSnackbar(Widget content) => SnackBar(
+      content: content,
       duration: Duration(milliseconds: 1500),
     );
 

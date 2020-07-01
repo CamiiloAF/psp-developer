@@ -143,6 +143,26 @@ class S {
     );
   }
 
+  /// `Cancelar`
+  String get dialogButtonCancel {
+    return Intl.message(
+      'Cancelar',
+      name: 'dialogButtonCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restaurar`
+  String get dialogButtonRestore {
+    return Intl.message(
+      'Restaurar',
+      name: 'dialogButtonRestore',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Proyectos`
   String get appBarTitleProjects {
     return Intl.message(
@@ -323,6 +343,16 @@ class S {
     );
   }
 
+  /// `No se encontró información`
+  String get message404 {
+    return Intl.message(
+      'No se encontró información',
+      name: 'message404',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An unexpected error occurred`
   String get messageUnexpectedError {
     return Intl.message(
@@ -338,6 +368,26 @@ class S {
     return Intl.message(
       'Credenciales incorrectas',
       name: 'messageIncorrectCredentials',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¡Te hemos enviado un email!`
+  String get messageWeHaveSentEmail {
+    return Intl.message(
+      '¡Te hemos enviado un email!',
+      name: 'messageWeHaveSentEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¡Te hemos enviado un SMS!`
+  String get messageWeHaveSentSMS {
+    return Intl.message(
+      '¡Te hemos enviado un SMS!',
+      name: 'messageWeHaveSentSMS',
       desc: '',
       args: [],
     );
@@ -708,6 +758,36 @@ class S {
     return Intl.message(
       'Tamaño',
       name: 'labelSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recuperar contraseña mediante email`
+  String get labelRestorePasswordByEmail {
+    return Intl.message(
+      'Recuperar contraseña mediante email',
+      name: 'labelRestorePasswordByEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recuperar contraseña mediante número telefónico`
+  String get labelRestorePasswordByPhoneNumber {
+    return Intl.message(
+      'Recuperar contraseña mediante número telefónico',
+      name: 'labelRestorePasswordByPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recuperar contraseña`
+  String get labelRestorePassword {
+    return Intl.message(
+      'Recuperar contraseña',
+      name: 'labelRestorePassword',
       desc: '',
       args: [],
     );

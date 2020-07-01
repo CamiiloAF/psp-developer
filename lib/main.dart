@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:psp_developer/src/models/programs_model.dart';
-import 'package:psp_developer/src/pages/programs/program_parts/program_parts_page.dart';
+import 'package:provider/provider.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
 import 'package:psp_developer/src/routes/routes.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
+
 import 'generated/l10n.dart';
 
 void main() async {
