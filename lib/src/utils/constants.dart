@@ -17,6 +17,7 @@ class Constants {
   static const TIME_LOGS_TABLE_NAME = 'time_log';
 
   static const TEST_REPORTS_TABLE_NAME = 'test_reports';
+  static const PIP_TABLE_NAME = 'pip';
 
   static String token;
 
@@ -94,6 +95,14 @@ class Constants {
       'current_result TEXT NULL,'
       'description TEXT NULL,'
       'objective TEXT NOT NULL);';
+
+  static const SQL_CREATE_TABLE_PIP = 'CREATE TABLE $PIP_TABLE_NAME('
+      'id INT (11) PRIMARY KEY NOT NULL,'
+      'programs_id INT (11) NOT NULL,'
+      'description TEXT NOT NULL,'
+      'proposals TEXT NOT NULL,'
+      'comments TEXT NULL,'
+      'date VARCHAR NOT NULL);';
 
   static final PHASES = [
     PhasesModel(id: 1, name: 'PLAN'),

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
+import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/test_reports/test_reports_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
+import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 
 import 'custom_list_tile.dart';
@@ -45,6 +47,11 @@ class DrawerProgramItems extends StatelessWidget {
                 title: S.of(context).appBarTitleTestReports,
                 onTap: () =>
                     navigateTo(context, TestReportsPage(programId: programId))),
+            CustomListTile(
+                isEnable: isPIPEnabled(context),
+                title: S.of(context).appBarTitlePIP,
+                onTap: () =>
+                    navigateTo(context, PIPPage(programId: programId))),
             Divider(),
             ListTile(
               leading: Icon(Icons.brightness_4),
@@ -58,6 +65,17 @@ class DrawerProgramItems extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool isPIPEnabled(BuildContext context) {
+    final lastValueProgramsStream = Provider.of<BlocProvider>(context)
+        .programsBloc
+        .lastValueProgramsByModuleIdController;
+
+    return lastValueProgramsStream.item2
+            .firstWhere((element) => element.id == programId)
+            .deliveryDate !=
+        null;
   }
 
   void navigateTo(BuildContext context, dynamic page) =>

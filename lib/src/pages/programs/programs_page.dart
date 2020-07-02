@@ -4,6 +4,7 @@ import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/program_parts_page.dart';
+import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/utils/searchs/search_programs.dart';
 import 'package:psp_developer/src/utils/utils.dart';
@@ -100,10 +101,9 @@ void onTapItemList(BuildContext context, ProgramModel program) {
   Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ProgramPartsPage(program: program)));
-  // (program.totalLines == null)
-  // ? ProgramPartsPage(program: program)
-  // : TimeLogsPage(
-  //     programId: program.id,
-  //   )));
+          builder: (context) => (program.totalLines == null)
+              ? ProgramPartsPage(program: program)
+              : TimeLogsPage(
+                  programId: program.id,
+                )));
 }

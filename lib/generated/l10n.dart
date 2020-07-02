@@ -263,6 +263,16 @@ class S {
     );
   }
 
+  /// `PIP`
+  String get appBarTitlePIP {
+    return Intl.message(
+      'PIP',
+      name: 'appBarTitlePIP',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NO ESTÁS AUTORIZADO`
   String get titleNotAutorized {
     return Intl.message(
@@ -388,6 +398,16 @@ class S {
     return Intl.message(
       '¡Te hemos enviado un SMS!',
       name: 'messageWeHaveSentSMS',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Se ha guardado el PIP`
+  String get messagePIPHasBeenSave {
+    return Intl.message(
+      'Se ha guardado el PIP',
+      name: 'messagePIPHasBeenSave',
       desc: '',
       args: [],
     );
@@ -788,6 +808,26 @@ class S {
     return Intl.message(
       'Recuperar contraseña',
       name: 'labelRestorePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Propuestas`
+  String get labelProposals {
+    return Intl.message(
+      'Propuestas',
+      name: 'labelProposals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fecha`
+  String get labelDate {
+    return Intl.message(
+      'Fecha',
+      name: 'labelDate',
       desc: '',
       args: [],
     );
