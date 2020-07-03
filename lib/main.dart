@@ -23,7 +23,7 @@ void main() async {
       create: (_) => FabModel(),
     ),
     ChangeNotifierProvider(
-      create: (_) => ThemeChanger(1),
+      create: (_) => ThemeChanger(Preferences().theme),
     ),
     ChangeNotifierProvider(
       create: (_) => TimelogPendingInterruptionModel(),

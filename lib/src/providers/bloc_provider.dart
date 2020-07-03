@@ -9,6 +9,7 @@ import 'package:psp_developer/src/blocs/projects_bloc.dart';
 import 'package:psp_developer/src/blocs/reusable_parts_bloc.dart';
 import 'package:psp_developer/src/blocs/test_reports_bloc.dart';
 import 'package:psp_developer/src/blocs/time_logs_bloc.dart';
+import 'package:psp_developer/src/blocs/users_bloc.dart';
 
 class BlocProvider {
   final _loginBloc = LoginBloc();
@@ -26,6 +27,8 @@ class BlocProvider {
   final _testReportsBloc = TestReportsBloc();
   final _pipBloc = PIPBloc();
 
+  final _userBloc = UsersBloc();
+
   LoginBloc get loginBloc => _loginBloc;
   ProjectsBloc get projectsBloc => _projectsBloc;
   ModulesBloc get modulesBloc => _modulesBloc;
@@ -40,4 +43,5 @@ class BlocProvider {
 
   TestReportsBloc get testReportsBloc => _testReportsBloc;
   PIPBloc get pipBloc => _pipBloc;
+  UsersBloc get userBloc => _userBloc;
 }

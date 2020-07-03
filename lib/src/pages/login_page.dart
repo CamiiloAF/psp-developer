@@ -292,7 +292,7 @@ class __RestorePasswordDialogState extends State<_RestorePasswordDialog>
       Builder(
         builder: (ctx) => OutlineButton(
           onPressed: () => _submit(ctx),
-          child: Text(s.dialogButtonRestore),
+          child: Text(s.dialogButtonRecover),
         ),
       ),
     ];

@@ -10,6 +10,8 @@ class Preferences {
   static const String _PREF_PENDING_INTERRUPTION_START_AT =
       'pending_interruption_start_at';
 
+  static const String _PREF_THEME = 'theme';
+
   static final Preferences _instancia = Preferences._internal();
 
   factory Preferences() {
@@ -66,5 +68,19 @@ class Preferences {
   void removePendingInterruptionAndTimeLogId() {
     _prefs.remove(_PREF_PENDING_INTERRUPTION_START_AT);
     _prefs.remove(_PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION);
+  }
+
+  // GET y SET theme
+  // 1 is light - 2 is dark
+  int get theme {
+    return _prefs.getInt(_PREF_THEME) ?? 1;
+  }
+
+  set theme(int value) {
+    _prefs.setInt(_PREF_THEME, value);
+  }
+
+  void clearPreferences() async {
+    await _prefs.clear();
   }
 }

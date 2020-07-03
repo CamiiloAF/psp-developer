@@ -7,11 +7,10 @@ import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/searchs/search_projects.dart';
-import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
-import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
+import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
 import 'package:tuple/tuple.dart';
 
 class ProjectsPage extends StatelessWidget {
@@ -32,7 +31,6 @@ class ProjectsPage extends StatelessWidget {
           title: S.of(context).appBarTitleProjects,
           searchDelegate: SearchProjects(projectsBloc)),
       body: _body(projectsBloc),
-      drawer: CustomDrawerMenu(),
     );
   }
 
@@ -98,42 +96,5 @@ class ProjectsPage extends StatelessWidget {
   Future<void> _refreshProjects(
       BuildContext context, ProjectsBloc projectsBloc) async {
     await projectsBloc.getProjects(true);
-  }
-}
-
-class CustomDrawerMenu extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final appTheme = Provider.of<ThemeChanger>(context);
-    return Drawer(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            SafeArea(
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                child: CircleAvatar(
-                  child: Text(
-                    'FH',
-                    style: TextStyle(fontSize: 50),
-                  ),
-                ),
-              ),
-            ),
-            CustomListTile(title: 'Usuarios libres', onTap: () {}),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.brightness_4),
-              title: Text(S.of(context).darkMode),
-              trailing: Switch.adaptive(
-                  value: appTheme.isDarkTheme,
-                  activeColor: appTheme.currentTheme.accentColor,
-                  onChanged: (value) => appTheme.isDarkTheme = value),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

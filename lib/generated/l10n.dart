@@ -113,6 +113,16 @@ class S {
     );
   }
 
+  /// `Las contraseñas no coinciden`
+  String get invalidConfirmPassword {
+    return Intl.message(
+      'Las contraseñas no coinciden',
+      name: 'invalidConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Número inválido`
   String get invalidNumber {
     return Intl.message(
@@ -153,11 +163,11 @@ class S {
     );
   }
 
-  /// `Restaurar`
-  String get dialogButtonRestore {
+  /// `Recuperar`
+  String get dialogButtonRecover {
     return Intl.message(
-      'Restaurar',
-      name: 'dialogButtonRestore',
+      'Recuperar',
+      name: 'dialogButtonRecover',
       desc: '',
       args: [],
     );
@@ -268,6 +278,16 @@ class S {
     return Intl.message(
       'PIP',
       name: 'appBarTitlePIP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Perfil`
+  String get appBarTitleProfile {
+    return Intl.message(
+      'Perfil',
+      name: 'appBarTitleProfile',
       desc: '',
       args: [],
     );
@@ -833,6 +853,26 @@ class S {
     );
   }
 
+  /// `Apellido`
+  String get labelLastName {
+    return Intl.message(
+      'Apellido',
+      name: 'labelLastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cambiar contraseña`
+  String get labelChangePassword {
+    return Intl.message(
+      'Cambiar contraseña',
+      name: 'labelChangePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Número inválido`
   String get inputPhoneError {
     return Intl.message(
@@ -918,6 +958,16 @@ class S {
     return Intl.message(
       'Modo oscuro',
       name: 'darkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modo claro`
+  String get lightMode {
+    return Intl.message(
+      'Modo claro',
+      name: 'lightMode',
       desc: '',
       args: [],
     );
