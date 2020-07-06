@@ -1,5 +1,7 @@
+import 'package:psp_developer/src/models/base_parts_model.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/repositories/programs_repository.dart';
+import 'package:psp_developer/src/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
@@ -39,6 +41,8 @@ class ProgramsBloc {
   }
 
   Future<int> updateProgramWithProgramParts(ProgramModel program) async {
+    program.totalLines = _getProgramTotalLines(program);
+
     final statusCode =
         await _programsRepository.updateProgramWithProgramParts(program);
 
@@ -59,7 +63,41 @@ class ProgramsBloc {
     return statusCode;
   }
 
-  void dispose() {
-    _programsByModuleIdController.sink.add(null);
+  int _getProgramTotalLines(ProgramModel program) {
+    final basePartsTotalLines = _getBasePartsTotalLines(program.baseParts);
+    final reusablePartsTotalLines =
+        _getReusableAndNewPartsTotalLines(program.reusableParts);
+    final newPartsTotalLines =
+        _getReusableAndNewPartsTotalLines(program.newParts);
+
+    return basePartsTotalLines + reusablePartsTotalLines + newPartsTotalLines;
   }
+
+  int _getBasePartsTotalLines(List<BasePartModel> baseParts) {
+    var totalLines = 0;
+
+    if (isNullOrEmpty(baseParts)) return totalLines;
+
+    baseParts.forEach((basePart) {
+      totalLines += basePart.plannedLinesAdded;
+      totalLines += basePart.plannedLinesBase;
+      totalLines -= basePart.plannedLinesDeleted;
+    });
+
+    return totalLines;
+  }
+
+  int _getReusableAndNewPartsTotalLines(List<dynamic> parts) {
+    var totalLines = 0;
+
+    if (isNullOrEmpty(parts)) return totalLines;
+
+    parts.forEach((part) {
+      totalLines += part.plannedLines;
+    });
+
+    return totalLines;
+  }
+
+  void dispose() => _programsByModuleIdController.sink.add(null);
 }

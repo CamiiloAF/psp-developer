@@ -7,6 +7,7 @@ import 'package:psp_developer/src/blocs/users_bloc.dart';
 import 'package:psp_developer/src/models/users_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
+import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
@@ -63,11 +64,16 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildChangePasswordText() {
+    final isDarkTheme = Provider.of<ThemeChanger>(context).isDarkTheme;
+
     return GestureDetector(
         onTap: _showChangePasswordDialog,
         child: Text(
           S.of(context).labelChangePassword,
-          style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
+          style: TextStyle(
+              color:
+                  (isDarkTheme) ? Colors.white : Theme.of(context).primaryColor,
+              fontSize: 20),
         ));
   }
 

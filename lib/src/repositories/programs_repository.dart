@@ -142,8 +142,12 @@ class _ProgramsByOrganizationNetworkBoundResource
 class _ProgramsUpdateBoundResource
     extends InsertAndUpdateBoundResource<ProgramModel> {
   @override
-  ProgramModel buildNewModel(payload) => null;
+  ProgramModel buildNewModel(payload) {
+    print(payload);
+    return null;
+  }
 
   @override
-  void doOperationInDb(ProgramModel model) => null;
+  void doOperationInDb(ProgramModel model) =>
+      DBProvider.db.update(model, Constants.PROGRAMS_TABLE_NAME);
 }

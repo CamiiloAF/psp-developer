@@ -153,6 +153,12 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
     if (!_formKey.currentState.validate()) return;
 
     _formKey.currentState.save();
+
+    if (!_testReportsBloc.isUniqueTestNumber(_testReportModel.testNumber)) {
+      _showSnackbarAlreadyExistTestNumber();
+      return;
+    }
+
     final progressDialog =
         getProgressDialog(context, S.of(context).progressDialogSaving);
 
@@ -163,16 +169,23 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
     if (_testReportModel.id == null) {
       _testReportModel.programsId = widget.programId;
       statusCode = await _testReportsBloc.insertTestReport(_testReportModel);
-      await progressDialog.hide();
     } else {
       statusCode = await _testReportsBloc.updateTestReport(_testReportModel);
-      await progressDialog.hide();
     }
+    await progressDialog.hide();
 
     if (statusCode == 201) {
       Navigator.pop(context);
     } else {
       showSnackBar(context, _scaffoldKey.currentState, statusCode);
     }
+  }
+
+  void _showSnackbarAlreadyExistTestNumber() {
+    final snackbar = buildSnackbar(
+        Text(S.of(context).messageAlreadyExistTestNumber),
+        durationInMilliseconds: 3000);
+
+    _scaffoldKey.currentState.showSnackBar(snackbar);
   }
 }

@@ -64,9 +64,8 @@ String getRequestResponseMessage(BuildContext context, int statusCode) {
 }
 
 void showSnackBar(
-    BuildContext context, ScaffoldState scaffoldState, int statusCode,
-    {bool allow404Message = false}) async {
-  if (allow404Message || statusCode != 404) {
+    BuildContext context, ScaffoldState scaffoldState, int statusCode) async {
+  if (statusCode != 404) {
     final snackBar =
         buildSnackbar(Text(getRequestResponseMessage(context, statusCode)));
 
@@ -74,9 +73,10 @@ void showSnackBar(
   }
 }
 
-SnackBar buildSnackbar(Widget content) => SnackBar(
+SnackBar buildSnackbar(Widget content, {int durationInMilliseconds = 1500}) =>
+    SnackBar(
       content: content,
-      duration: Duration(milliseconds: 1500),
+      duration: Duration(milliseconds: durationInMilliseconds),
     );
 
 bool isValidToken() {

@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "message401" : MessageLookupByLibrary.simpleMessage("No autorizado para solicitar recursos"),
     "message403" : MessageLookupByLibrary.simpleMessage("No tienes suficientes permisos"),
     "message404" : MessageLookupByLibrary.simpleMessage("No se encontró información"),
+    "messageAlreadyExistTestNumber" : MessageLookupByLibrary.simpleMessage("Ya existe un test con ese número, pruebe con otro"),
     "messageIncorrectCredentials" : MessageLookupByLibrary.simpleMessage("Credenciales incorrectas"),
     "messageNotConnection" : MessageLookupByLibrary.simpleMessage("Por favor revise su conexión a internet"),
     "messagePIPHasBeenSave" : MessageLookupByLibrary.simpleMessage("Se ha guardado el PIP"),

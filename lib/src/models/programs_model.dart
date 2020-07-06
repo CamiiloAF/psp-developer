@@ -23,7 +23,7 @@ ProgramModel programModelFromJson(String str) =>
     ProgramModel.fromJson(json.decode(str));
 
 String programModelToJson(ProgramModel data) =>
-    json.encode(data.toJson(isForDoOperationInNetwork: true));
+    json.encode(data.toJson(withProgramParts: true));
 
 class ProgramModel {
   ProgramModel({
@@ -74,8 +74,8 @@ class ProgramModel {
             : null,
       );
 
-  Map<String, dynamic> toJson({bool isForDoOperationInNetwork = false}) =>
-      (isForDoOperationInNetwork)
+  Map<String, dynamic> toJson({bool withProgramParts = false}) =>
+      (withProgramParts)
           ? {
               'id': id,
               'users_id': usersId,

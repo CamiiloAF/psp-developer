@@ -433,6 +433,16 @@ class S {
     );
   }
 
+  /// `Ya existe un test con ese número, pruebe con otro`
+  String get messageAlreadyExistTestNumber {
+    return Intl.message(
+      'Ya existe un test con ese número, pruebe con otro',
+      name: 'messageAlreadyExistTestNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No hay información`
   String get thereIsNoInformation {
     return Intl.message(

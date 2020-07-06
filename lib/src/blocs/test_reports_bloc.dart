@@ -1,6 +1,7 @@
 import 'package:psp_developer/src/blocs/Validators.dart';
 import 'package:psp_developer/src/models/test_reports_model.dart';
 import 'package:psp_developer/src/repositories/test_reports_repository.dart';
+import 'package:psp_developer/src/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
@@ -47,7 +48,14 @@ class TestReportsBloc with Validators {
     return statusCode;
   }
 
-  void dispose() {
-    _testReportsController.sink.add(null);
+  bool isUniqueTestNumber(int testNumber) {
+    final testReports = lastValueTestReportsController?.item2;
+
+    if (isNullOrEmpty(testReports)) return true;
+
+    return !testReports
+        .any((testReport) => testReport.testNumber == testNumber);
   }
+
+  void dispose() => _testReportsController.sink.add(null);
 }
