@@ -9,6 +9,7 @@ import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/drawer_program_items.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
+import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
 import 'package:tuple/tuple.dart';
 
 class PIPPage extends StatefulWidget {
@@ -51,6 +52,8 @@ class _PIPPageState extends State<PIPPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!isValidToken()) return NotAutorizedScreen();
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomAppBar(title: S.of(context).appBarTitlePIP),
@@ -163,7 +166,7 @@ class _PIPPageState extends State<PIPPage> {
       final snackbar = buildSnackbar(Text(S.of(context).messagePIPHasBeenSave));
       _scaffoldKey.currentState.showSnackBar(snackbar);
     } else {
-      showSnackBar(context, _scaffoldKey.currentState, statusCode);
+      await showSnackBar(context, _scaffoldKey.currentState, statusCode);
     }
   }
 

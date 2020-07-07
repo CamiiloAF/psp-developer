@@ -4,6 +4,8 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 
+import 'constants.dart';
+
 ProgressDialog getProgressDialog(BuildContext context, String message) {
   final progressDialog = ProgressDialog(context,
       type: ProgressDialogType.Normal, isDismissible: false, showLogs: false);
@@ -54,6 +56,9 @@ String getRequestResponseMessage(BuildContext context, int statusCode) {
     case 403:
       return S.of(context).message403;
       break;
+    case Constants.TIME_OUT_EXCEPTION_CODE:
+      return S.of(context).messageTimeOutException;
+      break;
     case 404:
       return S.of(context).message404;
       break;
@@ -63,13 +68,19 @@ String getRequestResponseMessage(BuildContext context, int statusCode) {
   }
 }
 
-void showSnackBar(
-    BuildContext context, ScaffoldState scaffoldState, int statusCode) async {
+Future<void> showSnackBar(
+  BuildContext context,
+  ScaffoldState scaffoldState,
+  int statusCode,
+) async {
   if (statusCode != 404) {
     final snackBar =
         buildSnackbar(Text(getRequestResponseMessage(context, statusCode)));
 
-    scaffoldState.showSnackBar(snackBar);
+    //Este delay es para que no genere un error. (Este error sólo se vé en la consola)
+    await Future.delayed(Duration(milliseconds: 1));
+
+    await scaffoldState.showSnackBar(snackBar);
   }
 }
 

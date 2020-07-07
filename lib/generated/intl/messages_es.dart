@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "messageIncorrectCredentials" : MessageLookupByLibrary.simpleMessage("Credenciales incorrectas"),
     "messageNotConnection" : MessageLookupByLibrary.simpleMessage("Por favor revise su conexión a internet"),
     "messagePIPHasBeenSave" : MessageLookupByLibrary.simpleMessage("Se ha guardado el PIP"),
+    "messageTimeOutException" : MessageLookupByLibrary.simpleMessage("La solicitud ha tardado mucho, inténtelo nuevamente"),
     "messageUnexpectedError" : MessageLookupByLibrary.simpleMessage("An unexpected error occurred"),
     "messageWeHaveSentEmail" : MessageLookupByLibrary.simpleMessage("¡Te hemos enviado un email!"),
     "messageWeHaveSentSMS" : MessageLookupByLibrary.simpleMessage("¡Te hemos enviado un SMS!"),

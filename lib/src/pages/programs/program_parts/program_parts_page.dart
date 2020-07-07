@@ -9,10 +9,9 @@ import 'package:psp_developer/src/pages/programs/program_parts/reusable_parts_pa
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/added_new_parts_model.dart';
-import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
-import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
+import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
 
 class ProgramPartsPage extends StatelessWidget {
   final ProgramModel program;
@@ -22,7 +21,7 @@ class ProgramPartsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Constants.token = Preferences().token;
+    if (!isValidToken()) return NotAutorizedScreen();
 
     final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
     programsBloc.getProgramsByOrganization(program.id);
@@ -117,7 +116,7 @@ class ProgramPartsPage extends StatelessWidget {
       await Navigator.pushReplacementNamed(context, TimeLogsPage.ROUTE_NAME,
           arguments: program.id);
     } else {
-      showSnackBar(context, _scaffoldKey.currentState, statusCode);
+      await showSnackBar(context, _scaffoldKey.currentState, statusCode);
     }
   }
 }

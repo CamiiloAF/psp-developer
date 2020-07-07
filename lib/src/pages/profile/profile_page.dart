@@ -12,6 +12,7 @@ import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
+import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -146,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
     statusCode = await _usersBloc.updateUser(_userModel);
     await progressDialog.hide();
 
-    showSnackBar(context, _scaffoldKey.currentState, statusCode);
+    await showSnackBar(context, _scaffoldKey.currentState, statusCode);
   }
 }
 
@@ -173,6 +174,8 @@ class __ChangePasswordDialogState extends State<_ChangePasswordDialog> {
 
   @override
   Widget build(BuildContext context) {
+    if (!isValidToken()) return NotAutorizedScreen();
+
     final s = S.of(context);
 
     return AlertDialog(
@@ -244,7 +247,7 @@ class __ChangePasswordDialogState extends State<_ChangePasswordDialog> {
     statusCode = await _usersBloc.changePassword(passwords);
 
     await progressDialog.hide();
-    showSnackBar(context, widget.scaffoldKey.currentState, statusCode);
+    await showSnackBar(context, widget.scaffoldKey.currentState, statusCode);
     Navigator.pop(context);
   }
 }

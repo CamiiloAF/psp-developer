@@ -40,6 +40,7 @@
     "messageWeHaveSentSMS": "¡Te hemos enviado un SMS!",
     "messagePIPHasBeenSave": "Se ha guardado el PIP",
     "messageAlreadyExistTestNumber": "Ya existe un test con ese número, pruebe con otro",
+    "messageTimeOutException": "La solicitud ha tardado mucho, inténtelo nuevamente",
     "thereIsNoInformation": "No hay información",
     "labelName": "Nombre",
     "inputNameError": "Debe tener al menos 3 carateres",

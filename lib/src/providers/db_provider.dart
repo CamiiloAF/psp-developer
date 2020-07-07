@@ -7,6 +7,8 @@ class DBProvider {
   static Database _database;
   static final DBProvider db = DBProvider._internal();
 
+  static const _DB_NAME = 'psp_developer.db';
+
   DBProvider._internal();
 
   Future<Database> get database async {
@@ -17,11 +19,7 @@ class DBProvider {
   }
 
   Future<Database> initDB() async {
-    var documentsDirectory = await getApplicationDocumentsDirectory();
-
-    final path = join(documentsDirectory.path, 'psp_developer.db');
-
-    return await openDatabase(path, version: 1, onOpen: (db) {},
+    return await openDatabase(await getDbPath(), version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute(Constants.SQL_CREATE_TABLE_PROJECTS);
       await db.execute(Constants.SQL_CREATE_TABLE_MODULES);
@@ -43,6 +41,16 @@ class DBProvider {
   void deleteAll(String tableName) async {
     final db = await DBProvider.db.database;
     await db.rawDelete('DELETE FROM $tableName');
+  }
+
+  void deleteDb() async {
+    await deleteDatabase(await getDbPath());
+    _database = null;
+  }
+
+  Future<String> getDbPath() async {
+    final documentsDirectory = await getApplicationDocumentsDirectory();
+    return join(documentsDirectory.path, _DB_NAME);
   }
 
   void insert(dynamic model, String tableName) async {

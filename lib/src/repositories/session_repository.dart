@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
+import 'package:psp_developer/src/utils/rate_limiter.dart';
 
 class SessionRepository {
   final preferences = Preferences();
@@ -26,7 +29,9 @@ class SessionRepository {
         'http_csrf_token': Constants.httpCsrfToken,
       };
 
-      final response = await http.post(url, headers: headers, body: authData);
+      final response = await http
+          .post(url, headers: headers, body: authData)
+          .timeout(Duration(seconds: Constants.TIME_OUT_SECONDS));
 
       Map<String, dynamic> decodeResponse = json.decode(response.body);
 
@@ -40,6 +45,8 @@ class SessionRepository {
       return {'ok': false, 'status': e.osError.errorCode};
     } on http.ClientException catch (_) {
       return {'ok': false, 'status': 7};
+    } on TimeoutException catch (_) {
+      return {'ok': false, 'status': Constants.TIME_OUT_EXCEPTION_CODE};
     } catch (e) {
       return {'ok': false, 'status': -1};
     }
@@ -66,13 +73,17 @@ class SessionRepository {
         'http_csrf_token': Constants.httpCsrfToken,
       };
 
-      final response = await http.post(url, headers: headers, body: body);
+      final response = await http
+          .post(url, headers: headers, body: body)
+          .timeout(Duration(seconds: Constants.TIME_OUT_SECONDS));
 
       return response.statusCode;
     } on SocketException catch (e) {
       return e.osError.errorCode;
     } on http.ClientException catch (_) {
       return 7;
+    } on TimeoutException catch (_) {
+      return Constants.TIME_OUT_EXCEPTION_CODE;
     } catch (e) {
       return -1;
     }
@@ -81,7 +92,12 @@ class SessionRepository {
   Future<void> logOut() async {
     try {
       final url = '${Constants.baseUrl}/auth/logout';
-      await http.post(url, headers: Constants.getHeaders());
+
+      await http
+          .post(url, headers: Constants.getHeaders())
+          .timeout(Duration(seconds: Constants.TIME_OUT_SECONDS));
+
+      await _clearLocalStorage();
 
       return;
     } catch (e) {
@@ -89,12 +105,18 @@ class SessionRepository {
     }
   }
 
-  void _saveSharedPrefs(decodeResponse) {
-    final token = decodeResponse['auth_token'];
+  void _clearLocalStorage() async {
+    await DBProvider.db.deleteDb();
+    await preferences.clearPreferences();
+    RateLimiter().clear();
+  }
+
+  void _saveSharedPrefs(decodeResponse) async {
+    final String token = decodeResponse['auth_token'];
 
     Constants.token = token;
 
     preferences.token = token;
-    preferences.curentUser = json.encode(decodeResponse);
+    preferences.curentUser = await json.encode(decodeResponse);
   }
 }

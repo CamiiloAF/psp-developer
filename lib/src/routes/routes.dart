@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
-import 'package:psp_developer/src/pages/login_page.dart';
+import 'package:psp_developer/src/pages/login/login_page.dart';
 import 'package:psp_developer/src/pages/modules/modules_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
