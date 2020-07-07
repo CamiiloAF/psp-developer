@@ -37,21 +37,17 @@ class DrawerProgramItems extends StatelessWidget {
             ),
             CustomListTile(
                 title: S.of(context).appBarTitleTimeLogs,
-                onTap: () =>
-                    navigateTo(context, TimeLogsPage(programId: programId))),
+                onTap: () => navigateTo(context, TimeLogsPage.ROUTE_NAME)),
             CustomListTile(
                 title: S.of(context).appBarTitleDefectLogs,
-                onTap: () =>
-                    navigateTo(context, DefectLogsPage(programId: programId))),
+                onTap: () => navigateTo(context, DefectLogsPage.ROUTE_NAME)),
             CustomListTile(
                 title: S.of(context).appBarTitleTestReports,
-                onTap: () =>
-                    navigateTo(context, TestReportsPage(programId: programId))),
+                onTap: () => navigateTo(context, TestReportsPage.ROUTE_NAME)),
             CustomListTile(
                 isEnable: isPIPEnabled(context),
                 title: S.of(context).appBarTitlePIP,
-                onTap: () =>
-                    navigateTo(context, PIPPage(programId: programId))),
+                onTap: () => navigateTo(context, PIPPage.ROUTE_NAME)),
             Divider(),
             ListTile(
               leading: Icon(Icons.brightness_4),
@@ -78,7 +74,13 @@ class DrawerProgramItems extends StatelessWidget {
         null;
   }
 
-  void navigateTo(BuildContext context, dynamic page) =>
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => page));
+  void navigateTo(BuildContext context, String routeName) {
+    final currentRouteName = ModalRoute.of(context).settings.name;
+
+    if (currentRouteName == routeName) {
+      Navigator.pop(context);
+    } else {
+      Navigator.pushReplacementNamed(context, routeName, arguments: programId);
+    }
+  }
 }

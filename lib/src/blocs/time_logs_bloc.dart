@@ -1,5 +1,6 @@
 import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/repositories/time_logs_repository.dart';
+import 'package:psp_developer/src/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
@@ -9,7 +10,7 @@ class TimeLogsBloc {
   final _timeLogsController =
       BehaviorSubject<Tuple2<int, List<TimeLogModel>>>();
 
-  Stream<Tuple2<int, List<TimeLogModel>>> get timeLogStream =>
+  Stream<Tuple2<int, List<TimeLogModel>>> get timeLogsStream =>
       _timeLogsController.stream;
 
   Tuple2<int, List<TimeLogModel>> get lastValueTimeLogsController =>
@@ -27,7 +28,7 @@ class TimeLogsBloc {
   }
 
   void verifyIfAllowCreateTimeLogs(List<TimeLogModel> timeLogs) {
-    if (timeLogs != null && timeLogs.isNotEmpty) {
+    if (!isNullOrEmpty(timeLogs)) {
       for (var timeLog in timeLogs) {
         if (!isAllowCreateNewTimeLog(timeLog.finishDate)) {
           allowCreateTimeLog = false;
@@ -70,7 +71,5 @@ class TimeLogsBloc {
 
   bool isAllowCreateNewTimeLog(int finishDate) => finishDate != null;
 
-  void dispose() {
-    _timeLogsController.sink.add(null);
-  }
+  void dispose() => _timeLogsController.sink.add(null);
 }

@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/defect_logs_bloc.dart';
 import 'package:psp_developer/src/models/defect_logs_model.dart';
-import 'package:psp_developer/src/pages/defect_logs/defect_log_edit_page.dart';
-import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
-import 'package:psp_developer/src/utils/searchs/search_delegate.dart';
-import 'package:psp_developer/src/widgets/custom_list_tile.dart';
+import 'package:psp_developer/src/searches/mixings/defect_logs_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/search_delegate.dart';
 
-class SearchDefectLogs extends DataSearch {
+class SearchDefectLogs extends DataSearch with DefectLogsPageAndSearchMixing {
   final DefectLogsBloc _defectLogsBloc;
   final int programId;
 
@@ -19,37 +17,20 @@ class SearchDefectLogs extends DataSearch {
 
     final defectLogs =
         _defectLogsBloc?.lastValueDefectLogsController?.item2 ?? [];
+
     if (defectLogs.isNotEmpty && defectLogs != null) {
       return Container(
           child: ListView(
         children: defectLogs
             .where((defectLog) => _areItemContainQuery(defectLog, query))
             .map((defectLog) {
-          final isEnable = Preferences().pendingInterruptionStartAt == null;
-
-          return CustomListTile(
-            title: 'id: ${defectLog.id}',
-            isEnable: isEnable,
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () => navigateToEditPage(context, defectLog),
-            subtitle: defectLog.description,
-          );
+          return buildItemList(context, defectLog,
+              closeSearch: () => close(context, null));
         }).toList(),
       ));
     } else {
       return super.textNoResults(context);
     }
-  }
-
-  void navigateToEditPage(BuildContext context, DefectLogModel defectLog) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => DefectLogEditPage(
-            programId: programId,
-            defectLog: defectLog,
-          ),
-        ));
   }
 
   bool _areItemContainQuery(DefectLogModel defectLog, String query) {

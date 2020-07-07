@@ -92,3 +92,6 @@ int getMinutesBetweenTwoDates(DateTime startDate, DateTime finishDate) =>
         : null;
 
 bool isNullOrEmpty(List list) => list == null || list.isEmpty;
+
+void navigatorPush(BuildContext context, dynamic page) =>
+    Navigator.push(context, MaterialPageRoute(builder: (_) => page));

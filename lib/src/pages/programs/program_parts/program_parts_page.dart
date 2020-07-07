@@ -114,12 +114,8 @@ class ProgramPartsPage extends StatelessWidget {
     await progressDialog.hide();
 
     if (statusCode == 204) {
-      await Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => TimeLogsPage(
-                    programId: program.id,
-                  )));
+      await Navigator.pushReplacementNamed(context, TimeLogsPage.ROUTE_NAME,
+          arguments: program.id);
     } else {
       showSnackBar(context, _scaffoldKey.currentState, statusCode);
     }

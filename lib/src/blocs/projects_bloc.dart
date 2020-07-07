@@ -21,7 +21,5 @@ class ProjectsBloc {
     _projectsController.sink.add(projectsWithStatusCode);
   }
 
-  void dispose() {
-    _projectsController?.close();
-  }
+  void dispose() => _projectsController?.sink?.add(null);
 }

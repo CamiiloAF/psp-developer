@@ -26,7 +26,6 @@ class PIPModel {
         programsId: json['programs_id'],
         description: json['description'],
         proposals: json['proposals'],
-        //TODO: Guardar esto como null y luego cargarlo a ver que pasa
         comments: json['comments'],
         date: int.parse(json['date']),
       );

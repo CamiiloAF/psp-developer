@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/test_reports_bloc.dart';
 import 'package:psp_developer/src/models/test_reports_model.dart';
-import 'package:psp_developer/src/pages/test_reports/test_report_edit_page.dart';
-import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
-import 'package:psp_developer/src/utils/searchs/search_delegate.dart';
-import 'package:psp_developer/src/widgets/custom_list_tile.dart';
+import 'package:psp_developer/src/searches/mixings/test_reports_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/search_delegate.dart';
 
-class SearchTestReports extends DataSearch {
+class SearchTestReports extends DataSearch with TestReportsPageAndSearchMixing {
   final TestReportsBloc _testReportsBloc;
   final int programId;
 
@@ -26,32 +23,13 @@ class SearchTestReports extends DataSearch {
         children: testReports
             .where((testReport) => _areItemContainQuery(testReport, query))
             .map((testReport) {
-          final isEnable = Preferences().pendingInterruptionStartAt == null;
-
-          return CustomListTile(
-            title: testReport.testName,
-            subtitle: testReport.objective,
-            isEnable: isEnable,
-            trailing:
-                Text('${S.of(context).labelNumber} ${testReport.testNumber}'),
-            onTap: () => navigateToEditPage(context, testReport),
-          );
+          return buildItemList(context, testReport,
+              closeSearch: () => close(context, null));
         }).toList(),
       ));
     } else {
       return super.textNoResults(context);
     }
-  }
-
-  void navigateToEditPage(BuildContext context, TestReportModel testReport) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => TestReportEditPage(
-            programId: programId,
-            testReport: testReport,
-          ),
-        ));
   }
 
   bool _areItemContainQuery(TestReportModel testReport, String query) {

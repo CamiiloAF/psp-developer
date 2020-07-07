@@ -20,7 +20,5 @@ class ModulesBloc {
     _modulesController.sink.add(modulesWithStatusCode);
   }
 
-  void dispose() {
-    _modulesController.sink.add(null);
-  }
+  void dispose() => _modulesController?.sink?.add(null);
 }

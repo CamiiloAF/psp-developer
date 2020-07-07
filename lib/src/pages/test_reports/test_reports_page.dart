@@ -2,63 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/test_reports_bloc.dart';
-import 'package:psp_developer/src/models/test_reports_model.dart';
-import 'package:psp_developer/src/pages/test_reports/test_report_edit_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
+import 'package:psp_developer/src/searches/mixings/test_reports_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/search_test_reports.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
-import 'package:psp_developer/src/utils/searchs/search_test_reports.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
+import 'package:psp_developer/src/widgets/common_list_of_models.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
-import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 import 'package:psp_developer/src/widgets/drawer_program_items.dart';
 import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
-import 'package:tuple/tuple.dart';
 
 class TestReportsPage extends StatefulWidget {
-  final int programId;
-
-  TestReportsPage({this.programId});
+  static const ROUTE_NAME = 'test-reports';
 
   @override
   _TestReportsPageState createState() => _TestReportsPageState();
 }
 
-class _TestReportsPageState extends State<TestReportsPage> {
+class _TestReportsPageState extends State<TestReportsPage>
+    with TestReportsPageAndSearchMixing {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final ScrollController _scrollController = ScrollController();
-  double _lastScroll = 0;
 
   TestReportsBloc _testReportsBloc;
+  int _programId;
 
   @override
   void initState() {
-    _lastScroll = 0;
+    _testReportsBloc = context.read<BlocProvider>().testReportsBloc;
+    super.initState();
+  }
 
-    if (Preferences().pendingInterruptionStartAt != null) {
-      _scrollController.addListener(() {
-        if (_scrollController.offset > _lastScroll &&
-            _scrollController.offset > 150) {
-          Provider.of<FabModel>(context, listen: false).isShowing = false;
-        } else {
-          Provider.of<FabModel>(context, listen: false).isShowing = true;
-        }
-
-        _lastScroll = _scrollController.offset;
-      });
-      Provider.of<FabModel>(context, listen: false).isShowing = false;
+  @override
+  void didChangeDependencies() {
+    _programId = ModalRoute.of(context).settings.arguments;
+    if (_testReportsBloc.lastValueTestReportsController == null) {
+      _testReportsBloc.getTestReports(false, _programId);
     }
 
-    super.initState();
-
-    _testReportsBloc = context.read<BlocProvider>().testReportsBloc;
-    _testReportsBloc.getTestReports(false, widget.programId);
+    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _testReportsBloc.dispose();
     super.dispose();
   }
 
@@ -76,97 +64,28 @@ class _TestReportsPageState extends State<TestReportsPage> {
       create: (_) => FabModel(),
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: DrawerProgramItems(programId: widget.programId),
+        drawer: DrawerProgramItems(programId: _programId),
         appBar: CustomAppBar(
           title: S.of(context).appBarTitleTestReports,
-          searchDelegate: SearchTestReports(_testReportsBloc, widget.programId),
+          searchDelegate: SearchTestReports(_testReportsBloc, _programId),
         ),
         floatingActionButton: FAB(
           isShowing: isShowing,
-          onPressed: () => navigateToEditPage(null),
+          onPressed: () => navigateToEditPage(context, null, _programId),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: _body(_testReportsBloc, widget.programId),
+        body: _body(),
       ),
     );
   }
 
-  Widget _body(TestReportsBloc testReportsBloc, int programId) {
-    return StreamBuilder(
-      stream: testReportsBloc.testReportsStream,
-      builder: (BuildContext context,
-          AsyncSnapshot<Tuple2<int, List<TestReportModel>>> snapshot) {
-        if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
-        }
+  Widget _body() => CommonListOfModels(
+        stream: _testReportsBloc.testReportsStream,
+        onRefresh: _onRefreshTestReports,
+        scaffoldKey: _scaffoldKey,
+        buildItemList: (items, index) => buildItemList(context, items[index]),
+      );
 
-        final testReports = snapshot.data.item2 ?? [];
-
-        final statusCode = snapshot.data.item1;
-
-        if (statusCode != 200) {
-          showSnackBar(context, _scaffoldKey.currentState, statusCode);
-        }
-
-        if (testReports.isEmpty) {
-          return RefreshIndicator(
-            onRefresh: () =>
-                _refreshTestReports(context, testReportsBloc, programId),
-            child: ListView(
-              children: [
-                Center(child: Text(S.of(context).thereIsNoInformation)),
-              ],
-            ),
-          );
-        }
-
-        return RefreshIndicator(
-          onRefresh: () =>
-              _refreshTestReports(context, testReportsBloc, programId),
-          child: _buildListView(testReports),
-        );
-      },
-    );
-  }
-
-  ListView _buildListView(List<TestReportModel> testReports) {
-    return ListView.separated(
-        controller: _scrollController,
-        itemCount: testReports.length,
-        physics: AlwaysScrollableScrollPhysics(),
-        itemBuilder: (context, i) => _buildItemList(testReports, i, context),
-        separatorBuilder: (BuildContext context, int index) => Divider(
-              thickness: 1.0,
-            ));
-  }
-
-  Widget _buildItemList(
-      List<TestReportModel> testReports, int i, BuildContext context) {
-    final isEnable = (Preferences().pendingInterruptionStartAt == null);
-
-    return CustomListTile(
-      title: testReports[i].testName,
-      trailing:
-          Text('${S.of(context).labelNumber} ${testReports[i].testNumber}'),
-      onTap: () => navigateToEditPage(testReports[i]),
-      isEnable: isEnable,
-      subtitle: testReports[i].objective,
-    );
-  }
-
-  void navigateToEditPage(TestReportModel testReport) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => TestReportEditPage(
-            programId: widget.programId,
-            testReport: testReport,
-          ),
-        ));
-  }
-
-  Future<void> _refreshTestReports(BuildContext context,
-      TestReportsBloc testReportsBloc, int programId) async {
-    await testReportsBloc.getTestReports(true, programId);
-  }
+  Future<void> _onRefreshTestReports() async =>
+      await _testReportsBloc.getTestReports(true, _programId);
 }

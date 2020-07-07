@@ -11,6 +11,9 @@ class PIPBloc with Validators {
 
   Stream<Tuple2<int, PIPModel>> get pipStream => _pipController.stream;
 
+  Tuple2<int, PIPModel> get lastValueTestReportsController =>
+      _pipController.value;
+
   void getPIP(bool isRefresing, int programId) async {
     final pipWithStatusCode = await _pipProvider.getPIP(isRefresing, programId);
     _pipController.sink.add(pipWithStatusCode);
@@ -35,7 +38,5 @@ class PIPBloc with Validators {
     return statusCode;
   }
 
-  void dispose() {
-    _pipController.sink.add(null);
-  }
+  void dispose() => _pipController.sink.add(null);
 }

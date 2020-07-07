@@ -7,13 +7,12 @@ import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
+import 'package:psp_developer/src/widgets/drawer_program_items.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
 import 'package:tuple/tuple.dart';
 
 class PIPPage extends StatefulWidget {
-  final int programId;
-
-  const PIPPage({this.programId});
+  static const ROUTE_NAME = 'pip';
 
   @override
   _PIPPageState createState() => _PIPPageState();
@@ -23,21 +22,39 @@ class _PIPPageState extends State<PIPPage> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  int _programId;
+
   PIPBloc _pipBloc;
   PIPModel _pip;
 
   @override
   void initState() {
-    super.initState();
     _pipBloc = context.read<BlocProvider>().pipBloc;
-    _pipBloc.getPIP(false, widget.programId);
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _programId = ModalRoute.of(context).settings.arguments;
+    if (_pipBloc.lastValueTestReportsController == null) {
+      _pipBloc.getPIP(false, _programId);
+    }
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _pipBloc.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: CustomAppBar(title: S.of(context).appBarTitleTestReports),
+      appBar: CustomAppBar(title: S.of(context).appBarTitlePIP),
+      drawer: DrawerProgramItems(programId: _programId),
       body: _createBody(),
     );
   }
@@ -134,7 +151,7 @@ class _PIPPageState extends State<PIPPage> {
     var statusCode = -1;
 
     if (_pip.id == null) {
-      _pip.programsId = widget.programId;
+      _pip.programsId = _programId;
 
       statusCode = await _pipBloc.insertPIP(_pip);
     } else {
@@ -150,6 +167,5 @@ class _PIPPageState extends State<PIPPage> {
     }
   }
 
-  Future<void> _refreshPip() async =>
-      await _pipBloc.getPIP(true, widget.programId);
+  Future<void> _refreshPip() async => await _pipBloc.getPIP(true, _programId);
 }

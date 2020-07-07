@@ -5,6 +5,7 @@ import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
+import 'package:psp_developer/src/utils/utils.dart';
 import 'package:tuple/tuple.dart';
 
 class PIPRepository {
@@ -78,8 +79,8 @@ class _PIPNetworkBoundResource extends NetworkBoundResource<PIPModel> {
   }
 
   @override
-  PIPModel decodeData(dynamic payload) =>
-      (payload != null) ? PIPModel.fromJson(payload) : null;
+  PIPModel decodeData(List<dynamic> payload) =>
+      (!isNullOrEmpty(payload)) ? PIPModel.fromJson(payload[0]) : null;
 }
 
 class _PIPInsertBoundResource extends InsertAndUpdateBoundResource<PIPModel> {
