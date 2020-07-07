@@ -9,7 +9,7 @@ import 'package:psp_developer/src/providers/models/fab_model.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
-import 'package:psp_developer/src/utils/utils.dart';
+import 'package:psp_developer/src/utils/utils.dart' as utils;
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
@@ -58,7 +58,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (!isValidToken()) return NotAutorizedScreen();
+    if (!utils.isValidToken()) return NotAutorizedScreen();
 
     return Scaffold(
       key: _scaffoldKey,
@@ -225,7 +225,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
         isSubmiteButtonEnabled = false;
         Provider.of<FabModel>(context, listen: false).isShowing = false;
       } else {
-        final currentInterruption = getMinutesBetweenTwoDates(
+        final currentInterruption = utils.getMinutesBetweenTwoDates(
             DateTime.fromMillisecondsSinceEpoch(pendingInterruptionStartAt),
             DateTime.now());
 
@@ -262,7 +262,8 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
         ? DateTime.fromMillisecondsSinceEpoch(_timeLogModel.finishDate)
         : null;
 
-    final timeInMinutes = getMinutesBetweenTwoDates(startDate, finishDate);
+    final timeInMinutes =
+        utils.getMinutesBetweenTwoDates(startDate, finishDate);
 
     setState(() {
       _deltaTime = timeInMinutes;
@@ -275,8 +276,11 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
     if (!_formKey.currentState.validate()) return;
 
     _formKey.currentState.save();
+
+    if (!_isValidDeltaTime()) return;
+
     final progressDialog =
-        getProgressDialog(context, S.of(context).progressDialogSaving);
+        utils.getProgressDialog(context, S.of(context).progressDialogSaving);
 
     await progressDialog.show();
 
@@ -299,7 +303,14 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
     if (statusCode == 201) {
       Navigator.pop(context);
     } else {
-      await showSnackBar(context, _scaffoldKey.currentState, statusCode);
+      await utils.showSnackBar(context, _scaffoldKey.currentState, statusCode);
     }
+  }
+
+  bool _isValidDeltaTime() {
+    if (_deltaTime == null || _deltaTime >= 0) return true;
+
+    utils.showSnackBarIncorrectDates(context, _scaffoldKey.currentState);
+    return false;
   }
 }

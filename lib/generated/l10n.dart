@@ -383,10 +383,10 @@ class S {
     );
   }
 
-  /// `An unexpected error occurred`
+  /// `Ocurrió un error inesperado, inténtelo nuevamente`
   String get messageUnexpectedError {
     return Intl.message(
-      'An unexpected error occurred',
+      'Ocurrió un error inesperado, inténtelo nuevamente',
       name: 'messageUnexpectedError',
       desc: '',
       args: [],
@@ -448,6 +448,16 @@ class S {
     return Intl.message(
       'La solicitud ha tardado mucho, inténtelo nuevamente',
       name: 'messageTimeOutException',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No puede haber una diferencia negativa entre fechas`
+  String get messageNoNegativeDifferenceBetweenDates {
+    return Intl.message(
+      'No puede haber una diferencia negativa entre fechas',
+      name: 'messageNoNegativeDifferenceBetweenDates',
       desc: '',
       args: [],
     );

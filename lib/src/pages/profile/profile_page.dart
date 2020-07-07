@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
-import 'package:psp_developer/src/blocs/Validators.dart';
+import 'package:psp_developer/src/blocs/validators/validators.dart';
 import 'package:psp_developer/src/blocs/users_bloc.dart';
 import 'package:psp_developer/src/models/users_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';

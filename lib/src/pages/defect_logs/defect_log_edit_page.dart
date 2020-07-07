@@ -6,7 +6,7 @@ import 'package:psp_developer/src/blocs/defect_logs_bloc.dart';
 import 'package:psp_developer/src/models/defect_logs_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/utils/constants.dart';
-import 'package:psp_developer/src/utils/utils.dart';
+import 'package:psp_developer/src/utils/utils.dart' as utils;
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
@@ -253,7 +253,8 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
         ? DateTime.fromMillisecondsSinceEpoch(_defectLogModel.finishDate)
         : null;
 
-    final timeInMinutes = getMinutesBetweenTwoDates(startDate, finishDate);
+    final timeInMinutes =
+        utils.getMinutesBetweenTwoDates(startDate, finishDate);
 
     setState(() {
       _defectLogModel.timeForRepair = timeInMinutes;
@@ -267,8 +268,11 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
     if (!_formKey.currentState.validate()) return;
 
     _formKey.currentState.save();
+
+    if (!_isValidTimeForRepair()) return;
+
     final progressDialog =
-        getProgressDialog(context, S.of(context).progressDialogSaving);
+        utils.getProgressDialog(context, S.of(context).progressDialogSaving);
 
     await progressDialog.show();
 
@@ -295,7 +299,15 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
     if (statusCode == 201) {
       Navigator.pop(context);
     } else {
-      await showSnackBar(context, _scaffoldKey.currentState, statusCode);
+      await utils.showSnackBar(context, _scaffoldKey.currentState, statusCode);
     }
+  }
+
+  bool _isValidTimeForRepair() {
+    if (_defectLogModel.timeForRepair == null ||
+        _defectLogModel.timeForRepair >= 0) return true;
+
+    utils.showSnackBarIncorrectDates(context, _scaffoldKey.currentState);
+    return false;
   }
 }

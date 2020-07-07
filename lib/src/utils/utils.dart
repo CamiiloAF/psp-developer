@@ -106,3 +106,20 @@ bool isNullOrEmpty(List list) => list == null || list.isEmpty;
 
 void navigatorPush(BuildContext context, dynamic page) =>
     Navigator.push(context, MaterialPageRoute(builder: (_) => page));
+
+bool isValidDates(DateTime date1, DateTime date2) {
+  final difference = getMinutesBetweenTwoDates(date1, date2);
+
+  return difference != null && difference >= 0;
+}
+
+void showSnackBarIncorrectDates(
+  BuildContext context,
+  ScaffoldState scaffoldState,
+) {
+  final snackBar = buildSnackbar(
+      Text(S.of(context).messageNoNegativeDifferenceBetweenDates),
+      durationInMilliseconds: 3500);
+
+  scaffoldState.showSnackBar(snackBar);
+}

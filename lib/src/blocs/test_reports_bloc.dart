@@ -1,4 +1,4 @@
-import 'package:psp_developer/src/blocs/Validators.dart';
+import 'package:psp_developer/src/blocs/validators/validators.dart';
 import 'package:psp_developer/src/models/test_reports_model.dart';
 import 'package:psp_developer/src/repositories/test_reports_repository.dart';
 import 'package:psp_developer/src/utils/utils.dart';

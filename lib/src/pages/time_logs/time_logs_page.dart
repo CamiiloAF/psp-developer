@@ -93,7 +93,6 @@ class _TimeLogsPageState extends State<TimeLogsPage>
         buildItemList: (items, index) => buildItemList(context, items[index]),
         verifyIfAllowCreateTimeLogs: (List<TimeLogModel> timeLogs) {
           _timeLogsBloc.verifyIfAllowCreateTimeLogs(timeLogs);
-          Provider.of<FabModel>(context).isShowing = true;
         },
       );
 

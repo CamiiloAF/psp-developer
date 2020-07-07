@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class FabModel with ChangeNotifier {
-  bool _isShowing = false;
+  bool _isShowing = true;
 
   bool get isShowing => _isShowing;
 
