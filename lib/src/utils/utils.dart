@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:psp_developer/generated/l10n.dart';
-import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
 
@@ -89,13 +88,6 @@ SnackBar buildSnackbar(Widget content, {int durationInMilliseconds = 1500}) =>
       content: content,
       duration: Duration(milliseconds: durationInMilliseconds),
     );
-
-bool isValidToken() {
-  final token = Preferences().token;
-
-  if (token == null || token.isEmpty) return false;
-  return true;
-}
 
 int getMinutesBetweenTwoDates(DateTime startDate, DateTime finishDate) =>
     (startDate != null && finishDate != null)

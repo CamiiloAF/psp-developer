@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:psp_developer/src/models/test_reports_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
-import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
@@ -39,8 +38,6 @@ class TestReportsRepository {
 
 class _TestReportsNetworkBoundResource
     extends NetworkBoundResource<List<TestReportModel>> {
-  final preferences = Preferences();
-
   final RateLimiter rateLimiter;
   final int programId;
 

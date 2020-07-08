@@ -5,7 +5,7 @@ import 'package:psp_developer/src/blocs/modules_bloc.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/searches/mixings/modules_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_modules.dart';
-import 'package:psp_developer/src/utils/utils.dart';
+import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/widgets/common_list_of_models.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
@@ -45,7 +45,7 @@ class _ModulesPageState extends State<ModulesPage>
 
   @override
   Widget build(BuildContext context) {
-    if (!isValidToken()) return NotAutorizedScreen();
+    if (!TokenHandler.existToken()) return NotAutorizedScreen();
 
     return Scaffold(
         key: _scaffoldKey,

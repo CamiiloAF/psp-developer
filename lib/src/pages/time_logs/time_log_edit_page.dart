@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/time_logs_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
+import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/utils/utils.dart' as utils;
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
@@ -58,7 +59,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (!utils.isValidToken()) return NotAutorizedScreen();
+    if (!TokenHandler.existToken()) return NotAutorizedScreen();
 
     return Scaffold(
       key: _scaffoldKey,

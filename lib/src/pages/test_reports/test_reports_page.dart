@@ -7,7 +7,7 @@ import 'package:psp_developer/src/providers/models/fab_model.dart';
 import 'package:psp_developer/src/searches/mixings/test_reports_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_test_reports.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
-import 'package:psp_developer/src/utils/utils.dart';
+import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/common_list_of_models.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
@@ -52,7 +52,7 @@ class _TestReportsPageState extends State<TestReportsPage>
 
   @override
   Widget build(BuildContext context) {
-    if (!isValidToken()) return NotAutorizedScreen();
+    if (!TokenHandler.existToken()) return NotAutorizedScreen();
 
     var isShowing = Provider.of<FabModel>(context).isShowing;
 

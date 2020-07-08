@@ -2,6 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
   static const String _PREF_TOKEN = 'token';
+  static const String _PREF_TOKEN_SAVED_AT = 'tokenSavedAt';
+
   static const String _PREF_CURRENT_USER = 'currentUser';
 
   //For interruption
@@ -22,65 +24,43 @@ class Preferences {
 
   SharedPreferences _prefs;
 
-  void initPrefs() async {
-    _prefs = await SharedPreferences.getInstance();
-  }
+  void initPrefs() async => _prefs = await SharedPreferences.getInstance();
 
-  // GET y SET de token
-  String get token {
-    return _prefs.getString(_PREF_TOKEN) ?? '';
-  }
+  // * Token
+  String get token => _prefs.getString(_PREF_TOKEN) ?? '';
+  set token(String value) => _prefs.setString(_PREF_TOKEN, value);
 
-  set token(String value) {
-    _prefs.setString(_PREF_TOKEN, value);
-  }
-
-  void removeToken() {
-    _prefs.remove(_PREF_TOKEN);
-  }
+  int get tokenSavedAt => _prefs.getInt(_PREF_TOKEN_SAVED_AT);
+  set tokenSavedAt(int value) => _prefs.setInt(_PREF_TOKEN_SAVED_AT, value);
 
   // GET y SET current user
-  String get curentUser {
-    return _prefs.getString(_PREF_CURRENT_USER) ?? '';
-  }
+  String get curentUser => _prefs.getString(_PREF_CURRENT_USER) ?? '';
 
-  set curentUser(String value) {
-    _prefs.setString(_PREF_CURRENT_USER, value);
-  }
+  set curentUser(String value) => _prefs.setString(_PREF_CURRENT_USER, value);
 
-  // GET y SET interruption
-  int get pendingInterruptionStartAt {
-    return _prefs.getInt(_PREF_PENDING_INTERRUPTION_START_AT);
-  }
+  // * TimeLog Interruption
+  int get pendingInterruptionStartAt =>
+      _prefs.getInt(_PREF_PENDING_INTERRUPTION_START_AT);
 
-  set pendingInterruptionStartAt(int value) {
-    _prefs.setInt(_PREF_PENDING_INTERRUPTION_START_AT, value);
-  }
+  set pendingInterruptionStartAt(int value) =>
+      _prefs.setInt(_PREF_PENDING_INTERRUPTION_START_AT, value);
 
-  int get timeLogIdWithPendingInterruption {
-    return _prefs.getInt(_PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION);
-  }
+  int get timeLogIdWithPendingInterruption =>
+      _prefs.getInt(_PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION);
 
-  set timeLogIdWithPendingInterruption(int value) {
-    _prefs.setInt(_PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION, value);
-  }
+  set timeLogIdWithPendingInterruption(int value) =>
+      _prefs.setInt(_PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION, value);
 
   void removePendingInterruptionAndTimeLogId() {
     _prefs.remove(_PREF_PENDING_INTERRUPTION_START_AT);
     _prefs.remove(_PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION);
   }
 
-  // GET y SET theme
+  // * Theme
   // 1 is light - 2 is dark
-  int get theme {
-    return _prefs.getInt(_PREF_THEME) ?? 1;
-  }
+  int get theme => _prefs.getInt(_PREF_THEME) ?? 1;
 
-  set theme(int value) {
-    _prefs.setInt(_PREF_THEME, value);
-  }
+  set theme(int value) => _prefs.setInt(_PREF_THEME, value);
 
-  void clearPreferences() async {
-    await _prefs.clear();
-  }
+  void clearPreferences() async => await _prefs.clear();
 }

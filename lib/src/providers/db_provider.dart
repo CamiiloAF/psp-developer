@@ -85,7 +85,7 @@ class DBProvider {
     await db.rawDelete('DELETE FROM $tableName WHERE projects_id = $projectId');
   }
 
-  // ? Programs
+  // * Programs
   Future<List<Map<String, dynamic>>> getAllProgramsByModuleId(
       String moduleId) async {
     final db = await DBProvider.db.database;

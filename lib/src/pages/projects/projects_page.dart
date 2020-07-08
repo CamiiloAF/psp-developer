@@ -7,7 +7,7 @@ import 'package:psp_developer/src/searches/mixings/projects_page_and_search_mixi
 import 'package:psp_developer/src/searches/search_projects.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
-import 'package:psp_developer/src/utils/utils.dart';
+import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/widgets/common_list_of_models.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
@@ -40,7 +40,7 @@ class _ProjectsPageState extends State<ProjectsPage>
 
   @override
   Widget build(BuildContext context) {
-    if (!isValidToken()) return NotAutorizedScreen();
+    if (!TokenHandler.existToken()) return NotAutorizedScreen();
 
     return Scaffold(
       key: _scaffoldKey,

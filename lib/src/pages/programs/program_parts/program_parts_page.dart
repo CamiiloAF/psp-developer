@@ -9,6 +9,7 @@ import 'package:psp_developer/src/pages/programs/program_parts/reusable_parts_pa
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/added_new_parts_model.dart';
+import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
@@ -21,7 +22,7 @@ class ProgramPartsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isValidToken()) return NotAutorizedScreen();
+    if (!TokenHandler.existToken()) return NotAutorizedScreen();
 
     final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
     programsBloc.getProgramsByOrganization(program.id);
