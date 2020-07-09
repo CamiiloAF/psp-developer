@@ -42,6 +42,8 @@
     "messageAlreadyExistTestNumber": "Ya existe un test con ese número, pruebe con otro",
     "messageTimeOutException": "La solicitud ha tardado mucho, inténtelo nuevamente",
     "messageNoNegativeDifferenceBetweenDates": "No puede haber una diferencia negativa entre fechas",
+    "messageEmailIsAlreadyInUse": "El correo electrónico ya se encuentra en uso",
+    "messagePhoneIsAlreadyInUse": "El teléfono ya se encuentra en uso",
     "thereIsNoInformation": "No hay información",
     "labelName": "Nombre",
     "inputNameError": "Debe tener al menos 3 carateres",

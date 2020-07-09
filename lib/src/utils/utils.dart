@@ -55,13 +55,18 @@ String getRequestResponseMessage(BuildContext context, int statusCode) {
     case 403:
       return S.of(context).message403;
       break;
-    case Constants.TIME_OUT_EXCEPTION_CODE:
-      return S.of(context).messageTimeOutException;
-      break;
     case 404:
       return S.of(context).message404;
       break;
-
+    case Constants.TIME_OUT_EXCEPTION_CODE:
+      return S.of(context).messageTimeOutException;
+      break;
+    case Constants.EMAIL_ALREADY_IN_USE:
+      return S.of(context).messageEmailIsAlreadyInUse;
+      break;
+    case Constants.PHONE_ALREADY_IN_USE:
+      return S.of(context).messagePhoneIsAlreadyInUse;
+      break;
     default:
       return S.of(context).messageUnexpectedError;
   }

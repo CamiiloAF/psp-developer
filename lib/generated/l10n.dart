@@ -463,6 +463,26 @@ class S {
     );
   }
 
+  /// `El correo electrónico ya se encuentra en uso`
+  String get messageEmailIsAlreadyInUse {
+    return Intl.message(
+      'El correo electrónico ya se encuentra en uso',
+      name: 'messageEmailIsAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `El teléfono ya se encuentra en uso`
+  String get messagePhoneIsAlreadyInUse {
+    return Intl.message(
+      'El teléfono ya se encuentra en uso',
+      name: 'messagePhoneIsAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No hay información`
   String get thereIsNoInformation {
     return Intl.message(
