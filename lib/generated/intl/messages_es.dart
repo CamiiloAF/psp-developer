@@ -104,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "message404" : MessageLookupByLibrary.simpleMessage("No se encontró información"),
     "messageAlreadyExistTestNumber" : MessageLookupByLibrary.simpleMessage("Ya existe un test con ese número, pruebe con otro"),
     "messageEmailIsAlreadyInUse" : MessageLookupByLibrary.simpleMessage("El correo electrónico ya se encuentra en uso"),
+    "messageExceededMaximumNumberSessionAttempts" : MessageLookupByLibrary.simpleMessage("Excedió el número máximo de intentos de sesión por hora"),
     "messageIncorrectCredentials" : MessageLookupByLibrary.simpleMessage("Credenciales incorrectas"),
     "messageNoNegativeDifferenceBetweenDates" : MessageLookupByLibrary.simpleMessage("No puede haber una diferencia negativa entre fechas"),
     "messageNotConnection" : MessageLookupByLibrary.simpleMessage("Por favor revise su conexión a internet"),

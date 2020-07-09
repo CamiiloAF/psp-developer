@@ -36,6 +36,7 @@
     "message404": "No se encontró información",
     "messageUnexpectedError": "Ocurrió un error inesperado, inténtelo nuevamente",
     "messageIncorrectCredentials": "Credenciales incorrectas",
+    "messageExceededMaximumNumberSessionAttempts": "Excedió el número máximo de intentos de sesión por hora",
     "messageWeHaveSentEmail": "¡Te hemos enviado un email!",
     "messageWeHaveSentSMS": "¡Te hemos enviado un SMS!",
     "messagePIPHasBeenSave": "Se ha guardado el PIP",

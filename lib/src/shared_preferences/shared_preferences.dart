@@ -6,6 +6,9 @@ class Preferences {
 
   static const String _PREF_CURRENT_USER = 'currentUser';
 
+  static const String _PREF_lOGIN_ATTEMPS = 'loginTries';
+  static const String _PREF_lOGIN_LAST_ATTEMP_AT = 'loginlastTryAt';
+
   //For interruption
   static const String _PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION =
       'time_log_id_with_pending_interruption';
@@ -61,6 +64,19 @@ class Preferences {
   int get theme => _prefs.getInt(_PREF_THEME) ?? 1;
 
   set theme(int value) => _prefs.setInt(_PREF_THEME, value);
+
+ // * Login tries
+  int get loginAttemps => _prefs.getInt(_PREF_lOGIN_ATTEMPS) ?? 0;
+  set loginAttemps(int value) => _prefs.setInt(_PREF_lOGIN_ATTEMPS, value);
+
+  int get loginLastAttempAt => _prefs.getInt(_PREF_lOGIN_LAST_ATTEMP_AT);
+  set loginLastAttempAt(int value) =>
+      _prefs.setInt(_PREF_lOGIN_LAST_ATTEMP_AT, value);
+
+  void restoreLoginAttemps() {
+    _prefs.remove(_PREF_lOGIN_ATTEMPS);
+    _prefs.remove(_PREF_lOGIN_LAST_ATTEMP_AT);
+  }
 
   void clearPreferences() async => await _prefs.clear();
 }
