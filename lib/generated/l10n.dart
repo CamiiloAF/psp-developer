@@ -1162,6 +1162,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Lenguaje del sistema`
+  String get labelSystemLanguage {
+    return Intl.message(
+      'Lenguaje del sistema',
+      name: 'labelSystemLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -1170,6 +1180,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'es'),
+      Locale.fromSubtags(languageCode: 'en'),
     ];
   }
 

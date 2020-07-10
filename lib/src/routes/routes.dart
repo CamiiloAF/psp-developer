@@ -10,6 +10,7 @@ import 'package:psp_developer/src/pages/programs/programs_page.dart';
 import 'package:psp_developer/src/pages/projects/projects_page.dart';
 import 'package:psp_developer/src/pages/test_reports/test_reports_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
+import 'package:psp_developer/src/pages/settings/settings_page.dart';
 
 Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
       LoginPage.ROUTE_NAME: (BuildContext context) => LoginPage(),
@@ -23,4 +24,5 @@ Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
       DefectLogsPage.ROUTE_NAME: (BuildContext context) => DefectLogsPage(),
       TestReportsPage.ROUTE_NAME: (BuildContext context) => TestReportsPage(),
       PIPPage.ROUTE_NAME: (BuildContext context) => PIPPage(),
+      SettingsPage.ROUTE_NAME: (BuildContext context) => SettingsPage(),
     };

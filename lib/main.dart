@@ -3,8 +3,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/src/pages/login/login_page.dart';
 import 'package:psp_developer/src/pages/projects/projects_page.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
+import 'package:psp_developer/src/providers/models/system_language_model.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
 import 'package:psp_developer/src/routes/routes.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
@@ -29,7 +31,9 @@ void main() async {
     ),
     ChangeNotifierProvider(
       create: (_) => TimelogPendingInterruptionModel(),
-    )
+    ),
+    ChangeNotifierProvider(
+        create: (_) => SystemLanguageModel(prefs.languageCode)),
   ], child: MyApp()));
 }
 
@@ -49,8 +53,10 @@ class MyApp extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
-          S.delegate
+          S.delegate,
+          LocaleNamesLocalizationsDelegate(),
         ],
+        locale: Provider.of<SystemLanguageModel>(context).locale,
         supportedLocales: S.delegate.supportedLocales);
   }
 }

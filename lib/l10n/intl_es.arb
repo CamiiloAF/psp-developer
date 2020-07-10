@@ -111,5 +111,10 @@
     "optionLogOut": "Cerrar sesión",
     "optionSettings": "Ajustes",
     "darkMode": "Modo oscuro",
-    "lightMode": "Modo claro"
+    "lightMode": "Modo claro",
+
+
+
+  "labelSystemLanguage": "Lenguaje del sistema"
+
 }
