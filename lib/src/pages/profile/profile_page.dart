@@ -5,6 +5,7 @@ import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/validators/validators.dart';
 import 'package:psp_developer/src/blocs/users_bloc.dart';
 import 'package:psp_developer/src/models/users_model.dart';
+import 'package:psp_developer/src/pages/experiences/experiences_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
@@ -16,6 +17,7 @@ import 'package:psp_developer/src/widgets/inputs_widget.dart';
 import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
 
 class ProfilePage extends StatefulWidget {
+  static const ROUTE_NAME = 'profile';
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -56,7 +58,18 @@ class _ProfilePageState extends State<ProfilePage> {
               _buildInputName(false),
               _buildInputEmail(),
               _buildInputPhoneWithCountryPicker(),
-              _buildChangePasswordText(),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    _buildTextButton(
+                        _goToExperiences, S.of(context).appBarTitleExperiences),
+                    Spacer(),
+                    _buildTextButton(_showChangePasswordDialog,
+                        S.of(context).labelChangePassword),
+                  ],
+                ),
+              ),
               SubmitButton(onPressed: () => _submit())
             ],
           ),
@@ -65,18 +78,29 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildChangePasswordText() {
+  Widget _buildTextButton(Function onTap, String label) {
     final isDarkTheme = Provider.of<ThemeChanger>(context).isDarkTheme;
 
     return GestureDetector(
-        onTap: _showChangePasswordDialog,
+        onTap: onTap,
         child: Text(
-          S.of(context).labelChangePassword,
+          label,
           style: TextStyle(
               color:
                   (isDarkTheme) ? Colors.white : Theme.of(context).primaryColor,
               fontSize: 20),
         ));
+  }
+
+  void _showChangePasswordDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => _ChangePasswordDialog(scaffoldKey: _scaffoldKey));
+  }
+
+  void _goToExperiences() {
+    Navigator.pushNamed(context, ExperiencesPage.ROUTE_NAME,
+        arguments: true /*para indicar que es para actualizar */);
   }
 
   Widget _buildInputName(bool isFirstName) {
@@ -127,12 +151,6 @@ class _ProfilePageState extends State<ProfilePage> {
   void _initializeGlobalCountryCode(String countryCode) =>
       this.countryCode = countryCode;
 
-  void _showChangePasswordDialog() {
-    showDialog(
-        context: context,
-        builder: (context) => _ChangePasswordDialog(scaffoldKey: _scaffoldKey));
-  }
-
   void _submit() async {
     if (!_formKey.currentState.validate()) return;
 
@@ -143,9 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     await progressDialog.show();
 
-    var statusCode = -1;
-
-    statusCode = await _usersBloc.updateUser(_userModel);
+    final statusCode = await _usersBloc.updateUser(_userModel);
     await progressDialog.hide();
 
     await showSnackBar(context, _scaffoldKey.currentState, statusCode);

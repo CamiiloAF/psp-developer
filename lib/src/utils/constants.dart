@@ -24,6 +24,7 @@ class Constants {
 
   static const TEST_REPORTS_TABLE_NAME = 'test_reports';
   static const PIP_TABLE_NAME = 'pip';
+  static const EXPERIENCES_TABLE_NAME = 'experiences';
 
   static String token;
 
@@ -109,6 +110,19 @@ class Constants {
       'proposals TEXT NOT NULL,'
       'comments TEXT NULL,'
       'date VARCHAR NOT NULL);';
+
+  static const SQL_CREATE_TABLE_EXPERIENCES =
+      'CREATE TABLE $EXPERIENCES_TABLE_NAME('
+      'id INT (11) PRIMARY KEY NOT NULL,'
+      'users_id INT (11) NULL,'
+      'positions TEXT NOT NULL,'
+      'years_generals INT (11) NOT NULL,'
+      'years_configuration INT (11) NOT NULL,'
+      'years_integration INT (11) NOT NULL,'
+      'years_requirements INT (11) NOT NULL,'
+      'years_design INT (11) NOT NULL,'
+      'years_tests INT (11) NOT NULL,'
+      'years_support INT (11) NOT NULL);';
 
   static final PHASES = [
     PhasesModel(id: 1, name: 'PLAN'),

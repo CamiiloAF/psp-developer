@@ -21,6 +21,7 @@ class DBProvider {
   Future<Database> initDB() async {
     return await openDatabase(await getDbPath(), version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
+      await db.execute(Constants.SQL_CREATE_TABLE_EXPERIENCES);
       await db.execute(Constants.SQL_CREATE_TABLE_PROJECTS);
       await db.execute(Constants.SQL_CREATE_TABLE_MODULES);
       await db.execute(Constants.SQL_CREATE_TABLE_PROGRAMS);

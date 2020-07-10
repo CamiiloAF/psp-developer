@@ -11,6 +11,8 @@ import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
 
 class ModulesPage extends StatefulWidget {
+  static const ROUTE_NAME = 'modules';
+
   @override
   _ModulesPageState createState() => _ModulesPageState();
 }

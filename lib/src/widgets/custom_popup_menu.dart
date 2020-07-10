@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
+import 'package:psp_developer/src/pages/experiences/experiences_page.dart';
+import 'package:psp_developer/src/pages/profile/profile_page.dart';
 import 'package:psp_developer/src/repositories/session_repository.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 
 class CustomPopupMenu extends StatelessWidget {
-  final _sessionProvider = SessionRepository();
-
   final _optionSettingsIndex = 1;
   final _optionChangeTheme = 2;
   final _optionProfile = 3;
@@ -62,18 +62,20 @@ class CustomPopupMenu extends StatelessWidget {
   }
 
   void _onSelectedOptionProfile(BuildContext context) {
-    if (ModalRoute.of(context).settings.name != 'profile') {
-      Navigator.pushNamed(context, 'profile');
+    final currentRouteName = ModalRoute.of(context).settings.name;
+    if (currentRouteName != ProfilePage.ROUTE_NAME &&
+        currentRouteName != ExperiencesPage.ROUTE_NAME) {
+      Navigator.pushNamed(context, ProfilePage.ROUTE_NAME);
     }
   }
 
-  void doLogout(BuildContext context) async {
+  static void doLogout(BuildContext context) async {
     final progressDialog =
         getProgressDialog(context, S.of(context).progressDialogLoading);
 
     await progressDialog.show();
 
-    await _sessionProvider.logOut();
+    await SessionRepository().logOut();
 
     await Navigator.pushNamedAndRemoveUntil(context, 'login', (r) => false);
     await progressDialog.hide();

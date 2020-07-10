@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:psp_developer/src/pages/login/login_page.dart';
+import 'package:psp_developer/src/pages/projects/projects_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
@@ -38,7 +40,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'PSP - DEVELOPER',
         debugShowCheckedModeBanner: false,
-        initialRoute: (preferences.token != '') ? 'projects' : 'login',
+        initialRoute: (preferences.token != '')
+            ? ProjectsPage.ROUTE_NAME
+            : LoginPage.ROUTE_NAME,
         routes: getApplicationRoutes(),
         theme: Provider.of<ThemeChanger>(context).currentTheme,
         localizationsDelegates: [

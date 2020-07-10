@@ -1,5 +1,6 @@
 import 'package:psp_developer/src/blocs/base_parts_bloc.dart';
 import 'package:psp_developer/src/blocs/defect_logs_bloc.dart';
+import 'package:psp_developer/src/blocs/experiences_bloc.dart';
 import 'package:psp_developer/src/blocs/login_bloc.dart';
 import 'package:psp_developer/src/blocs/modules_bloc.dart';
 import 'package:psp_developer/src/blocs/new_parts_bloc.dart';
@@ -12,7 +13,9 @@ import 'package:psp_developer/src/blocs/time_logs_bloc.dart';
 import 'package:psp_developer/src/blocs/users_bloc.dart';
 
 class BlocProvider {
+  final _experiencesBloc = ExperiencesBloc();
   final _loginBloc = LoginBloc();
+
   final _projectsBloc = ProjectsBloc();
   final _modulesBloc = ModulesBloc();
 
@@ -29,7 +32,13 @@ class BlocProvider {
 
   final _userBloc = UsersBloc();
 
-  LoginBloc get loginBloc => _loginBloc;
+  LoginBloc get loginBloc {
+    _loginBloc.experiencesBloc = _experiencesBloc;
+    return _loginBloc;
+  }
+
+  ExperiencesBloc get experiencesBloc => _experiencesBloc;
+
   ProjectsBloc get projectsBloc => _projectsBloc;
   ModulesBloc get modulesBloc => _modulesBloc;
 

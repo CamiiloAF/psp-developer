@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:psp_developer/src/models/modules_model.dart';
+import 'package:psp_developer/src/pages/programs/programs_page.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 
 mixin ModulesPageAndSearchMixing {
@@ -11,7 +12,8 @@ mixin ModulesPageAndSearchMixing {
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () {
         if (closeSearch != null) closeSearch();
-        Navigator.pushNamed(context, 'programs', arguments: module.id);
+        Navigator.pushNamed(context, ProgramsPage.ROUTE_NAME,
+            arguments: module.id);
       },
       subtitle: module.description,
     );

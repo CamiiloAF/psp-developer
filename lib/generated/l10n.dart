@@ -173,6 +173,16 @@ class S {
     );
   }
 
+  /// `Experiencias`
+  String get appBarTitleExperiences {
+    return Intl.message(
+      'Experiencias',
+      name: 'appBarTitleExperiences',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Proyectos`
   String get appBarTitleProjects {
     return Intl.message(
@@ -378,6 +388,16 @@ class S {
     return Intl.message(
       'No se encontró información',
       name: 'message404',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error del servidor`
+  String get message500 {
+    return Intl.message(
+      'Error del servidor',
+      name: 'message500',
       desc: '',
       args: [],
     );
@@ -928,6 +948,96 @@ class S {
     return Intl.message(
       'Cambiar contraseña',
       name: 'labelChangePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Posiciones`
+  String get labelPositions {
+    return Intl.message(
+      'Posiciones',
+      name: 'labelPositions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organización`
+  String get labelOrganization {
+    return Intl.message(
+      'Organización',
+      name: 'labelOrganization',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Años en general`
+  String get labelYearsGenerals {
+    return Intl.message(
+      'Años en general',
+      name: 'labelYearsGenerals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Años en configuración`
+  String get labelYearsConfiguration {
+    return Intl.message(
+      'Años en configuración',
+      name: 'labelYearsConfiguration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Años en integración`
+  String get labelYearsIntegration {
+    return Intl.message(
+      'Años en integración',
+      name: 'labelYearsIntegration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Años en requerimientos`
+  String get labelYearsRequirements {
+    return Intl.message(
+      'Años en requerimientos',
+      name: 'labelYearsRequirements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Años en diseño`
+  String get labelYearsDesign {
+    return Intl.message(
+      'Años en diseño',
+      name: 'labelYearsDesign',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Años en tests`
+  String get labelYearsTests {
+    return Intl.message(
+      'Años en tests',
+      name: 'labelYearsTests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Años en soporte`
+  String get labelYearsSupport {
+    return Intl.message(
+      'Años en soporte',
+      name: 'labelYearsSupport',
       desc: '',
       args: [],
     );

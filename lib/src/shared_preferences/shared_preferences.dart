@@ -62,10 +62,9 @@ class Preferences {
   // * Theme
   // 1 is light - 2 is dark
   int get theme => _prefs.getInt(_PREF_THEME) ?? 1;
-
   set theme(int value) => _prefs.setInt(_PREF_THEME, value);
 
- // * Login tries
+  // * Login tries
   int get loginAttemps => _prefs.getInt(_PREF_lOGIN_ATTEMPS) ?? 0;
   set loginAttemps(int value) => _prefs.setInt(_PREF_lOGIN_ATTEMPS, value);
 

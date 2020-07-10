@@ -58,6 +58,9 @@ String getRequestResponseMessage(BuildContext context, int statusCode) {
     case 404:
       return S.of(context).message404;
       break;
+    case 500:
+      return S.of(context).message500;
+      break;
     case Constants.TIME_OUT_EXCEPTION_CODE:
       return S.of(context).messageTimeOutException;
       break;

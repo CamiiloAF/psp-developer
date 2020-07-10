@@ -5,7 +5,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
 class PIPBloc with Validators {
-  final _pipProvider = PIPRepository();
+  final _pipRepository = PIPRepository();
 
   final _pipController = BehaviorSubject<Tuple2<int, PIPModel>>();
 
@@ -15,12 +15,13 @@ class PIPBloc with Validators {
       _pipController.value;
 
   void getPIP(bool isRefresing, int programId) async {
-    final pipWithStatusCode = await _pipProvider.getPIP(isRefresing, programId);
+    final pipWithStatusCode =
+        await _pipRepository.getPIP(isRefresing, programId);
     _pipController.sink.add(pipWithStatusCode);
   }
 
   Future<int> insertPIP(PIPModel pip) async {
-    final result = await _pipProvider.insertPIP(pip);
+    final result = await _pipRepository.insertPIP(pip);
     final statusCode = result.item1;
 
     if (statusCode == 201) {
@@ -30,7 +31,7 @@ class PIPBloc with Validators {
   }
 
   Future<int> updatePIP(PIPModel pip) async {
-    final statusCode = await _pipProvider.updatePIP(pip);
+    final statusCode = await _pipRepository.updatePIP(pip);
 
     if (statusCode == 204) {
       _pipController.sink.add(Tuple2(200, pip));

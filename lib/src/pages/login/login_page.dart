@@ -15,6 +15,7 @@ import 'package:psp_developer/src/widgets/inputs_widget.dart';
 import 'login_background.dart';
 
 class LoginPage extends StatefulWidget {
+  static const ROUTE_NAME = 'login';
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -142,14 +143,18 @@ class _LoginPageState extends State<LoginPage> {
     Map response =
         await sessionProvider.doLogin(_loginBloc.email, _loginBloc.password);
 
-    await progressDialog.hide();
-
     if (response['ok']) {
-      await Navigator.pushReplacementNamed(context, 'projects');
+      final routeName = await _loginBloc.getNextRoteName();
+      if (routeName != null) {
+        await Navigator.pushNamedAndRemoveUntil(
+            context, routeName, (_) => false);
+      }
+
       preferences.restoreLoginAttemps();
     } else {
       _badLogin(response['status']);
     }
+    await progressDialog.hide();
   }
 
   void _badLogin(int responseStatus) async {
