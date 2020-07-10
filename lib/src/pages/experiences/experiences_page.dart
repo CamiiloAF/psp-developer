@@ -56,8 +56,6 @@ class _ExperiencesPageState extends State<ExperiencesPage> {
       _retainedToken = preferences.token;
       preferences.token = '';
     }
-    // * El token de las constantes no se retiene porque este se elimina una vez
-    // * se cierre la app, además ese es el que se usa para las peticiones
   }
 
   @override

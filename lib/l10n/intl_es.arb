@@ -100,6 +100,8 @@
     "labelYearsDesign": "Años en diseño",
     "labelYearsTests": "Años en tests",
     "labelYearsSupport": "Años en soporte",
+    "labelLoading": "Cargando...",
+    "labelLanguage": "Lenguaje",
     "inputPhoneError": "Número inválido",
     "helperInputDate": "Mantenga presionado el icono para poner la fecha y hora actual",
     "helperTimeInMinutes": "Tiempo en minutos",

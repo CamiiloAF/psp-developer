@@ -1043,6 +1043,26 @@ class S {
     );
   }
 
+  /// `Cargando...`
+  String get labelLoading {
+    return Intl.message(
+      'Cargando...',
+      name: 'labelLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lenguaje`
+  String get labelLanguage {
+    return Intl.message(
+      'Lenguaje',
+      name: 'labelLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Número inválido`
   String get inputPhoneError {
     return Intl.message(

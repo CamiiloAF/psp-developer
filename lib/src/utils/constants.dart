@@ -17,7 +17,9 @@ class Constants {
   //Table names
   static const PROJECTS_TABLE_NAME = 'projects';
   static const MODULES_TABLE_NAME = 'modules';
+
   static const PROGRAMS_TABLE_NAME = 'programs';
+  static const LANGUAGES_TABLE_NAME = 'languages';
 
   static const DEFECT_LOGS_TABLE_NAME = 'defect_log';
   static const TIME_LOGS_TABLE_NAME = 'time_log';
@@ -65,6 +67,11 @@ class Constants {
       'start_date VARCHAR NOT NULL,'
       'update_date VARCHAR NULL,'
       'delivery_date VARCHAR NULL);';
+
+  static const SQL_CREATE_TABLE_LANGUAGES =
+      'CREATE TABLE $LANGUAGES_TABLE_NAME('
+      'id INT (11) PRIMARY KEY NOT NULL,'
+      'name VARCHAR (50) NOT NULL);';
 
   static const SQL_CREATE_TABLE_DEFECT_LOGS =
       'CREATE TABLE $DEFECT_LOGS_TABLE_NAME('

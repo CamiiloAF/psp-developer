@@ -166,6 +166,9 @@ class InputMultiline extends StatelessWidget {
   final String errorText;
   final String initialValue;
   final String label;
+
+  final bool isReadOnly;
+
   final String Function(String value) onChanged;
   final Function(String value) onSaved;
 
@@ -175,6 +178,7 @@ class InputMultiline extends StatelessWidget {
     this.onChanged,
     this.onSaved,
     this.initialValue,
+    this.isReadOnly = false,
   });
 
   @override
@@ -188,6 +192,7 @@ class InputMultiline extends StatelessWidget {
             labelText: (label == null) ? S.of(context).labelDescription : label,
             errorText: errorText),
         keyboardType: TextInputType.multiline,
+        readOnly: isReadOnly,
         onChanged: onChanged,
         validator: onChanged,
         onSaved: onSaved,
@@ -201,16 +206,19 @@ class InputMultiline extends StatelessWidget {
 class InputDate extends StatefulWidget {
   final String labelAndHint;
   final bool isRequired;
+  final bool isEnabled;
   final DateTime initialValue;
+
   final Function(DateTime) onSaved;
   final Function(DateTime) onChanged;
 
   InputDate(
       {this.isRequired = false,
       @required this.labelAndHint,
-      @required this.onSaved,
+      this.onSaved,
       this.initialValue,
-      this.onChanged});
+      this.onChanged,
+      this.isEnabled = true});
 
   @override
   _InputDateState createState() => _InputDateState();
@@ -230,6 +238,7 @@ class _InputDateState extends State<InputDate> {
       margin: EdgeInsets.only(top: 20),
       child: DateTimeField(
           initialValue: widget.initialValue,
+          enabled: widget.isEnabled,
           format: Constants.format,
           controller: textEditingController,
           decoration: buildInputDecoration(context, Constants.format),
@@ -363,7 +372,7 @@ class InputForm extends StatelessWidget {
   final String Function(String value) validator;
 
   InputForm({
-    @required this.onSaved,
+    this.onSaved,
     @required this.label,
     this.initialValue,
     this.maxLenght,

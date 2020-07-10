@@ -1,12 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
+import 'package:psp_developer/src/pages/profile/profile_page.dart';
 import 'package:psp_developer/src/pages/test_reports/test_reports_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
+import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 
 import 'custom_list_tile.dart';
@@ -23,18 +27,7 @@ class DrawerProgramItems extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-            SafeArea(
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                child: CircleAvatar(
-                  child: Text(
-                    'FH',
-                    style: TextStyle(fontSize: 50),
-                  ),
-                ),
-              ),
-            ),
+            _buildCircleAvatar(context),
             CustomListTile(
                 title: S.of(context).appBarTitleTimeLogs,
                 onTap: () => navigateTo(context, TimeLogsPage.ROUTE_NAME)),
@@ -61,6 +54,35 @@ class DrawerProgramItems extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  SafeArea _buildCircleAvatar(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 20),
+        width: double.infinity,
+        height: 200,
+        child: CircleAvatar(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: InkWell(
+            onTap: () => Navigator.pushNamed(context, ProfilePage.ROUTE_NAME),
+            child: Text(
+              _getCurrentUserNameInitials(),
+              style: TextStyle(fontSize: 50),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  String _getCurrentUserNameInitials() {
+    final currentUser = json.decode(Preferences().curentUser);
+
+    final firstName = currentUser['first_name'].toString().trimLeft();
+    final lastName = currentUser['last_name'].toString().trimLeft();
+
+    return '${firstName[0]}${lastName[0]}';
   }
 
   bool isPIPEnabled(BuildContext context) {

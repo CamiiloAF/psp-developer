@@ -1,6 +1,7 @@
 import 'package:psp_developer/src/blocs/base_parts_bloc.dart';
 import 'package:psp_developer/src/blocs/defect_logs_bloc.dart';
 import 'package:psp_developer/src/blocs/experiences_bloc.dart';
+import 'package:psp_developer/src/blocs/languages_bloc.dart';
 import 'package:psp_developer/src/blocs/login_bloc.dart';
 import 'package:psp_developer/src/blocs/modules_bloc.dart';
 import 'package:psp_developer/src/blocs/new_parts_bloc.dart';
@@ -20,6 +21,8 @@ class BlocProvider {
   final _modulesBloc = ModulesBloc();
 
   final _programsBloc = ProgramsBloc();
+  final _languagesBloc = LanguagesBloc();
+
   final _basePartsBloc = BasePartsBloc();
   final _reusablePartsBloc = ReusablePartsBloc();
   final _newPartsBloc = NewPartsBloc();
@@ -43,6 +46,8 @@ class BlocProvider {
   ModulesBloc get modulesBloc => _modulesBloc;
 
   ProgramsBloc get programsBloc => _programsBloc;
+  LanguagesBloc get languagesBloc => _languagesBloc;
+
   BasePartsBloc get basePartsBloc => _basePartsBloc;
   ReusablePartsBloc get reusablePartsBloc => _reusablePartsBloc;
   NewPartsBloc get newPartsBloc => _newPartsBloc;

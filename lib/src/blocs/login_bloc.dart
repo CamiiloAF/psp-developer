@@ -13,7 +13,6 @@ class LoginBloc with Validators {
   final _passwordController = BehaviorSubject<String>();
 
   ExperiencesBloc _experiencesBloc;
-
   set experiencesBloc(ExperiencesBloc value) => _experiencesBloc = value;
 
   Stream<String> get emailStream =>
@@ -60,7 +59,7 @@ class LoginBloc with Validators {
   }
 
   Future<String> getNextRoteName() async {
-    final haveExperiences = await _experiencesBloc.haveExperiences();
+    final haveExperiences = await _experiencesBloc.haveExperience();
 
     if (haveExperiences == null) return null;
 

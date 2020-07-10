@@ -9,7 +9,7 @@ class ExperiencesBloc with Validators {
   Future<Tuple2<int, ExperienceModel>> getExperience() async =>
       await _experienceRepository.getExperiences();
 
-  Future<bool> haveExperiences() async {
+  Future<bool> haveExperience() async {
     bool haveExperiences;
 
     final experienceWithStatusCode =
