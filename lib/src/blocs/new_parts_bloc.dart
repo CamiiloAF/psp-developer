@@ -24,8 +24,24 @@ class NewPartsBloc with Validators {
     _newPartsController.sink.add(newPartsWithStatusCode);
   }
 
+  Future<int> updateNewPart(NewPartModel newPart) async {
+    final statusCode = await _newPartsProvider.updateNewPart(newPart);
+
+    if (statusCode == 204) {
+      final tempNewParts = lastValueNewPartsController.item2;
+
+      final indexOfOldNewPart =
+          tempNewParts.indexWhere((element) => element.id == newPart.id);
+
+      tempNewParts[indexOfOldNewPart] = newPart;
+
+      _newPartsController.sink.add(Tuple2(200, tempNewParts));
+    }
+    return statusCode;
+  }
+
   void dispose() {
     addedNewParts.clear();
-    _newPartsController.sink.add(null);
+    _newPartsController?.sink?.add(null);
   }
 }

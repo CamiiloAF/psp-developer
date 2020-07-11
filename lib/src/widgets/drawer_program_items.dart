@@ -61,11 +61,11 @@ class DrawerProgramItems extends StatelessWidget {
                 title: s.appBarTitleBaseParts,
                 onTap: () => navigateTo(context, BasePartsPage.ROUTE_NAME)),
             CustomListTile(
-                title: s.appBarTitleReusableParts,
-                onTap: () => navigateTo(context, ReusablePartsPage.ROUTE_NAME)),
-            CustomListTile(
                 title: s.appBarTitleNewParts,
                 onTap: () => navigateTo(context, NewPartsPage.ROUTE_NAME)),
+            CustomListTile(
+                title: s.appBarTitleReusableParts,
+                onTap: () => navigateTo(context, ReusablePartsPage.ROUTE_NAME)),
             Divider(),
             ListTile(
               leading: Icon(Icons.brightness_4),

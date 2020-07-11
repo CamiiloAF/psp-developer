@@ -89,6 +89,7 @@
   "labelReusableProgram": "Programa Reutilizable:",
   "labelDoNotHavePrograms": "No hay otros programas",
   "labelMethodsPlanned": "Métodos planeados",
+  "labelMethodsCurrent": "Métodos actuales",
   "labelType": "Tipo",
   "labelSize": "Tamaño",
   "labelRestorePasswordByEmail": "Recuperar contraseña mediante email",

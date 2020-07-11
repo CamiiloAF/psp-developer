@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:psp_developer/src/models/new_parts_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/utils/constants.dart';
+import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
@@ -13,11 +14,13 @@ class NewPartsRepository {
         _NewPartsNetworkBoundResource(RateLimiter(), programId);
     final response = await networkBoundResource.execute(isRefreshing);
 
-    if (response.item2 == null) {
-      return Tuple2(response.item1, []);
-    } else {
-      return response;
-    }
+    return (response.item2 == null) ? Tuple2(response.item1, []) : response;
+  }
+
+  Future<int> updateNewPart(NewPartModel newPart) async {
+    final url = '${Constants.baseUrl}/new-parts/${newPart.id}';
+    return await _NewPartsUpdateBoundResource()
+        .executeUpdate(newPartModelToJson(newPart), newPart, url);
   }
 }
 
@@ -70,4 +73,14 @@ class _NewPartsNetworkBoundResource
   @override
   List<NewPartModel> decodeData(List<dynamic> payload) =>
       NewPartsModel.fromJsonList(payload).newParts;
+}
+
+class _NewPartsUpdateBoundResource
+    extends InsertAndUpdateBoundResource<NewPartModel> {
+  @override
+  NewPartModel buildNewModel(payload) => null;
+
+  @override
+  void doOperationInDb(NewPartModel model) async =>
+      await DBProvider.db.update(model, Constants.NEW_PARTS_TABLE_NAME);
 }

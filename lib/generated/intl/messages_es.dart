@@ -75,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelLanguage" : MessageLookupByLibrary.simpleMessage("Lenguaje"),
     "labelLastName" : MessageLookupByLibrary.simpleMessage("Apellido"),
     "labelLoading" : MessageLookupByLibrary.simpleMessage("Cargando..."),
+    "labelMethodsCurrent" : MessageLookupByLibrary.simpleMessage("Métodos actuales"),
     "labelMethodsPlanned" : MessageLookupByLibrary.simpleMessage("Métodos planeados"),
     "labelName" : MessageLookupByLibrary.simpleMessage("Nombre"),
     "labelNone" : MessageLookupByLibrary.simpleMessage("No aplica"),

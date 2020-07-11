@@ -5,6 +5,7 @@ import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
 import 'package:psp_developer/src/pages/experiences/experiences_page.dart';
 import 'package:psp_developer/src/pages/login/login_page.dart';
 import 'package:psp_developer/src/pages/modules/modules_page.dart';
+import 'package:psp_developer/src/pages/new_parts/new_part_edit_page.dart';
 import 'package:psp_developer/src/pages/new_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
@@ -32,6 +33,7 @@ Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
       BasePartsPage.ROUTE_NAME: (BuildContext context) => BasePartsPage(),
       BasePartEditPage.ROUTE_NAME: (BuildContext context) => BasePartEditPage(),
       NewPartsPage.ROUTE_NAME: (BuildContext context) => NewPartsPage(),
+      NewPartEditPage.ROUTE_NAME: (BuildContext context) => NewPartEditPage(),
       ReusablePartsPage.ROUTE_NAME: (BuildContext context) =>
           ReusablePartsPage(),
     };

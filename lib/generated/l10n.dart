@@ -933,6 +933,16 @@ class S {
     );
   }
 
+  /// `Métodos actuales`
+  String get labelMethodsCurrent {
+    return Intl.message(
+      'Métodos actuales',
+      name: 'labelMethodsCurrent',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Tipo`
   String get labelType {
     return Intl.message(
