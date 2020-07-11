@@ -1,9 +1,5 @@
 import 'dart:convert';
 
-import 'package:psp_developer/src/models/base_parts_model.dart';
-import 'package:psp_developer/src/models/new_parts_model.dart';
-import 'package:psp_developer/src/models/reusable_parts_model.dart';
-
 class ProgramsModel {
   List<ProgramModel> programs = [];
 
@@ -22,8 +18,7 @@ class ProgramsModel {
 ProgramModel programModelFromJson(String str) =>
     ProgramModel.fromJson(json.decode(str));
 
-String programModelToJson(ProgramModel data) =>
-    json.encode(data.toJson(withProgramParts: true));
+String programModelToJson(ProgramModel data) => json.encode(data.toJson());
 
 class ProgramModel {
   ProgramModel({
@@ -52,10 +47,6 @@ class ProgramModel {
   int updateDate;
   int deliveryDate;
 
-  List<BasePartModel> baseParts = [];
-  List<ReusablePartModel> reusableParts = [];
-  List<NewPartModel> newParts = [];
-
   factory ProgramModel.fromJson(Map<String, dynamic> json) => ProgramModel(
         id: json['id'],
         usersId: json['users_id'],
@@ -74,35 +65,17 @@ class ProgramModel {
             : null,
       );
 
-  Map<String, dynamic> toJson({bool withProgramParts = false}) =>
-      (withProgramParts)
-          ? {
-              'id': id,
-              'users_id': usersId,
-              'languages_id': languagesId,
-              'modules_id': modulesId,
-              'name': name,
-              'description': description,
-              'total_lines': totalLines,
-              'planning_date': planningDate,
-              'start_date': startDate,
-              'update_date': updateDate,
-              'delivery_date': deliveryDate,
-              'base_parts': baseParts,
-              'reusable_parts': reusableParts,
-              'new_parts': newParts,
-            }
-          : {
-              'id': id,
-              'users_id': usersId,
-              'languages_id': languagesId,
-              'modules_id': modulesId,
-              'name': name,
-              'description': description,
-              'total_lines': totalLines,
-              'planning_date': planningDate,
-              'start_date': startDate,
-              'update_date': updateDate,
-              'delivery_date': deliveryDate,
-            };
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'users_id': usersId,
+        'languages_id': languagesId,
+        'modules_id': modulesId,
+        'name': name,
+        'description': description,
+        'total_lines': totalLines,
+        'planning_date': planningDate,
+        'start_date': startDate,
+        'update_date': updateDate,
+        'delivery_date': deliveryDate,
+      };
 }

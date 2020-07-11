@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
+import 'package:psp_developer/src/models/program_parts_model.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/base_parts_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/new_parts_page.dart';
@@ -99,17 +100,13 @@ class ProgramPartsPage extends StatelessWidget {
     var statusCode = -1;
 
     final blocProvider = Provider.of<BlocProvider>(context, listen: false);
-    final baseParts = blocProvider.basePartsBloc.addedBaseParts;
-    final reusableParts = blocProvider.reusablePartsBloc.addedReusableParts;
-    final newParts = blocProvider.newPartsBloc.addedNewParts;
 
-    program
-      ..baseParts = baseParts
-      ..reusableParts = reusableParts
-      ..newParts = newParts;
+    final programPartsModel = _buildProgramParts(context);
 
-    statusCode =
-        await blocProvider.programsBloc.updateProgramWithProgramParts(program);
+    program.updateDate = DateTime.now().millisecondsSinceEpoch;
+
+    statusCode = await blocProvider.programsBloc
+        .updateProgramWithProgramParts(program, programPartsModel);
 
     await progressDialog.hide();
 
@@ -119,5 +116,19 @@ class ProgramPartsPage extends StatelessWidget {
     } else {
       await showSnackBar(context, _scaffoldKey.currentState, statusCode);
     }
+  }
+
+  ProgramPartsModel _buildProgramParts(BuildContext context) {
+    final blocProvider = Provider.of<BlocProvider>(context, listen: false);
+
+    final baseParts = blocProvider.basePartsBloc.addedBaseParts;
+    final reusableParts = blocProvider.reusablePartsBloc.addedReusableParts;
+    final newParts = blocProvider.newPartsBloc.addedNewParts;
+
+    return ProgramPartsModel(
+      baseParts: baseParts,
+      reusableParts: reusableParts,
+      newParts: newParts,
+    );
   }
 }

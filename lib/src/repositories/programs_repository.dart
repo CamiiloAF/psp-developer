@@ -1,10 +1,10 @@
 import 'package:http/http.dart' as http;
-
+import 'package:psp_developer/src/models/program_parts_model.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/utils/constants.dart';
-import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
+import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
 
@@ -37,10 +37,17 @@ class ProgramsRepository {
     }
   }
 
-  Future<int> updateProgramWithProgramParts(ProgramModel program) async {
+  Future<int> updateProgram(ProgramModel program) async {
     final url = '${Constants.baseUrl}/programs/${program.id}';
     return await _ProgramsUpdateBoundResource()
         .executeUpdate(programModelToJson(program), program, url);
+  }
+
+  Future<int> addProgramParts(ProgramPartsModel programParts) async {
+    final url = '${Constants.baseUrl}/parts/set-program';
+    final result = await _ProgramPartsInsertBoundResource()
+        .executeInsert(programPartsModelToJson(programParts), url);
+    return result.item1;
   }
 }
 
@@ -142,12 +149,18 @@ class _ProgramsByOrganizationNetworkBoundResource
 class _ProgramsUpdateBoundResource
     extends InsertAndUpdateBoundResource<ProgramModel> {
   @override
-  ProgramModel buildNewModel(payload) {
-    print(payload);
-    return null;
-  }
+  ProgramModel buildNewModel(payload) => null;
 
   @override
   void doOperationInDb(ProgramModel model) =>
       DBProvider.db.update(model, Constants.PROGRAMS_TABLE_NAME);
+}
+
+class _ProgramPartsInsertBoundResource
+    extends InsertAndUpdateBoundResource<ProgramPartsModel> {
+  @override
+  ProgramPartsModel buildNewModel(payload) => null;
+
+  @override
+  void doOperationInDb(ProgramPartsModel model) => null;
 }

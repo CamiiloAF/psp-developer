@@ -142,17 +142,25 @@ class __FormState extends State<_Form> {
   void initState() {
     _basePart = context.read<_AddedBasePartsModel>().currentBasePart;
 
-    _currentBaseProgramId = _basePart?.programsBaseId ?? -1;
-
     programsTuple = context
         .read<BlocProvider>()
         .programsBloc
         .lastValueProgramsByOrganizationController
         ?.item2;
 
+    _initializeCurrentBaseProgramId();
+
     isUIDisable = isNullOrEmpty(programsTuple);
 
     super.initState();
+  }
+
+  void _initializeCurrentBaseProgramId() {
+    _currentBaseProgramId = _basePart?.programsBaseId ?? -1;
+
+    if (!isNullOrEmpty(programsTuple)) {
+      _currentBaseProgramId = programsTuple[0].item1;
+    }
   }
 
   @override
@@ -197,7 +205,7 @@ class __FormState extends State<_Form> {
     return Spinner(
       label: S.of(context).labelBaseProgram,
       items: _getDropDownMenuItems(),
-      value: _basePart?.programsBaseId ?? -1,
+      value: _basePart?.programsBaseId ?? _currentBaseProgramId,
       onChanged: (value) {
         setState(() {
           _formKey.currentState.save();
@@ -209,19 +217,16 @@ class __FormState extends State<_Form> {
   }
 
   List<DropdownMenuItem<int>> _getDropDownMenuItems() {
-    final items = <DropdownMenuItem<int>>[
-      DropdownMenuItem(
-          value: -1,
-          child: Text((isNullOrEmpty(programsTuple))
-              ? S.of(context).labelDoNotHavePrograms
-              : S.of(context).labelNone))
-    ];
+    final items = <DropdownMenuItem<int>>[];
 
     if (!isNullOrEmpty(programsTuple)) {
       programsTuple.forEach((programTuple) {
         items.add(DropdownMenuItem(
             value: programTuple.item1, child: Text(programTuple.item2)));
       });
+    } else {
+      items.add(DropdownMenuItem(
+          value: -1, child: Text(S.of(context).labelDoNotHavePrograms)));
     }
 
     return items;
@@ -254,8 +259,7 @@ class __FormState extends State<_Form> {
     _formKey.currentState.save();
 
     _basePart.programsId = widget.programsId;
-    _basePart.programsBaseId =
-        (_currentBaseProgramId == -1) ? null : _currentBaseProgramId;
+    _basePart.programsBaseId = _currentBaseProgramId;
 
     Provider.of<_AddedBasePartsModel>(widget.ctx, listen: false)
       ..addBaseParts(_basePart)

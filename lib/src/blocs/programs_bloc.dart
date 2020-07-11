@@ -1,4 +1,5 @@
 import 'package:psp_developer/src/models/base_parts_model.dart';
+import 'package:psp_developer/src/models/program_parts_model.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/repositories/programs_repository.dart';
 import 'package:psp_developer/src/utils/utils.dart';
@@ -40,11 +41,16 @@ class ProgramsBloc {
     _programsByOrganizationController.sink.add(programsWithStatusCode);
   }
 
-  Future<int> updateProgramWithProgramParts(ProgramModel program) async {
-    program.totalLines = _getProgramTotalLines(program);
+  Future<int> updateProgramWithProgramParts(
+      ProgramModel program, ProgramPartsModel programParts) async {
+    program.totalLines = _getProgramTotalLines(programParts);
 
-    final statusCode =
-        await _programsRepository.updateProgramWithProgramParts(program);
+    final programPartsStatusCode =
+        await _programsRepository.addProgramParts(programParts);
+
+    if (programPartsStatusCode != 201) return programPartsStatusCode;
+
+    final statusCode = await _programsRepository.updateProgram(program);
 
     if (statusCode == 204) {
       final tempProgramsByModuleId =
@@ -63,12 +69,12 @@ class ProgramsBloc {
     return statusCode;
   }
 
-  int _getProgramTotalLines(ProgramModel program) {
-    final basePartsTotalLines = _getBasePartsTotalLines(program.baseParts);
+  int _getProgramTotalLines(ProgramPartsModel programParts) {
+    final basePartsTotalLines = _getBasePartsTotalLines(programParts.baseParts);
     final reusablePartsTotalLines =
-        _getReusableAndNewPartsTotalLines(program.reusableParts);
+        _getReusableAndNewPartsTotalLines(programParts.reusableParts);
     final newPartsTotalLines =
-        _getReusableAndNewPartsTotalLines(program.newParts);
+        _getReusableAndNewPartsTotalLines(programParts.newParts);
 
     return basePartsTotalLines + reusablePartsTotalLines + newPartsTotalLines;
   }
