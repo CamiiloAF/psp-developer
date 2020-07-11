@@ -28,6 +28,10 @@ class Constants {
   static const PIP_TABLE_NAME = 'pip';
   static const EXPERIENCES_TABLE_NAME = 'experiences';
 
+  static const BASE_PARTS_TABLE_NAME = 'base_parts';
+  static const NEW_PARTS_TABLE_NAME = 'new_parts';
+  static const REUSABLE_PARTS_TABLE_NAME = 'reusable_parts';
+
   static String token;
 
   static Map<String, String> getHeaders() => {
@@ -35,6 +39,19 @@ class Constants {
         'http_csrf_token': httpCsrfToken,
         'http_auth_token': token,
       };
+
+  static const SQL_CREATE_TABLE_EXPERIENCES =
+      'CREATE TABLE $EXPERIENCES_TABLE_NAME('
+      'id INT (11) PRIMARY KEY NOT NULL,'
+      'users_id INT (11) NULL,'
+      'positions TEXT NOT NULL,'
+      'years_generals INT (11) NOT NULL,'
+      'years_configuration INT (11) NOT NULL,'
+      'years_integration INT (11) NOT NULL,'
+      'years_requirements INT (11) NOT NULL,'
+      'years_design INT (11) NOT NULL,'
+      'years_tests INT (11) NOT NULL,'
+      'years_support INT (11) NOT NULL);';
 
   static const SQL_CREATE_TABLE_PROJECTS =
       'CREATE TABLE ${PROJECTS_TABLE_NAME}('
@@ -118,18 +135,38 @@ class Constants {
       'comments TEXT NULL,'
       'date VARCHAR NOT NULL);';
 
-  static const SQL_CREATE_TABLE_EXPERIENCES =
-      'CREATE TABLE $EXPERIENCES_TABLE_NAME('
+  static const SQL_CREATE_TABLE_BASE_PARTS =
+      'CREATE TABLE $BASE_PARTS_TABLE_NAME('
       'id INT (11) PRIMARY KEY NOT NULL,'
-      'users_id INT (11) NULL,'
-      'positions TEXT NOT NULL,'
-      'years_generals INT (11) NOT NULL,'
-      'years_configuration INT (11) NOT NULL,'
-      'years_integration INT (11) NOT NULL,'
-      'years_requirements INT (11) NOT NULL,'
-      'years_design INT (11) NOT NULL,'
-      'years_tests INT (11) NOT NULL,'
-      'years_support INT (11) NOT NULL);';
+      'programs_id INT (11) NOT NULL,'
+      'programs_base_id INT (11) NOT NULL,'
+      'planned_lines_base INT (11) NOT NULL,'
+      'planned_lines_deleted INT (11) NOT NULL,'
+      'planned_lines_edits INT (11) NOT NULL,'
+      'planned_lines_added INT (11) NOT NULL,'
+      'current_lines_base INT (11) NULL,'
+      'current_lines_deleted INT (11) NULL,'
+      'current_lines_edits INT (11) NULL,'
+      'current_lines_added INT (11) NULL);';
+
+  static const SQL_CREATE_TABLE_NEW_PARTS =
+      'CREATE TABLE $NEW_PARTS_TABLE_NAME('
+      'id INT (11) PRIMARY KEY NOT NULL,'
+      'programs_id INT (11) NOT NULL,'
+      'types_sizes_id INT (11) NOT NULL,'
+      'name VARCHAR (50) NOT NULL,'
+      'planned_lines INT (11) NOT NULL,'
+      'number_methods_planned INT (11) NOT NULL,'
+      'current_lines INT (11) NULL,'
+      'number_methods_current INT (11) NULL);';
+
+  static const SQL_CREATE_TABLE_REUSABLE_PARTS =
+      'CREATE TABLE $REUSABLE_PARTS_TABLE_NAME('
+      'id INT (11) PRIMARY KEY NOT NULL,'
+      'programs_id INT (11) NOT NULL,'
+      'programs_reusables_id INT (11) NOT NULL,'
+      'planned_lines INT (11) NOT NULL,'
+      'current_lines INT (11) NULL);';
 
   static final PHASES = [
     PhasesModel(id: 1, name: 'PLAN'),

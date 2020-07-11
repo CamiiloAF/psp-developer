@@ -79,6 +79,11 @@
   "labelPlannedLinesDeleted": "Planned deleted lines",
   "labelPlannedLinesEdits": "Planned edited lines",
   "labelPlannedLinesAdded": "Planned added lines",
+  "labelPlannedLines": "Planned lines:",
+  "labelCurrentLinesBase": "Current base lines",
+  "labelCurrentLinesDeleted": "Current deleted lines",
+  "labelCurrentLinesEdits": "Current edited lines",
+  "labelCurrentLinesAdded": "Current added lines",
   "labelBaseProgram": "Base Program:",
   "labelReusableProgram": "Reusable Program:",
   "labelDoNotHavePrograms": "There are no other programs",
@@ -103,6 +108,7 @@
   "labelYearsSupport": "Years in support",
   "labelLoading": "Loading...",
   "labelLanguage": "Language",
+  "labelSystemLanguage": "System language",
   "helperInputDate": "Press and hold the icon to set the current date and time",
   "helperTimeInMinutes": "Time in minutes",
   "buttonStartInterruption": "Start interruption",
@@ -111,6 +117,5 @@
   "optionLogOut": "Log out",
   "optionSettings": "Settings",
   "darkMode": "Dark mode",
-  "lightMode": "Light mode",
-  "labelSystemLanguage": "System language"
+  "lightMode": "Light mode"
 }

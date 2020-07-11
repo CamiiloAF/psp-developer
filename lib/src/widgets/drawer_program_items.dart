@@ -1,12 +1,16 @@
 import 'dart:convert';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
+import 'package:psp_developer/src/pages/base_parts/base_parts_page.dart';
 import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
+import 'package:psp_developer/src/pages/new_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
+import 'package:psp_developer/src/pages/reusable_parts/reusable_parts_page.dart';
 import 'package:psp_developer/src/pages/test_reports/test_reports_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
@@ -23,28 +27,49 @@ class DrawerProgramItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
+    final s = S.of(context);
+
     return Drawer(
       child: Container(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             _buildCircleAvatar(context),
             CustomListTile(
-                title: S.of(context).appBarTitleTimeLogs,
+                title: s.appBarTitleTimeLogs,
                 onTap: () => navigateTo(context, TimeLogsPage.ROUTE_NAME)),
             CustomListTile(
-                title: S.of(context).appBarTitleDefectLogs,
+                title: s.appBarTitleDefectLogs,
                 onTap: () => navigateTo(context, DefectLogsPage.ROUTE_NAME)),
             CustomListTile(
-                title: S.of(context).appBarTitleTestReports,
+                title: s.appBarTitleTestReports,
                 onTap: () => navigateTo(context, TestReportsPage.ROUTE_NAME)),
             CustomListTile(
                 isEnable: isPIPEnabled(context),
-                title: S.of(context).appBarTitlePIP,
+                title: s.appBarTitlePIP,
                 onTap: () => navigateTo(context, PIPPage.ROUTE_NAME)),
+            Divider(),
+            FadeInLeft(
+              child: Container(
+                padding: EdgeInsets.only(top: 8, bottom: 8, left: 16),
+                child: Text(
+                  s.appBarTitleProgramParts,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+            ),
+            CustomListTile(
+                title: s.appBarTitleBaseParts,
+                onTap: () => navigateTo(context, BasePartsPage.ROUTE_NAME)),
+            CustomListTile(
+                title: s.appBarTitleReusableParts,
+                onTap: () => navigateTo(context, ReusablePartsPage.ROUTE_NAME)),
+            CustomListTile(
+                title: s.appBarTitleNewParts,
+                onTap: () => navigateTo(context, NewPartsPage.ROUTE_NAME)),
             Divider(),
             ListTile(
               leading: Icon(Icons.brightness_4),
-              title: Text(S.of(context).darkMode),
+              title: Text(s.darkMode),
               trailing: Switch.adaptive(
                   value: appTheme.isDarkTheme,
                   activeColor: appTheme.currentTheme.accentColor,
@@ -61,7 +86,7 @@ class DrawerProgramItems extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
         width: double.infinity,
-        height: 200,
+        height: 150,
         child: CircleAvatar(
           backgroundColor: Theme.of(context).primaryColor,
           child: InkWell(

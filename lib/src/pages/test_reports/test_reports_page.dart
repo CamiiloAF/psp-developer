@@ -4,7 +4,7 @@ import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/test_reports_bloc.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
-import 'package:psp_developer/src/searches/mixings/test_reports_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/test_reports_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_test_reports.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/token_handler.dart';

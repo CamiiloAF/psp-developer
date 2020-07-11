@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/time_logs_bloc.dart';
 import 'package:psp_developer/src/models/time_logs_model.dart';
-import 'package:psp_developer/src/searches/mixings/time_logs_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/time_logs_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_delegate.dart';
 import 'package:psp_developer/src/utils/constants.dart';
 

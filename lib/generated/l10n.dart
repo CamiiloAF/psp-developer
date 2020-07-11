@@ -843,6 +843,56 @@ class S {
     );
   }
 
+  /// `Líneas planeadas:`
+  String get labelPlannedLines {
+    return Intl.message(
+      'Líneas planeadas:',
+      name: 'labelPlannedLines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas base actuales`
+  String get labelCurrentLinesBase {
+    return Intl.message(
+      'Líneas base actuales',
+      name: 'labelCurrentLinesBase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas borradas actuales`
+  String get labelCurrentLinesDeleted {
+    return Intl.message(
+      'Líneas borradas actuales',
+      name: 'labelCurrentLinesDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas editadas actuales`
+  String get labelCurrentLinesEdits {
+    return Intl.message(
+      'Líneas editadas actuales',
+      name: 'labelCurrentLinesEdits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Líneas añadidas actuales`
+  String get labelCurrentLinesAdded {
+    return Intl.message(
+      'Líneas añadidas actuales',
+      name: 'labelCurrentLinesAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Programa Base:`
   String get labelBaseProgram {
     return Intl.message(

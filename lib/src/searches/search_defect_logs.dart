@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/defect_logs_bloc.dart';
 import 'package:psp_developer/src/models/defect_logs_model.dart';
-import 'package:psp_developer/src/searches/mixings/defect_logs_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/defect_logs_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_delegate.dart';
 
 class SearchDefectLogs extends DataSearch with DefectLogsPageAndSearchMixing {

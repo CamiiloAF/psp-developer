@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:psp_developer/src/blocs/modules_bloc.dart';
 import 'package:psp_developer/src/models/modules_model.dart';
-import 'package:psp_developer/src/searches/mixings/modules_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/modules_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_delegate.dart';
 
 class SearchModules extends DataSearch with ModulesPageAndSearchMixing {

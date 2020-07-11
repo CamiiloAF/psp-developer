@@ -6,7 +6,7 @@ import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/fab_model.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
-import 'package:psp_developer/src/searches/mixings/time_logs_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/time_logs_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_time_logs.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/token_handler.dart';

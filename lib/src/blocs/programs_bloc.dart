@@ -32,6 +32,11 @@ class ProgramsBloc {
   void getPrograms(bool isRefresing, int moduleId) async {
     final programsWithStatusCode = await _programsRepository
         .getAllProgramsByModulesId(isRefresing, moduleId);
+
+    if (programsWithStatusCode.item1 == 200) {
+      getProgramsByOrganization(null);
+    }
+
     _programsByModuleIdController.sink.add(programsWithStatusCode);
   }
 

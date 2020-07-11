@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
-import 'package:psp_developer/src/searches/mixings/programs_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/programs_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_programs.dart';
 import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/widgets/common_list_of_models.dart';

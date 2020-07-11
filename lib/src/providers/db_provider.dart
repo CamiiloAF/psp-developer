@@ -34,6 +34,10 @@ class DBProvider {
 
       await db.execute(Constants.SQL_CREATE_TABLE_TEST_REPORTS);
       await db.execute(Constants.SQL_CREATE_TABLE_PIP);
+
+      await db.execute(Constants.SQL_CREATE_TABLE_BASE_PARTS);
+      await db.execute(Constants.SQL_CREATE_TABLE_NEW_PARTS);
+      await db.execute(Constants.SQL_CREATE_TABLE_REUSABLE_PARTS);
     });
   }
 

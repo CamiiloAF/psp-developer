@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/test_reports_bloc.dart';
 import 'package:psp_developer/src/models/test_reports_model.dart';
-import 'package:psp_developer/src/searches/mixings/test_reports_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/test_reports_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_delegate.dart';
 
 class SearchTestReports extends DataSearch with TestReportsPageAndSearchMixing {

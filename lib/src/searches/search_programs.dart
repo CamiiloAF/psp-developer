@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
-import 'package:psp_developer/src/searches/mixings/programs_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/programs_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_delegate.dart';
 
 class SearchPrograms extends DataSearch with ProgramsPageAndSearchMixing {

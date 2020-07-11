@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psp_developer/src/blocs/projects_bloc.dart';
 import 'package:psp_developer/src/models/projects_model.dart';
-import 'package:psp_developer/src/searches/mixings/projects_page_and_search_mixing.dart';
+import 'package:psp_developer/src/searches/mixins/projects_page_and_search_mixing.dart';
 import 'package:psp_developer/src/searches/search_delegate.dart';
 
 class SearchProjects extends DataSearch with ProjectsPageAndSearchMixing {
