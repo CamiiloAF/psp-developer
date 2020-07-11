@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:psp_developer/src/models/reusable_parts_model.dart';
 import 'package:psp_developer/src/providers/db_provider.dart';
 import 'package:psp_developer/src/utils/constants.dart';
+import 'package:psp_developer/src/utils/network_bound_resources/insert_and_update_bound_resource.dart';
 import 'package:psp_developer/src/utils/network_bound_resources/network_bound_resource.dart';
 import 'package:psp_developer/src/utils/rate_limiter.dart';
 import 'package:tuple/tuple.dart';
@@ -14,6 +15,12 @@ class ReusablePartsRepository {
     final response = await networkBoundResource.execute(isRefreshing);
 
     return (response.item2 == null) ? Tuple2(response.item1, []) : response;
+  }
+
+  Future<int> updateReusablePart(ReusablePartModel reusablePart) async {
+    final url = '${Constants.baseUrl}/reusable-parts/${reusablePart.id}';
+    return await _ReusablePartsUpdateBoundResource().executeUpdate(
+        reusablePartModelToJson(reusablePart), reusablePart, url);
   }
 }
 
@@ -69,4 +76,14 @@ class _ReusablePartsNetworkBoundResource
   @override
   List<ReusablePartModel> decodeData(List<dynamic> payload) =>
       ReusablePartsModel.fromJsonList(payload).reusableParts;
+}
+
+class _ReusablePartsUpdateBoundResource
+    extends InsertAndUpdateBoundResource<ReusablePartModel> {
+  @override
+  ReusablePartModel buildNewModel(payload) => null;
+
+  @override
+  void doOperationInDb(ReusablePartModel model) async =>
+      await DBProvider.db.update(model, Constants.REUSABLE_PARTS_TABLE_NAME);
 }

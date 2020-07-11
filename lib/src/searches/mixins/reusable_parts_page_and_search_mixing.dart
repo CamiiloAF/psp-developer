@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/models/reusable_parts_model.dart';
 import 'package:psp_developer/src/widgets/custom_list_tile.dart';
+import 'package:psp_developer/src/pages/reusable_parts/reusable_part_edit_page.dart';
 
 mixin ReusablePartsPageAndSearchMixing {
   Widget buildItemList(BuildContext context, ReusablePartModel reusablePart,
@@ -12,8 +13,7 @@ mixin ReusablePartsPageAndSearchMixing {
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () {
         if (closeSearch != null) closeSearch();
-        Navigator.pushNamed(
-            context, 'ReusablePartDetailPage.ROUTE_NAME', //TODO PONER LA RUTA
+        Navigator.pushNamed(context, ReusablePartEditPage.ROUTE_NAME,
             arguments: reusablePart);
       },
     );
