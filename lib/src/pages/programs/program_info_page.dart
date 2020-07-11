@@ -75,8 +75,13 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
                 height: 10,
               ),
               _buildLanguageDropdownButton(),
-              _inputPlanningDate(),
-              _inputStartDate(),
+              _buildInputDateDisable(
+                  _programModel.planningDate, s.labelPlanningDate),
+              _buildInputDateDisable(_programModel.startDate, s.labelStartDate),
+              _buildInputDateDisable(
+                  _programModel.updateDate, s.labelUpdateDate),
+              _buildInputDateDisable(
+                  _programModel.deliveryDate, s.labelDeliveryDate),
             ],
           ),
         ),
@@ -106,10 +111,9 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
         final languageName = (snapshot.hasData)
             ? _languagesBloc.getLanguageNameById(_programModel.languagesId)
             : S.of(context).labelLoading;
-        ;
 
         return Spinner(
-          label: S.of(context).labelLanguage,
+          label: '${S.of(context).labelLanguage}:',
           value: languageName,
           items: [
             DropdownMenuItem(value: languageName, child: Text(languageName))
@@ -120,24 +124,13 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     );
   }
 
-  Widget _inputPlanningDate() {
+  Widget _buildInputDateDisable(int initialValueInMilliseconds, String label) {
     return InputDate(
-      initialValue: (_programModel.planningDate != null)
-          ? DateTime.fromMillisecondsSinceEpoch(_programModel.planningDate)
+      initialValue: (initialValueInMilliseconds != null)
+          ? DateTime.fromMillisecondsSinceEpoch(initialValueInMilliseconds)
           : null,
       isEnabled: false,
-      labelAndHint: S.of(context).labelPlanningDate,
+      labelAndHint: label,
     );
-  }
-
-  Widget _inputStartDate() {
-    return InputDate(
-        initialValue: (_programModel.startDate != null)
-            ? DateTime.fromMillisecondsSinceEpoch(_programModel.startDate)
-            : null,
-        isEnabled: false,
-        labelAndHint: S.of(context).labelStartDate,
-        onSaved: (DateTime value) =>
-            _programModel.startDate = value?.millisecondsSinceEpoch);
   }
 }

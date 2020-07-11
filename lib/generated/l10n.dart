@@ -393,10 +393,10 @@ class S {
     );
   }
 
-  /// `Error del servidor`
+  /// `Error interno del servidor`
   String get message500 {
     return Intl.message(
-      'Error del servidor',
+      'Error interno del servidor',
       name: 'message500',
       desc: '',
       args: [],
@@ -578,6 +578,26 @@ class S {
     return Intl.message(
       'Fecha de inicio',
       name: 'labelStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fecha de actualización`
+  String get labelUpdateDate {
+    return Intl.message(
+      'Fecha de actualización',
+      name: 'labelUpdateDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fecha de entrega`
+  String get labelDeliveryDate {
+    return Intl.message(
+      'Fecha de entrega',
+      name: 'labelDeliveryDate',
       desc: '',
       args: [],
     );
@@ -1063,6 +1083,16 @@ class S {
     );
   }
 
+  /// `Lenguaje del sistema`
+  String get labelSystemLanguage {
+    return Intl.message(
+      'Lenguaje del sistema',
+      name: 'labelSystemLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Número inválido`
   String get inputPhoneError {
     return Intl.message(
@@ -1158,16 +1188,6 @@ class S {
     return Intl.message(
       'Modo claro',
       name: 'lightMode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Lenguaje del sistema`
-  String get labelSystemLanguage {
-    return Intl.message(
-      'Lenguaje del sistema',
-      name: 'labelSystemLanguage',
       desc: '',
       args: [],
     );
