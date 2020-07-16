@@ -6,6 +6,7 @@ import 'package:psp_developer/src/blocs/login_bloc.dart';
 import 'package:psp_developer/src/blocs/modules_bloc.dart';
 import 'package:psp_developer/src/blocs/new_parts_bloc.dart';
 import 'package:psp_developer/src/blocs/pip_bloc.dart';
+import 'package:psp_developer/src/blocs/program_plan_summary_bloc.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/blocs/projects_bloc.dart';
 import 'package:psp_developer/src/blocs/reusable_parts_bloc.dart';
@@ -35,6 +36,8 @@ class BlocProvider {
 
   final _userBloc = UsersBloc();
 
+  final _programPlanSummaryBloc = ProgramPlanSummaryBloc();
+
   LoginBloc get loginBloc {
     _loginBloc.experiencesBloc = _experiencesBloc;
     return _loginBloc;
@@ -43,19 +46,28 @@ class BlocProvider {
   ExperiencesBloc get experiencesBloc => _experiencesBloc;
 
   ProjectsBloc get projectsBloc => _projectsBloc;
+
   ModulesBloc get modulesBloc => _modulesBloc;
 
   ProgramsBloc get programsBloc => _programsBloc;
+
   LanguagesBloc get languagesBloc => _languagesBloc;
 
   BasePartsBloc get basePartsBloc => _basePartsBloc;
+
   ReusablePartsBloc get reusablePartsBloc => _reusablePartsBloc;
+
   NewPartsBloc get newPartsBloc => _newPartsBloc;
 
   DefectLogsBloc get defectLogsBloc => _defectLogsBloc;
+
   TimeLogsBloc get timeLogsBloc => _timeLogsBloc;
 
   TestReportsBloc get testReportsBloc => _testReportsBloc;
+
   PIPBloc get pipBloc => _pipBloc;
+
   UsersBloc get userBloc => _userBloc;
+
+  ProgramPlanSummaryBloc get programPlanSummaryBloc => _programPlanSummaryBloc;
 }

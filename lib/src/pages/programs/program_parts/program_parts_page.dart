@@ -2,53 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
-import 'package:psp_developer/src/models/program_parts_model.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/base_parts_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/reusable_parts_page.dart';
-import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
+import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_time_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/added_new_parts_model.dart';
 import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
-import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
+import 'package:psp_developer/src/widgets/not_authorized_screen.dart';
 
-class ProgramPartsPage extends StatelessWidget {
+class ProgramPartsPage extends StatefulWidget {
   final ProgramModel program;
 
   ProgramPartsPage({@required this.program});
+
+  @override
+  _ProgramPartsPageState createState() => _ProgramPartsPageState();
+}
+
+class _ProgramPartsPageState extends State<ProgramPartsPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  ProgramsBloc _programsBloc;
+
+  @override
+  void initState() {
+    _programsBloc = context.read<BlocProvider>().programsBloc;
+    _programsBloc.getProgramsByOrganization(widget.program.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (!TokenHandler.existToken()) return NotAutorizedScreen();
-
-    final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
-    programsBloc.getProgramsByOrganization(program.id);
+    if (!TokenHandler.existToken()) return NotAuthorizedScreen();
 
     return DefaultTabController(
       length: 3,
       child: ChangeNotifierProvider(
         create: (BuildContext context) => AddedNewPartsModel(),
-        builder: (ctx, child) => buildScaffold(ctx, programsBloc),
+        builder: (ctx, child) => buildScaffold(ctx, _programsBloc),
       ),
     );
   }
 
-  Scaffold buildScaffold(BuildContext context, ProgramsBloc programsBloc) {
+  Scaffold buildScaffold(BuildContext ctx, ProgramsBloc programsBloc) {
     return Scaffold(
         key: _scaffoldKey,
         appBar: CustomAppBar(
           moreActions: [
             IconButton(
               icon: Icon(Icons.check),
-              onPressed: (Provider.of<AddedNewPartsModel>(context)
-                      .addedNewParts
-                      .isEmpty)
-                  ? null
-                  : () => updateProgramWithProgramParts(context),
+              onPressed:
+                  (Provider.of<AddedNewPartsModel>(ctx).addedNewParts.isEmpty)
+                      ? null
+                      : () => _goToPlanningTimes(context),
             )
           ],
           bottom: TabBar(
@@ -82,53 +92,16 @@ class ProgramPartsPage extends StatelessWidget {
 
             return TabBarView(
               children: [
-                BasePartsPage(programId: program.id),
-                ReusablePartsPage(programId: program.id),
-                NewPartsPage(programId: program.id),
+                BasePartsPage(programId: widget.program.id),
+                ReusablePartsPage(programId: widget.program.id),
+                NewPartsPage(programId: widget.program.id),
               ],
             );
           },
         ));
   }
 
-  void updateProgramWithProgramParts(BuildContext context) async {
-    final progressDialog =
-        getProgressDialog(context, S.of(context).progressDialogSaving);
-
-    await progressDialog.show();
-
-    var statusCode = -1;
-
-    final blocProvider = Provider.of<BlocProvider>(context, listen: false);
-
-    final programPartsModel = _buildProgramParts(context);
-
-    program.updateDate = DateTime.now().millisecondsSinceEpoch;
-
-    statusCode = await blocProvider.programsBloc
-        .updateProgramWithProgramParts(program, programPartsModel);
-
-    await progressDialog.hide();
-
-    if (statusCode == 204) {
-      await Navigator.pushReplacementNamed(context, TimeLogsPage.ROUTE_NAME,
-          arguments: program.id);
-    } else {
-      await showSnackBar(context, _scaffoldKey.currentState, statusCode);
-    }
-  }
-
-  ProgramPartsModel _buildProgramParts(BuildContext context) {
-    final blocProvider = Provider.of<BlocProvider>(context, listen: false);
-
-    final baseParts = blocProvider.basePartsBloc.addedBaseParts;
-    final reusableParts = blocProvider.reusablePartsBloc.addedReusableParts;
-    final newParts = blocProvider.newPartsBloc.addedNewParts;
-
-    return ProgramPartsModel(
-      baseParts: baseParts,
-      reusableParts: reusableParts,
-      newParts: newParts,
-    );
-  }
+  void _goToPlanningTimes(BuildContext context) =>
+      Navigator.pushNamed(context, ProgramPlanningTimePage.ROUTE_NAME,
+          arguments: widget.program);
 }

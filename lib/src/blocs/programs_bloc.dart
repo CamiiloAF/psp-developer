@@ -1,3 +1,4 @@
+import 'package:psp_developer/src/blocs/validators/validators.dart';
 import 'package:psp_developer/src/models/base_parts_model.dart';
 import 'package:psp_developer/src/models/program_parts_model.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
@@ -6,14 +7,14 @@ import 'package:psp_developer/src/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
-class ProgramsBloc {
+class ProgramsBloc with Validators {
   final _programsRepository = ProgramsRepository();
 
   final _programsByModuleIdController =
-      BehaviorSubject<Tuple2<int, List<ProgramModel>>>();
+  BehaviorSubject<Tuple2<int, List<ProgramModel>>>();
 
   final _programsByOrganizationController =
-      BehaviorSubject<Tuple2<int, List<Tuple2<int, String>>>>();
+  BehaviorSubject<Tuple2<int, List<Tuple2<int, String>>>>();
 
   Stream<Tuple2<int, List<ProgramModel>>> get programsByModuleIdStream =>
       _programsByModuleIdController.stream;
@@ -22,12 +23,12 @@ class ProgramsBloc {
       _programsByModuleIdController.value;
 
   Stream<Tuple2<int, List<Tuple2<int, String>>>>
-      get programsByOrganizationStream =>
-          _programsByOrganizationController.stream;
+  get programsByOrganizationStream =>
+      _programsByOrganizationController.stream;
 
   Tuple2<int, List<Tuple2<int, String>>>
-      get lastValueProgramsByOrganizationController =>
-          _programsByOrganizationController.value;
+  get lastValueProgramsByOrganizationController =>
+      _programsByOrganizationController.value;
 
   void getPrograms(bool isRefresing, int moduleId) async {
     final programsWithStatusCode = await _programsRepository
@@ -46,12 +47,12 @@ class ProgramsBloc {
     _programsByOrganizationController.sink.add(programsWithStatusCode);
   }
 
-  Future<int> updateProgramWithProgramParts(
-      ProgramModel program, ProgramPartsModel programParts) async {
+  Future<int> updateProgramWithProgramParts(ProgramModel program,
+      ProgramPartsModel programParts) async {
     program.totalLines = _getProgramTotalLines(programParts);
 
     final programPartsStatusCode =
-        await _programsRepository.addProgramParts(programParts);
+    await _programsRepository.addProgramParts(programParts);
 
     if (programPartsStatusCode != 201) return programPartsStatusCode;
 
@@ -77,9 +78,9 @@ class ProgramsBloc {
   int _getProgramTotalLines(ProgramPartsModel programParts) {
     final basePartsTotalLines = _getBasePartsTotalLines(programParts.baseParts);
     final reusablePartsTotalLines =
-        _getReusableAndNewPartsTotalLines(programParts.reusableParts);
+    _getReusableAndNewPartsTotalLines(programParts.reusableParts);
     final newPartsTotalLines =
-        _getReusableAndNewPartsTotalLines(programParts.newParts);
+    _getReusableAndNewPartsTotalLines(programParts.newParts);
 
     return basePartsTotalLines + reusablePartsTotalLines + newPartsTotalLines;
   }
@@ -110,5 +111,9 @@ class ProgramsBloc {
     return totalLines;
   }
 
-  void dispose() => _programsByModuleIdController.sink.add(null);
+  void dispose() {
+    _programsByModuleIdController.sink.add(null);
+    _programsByOrganizationController.sink.add(null);
+  }
+
 }

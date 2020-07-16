@@ -19,6 +19,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static m0(phase) => "Tiempo estimado en ${phase}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "appBarTitleBaseParts" : MessageLookupByLibrary.simpleMessage("Base parts"),
@@ -27,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appBarTitleModules" : MessageLookupByLibrary.simpleMessage("Modules"),
     "appBarTitleNewParts" : MessageLookupByLibrary.simpleMessage("New parts"),
     "appBarTitlePIP" : MessageLookupByLibrary.simpleMessage("PIP"),
+    "appBarTitlePlanningTime" : MessageLookupByLibrary.simpleMessage("Time´s planning"),
     "appBarTitleProfile" : MessageLookupByLibrary.simpleMessage("Profile"),
     "appBarTitleProgramParts" : MessageLookupByLibrary.simpleMessage("Program parts"),
     "appBarTitlePrograms" : MessageLookupByLibrary.simpleMessage("Programs"),
@@ -107,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelTimeForRepair" : MessageLookupByLibrary.simpleMessage("Time to repair"),
     "labelType" : MessageLookupByLibrary.simpleMessage("Type"),
     "labelUpdateDate" : MessageLookupByLibrary.simpleMessage("Update date"),
+    "labelWithPlaceHolderEstimatedTimeIn" : m0,
     "labelYearsConfiguration" : MessageLookupByLibrary.simpleMessage("Years in configuration"),
     "labelYearsDesign" : MessageLookupByLibrary.simpleMessage("Years in design"),
     "labelYearsGenerals" : MessageLookupByLibrary.simpleMessage("Years in general"),
@@ -140,6 +144,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "progressDialogSaving" : MessageLookupByLibrary.simpleMessage("Saving"),
     "save" : MessageLookupByLibrary.simpleMessage("Save"),
     "thereIsNoInformation" : MessageLookupByLibrary.simpleMessage("There is no information"),
-    "titleNotAutorized" : MessageLookupByLibrary.simpleMessage("YOU ARE NOT AUTHORIZED")
+    "titleDefectsInjectedInPhase" : MessageLookupByLibrary.simpleMessage("DEFECTS INJECTED IN PHASE "),
+    "titleDefectsRemovedInPhase" : MessageLookupByLibrary.simpleMessage("DEFECTS REMOVED IN PHASE "),
+    "titleNotAutorized" : MessageLookupByLibrary.simpleMessage("YOU ARE NOT AUTHORIZED"),
+    "titleProgramSizeSummary" : MessageLookupByLibrary.simpleMessage("PROGRAM SIZE SUMMARY"),
+    "titleTimeInPhase" : MessageLookupByLibrary.simpleMessage("TIME IN PHASE (MIN)")
   };
 }

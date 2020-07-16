@@ -10,6 +10,7 @@ import 'package:psp_developer/src/pages/new_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
 import 'package:psp_developer/src/pages/programs/program_info_page.dart';
+import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_time_page.dart';
 import 'package:psp_developer/src/pages/programs/programs_page.dart';
 import 'package:psp_developer/src/pages/projects/projects_page.dart';
 import 'package:psp_developer/src/pages/reusable_parts/reusable_part_edit_page.dart';
@@ -39,4 +40,5 @@ Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
           ReusablePartsPage(),
       ReusablePartEditPage.ROUTE_NAME: (BuildContext context) =>
           ReusablePartEditPage(),
+      ProgramPlanningTimePage.ROUTE_NAME: (BuildContext context) => ProgramPlanningTimePage(),
     };

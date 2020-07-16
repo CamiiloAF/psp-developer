@@ -83,7 +83,7 @@ class _ReusablePartsPageState extends State<ReusablePartsPage>
         title:
             '${reusableParts.length - i} - ${S.of(context).labelPlannedLinesBase}: ${reusableParts[i].plannedLines}',
         trailing: Container(
-          width: MediaQuery.of(context).size.width * 0.25,
+          width: MediaQuery.of(context).size.width * 0.3,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

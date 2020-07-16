@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
             ? ProjectsPage.ROUTE_NAME
             : LoginPage.ROUTE_NAME,
         routes: getApplicationRoutes(),
+//    home: ProgramPlanningTimePage(),
         theme: Provider.of<ThemeChanger>(context).currentTheme,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

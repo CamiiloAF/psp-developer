@@ -79,7 +79,7 @@ class _NewPartsPageState extends State<NewPartsPage>
         title:
             '${newParts.length - i} - ${S.of(context).labelName}: ${newParts[i].name}',
         trailing: Container(
-          width: MediaQuery.of(context).size.width * 0.25,
+          width: MediaQuery.of(context).size.width * 0.3,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -152,12 +152,12 @@ class __FormState extends State<_Form> {
             _buildInputName(
               '${_newPart?.name ?? ''}',
             ),
-            _builNumericInput(
+            _buildNumericInput(
                 context,
                 S.of(context).labelPlannedLinesBase,
                 '${_newPart?.plannedLines ?? ''}',
                 (value) => _newPart?.plannedLines = int.tryParse(value)),
-            _builNumericInput(
+            _buildNumericInput(
                 context,
                 S.of(context).labelMethodsPlanned,
                 '${_newPart?.numberMethodsPlanned ?? ''}',
@@ -225,7 +225,7 @@ class __FormState extends State<_Form> {
     );
   }
 
-  Widget _builNumericInput(BuildContext context, String label, String text,
+  Widget _buildNumericInput(BuildContext context, String label, String text,
       Function(String) onSaved) {
     final controller = TextEditingController();
     controller.text = text;

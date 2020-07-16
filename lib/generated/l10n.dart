@@ -303,11 +303,61 @@ class S {
     );
   }
 
+  /// `Planeación de tiempos`
+  String get appBarTitlePlanningTime {
+    return Intl.message(
+      'Planeación de tiempos',
+      name: 'appBarTitlePlanningTime',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NO ESTÁS AUTORIZADO`
   String get titleNotAutorized {
     return Intl.message(
       'NO ESTÁS AUTORIZADO',
       name: 'titleNotAutorized',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RESUMEN TAMAÑO DEL PROGRAMA`
+  String get titleProgramSizeSummary {
+    return Intl.message(
+      'RESUMEN TAMAÑO DEL PROGRAMA',
+      name: 'titleProgramSizeSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TIEMPO POR FASE (MIN)`
+  String get titleTimeInPhase {
+    return Intl.message(
+      'TIEMPO POR FASE (MIN)',
+      name: 'titleTimeInPhase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DEFECTOS INYECTADOS POR FASE`
+  String get titleDefectsInjectedInPhase {
+    return Intl.message(
+      'DEFECTOS INYECTADOS POR FASE',
+      name: 'titleDefectsInjectedInPhase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DEFECTOS REMOVIDOS POR FASE`
+  String get titleDefectsRemovedInPhase {
+    return Intl.message(
+      'DEFECTOS REMOVIDOS POR FASE',
+      name: 'titleDefectsRemovedInPhase',
       desc: '',
       args: [],
     );
@@ -1150,6 +1200,16 @@ class S {
       name: 'labelSystemLanguage',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Tiempo estimado en {phase}`
+  String labelWithPlaceHolderEstimatedTimeIn(Object phase) {
+    return Intl.message(
+      'Tiempo estimado en $phase',
+      name: 'labelWithPlaceHolderEstimatedTimeIn',
+      desc: '',
+      args: [phase],
     );
   }
 

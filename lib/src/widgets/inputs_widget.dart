@@ -412,6 +412,7 @@ class CustomInput extends StatefulWidget {
   final String errorText;
   final String initialValue;
   final String label;
+  final String helperText;
 
   final bool Function(String value) onChanged;
   final String Function(String value) validator;
@@ -428,6 +429,7 @@ class CustomInput extends StatefulWidget {
   CustomInput({
     this.errorText,
     @required this.label,
+    this.helperText,
     this.onChanged,
     this.validator,
     @required this.onSaved,
@@ -455,6 +457,7 @@ class _CustomInputState extends State<CustomInput> {
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
             labelText: widget.label,
+            helperText: widget.helperText,
             errorText: (hasError) ? widget.errorText : null),
         keyboardType: widget.keyboardType,
         onChanged: (widget.onChanged == null)

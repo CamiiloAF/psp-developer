@@ -9,7 +9,7 @@ import 'package:psp_developer/src/utils/token_handler.dart';
 import 'package:psp_developer/src/widgets/common_list_of_models.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/drawer_program_items.dart';
-import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
+import 'package:psp_developer/src/widgets/not_authorized_screen.dart';
 
 class ReusablePartsPage extends StatefulWidget {
   static const ROUTE_NAME = 'reusable-parts';
@@ -48,7 +48,7 @@ class _ReusablePartsPageState extends State<ReusablePartsPage>
 
   @override
   Widget build(BuildContext context) {
-    if (!TokenHandler.existToken()) return NotAutorizedScreen();
+    if (!TokenHandler.existToken()) return NotAuthorizedScreen();
 
     return Scaffold(
       key: _scaffoldKey,

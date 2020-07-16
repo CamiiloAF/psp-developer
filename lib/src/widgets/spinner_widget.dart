@@ -13,7 +13,7 @@ class Spinner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(label),
+        Flexible(flex: 3,child: Text(label)),
         Expanded(
           child: Container(),
         ),

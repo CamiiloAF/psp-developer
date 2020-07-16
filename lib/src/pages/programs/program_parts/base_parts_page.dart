@@ -81,7 +81,7 @@ class _BasePartsPageState extends State<BasePartsPage>
         title:
             '${baseParts.length - i} - ${S.of(context).labelPlannedLinesBase}: ${baseParts[i].plannedLinesBase}',
         trailing: Container(
-          width: MediaQuery.of(context).size.width * 0.25,
+          width: MediaQuery.of(context).size.width * 0.3,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

@@ -99,7 +99,7 @@ class __FormState extends State<_Form> {
     List<String> typeSize;
 
     Constants.NEW_PART_TYPES_SIZE.forEach((key, value) {
-      if (value == widget.newPart.id) {
+      if (value == widget.newPart.typesSizesId) {
         typeSize = key.split('-');
       }
     });
@@ -135,10 +135,10 @@ class __FormState extends State<_Form> {
     final s = S.of(context);
     return Column(
       children: [
-        _builNumericInput(s.labelPlannedLinesBase,
+        _buildNumericInput(s.labelPlannedLinesBase,
             '${widget.newPart?.plannedLines ?? ''}', null,
             isReadOnly: true),
-        _builNumericInput(s.labelMethodsPlanned,
+        _buildNumericInput(s.labelMethodsPlanned,
             '${widget.newPart?.numberMethodsPlanned ?? ''}', null,
             isReadOnly: true),
       ],
@@ -150,12 +150,12 @@ class __FormState extends State<_Form> {
 
     return Column(
       children: [
-        _builNumericInput(
+        _buildNumericInput(
           s.labelCurrentLinesBase,
           '${widget.newPart?.currentLines ?? ''}',
           (value) => widget.newPart?.currentLines = int.tryParse(value),
         ),
-        _builNumericInput(
+        _buildNumericInput(
           s.labelMethodsCurrent,
           '${widget.newPart?.numberMethodsCurrent ?? ''}',
           (value) => widget.newPart?.numberMethodsCurrent = int.tryParse(value),
@@ -164,7 +164,7 @@ class __FormState extends State<_Form> {
     );
   }
 
-  Widget _builNumericInput(
+  Widget _buildNumericInput(
       String label, String initialValue, Function(String) onSaved,
       {bool isReadOnly = false}) {
     return InputForm(

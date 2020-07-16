@@ -10,7 +10,7 @@ import 'package:psp_developer/src/utils/utils.dart';
 import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/custom_app_bar.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
-import 'package:psp_developer/src/widgets/not_autorized_screen.dart';
+import 'package:psp_developer/src/widgets/not_authorized_screen.dart';
 
 class TestReportEditPage extends StatefulWidget {
   final int programId;
@@ -44,7 +44,7 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (!TokenHandler.existToken()) return NotAutorizedScreen();
+    if (!TokenHandler.existToken()) return NotAuthorizedScreen();
 
     return Scaffold(
       key: _scaffoldKey,
