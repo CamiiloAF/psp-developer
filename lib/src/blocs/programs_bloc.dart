@@ -8,13 +8,26 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
 class ProgramsBloc with Validators {
+  ProgramModel _currentProgram;
+
+  setCurrentProgram(int programId) {
+    final lastPrograms = lastValueProgramsByModuleIdController?.item2;
+
+    _currentProgram =
+        lastPrograms.firstWhere((program) => program.id == programId);
+  }
+
+  ProgramModel getCurrentProgram() => _currentProgram;
+
+  bool _hasCurrentProgramEnded() => _currentProgram?.deliveryDate != null;
+
   final _programsRepository = ProgramsRepository();
 
   final _programsByModuleIdController =
-  BehaviorSubject<Tuple2<int, List<ProgramModel>>>();
+      BehaviorSubject<Tuple2<int, List<ProgramModel>>>();
 
   final _programsByOrganizationController =
-  BehaviorSubject<Tuple2<int, List<Tuple2<int, String>>>>();
+      BehaviorSubject<Tuple2<int, List<Tuple2<int, String>>>>();
 
   Stream<Tuple2<int, List<ProgramModel>>> get programsByModuleIdStream =>
       _programsByModuleIdController.stream;
@@ -23,12 +36,12 @@ class ProgramsBloc with Validators {
       _programsByModuleIdController.value;
 
   Stream<Tuple2<int, List<Tuple2<int, String>>>>
-  get programsByOrganizationStream =>
-      _programsByOrganizationController.stream;
+      get programsByOrganizationStream =>
+          _programsByOrganizationController.stream;
 
   Tuple2<int, List<Tuple2<int, String>>>
-  get lastValueProgramsByOrganizationController =>
-      _programsByOrganizationController.value;
+      get lastValueProgramsByOrganizationController =>
+          _programsByOrganizationController.value;
 
   void getPrograms(bool isRefresing, int moduleId) async {
     final programsWithStatusCode = await _programsRepository
@@ -47,12 +60,12 @@ class ProgramsBloc with Validators {
     _programsByOrganizationController.sink.add(programsWithStatusCode);
   }
 
-  Future<int> updateProgramWithProgramParts(ProgramModel program,
-      ProgramPartsModel programParts) async {
+  Future<int> updateProgramWithProgramParts(
+      ProgramModel program, ProgramPartsModel programParts) async {
     program.totalLines = _getProgramTotalLines(programParts);
 
     final programPartsStatusCode =
-    await _programsRepository.addProgramParts(programParts);
+        await _programsRepository.addProgramParts(programParts);
 
     if (programPartsStatusCode != 201) return programPartsStatusCode;
 
@@ -78,9 +91,9 @@ class ProgramsBloc with Validators {
   int _getProgramTotalLines(ProgramPartsModel programParts) {
     final basePartsTotalLines = _getBasePartsTotalLines(programParts.baseParts);
     final reusablePartsTotalLines =
-    _getReusableAndNewPartsTotalLines(programParts.reusableParts);
+        _getReusableAndNewPartsTotalLines(programParts.reusableParts);
     final newPartsTotalLines =
-    _getReusableAndNewPartsTotalLines(programParts.newParts);
+        _getReusableAndNewPartsTotalLines(programParts.newParts);
 
     return basePartsTotalLines + reusablePartsTotalLines + newPartsTotalLines;
   }
@@ -115,5 +128,4 @@ class ProgramsBloc with Validators {
     _programsByModuleIdController.sink.add(null);
     _programsByOrganizationController.sink.add(null);
   }
-
 }

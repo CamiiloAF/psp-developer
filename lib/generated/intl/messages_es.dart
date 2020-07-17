@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "appBarTitleAnalysisTools" : MessageLookupByLibrary.simpleMessage("Herramientas de análisis"),
     "appBarTitleBaseParts" : MessageLookupByLibrary.simpleMessage("Partes base"),
     "appBarTitleDefectLogs" : MessageLookupByLibrary.simpleMessage("Log de Defectos"),
     "appBarTitleExperiences" : MessageLookupByLibrary.simpleMessage("Experiencias"),
@@ -150,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "titleDefectsRemovedInPhase" : MessageLookupByLibrary.simpleMessage("DEFECTOS REMOVIDOS POR FASE"),
     "titleNotAutorized" : MessageLookupByLibrary.simpleMessage("NO ESTÁS AUTORIZADO"),
     "titleProgramSizeSummary" : MessageLookupByLibrary.simpleMessage("RESUMEN TAMAÑO DEL PROGRAMA"),
-    "titleTimeInPhase" : MessageLookupByLibrary.simpleMessage("TIEMPO POR FASE (MIN)")
+    "titleSizeOfPrograms" : MessageLookupByLibrary.simpleMessage("Tamaños de los programas"),
+    "titleTimeInPhase" : MessageLookupByLibrary.simpleMessage("TIEMPO POR FASE (MIN)"),
+    "titleTotalDefects" : MessageLookupByLibrary.simpleMessage("Total de defectos")
   };
 }

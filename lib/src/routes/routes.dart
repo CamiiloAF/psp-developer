@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:psp_developer/src/pages/analysis_tools/analysis_tools_page.dart';
 import 'package:psp_developer/src/pages/base_parts/base_part_edit_page.dart';
 import 'package:psp_developer/src/pages/base_parts/base_parts_page.dart';
 import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
@@ -40,5 +41,8 @@ Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
           ReusablePartsPage(),
       ReusablePartEditPage.ROUTE_NAME: (BuildContext context) =>
           ReusablePartEditPage(),
-      ProgramPlanningTimePage.ROUTE_NAME: (BuildContext context) => ProgramPlanningTimePage(),
+      ProgramPlanningTimePage.ROUTE_NAME: (BuildContext context) =>
+          ProgramPlanningTimePage(),
+      AnalysisToolsPage.ROUTE_NAME: (BuildContext context) =>
+          AnalysisToolsPage(),
     };

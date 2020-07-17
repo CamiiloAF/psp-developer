@@ -313,6 +313,16 @@ class S {
     );
   }
 
+  /// `Herramientas de análisis`
+  String get appBarTitleAnalysisTools {
+    return Intl.message(
+      'Herramientas de análisis',
+      name: 'appBarTitleAnalysisTools',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NO ESTÁS AUTORIZADO`
   String get titleNotAutorized {
     return Intl.message(
@@ -358,6 +368,26 @@ class S {
     return Intl.message(
       'DEFECTOS REMOVIDOS POR FASE',
       name: 'titleDefectsRemovedInPhase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tamaños de los programas`
+  String get titleSizeOfPrograms {
+    return Intl.message(
+      'Tamaños de los programas',
+      name: 'titleSizeOfPrograms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total de defectos`
+  String get titleTotalDefects {
+    return Intl.message(
+      'Total de defectos',
+      name: 'titleTotalDefects',
       desc: '',
       args: [],
     );

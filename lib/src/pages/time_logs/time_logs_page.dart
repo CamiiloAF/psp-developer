@@ -31,13 +31,19 @@ class _TimeLogsPageState extends State<TimeLogsPage>
 
   @override
   void initState() {
-    _timeLogsBloc = context.read<BlocProvider>().timeLogsBloc;
+    final blocProvider = context.read<BlocProvider>();
+    _timeLogsBloc = blocProvider.timeLogsBloc;
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     _programId = ModalRoute.of(context).settings.arguments;
+
+    Provider.of<BlocProvider>(context)
+        .programsBloc
+        .setCurrentProgram(_programId);
+
     if (_timeLogsBloc.lastValueTimeLogsController == null) {
       _timeLogsBloc.getTimeLogs(false, _programId);
     }
