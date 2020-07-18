@@ -41,5 +41,5 @@ class _UsersUpdateBoundResource
   //En este caso no se guarda en la BD sino en las preferencias de usuario
   @override
   void doOperationInDb(UserModel model) async =>
-      Preferences().curentUser = userModelToJson(model);
+      Preferences().currentUser = userModelToJson(model);
 }

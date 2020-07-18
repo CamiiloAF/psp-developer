@@ -7,6 +7,7 @@ class CommonListOfModels extends StatelessWidget {
   final Stream<dynamic> stream;
   final Function onRefresh;
   final Widget Function(List<dynamic> item, int index) buildItemList;
+  final Widget Function(List<dynamic> items) buildListView;
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   // ? ONLY FOR TIMELOGS
@@ -15,7 +16,8 @@ class CommonListOfModels extends StatelessWidget {
   const CommonListOfModels(
       {@required this.stream,
       @required this.onRefresh,
-      @required this.buildItemList,
+      this.buildItemList,
+      this.buildListView,
       @required this.scaffoldKey,
       this.verifyIfAllowCreateTimeLogs});
 
@@ -46,7 +48,9 @@ class CommonListOfModels extends StatelessWidget {
 
         return RefreshIndicator(
           onRefresh: onRefresh,
-          child: _buildListView(items),
+          child: (buildListView == null)
+              ? _buildListView(items)
+              : buildListView(items),
         );
       },
     );

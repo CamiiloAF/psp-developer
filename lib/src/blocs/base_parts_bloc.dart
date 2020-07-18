@@ -7,7 +7,7 @@ import 'package:tuple/tuple.dart';
 class BasePartsBloc with Validators {
   final List<BasePartModel> addedBaseParts = [];
 
-  final _basePartsProvider = BasePartsRepository();
+  final _basePartsRepository = BasePartsRepository();
 
   final _basePartsController =
       BehaviorSubject<Tuple2<int, List<BasePartModel>>>();
@@ -20,12 +20,12 @@ class BasePartsBloc with Validators {
 
   void getBaseParts(bool isRefreshing, int programId) async {
     final basePartsWithStatusCode =
-        await _basePartsProvider.getAllBaseParts(isRefreshing, programId);
+        await _basePartsRepository.getAllBaseParts(isRefreshing, programId);
     _basePartsController.sink.add(basePartsWithStatusCode);
   }
 
   Future<int> updateBasePart(BasePartModel basePart) async {
-    final statusCode = await _basePartsProvider.updateBasePart(basePart);
+    final statusCode = await _basePartsRepository.updateBasePart(basePart);
 
     if (statusCode == 204) {
       final tempBaseParts = lastValueBasePartsController.item2;

@@ -110,7 +110,7 @@ class DrawerProgramItems extends StatelessWidget {
   }
 
   String _getCurrentUserNameInitials() {
-    final currentUser = json.decode(Preferences().curentUser);
+    final currentUser = json.decode(Preferences().currentUser);
 
     final firstName = currentUser['first_name'].toString().trimLeft();
     final lastName = currentUser['last_name'].toString().trimLeft();

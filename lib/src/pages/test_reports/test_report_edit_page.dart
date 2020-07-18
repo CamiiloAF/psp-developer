@@ -82,12 +82,13 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
   }
 
   Widget _buildInputTestNumber() {
+    final s = S.of(context);
+
     return InputForm(
       onSaved: (value) => _testReportModel.testNumber = int.tryParse(value),
-      label: S.of(context).labelTestNumber,
+      label: s.labelTestNumber,
       maxLenght: 5,
-      onChanged: (value) =>
-          _testReportsBloc.validateRequiredInput(context, value),
+      onChanged: (value) => _testReportsBloc.validateRequiredInput(s, value),
       initialValue: '${_testReportModel.testNumber ?? ''}',
       keyboardType: TextInputType.number,
     );
@@ -115,20 +116,20 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
   }
 
   Widget _buildInputTestConditions() {
+    final s = S.of(context);
     return InputMultiline(
         initialValue: _testReportModel.conditions,
-        label: S.of(context).labelConditions,
-        onChanged: (value) =>
-            _testReportsBloc.validateRequiredInput(context, value),
+        label: s.labelConditions,
+        onChanged: (value) => _testReportsBloc.validateRequiredInput(s, value),
         onSaved: (value) => _testReportModel.conditions = value);
   }
 
   Widget _buildInputExpectedResult() {
+    final s = S.of(context);
     return InputMultiline(
         initialValue: _testReportModel.expectedResult,
         label: S.of(context).labelExpectedResult,
-        onChanged: (value) =>
-            _testReportsBloc.validateRequiredInput(context, value),
+        onChanged: (value) => _testReportsBloc.validateRequiredInput(s, value),
         onSaved: (value) => _testReportModel.expectedResult = value);
   }
 
@@ -149,11 +150,12 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
   }
 
   Widget _buildInputObjective() {
+    final s = S.of(context);
     return InputMultiline(
         initialValue: _testReportModel.objective,
-        label: S.of(context).labelObjective,
+        label: s.labelObjective,
         onChanged: (value) =>
-            _testReportsBloc.validateRequiredInput(context, value),
+            _testReportsBloc.validateRequiredInput(s, value),
         onSaved: (value) =>
             _testReportModel.objective = (value.isNotEmpty) ? value : null);
   }

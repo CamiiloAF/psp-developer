@@ -110,18 +110,20 @@ class _PIPPageState extends State<PIPPage> {
   }
 
   Widget _buildInputPipDescription() {
+    final s = S.of(context);
     return InputMultiline(
         initialValue: _pip.description,
-        label: S.of(context).labelDescription,
-        onChanged: (value) => _pipBloc.validateRequiredInput(context, value),
+        label: s.labelDescription,
+        onChanged: (value) => _pipBloc.validateRequiredInput(s, value),
         onSaved: (value) => _pip.description = value);
   }
 
   Widget _buildInputPipProposals() {
+    final s = S.of(context);
     return InputMultiline(
         initialValue: _pip.proposals,
-        label: S.of(context).labelProposals,
-        onChanged: (value) => _pipBloc.validateRequiredInput(context, value),
+        label: s.labelProposals,
+        onChanged: (value) => _pipBloc.validateRequiredInput(s, value),
         onSaved: (value) => _pip.proposals = value);
   }
 

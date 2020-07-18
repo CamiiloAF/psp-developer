@@ -40,7 +40,7 @@ class _ExperienceNetworkBoundResource
 
   @override
   Future<http.Response> createCall() async {
-    final userId = json.decode(Preferences().curentUser)['id'];
+    final userId = json.decode(Preferences().currentUser)['id'];
     final url = '${Constants.baseUrl}/experiences/by-user/${userId}';
 
     return await http.get(url, headers: Constants.getHeaders());
@@ -59,7 +59,7 @@ class _ExperienceNetworkBoundResource
   bool shouldFetch(ExperienceModel data) => true;
 
   @override
-  Future<ExperienceModel> loadFromDb() async {
+  Future<ExperienceModel> loadFromLocalStorage() async {
     //Es una lista con un sólo elemento o en su defecto con ninguno
     final experiences =
         await DBProvider.db.getAllModels(Constants.EXPERIENCES_TABLE_NAME);

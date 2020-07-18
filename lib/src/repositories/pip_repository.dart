@@ -9,11 +9,11 @@ import 'package:psp_developer/src/utils/utils.dart';
 import 'package:tuple/tuple.dart';
 
 class PIPRepository {
-  Future<Tuple2<int, PIPModel>> getPIP(bool isRefresing, int programId) async {
+  Future<Tuple2<int, PIPModel>> getPIP(bool isRefreshing, int programId) async {
     final networkBoundResource =
         _PIPNetworkBoundResource(RateLimiter(), programId);
 
-    final response = await networkBoundResource.execute(isRefresing);
+    final response = await networkBoundResource.execute(isRefreshing);
 
     return (response.item2 == null) ? Tuple2(response.item1, null) : response;
   }
@@ -62,7 +62,7 @@ class _PIPNetworkBoundResource extends NetworkBoundResource<PIPModel> {
       rateLimiter.shouldFetch(_pipRateLimitKey, Duration(minutes: 10));
 
   @override
-  Future<PIPModel> loadFromDb() async {
+  Future<PIPModel> loadFromLocalStorage() async {
     //Es una lista con un sólo elemento o en su defecto con ninguno
     final pips = await DBProvider.db
         .getAllModelsByProgramId(Constants.PIP_TABLE_NAME, programId);

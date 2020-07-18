@@ -43,9 +43,9 @@ class ProgramsBloc with Validators {
       get lastValueProgramsByOrganizationController =>
           _programsByOrganizationController.value;
 
-  void getPrograms(bool isRefresing, int moduleId) async {
+  void getPrograms(bool isRefreshing, int moduleId) async {
     final programsWithStatusCode = await _programsRepository
-        .getAllProgramsByModulesId(isRefresing, moduleId);
+        .getAllProgramsByModulesId(isRefreshing, moduleId);
 
     if (programsWithStatusCode.item1 == 200) {
       getProgramsByOrganization(null);

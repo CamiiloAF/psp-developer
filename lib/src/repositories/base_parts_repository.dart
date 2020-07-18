@@ -61,7 +61,7 @@ class _BasePartsNetworkBoundResource
       rateLimiter.shouldFetch(_allBaseParts, Duration(minutes: 10));
 
   @override
-  Future<List<BasePartModel>> loadFromDb() async =>
+  Future<List<BasePartModel>> loadFromLocalStorage() async =>
       _getBasePartsFromJson(await DBProvider.db
           .getAllModelsByProgramId(Constants.BASE_PARTS_TABLE_NAME, programId));
 

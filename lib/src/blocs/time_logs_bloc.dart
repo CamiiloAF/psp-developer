@@ -18,9 +18,9 @@ class TimeLogsBloc {
 
   bool allowCreateTimeLog = true;
 
-  void getTimeLogs(bool isRefresing, int programId) async {
+  void getTimeLogs(bool isRefreshing, int programId) async {
     final timeLogWithStatusCode =
-        await _timeLogsProvider.getAllTimeLogs(isRefresing, programId);
+        await _timeLogsProvider.getAllTimeLogs(isRefreshing, programId);
 
     verifyIfAllowCreateTimeLogs(timeLogWithStatusCode.item2);
 

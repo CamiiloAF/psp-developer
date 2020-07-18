@@ -51,7 +51,7 @@ class _LanguagesNetworkBoundResource
       rateLimiter.shouldFetch(_allLanguages, Duration(minutes: 10));
 
   @override
-  Future<List<LanguageModel>> loadFromDb() async => _getLanguagesFromJson(
+  Future<List<LanguageModel>> loadFromLocalStorage() async => _getLanguagesFromJson(
       await DBProvider.db.getAllModels(Constants.LANGUAGES_TABLE_NAME));
 
   List<LanguageModel> _getLanguagesFromJson(List<Map<String, dynamic>> res) {

@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   UsersBloc _usersBloc;
-  final UserModel _userModel = userModelFromJson(Preferences().curentUser);
+  final UserModel _userModel = userModelFromJson(Preferences().currentUser);
 
   String countryCode;
 

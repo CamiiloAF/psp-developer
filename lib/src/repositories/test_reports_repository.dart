@@ -9,10 +9,10 @@ import 'package:tuple/tuple.dart';
 
 class TestReportsRepository {
   Future<Tuple2<int, List<TestReportModel>>> getAllTestReports(
-      bool isRefresing, int programId) async {
+      bool isRefreshing, int programId) async {
     final networkBoundResource =
         _TestReportsNetworkBoundResource(RateLimiter(), programId);
-    final response = await networkBoundResource.execute(isRefresing);
+    final response = await networkBoundResource.execute(isRefreshing);
 
     if (response.item2 == null) {
       return Tuple2(response.item1, []);
@@ -69,7 +69,7 @@ class _TestReportsNetworkBoundResource
       rateLimiter.shouldFetch(_allTestReports, Duration(minutes: 10));
 
   @override
-  Future<List<TestReportModel>> loadFromDb() async =>
+  Future<List<TestReportModel>> loadFromLocalStorage() async =>
       _getTestReportsFromJson(await DBProvider.db.getAllModelsByProgramId(
           Constants.TEST_REPORTS_TABLE_NAME, programId));
 

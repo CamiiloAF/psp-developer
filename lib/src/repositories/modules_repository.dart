@@ -10,10 +10,10 @@ class ModulesRepository {
   String lastProjectId;
 
   Future<Tuple2<int, List<ModuleModel>>> getAllModules(
-      bool isRefresing, String projectId) async {
+      bool isRefreshing, String projectId) async {
     final networkBoundResource =
         _ModulesNetworkBoundResource(RateLimiter(), projectId, lastProjectId);
-    final response = await networkBoundResource.execute(isRefresing);
+    final response = await networkBoundResource.execute(isRefreshing);
 
     if (response.item2 == null) {
       return Tuple2(response.item1, []);
@@ -60,7 +60,7 @@ class _ModulesNetworkBoundResource
       rateLimiter.shouldFetch(_allModules, Duration(minutes: 10));
 
   @override
-  Future<List<ModuleModel>> loadFromDb() async => _getModulesFromJson(
+  Future<List<ModuleModel>> loadFromLocalStorage() async => _getModulesFromJson(
       await DBProvider.db.getAllByProjectId(projectId, tableName));
 
   List<ModuleModel> _getModulesFromJson(List<Map<String, dynamic>> res) {

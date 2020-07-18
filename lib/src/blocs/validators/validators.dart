@@ -43,9 +43,9 @@ class Validators {
           ? true
           : false;
 
-  String validateRequiredInput(BuildContext context, String value) =>
+  String validateRequiredInput(S s, String value) =>
       (value == null || value.isEmpty)
-          ? S.of(context).inputRequiredError
+          ? s.inputRequiredError
           : null;
 
   bool isValidNumber(String number) {

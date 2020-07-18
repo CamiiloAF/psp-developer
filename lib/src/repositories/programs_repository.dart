@@ -10,11 +10,11 @@ import 'package:tuple/tuple.dart';
 
 class ProgramsRepository {
   Future<Tuple2<int, List<ProgramModel>>> getAllProgramsByModulesId(
-      bool isRefresing, int moduleId) async {
+      bool isRefreshing, int moduleId) async {
     final networkBoundResource =
         _ProgramsNetworkBoundResource(RateLimiter(), '$moduleId');
 
-    final response = await networkBoundResource.execute(isRefresing);
+    final response = await networkBoundResource.execute(isRefreshing);
 
     if (response.item2 == null) {
       return Tuple2(response.item1, []);
@@ -83,7 +83,7 @@ class _ProgramsNetworkBoundResource
       rateLimiter.shouldFetch(_allPrograms, Duration(minutes: 10));
 
   @override
-  Future<List<ProgramModel>> loadFromDb() async => _getProgramsFromJson(
+  Future<List<ProgramModel>> loadFromLocalStorage() async => _getProgramsFromJson(
       await DBProvider.db.getAllProgramsByModuleId(moduleId));
 
   List<ProgramModel> _getProgramsFromJson(List<Map<String, dynamic>> res) {
@@ -122,7 +122,7 @@ class _ProgramsByOrganizationNetworkBoundResource
   bool shouldFetch(List<dynamic> data) => true;
 
   @override
-  Future<List<Tuple2<int, String>>> loadFromDb() async =>
+  Future<List<Tuple2<int, String>>> loadFromLocalStorage() async =>
       (callResult == null) ? null : callResult;
 
   @override

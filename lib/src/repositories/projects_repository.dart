@@ -10,9 +10,9 @@ import 'package:tuple/tuple.dart';
 
 class ProjectsRepository {
   Future<Tuple2<int, List<ProjectModel>>> getAllProjects(
-      bool isRefresing) async {
+      bool isRefreshing) async {
     final networkBoundResource = _ProjectsNetworkBoundResource(RateLimiter());
-    final response = await networkBoundResource.execute(isRefresing);
+    final response = await networkBoundResource.execute(isRefreshing);
 
     if (response.item2 == null) {
       return Tuple2(response.item1, []);
@@ -33,7 +33,7 @@ class _ProjectsNetworkBoundResource
 
   @override
   Future<http.Response> createCall() async {
-    final userId = json.decode(preferences.curentUser)['id'];
+    final userId = json.decode(preferences.currentUser)['id'];
     final url = '${Constants.baseUrl}/projects/by-user/$userId';
 
     return await http.get(url, headers: Constants.getHeaders());
@@ -55,7 +55,7 @@ class _ProjectsNetworkBoundResource
       rateLimiter.shouldFetch(_allProjects, Duration(minutes: 10));
 
   @override
-  Future<List<ProjectModel>> loadFromDb() async => _getProjectsFromJson(
+  Future<List<ProjectModel>> loadFromLocalStorage() async => _getProjectsFromJson(
       await DBProvider.db.getAllModels(Constants.PROJECTS_TABLE_NAME));
 
   List<ProjectModel> _getProjectsFromJson(List<Map<String, dynamic>> res) {

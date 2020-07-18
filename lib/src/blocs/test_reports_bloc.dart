@@ -17,9 +17,9 @@ class TestReportsBloc with Validators {
   Tuple2<int, List<TestReportModel>> get lastValueTestReportsController =>
       _testReportsController.value;
 
-  void getTestReports(bool isRefresing, int programId) async {
+  void getTestReports(bool isRefreshing, int programId) async {
     final testReportsWithStatusCode =
-        await _testReportsProvider.getAllTestReports(isRefresing, programId);
+        await _testReportsProvider.getAllTestReports(isRefreshing, programId);
     _testReportsController.sink.add(testReportsWithStatusCode);
   }
 

@@ -7,7 +7,7 @@ class Preferences {
   static const String _PREF_CURRENT_USER = 'currentUser';
 
   static const String _PREF_lOGIN_ATTEMPS = 'loginTries';
-  static const String _PREF_lOGIN_LAST_ATTEMP_AT = 'loginlastTryAt';
+  static const String _PREF_lOGIN_LAST_ATTEMP_AT = 'loginLastTryAt';
 
   //For interruption
   static const String _PREF_TIME_LOG_ID_WHIT_PENDING_INTERRUPTION =
@@ -19,11 +19,11 @@ class Preferences {
 
   static const String _PREF_LANGUAGE_CODE = 'languageCode';
 
-  static final Preferences _instancia = Preferences._internal();
+  static const String _PREF_ANALYSIS_TOOLS_DATA = 'analysisToolsData';
 
-  factory Preferences() {
-    return _instancia;
-  }
+  static final Preferences _instance = Preferences._internal();
+
+  factory Preferences() => _instance;
 
   Preferences._internal();
 
@@ -33,15 +33,17 @@ class Preferences {
 
   // * Token
   String get token => _prefs.getString(_PREF_TOKEN) ?? '';
+
   set token(String value) => _prefs.setString(_PREF_TOKEN, value);
 
   int get tokenSavedAt => _prefs.getInt(_PREF_TOKEN_SAVED_AT);
+
   set tokenSavedAt(int value) => _prefs.setInt(_PREF_TOKEN_SAVED_AT, value);
 
   // GET y SET current user
-  String get curentUser => _prefs.getString(_PREF_CURRENT_USER) ?? '';
+  String get currentUser => _prefs.getString(_PREF_CURRENT_USER) ?? '';
 
-  set curentUser(String value) => _prefs.setString(_PREF_CURRENT_USER, value);
+  set currentUser(String value) => _prefs.setString(_PREF_CURRENT_USER, value);
 
   // * TimeLog Interruption
   int get pendingInterruptionStartAt =>
@@ -64,13 +66,16 @@ class Preferences {
   // * Theme
   // 1 is light - 2 is dark
   int get theme => _prefs.getInt(_PREF_THEME) ?? 1;
+
   set theme(int value) => _prefs.setInt(_PREF_THEME, value);
 
   // * Login tries
   int get loginAttemps => _prefs.getInt(_PREF_lOGIN_ATTEMPS) ?? 0;
+
   set loginAttemps(int value) => _prefs.setInt(_PREF_lOGIN_ATTEMPS, value);
 
   int get loginLastAttempAt => _prefs.getInt(_PREF_lOGIN_LAST_ATTEMP_AT);
+
   set loginLastAttempAt(int value) =>
       _prefs.setInt(_PREF_lOGIN_LAST_ATTEMP_AT, value);
 
@@ -79,10 +84,18 @@ class Preferences {
     _prefs.remove(_PREF_lOGIN_LAST_ATTEMP_AT);
   }
 
-// * App Language
+  // * App Language
   String get languageCode => _prefs.getString(_PREF_LANGUAGE_CODE) ?? '';
+
   set languageCode(String value) =>
       _prefs.setString(_PREF_LANGUAGE_CODE, value);
+
+  // * Analysis tools data
+  String get analysisToolsData =>
+      _prefs.getString(_PREF_ANALYSIS_TOOLS_DATA) ?? '';
+
+  set analysisToolsData(String value) =>
+      _prefs.setString(_PREF_ANALYSIS_TOOLS_DATA, value);
 
   void clearPreferences() async => await _prefs.clear();
 }
