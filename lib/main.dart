@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:provider/provider.dart';
-import 'package:psp_developer/src/pages/analysis_tools/analysis_tools_page.dart';
 import 'package:psp_developer/src/pages/login/login_page.dart';
 import 'package:psp_developer/src/pages/projects/projects_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
@@ -49,7 +48,6 @@ class MyApp extends StatelessWidget {
             ? ProjectsPage.ROUTE_NAME
             : LoginPage.ROUTE_NAME,
         routes: getApplicationRoutes(),
-        // home: AnalysisToolsPage(),
         theme: Provider.of<ThemeChanger>(context).currentTheme,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

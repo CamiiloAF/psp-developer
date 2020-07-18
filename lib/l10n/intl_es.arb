@@ -28,13 +28,15 @@
   "appBarTitleProfile": "Perfil",
   "appBarTitlePlanningTime": "Planeación de tiempos",
   "appBarTitleAnalysisTools": "Herramientas de análisis",
+  "appBarTitleProgramSummary": "Resumen del programa",
   "titleNotAutorized": "NO ESTÁS AUTORIZADO",
   "titleProgramSizeSummary": "RESUMEN TAMAÑO DEL PROGRAMA",
-  "titleTimeInPhase": "TIEMPO POR FASE (MIN)",
-  "titleDefectsInjectedInPhase": "DEFECTOS INYECTADOS POR FASE",
-  "titleDefectsRemovedInPhase": "DEFECTOS REMOVIDOS POR FASE",
+  "titleTimeInPhase": "Tiempo por fase (min)",
+  "titleDefectsInjectedByPhase": "Defectos inyectados por fase",
+  "titleDefectsRemovedByPhase": "Defectos removidos por fase",
   "titleSizeOfPrograms": "Tamaños de los programas",
   "titleTotalDefects": "Total de defectos",
+  "titleTotalTimes": "Total de tiempos",
   "progressDialogLoading": "Cargando",
   "progressDialogSaving": "Guardando",
   "messageNotConnection": "Por favor revise su conexión a internet",
@@ -120,6 +122,7 @@
   "labelLanguage": "Lenguaje",
   "labelSystemLanguage": "Lenguaje del sistema",
   "labelWithPlaceHolderEstimatedTimeIn": "Tiempo estimado en {phase}",
+  "labelFinishProgram": "Finalizar programa",
   "inputPhoneError": "Número inválido",
   "helperInputDate": "Mantenga presionado el icono para poner la fecha y hora actual",
   "helperTimeInMinutes": "Tiempo en minutos",
@@ -129,5 +132,10 @@
   "optionLogOut": "Cerrar sesión",
   "optionSettings": "Ajustes",
   "darkMode": "Modo oscuro",
+
+
+
+
+
   "lightMode": "Modo claro"
 }

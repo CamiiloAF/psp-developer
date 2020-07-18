@@ -29,11 +29,17 @@ class DrawerProgramItems extends StatelessWidget {
     final appTheme = Provider.of<ThemeChanger>(context);
     final s = S.of(context);
 
+    final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
+
+    programsBloc.setCurrentProgram(programId);
+
     return Drawer(
       child: Container(
         child: ListView(
           children: <Widget>[
             _buildCircleAvatar(context),
+            CustomListTile(title: s.appBarTitleProgramSummary, onTap: () {}),
+            Divider(),
             CustomListTile(
                 title: s.appBarTitleTimeLogs,
                 onTap: () => navigateTo(context, TimeLogsPage.ROUTE_NAME)),
@@ -44,7 +50,7 @@ class DrawerProgramItems extends StatelessWidget {
                 title: s.appBarTitleTestReports,
                 onTap: () => navigateTo(context, TestReportsPage.ROUTE_NAME)),
             CustomListTile(
-                isEnable: isPIPEnabled(context),
+                isEnable: programsBloc.hasCurrentProgramEnded(),
                 title: s.appBarTitlePIP,
                 onTap: () => navigateTo(context, PIPPage.ROUTE_NAME)),
             Divider(),
@@ -66,6 +72,8 @@ class DrawerProgramItems extends StatelessWidget {
             CustomListTile(
                 title: s.appBarTitleReusableParts,
                 onTap: () => navigateTo(context, ReusablePartsPage.ROUTE_NAME)),
+            Divider(),
+            CustomListTile(title: s.labelFinishProgram, onTap: () {}),
             Divider(),
             ListTile(
               leading: Icon(Icons.brightness_4),
@@ -108,17 +116,6 @@ class DrawerProgramItems extends StatelessWidget {
     final lastName = currentUser['last_name'].toString().trimLeft();
 
     return '${firstName[0]}${lastName[0]}';
-  }
-
-  bool isPIPEnabled(BuildContext context) {
-    final lastValueProgramsStream = Provider.of<BlocProvider>(context)
-        .programsBloc
-        .lastValueProgramsByModuleIdController;
-
-    return lastValueProgramsStream.item2
-            .firstWhere((element) => element.id == programId)
-            .deliveryDate !=
-        null;
   }
 
   void navigateTo(BuildContext context, String routeName) {

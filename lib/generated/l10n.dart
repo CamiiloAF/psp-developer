@@ -323,6 +323,16 @@ class S {
     );
   }
 
+  /// `Resumen del programa`
+  String get appBarTitleProgramSummary {
+    return Intl.message(
+      'Resumen del programa',
+      name: 'appBarTitleProgramSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NO ESTÁS AUTORIZADO`
   String get titleNotAutorized {
     return Intl.message(
@@ -343,31 +353,31 @@ class S {
     );
   }
 
-  /// `TIEMPO POR FASE (MIN)`
+  /// `Tiempo por fase (min)`
   String get titleTimeInPhase {
     return Intl.message(
-      'TIEMPO POR FASE (MIN)',
+      'Tiempo por fase (min)',
       name: 'titleTimeInPhase',
       desc: '',
       args: [],
     );
   }
 
-  /// `DEFECTOS INYECTADOS POR FASE`
-  String get titleDefectsInjectedInPhase {
+  /// `Defectos inyectados por fase`
+  String get titleDefectsInjectedByPhase {
     return Intl.message(
-      'DEFECTOS INYECTADOS POR FASE',
-      name: 'titleDefectsInjectedInPhase',
+      'Defectos inyectados por fase',
+      name: 'titleDefectsInjectedByPhase',
       desc: '',
       args: [],
     );
   }
 
-  /// `DEFECTOS REMOVIDOS POR FASE`
-  String get titleDefectsRemovedInPhase {
+  /// `Defectos removidos por fase`
+  String get titleDefectsRemovedByPhase {
     return Intl.message(
-      'DEFECTOS REMOVIDOS POR FASE',
-      name: 'titleDefectsRemovedInPhase',
+      'Defectos removidos por fase',
+      name: 'titleDefectsRemovedByPhase',
       desc: '',
       args: [],
     );
@@ -388,6 +398,16 @@ class S {
     return Intl.message(
       'Total de defectos',
       name: 'titleTotalDefects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total de tiempos`
+  String get titleTotalTimes {
+    return Intl.message(
+      'Total de tiempos',
+      name: 'titleTotalTimes',
       desc: '',
       args: [],
     );
@@ -1240,6 +1260,16 @@ class S {
       name: 'labelWithPlaceHolderEstimatedTimeIn',
       desc: '',
       args: [phase],
+    );
+  }
+
+  /// `Finalizar programa`
+  String get labelFinishProgram {
+    return Intl.message(
+      'Finalizar programa',
+      name: 'labelFinishProgram',
+      desc: '',
+      args: [],
     );
   }
 

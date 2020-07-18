@@ -74,6 +74,10 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+        .programsBloc
+        .hasCurrentProgramEnded());
+
     return Form(
         key: _formKey,
         child: Column(
@@ -89,7 +93,8 @@ class __FormState extends State<_Form> {
               (value) =>
                   widget.reusablePart?.currentLines = int.tryParse(value),
             ),
-            SubmitButton(onPressed: _submit)
+            SubmitButton(
+                onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
           ],
         ));
   }

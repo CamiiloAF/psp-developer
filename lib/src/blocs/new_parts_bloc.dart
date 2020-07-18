@@ -1,6 +1,7 @@
 import 'package:psp_developer/src/blocs/validators/validators.dart';
 import 'package:psp_developer/src/models/new_parts_model.dart';
 import 'package:psp_developer/src/repositories/new_parts_repository.dart';
+import 'package:psp_developer/src/utils/constants.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
@@ -39,6 +40,9 @@ class NewPartsBloc with Validators {
     }
     return statusCode;
   }
+
+  double calculatePlanningLines(int typeSizesId, int methodsPlanned) =>
+      methodsPlanned * Constants.TYPES_SIZE_VALUES[typeSizesId];
 
   void dispose() {
     addedNewParts.clear();

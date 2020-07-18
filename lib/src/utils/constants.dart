@@ -109,7 +109,7 @@ class Constants {
       'programs_id INT (11) NOT NULL,'
       'phases_id INT (11) NOT NULL,'
       'start_date VARCHAR NOT NULL,'
-      'delta_time DOUBLE NULL,'
+      'delta_time INT NULL,'
       'finish_date VARCHAR NULL,'
       'interruption INT NOT NULL,'
       'comments TEXT NULL);';
@@ -154,7 +154,7 @@ class Constants {
       'programs_id INT (11) NOT NULL,'
       'types_sizes_id INT (11) NOT NULL,'
       'name VARCHAR (50) NOT NULL,'
-      'planned_lines INT (11) NOT NULL,'
+      'planned_lines DOUBLE NOT NULL,'
       'number_methods_planned INT (11) NOT NULL,'
       'current_lines INT (11) NULL,'
       'number_methods_current INT (11) NULL);';
@@ -238,5 +238,38 @@ class Constants {
     'text-m': 28,
     'text-l': 29,
     'text-vl': 30,
+  };
+
+  static const TYPES_SIZE_VALUES = {
+    1: 2.34,
+    2: 5.13,
+    3: 11.25,
+    4: 24.66,
+    5: 54.04,
+    6: 2.6,
+    7: 4.79,
+    8: 8.84,
+    9: 16.31,
+    10: 30.09,
+    11: 9.01,
+    12: 12.06,
+    13: 16.15,
+    14: 21.62,
+    15: 28.93,
+    16: 7.55,
+    17: 10.98,
+    18: 15.98,
+    19: 23.25,
+    20: 33.83,
+    21: 3.88,
+    22: 5.04,
+    23: 6.56,
+    24: 8.53,
+    25: 11.09,
+    26: 3.75,
+    27: 8.0,
+    28: 17.07,
+    29: 36.41,
+    30: 77.66,
   };
 }

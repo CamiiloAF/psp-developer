@@ -28,13 +28,15 @@
   "appBarTitleProfile": "Profile",
   "appBarTitlePlanningTime": "Time´s planning",
   "appBarTitleAnalysisTools": "Analysis tools",
+  "appBarTitleProgramSummary": "Program summary",
   "titleNotAutorized": "YOU ARE NOT AUTHORIZED",
   "titleProgramSizeSummary": "PROGRAM SIZE SUMMARY",
-  "titleTimeInPhase": "TIME IN PHASE (MIN)",
-  "titleDefectsInjectedInPhase": "DEFECTS INJECTED IN PHASE ",
-  "titleDefectsRemovedInPhase": "DEFECTS REMOVED IN PHASE ",
+  "titleTimeInPhase": "Time in phase (min)",
+  "titleDefectsInjectedByPhase": "Defects injected by phase",
+  "titleDefectsRemovedByPhase": "Defects removed by phase",
   "titleSizeOfPrograms": "Size of programs",
   "titleTotalDefects": "Total defects",
+  "titleTotalTimes": "Total times",
   "progressDialogLoading": "Loading",
   "progressDialogSaving": "Saving",
   "messageNotConnection": "Please check your internet connection",
@@ -119,6 +121,7 @@
   "labelLanguage": "Language",
   "labelSystemLanguage": "System language",
   "labelWithPlaceHolderEstimatedTimeIn": "Tiempo estimado en {phase}",
+  "labelFinishProgram": "Finish program",
   "helperInputDate": "Press and hold the icon to set the current date and time",
   "helperTimeInMinutes": "Time in minutes",
   "buttonStartInterruption": "Start interruption",
@@ -128,4 +131,5 @@
   "optionSettings": "Settings",
   "darkMode": "Dark mode",
   "lightMode": "Light mode"
+
 }

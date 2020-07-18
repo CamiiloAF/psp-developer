@@ -54,6 +54,10 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
   }
 
   Widget _createBody() {
+    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+        .programsBloc
+        .hasCurrentProgramEnded());
+
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(15.0),
@@ -68,7 +72,8 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
               _buildInputCurrentResult(),
               _buildInputTestDescription(),
               _buildInputObjective(),
-              SubmitButton(onPressed: () => _submit())
+              SubmitButton(
+                  onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
             ],
           ),
         ),

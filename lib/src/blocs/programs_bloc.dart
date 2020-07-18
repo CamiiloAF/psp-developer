@@ -10,7 +10,7 @@ import 'package:tuple/tuple.dart';
 class ProgramsBloc with Validators {
   ProgramModel _currentProgram;
 
-  setCurrentProgram(int programId) {
+  void setCurrentProgram(int programId) {
     final lastPrograms = lastValueProgramsByModuleIdController?.item2;
 
     _currentProgram =
@@ -19,7 +19,7 @@ class ProgramsBloc with Validators {
 
   ProgramModel getCurrentProgram() => _currentProgram;
 
-  bool _hasCurrentProgramEnded() => _currentProgram?.deliveryDate != null;
+  bool hasCurrentProgramEnded() => _currentProgram?.deliveryDate != null;
 
   final _programsRepository = ProgramsRepository();
 

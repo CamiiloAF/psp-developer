@@ -19,7 +19,7 @@ class SessionRepository with TokenHandler {
       final url = '${Constants.baseUrl}/auth/login';
 
       final authData = {
-        'identity': 'jjdnezc_2@gmail.com',
+        'identity': 'desarrollador_2@gmail.com',
         'password': '123456789'
       };
 

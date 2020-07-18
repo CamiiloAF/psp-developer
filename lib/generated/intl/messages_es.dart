@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appBarTitlePlanningTime" : MessageLookupByLibrary.simpleMessage("Planeación de tiempos"),
     "appBarTitleProfile" : MessageLookupByLibrary.simpleMessage("Perfil"),
     "appBarTitleProgramParts" : MessageLookupByLibrary.simpleMessage("Partes del programa"),
+    "appBarTitleProgramSummary" : MessageLookupByLibrary.simpleMessage("Resumen del programa"),
     "appBarTitlePrograms" : MessageLookupByLibrary.simpleMessage("Programas"),
     "appBarTitleProjects" : MessageLookupByLibrary.simpleMessage("Proyectos"),
     "appBarTitleReusableParts" : MessageLookupByLibrary.simpleMessage("Partes reutilizables"),
@@ -74,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelEmail" : MessageLookupByLibrary.simpleMessage("Correo electrónico"),
     "labelExpectedResult" : MessageLookupByLibrary.simpleMessage("Resultado esperado"),
     "labelFinishDate" : MessageLookupByLibrary.simpleMessage("Fecha de finalización"),
+    "labelFinishProgram" : MessageLookupByLibrary.simpleMessage("Finalizar programa"),
     "labelInterruption" : MessageLookupByLibrary.simpleMessage("Interrupción"),
     "labelInterruptionStartAt" : MessageLookupByLibrary.simpleMessage("Inicio de la interrupción"),
     "labelLanguage" : MessageLookupByLibrary.simpleMessage("Lenguaje"),
@@ -147,12 +149,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "progressDialogSaving" : MessageLookupByLibrary.simpleMessage("Guardando"),
     "save" : MessageLookupByLibrary.simpleMessage("Guardar"),
     "thereIsNoInformation" : MessageLookupByLibrary.simpleMessage("No hay información"),
-    "titleDefectsInjectedInPhase" : MessageLookupByLibrary.simpleMessage("DEFECTOS INYECTADOS POR FASE"),
-    "titleDefectsRemovedInPhase" : MessageLookupByLibrary.simpleMessage("DEFECTOS REMOVIDOS POR FASE"),
+    "titleDefectsInjectedByPhase" : MessageLookupByLibrary.simpleMessage("Defectos inyectados por fase"),
+    "titleDefectsRemovedByPhase" : MessageLookupByLibrary.simpleMessage("Defectos removidos por fase"),
     "titleNotAutorized" : MessageLookupByLibrary.simpleMessage("NO ESTÁS AUTORIZADO"),
     "titleProgramSizeSummary" : MessageLookupByLibrary.simpleMessage("RESUMEN TAMAÑO DEL PROGRAMA"),
     "titleSizeOfPrograms" : MessageLookupByLibrary.simpleMessage("Tamaños de los programas"),
-    "titleTimeInPhase" : MessageLookupByLibrary.simpleMessage("TIEMPO POR FASE (MIN)"),
-    "titleTotalDefects" : MessageLookupByLibrary.simpleMessage("Total de defectos")
+    "titleTimeInPhase" : MessageLookupByLibrary.simpleMessage("Tiempo por fase (min)"),
+    "titleTotalDefects" : MessageLookupByLibrary.simpleMessage("Total de defectos"),
+    "titleTotalTimes" : MessageLookupByLibrary.simpleMessage("Total de tiempos")
   };
 }

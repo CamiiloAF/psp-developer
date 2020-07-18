@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
+import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/blocs/time_logs_bloc.dart';
 import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
@@ -27,12 +28,15 @@ class _TimeLogsPageState extends State<TimeLogsPage>
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   TimeLogsBloc _timeLogsBloc;
+  ProgramsBloc _programsBloc;
+
   int _programId;
 
   @override
   void initState() {
     final blocProvider = context.read<BlocProvider>();
     _timeLogsBloc = blocProvider.timeLogsBloc;
+    _programsBloc = blocProvider.programsBloc;
     super.initState();
   }
 
@@ -40,9 +44,7 @@ class _TimeLogsPageState extends State<TimeLogsPage>
   void didChangeDependencies() {
     _programId = ModalRoute.of(context).settings.arguments;
 
-    Provider.of<BlocProvider>(context)
-        .programsBloc
-        .setCurrentProgram(_programId);
+    _programsBloc.setCurrentProgram(_programId);
 
     if (_timeLogsBloc.lastValueTimeLogsController == null) {
       _timeLogsBloc.getTimeLogs(false, _programId);
@@ -62,7 +64,8 @@ class _TimeLogsPageState extends State<TimeLogsPage>
     if (!TokenHandler.existToken()) return NotAuthorizedScreen();
 
     var isShowing = (Provider.of<FabModel>(context).isShowing &&
-        _timeLogsBloc.allowCreateTimeLog);
+        _timeLogsBloc.allowCreateTimeLog &&
+        !_programsBloc.hasCurrentProgramEnded());
 
     if (Preferences().pendingInterruptionStartAt != null) {
       isShowing = false;

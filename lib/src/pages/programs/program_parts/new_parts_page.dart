@@ -154,11 +154,6 @@ class __FormState extends State<_Form> {
             ),
             _buildNumericInput(
                 context,
-                S.of(context).labelPlannedLinesBase,
-                '${_newPart?.plannedLines ?? ''}',
-                (value) => _newPart?.plannedLines = int.tryParse(value)),
-            _buildNumericInput(
-                context,
                 S.of(context).labelMethodsPlanned,
                 '${_newPart?.numberMethodsPlanned ?? ''}',
                 (value) =>
@@ -255,6 +250,8 @@ class __FormState extends State<_Form> {
     _newPart.programsId = widget.programId;
     _newPart.typesSizesId = Constants.NEW_PART_TYPES_SIZE[
         '${addedNewPartsModel.newPartType}-${addedNewPartsModel.newPartSize}'];
+    _newPart.plannedLines = widget.newPartBloc.calculatePlanningLines(
+        _newPart.typesSizesId, _newPart.numberMethodsPlanned);
 
     Provider.of<AddedNewPartsModel>(context, listen: false)
       ..addNewParts(_newPart)

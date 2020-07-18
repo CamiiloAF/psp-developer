@@ -63,6 +63,10 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
   }
 
   Widget _createBody() {
+    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+        .programsBloc
+        .hasCurrentProgramEnded());
+
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(15.0),
@@ -79,7 +83,8 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
               _buildInputStartDate(),
               _buildInputFinishDate(),
               _buildInputTimeForRepair(),
-              SubmitButton(onPressed: () => _submit())
+              SubmitButton(
+                  onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
             ],
           ),
         ),

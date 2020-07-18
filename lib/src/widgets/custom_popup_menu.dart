@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/generated/l10n.dart';
+import 'package:psp_developer/src/pages/analysis_tools/analysis_tools_page.dart';
 import 'package:psp_developer/src/pages/experiences/experiences_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
 import 'package:psp_developer/src/pages/settings/settings_page.dart';
@@ -14,7 +15,8 @@ class CustomPopupMenu extends StatelessWidget {
   final _optionSettingsIndex = 1;
   final _optionChangeTheme = 2;
   final _optionProfile = 3;
-  final _optionLogOutIndex = 4;
+  final _optionAnalysisTools = 4;
+  final _optionLogOutIndex = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CustomPopupMenu extends StatelessWidget {
       s.optionSettings,
       (Preferences().theme == 1) ? s.darkMode : s.lightMode,
       s.appBarTitleProfile,
+      s.appBarTitleAnalysisTools,
       s.optionLogOut,
     ];
   }
@@ -53,6 +56,8 @@ class CustomPopupMenu extends StatelessWidget {
       _onSelectedOptionChangeTheme(context);
     } else if (value == options[_optionProfile]) {
       _onSelectedOptionProfile(context);
+    } else if (value == options[_optionAnalysisTools]) {
+      _onSelectedOptionAnalysisTools(context);
     } else if (value == options[_optionLogOutIndex]) {
       doLogout(context);
     }
@@ -62,6 +67,13 @@ class CustomPopupMenu extends StatelessWidget {
     final currentRouteName = ModalRoute.of(context).settings.name;
     if (currentRouteName != SettingsPage.ROUTE_NAME) {
       Navigator.pushNamed(context, SettingsPage.ROUTE_NAME);
+    }
+  }
+
+  void _onSelectedOptionAnalysisTools(BuildContext context) {
+    final currentRouteName = ModalRoute.of(context).settings.name;
+    if (currentRouteName != AnalysisToolsPage.ROUTE_NAME) {
+      Navigator.pushNamed(context, AnalysisToolsPage.ROUTE_NAME);
     }
   }
 

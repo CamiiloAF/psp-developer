@@ -1,13 +1,14 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:psp_developer/src/models/graphics/i_graphics_model.dart';
+import 'package:psp_developer/src/models/graphics/graphics_item_model.dart';
+import 'package:psp_developer/src/utils/utils.dart';
 
 class ChartsBuilder {
   final bool isDarkTheme;
 
   ChartsBuilder({@required this.isDarkTheme});
 
-  Widget build(String title, List<IGraphicsModel> data) {
+  Widget build(String title, List<GraphicsItemModel> data) {
     return Padding(
       padding: const EdgeInsets.all(4),
       child: Card(
@@ -36,14 +37,16 @@ class ChartsBuilder {
     );
   }
 
-  List<charts.Series<IGraphicsModel, String>> _createSampleData(
-      List<IGraphicsModel> data) {
+  List<charts.Series<GraphicsItemModel, String>> _createSampleData(
+      List<GraphicsItemModel> data) {
     return [
-      charts.Series<IGraphicsModel, String>(
+      charts.Series<GraphicsItemModel, String>(
         id: 'Graphics',
-        domainFn: (IGraphicsModel model, _) => model.domain,
-        measureFn: (IGraphicsModel model, _) => model.measure,
-        data: data,
+        domainFn: (GraphicsItemModel model, _) => model.domain,
+        measureFn: (GraphicsItemModel model, _) => model.measure,
+        data: (!isNullOrEmpty(data))
+            ? data
+            : [GraphicsItemModel(domain: '', measure: 0)],
         fillColorFn: (datum, index) => charts.Color.fromHex(code: '#607d8b'),
       )
     ];

@@ -54,7 +54,10 @@ class _DefectLogsPageState extends State<DefectLogsPage>
   Widget build(BuildContext context) {
     if (!TokenHandler.existToken()) return NotAuthorizedScreen();
 
-    var isShowing = Provider.of<FabModel>(context).isShowing;
+    var isShowing = (Provider.of<FabModel>(context).isShowing &&
+        !Provider.of<BlocProvider>(context)
+            .programsBloc
+            .hasCurrentProgramEnded());
 
     if (Preferences().pendingInterruptionStartAt != null) isShowing = false;
 

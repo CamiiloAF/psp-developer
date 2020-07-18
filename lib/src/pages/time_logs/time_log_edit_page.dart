@@ -69,6 +69,12 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _createBody() {
+    if (Provider.of<BlocProvider>(context)
+        .programsBloc
+        .hasCurrentProgramEnded()) {
+      isSubmiteButtonEnabled = false;
+    }
+
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(15.0),
@@ -168,7 +174,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _buildInputInterruptionStartAt() {
-    if (_timeLogModel.id == null) return Container();
+    if (_timeLogModel.id == null || !isSubmiteButtonEnabled) return Container();
 
     final pendingInterruptionStartAt = Preferences().pendingInterruptionStartAt;
     final timeLogIdWithPendingInterruption =
@@ -192,7 +198,9 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _buildStartInterruptionButton() {
-    if (_timeLogModel.id == null) return Container(height: 10);
+    if (!isSubmiteButtonEnabled || _timeLogModel.id == null) {
+      return Container(height: 10);
+    }
 
     final pendingInterruptionStartAt = Preferences().pendingInterruptionStartAt;
 
@@ -287,7 +295,10 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
 
     var statusCode = -1;
 
-    _timeLogModel.deltaTime = _deltaTime?.toDouble();
+    _timeLogModel.deltaTime = (_deltaTime != null)
+        ? _deltaTime - _timeLogModel?.interruption ?? 0
+        : null;
+
     _timeLogModel.phasesId = _currentPhaseId;
 
     if (_timeLogModel.id == null) {
