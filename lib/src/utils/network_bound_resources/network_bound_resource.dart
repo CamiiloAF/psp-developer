@@ -13,6 +13,7 @@ abstract class NetworkBoundResource<ResultType> with TokenHandler {
   int _statusCode = 0;
 
   Future<Tuple2<int, ResultType>> execute(bool isRefreshing) async {
+
     final mIsValidToken = await isValidToken();
     if (mIsValidToken != 200) return Tuple2(mIsValidToken, null);
 

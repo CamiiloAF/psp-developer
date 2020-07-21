@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:psp_developer/generated/l10n.dart';
 
 class Validators {

@@ -103,7 +103,7 @@ class _RestorePasswordDialogState extends State<RestorePasswordDialog>
       widget.scaffoldKey.currentState.showSnackBar(snackbar);
     } else {
       final snackbar =
-          buildSnackbar(Text(getRequestResponseMessage(context, statusCode)));
+          buildSnackbar(Text(getRequestResponseMessage(s, statusCode)));
       widget.scaffoldKey.currentState.showSnackBar(snackbar);
     }
     Navigator.pop(context);
