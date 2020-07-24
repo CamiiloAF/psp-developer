@@ -58,6 +58,8 @@
   "messagePhoneIsAlreadyInUse": "Phone is already in use",
   "messageYouMustHaveCompletedPrograms": "You must have at least 3 completed programs",
   "messageProgramDoesNotMeetAllRecords": "Current program does not meet records to end",
+  "messageProgramDoesNotHaveCurrentParts": "The program does not have the current parts",
+  "messageProgramDoesNotHaveDeltaTimes": "The program does not have the delta times",
   "thereIsNoInformation": "There is no information",
   "inputNameError": "Must be at least 3 characters",
   "inputRequiredError": "This input is required",

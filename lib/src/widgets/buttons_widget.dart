@@ -5,13 +5,13 @@ import 'package:psp_developer/src/utils/theme/theme_changer.dart';
 
 class CustomRaisedButton extends StatelessWidget {
   final String buttonText;
-  final Function onPress;
+  final Function onPressed;
   final double paddingHorizontal;
   final double paddingVertical;
 
   const CustomRaisedButton({
     this.buttonText,
-    this.onPress,
+    this.onPressed,
     this.paddingHorizontal = 80,
     this.paddingVertical = 15,
   });
@@ -26,7 +26,7 @@ class CustomRaisedButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       color: Theme.of(context).primaryColor,
       textColor: Colors.white,
-      onPressed: onPress,
+      onPressed: onPressed,
     );
   }
 }
@@ -80,6 +80,24 @@ class SubmitButton extends StatelessWidget {
         icon: Icon(Icons.save),
         onPressed: onPressed,
       ),
+    );
+  }
+}
+
+class AlertDialogButton extends StatelessWidget {
+  final Function onPressed;
+  final String buttonText;
+
+  const AlertDialogButton({this.onPressed, this.buttonText});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<ThemeChanger>(context).isDarkTheme;
+
+    return FlatButton(
+      child: Text(buttonText),
+      textColor: (isDarkTheme) ? Colors.white : Theme.of(context).accentColor,
+      onPressed: onPressed,
     );
   }
 }

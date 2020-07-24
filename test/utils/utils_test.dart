@@ -23,6 +23,10 @@ void main() {
         'You must have at least 3 completed programs';
     final messageProgramDoesNotMeetAllRecords =
         'Current program does not meet records to end';
+    final messageProgramDoesNotHaveCurrentParts =
+        'Current program does not have current parts';
+    final messageProgramDoesNotHaveDeltaTimes =
+        'Current program does not have delta time';
 
     final mockS = _MockS();
 
@@ -42,6 +46,10 @@ void main() {
         .thenReturn(messageYouMustHaveCompletedPrograms);
     when(mockS.messageProgramDoesNotMeetAllRecords)
         .thenReturn(messageProgramDoesNotMeetAllRecords);
+    when(mockS.messageProgramDoesNotHaveCurrentParts)
+        .thenReturn(messageProgramDoesNotHaveCurrentParts);
+    when(mockS.messageProgramDoesNotHaveDeltaTimes)
+        .thenReturn(messageProgramDoesNotHaveDeltaTimes);
 
     String getStatusCodeMessage(int statusCodeToTest) =>
         utils.getRequestResponseMessage(mockS, statusCodeToTest);
@@ -93,6 +101,16 @@ void main() {
     test('getRequestResponseMessage with code 56', () {
       expect(getStatusCodeMessage(56), messageProgramDoesNotMeetAllRecords);
     });
+
+    test('getRequestResponseMessage with code 57', () {
+      expect(getStatusCodeMessage(57), messageProgramDoesNotHaveCurrentParts);
+    });
+
+    test('getRequestResponseMessage with code 58', () {
+      expect(getStatusCodeMessage(58), messageProgramDoesNotHaveDeltaTimes);
+    });
+
+
   });
 
   group('Verify functionality of utils method that work with dates', () {

@@ -59,6 +59,8 @@
   "messagePhoneIsAlreadyInUse": "El teléfono ya se encuentra en uso",
   "messageYouMustHaveCompletedPrograms": "Al menos debe tener 3 programas finalizados",
   "messageProgramDoesNotMeetAllRecords": "El programa actual no cumple con los registros para finalizar",
+  "messageProgramDoesNotHaveCurrentParts": "El programa no tiene las partes actuales",
+  "messageProgramDoesNotHaveDeltaTimes": "El programa no tiene los timepos delta",
   "thereIsNoInformation": "No hay información",
   "labelName": "Nombre",
   "inputNameError": "Debe tener al menos 3 carateres",

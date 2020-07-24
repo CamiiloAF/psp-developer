@@ -3,6 +3,7 @@ import 'package:psp_developer/generated/l10n.dart';
 import 'package:psp_developer/src/blocs/validators/validators.dart';
 import 'package:psp_developer/src/repositories/session_repository.dart';
 import 'package:psp_developer/src/utils/utils.dart';
+import 'package:psp_developer/src/widgets/buttons_widget.dart';
 import 'package:psp_developer/src/widgets/inputs_widget.dart';
 
 class RestorePasswordDialog extends StatefulWidget {
@@ -34,10 +35,10 @@ class _RestorePasswordDialogState extends State<RestorePasswordDialog>
         title: Text(s.labelRestorePassword),
         actions: _buildDialogOptions(context, s),
         content: Form(
-            key: _dialogFormKey, child: Container(child: _buidlInputForm())));
+            key: _dialogFormKey, child: Container(child: _buildInputForm())));
   }
 
-  Widget _buidlInputForm() {
+  Widget _buildInputForm() {
     return (widget.isByEmail)
         ? InputEmail(
             onSaved: (value) => _email = value,
@@ -60,14 +61,14 @@ class _RestorePasswordDialogState extends State<RestorePasswordDialog>
 
   List<Widget> _buildDialogOptions(BuildContext context, S s) {
     return [
-      OutlineButton(
+      AlertDialogButton(
+        buttonText: s.dialogButtonCancel,
         onPressed: () => Navigator.pop(context),
-        child: Text(s.dialogButtonCancel),
       ),
       Builder(
-        builder: (ctx) => OutlineButton(
+        builder: (ctx) => AlertDialogButton(
+          buttonText: s.dialogButtonRecover,
           onPressed: () => _submit(ctx),
-          child: Text(s.dialogButtonRecover),
         ),
       ),
     ];

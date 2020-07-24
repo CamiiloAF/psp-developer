@@ -16,6 +16,7 @@ import 'login_background.dart';
 
 class LoginPage extends StatefulWidget {
   static const ROUTE_NAME = 'login';
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -66,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
           margin: EdgeInsets.symmetric(vertical: 30),
           padding: EdgeInsets.symmetric(vertical: 50),
           decoration: BoxDecoration(
-              color: (isDarkTheme) ? Color(0xFF757575) : Colors.white,
+              color:
+                  (isDarkTheme) ? Colors.white.withOpacity(0.1) : Colors.white,
               borderRadius: BorderRadius.circular(5),
               boxShadow: <BoxShadow>[
                 BoxShadow(
@@ -128,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
         return Container(
           child: CustomRaisedButton(
               buttonText: S.of(context).loginButton,
-              onPress: (isEnabled) ? () => _doLogin() : null),
+              onPressed: (isEnabled && snapshot.hasData) ? () => _doLogin() : null),
         );
       },
     );
@@ -144,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
         await sessionProvider.doLogin(_loginBloc.email, _loginBloc.password);
 
     if (response['ok']) {
-      final routeName = await _loginBloc.getNextRoteName();
+      final routeName = await _loginBloc.getNextRouteName();
       if (routeName != null) {
         await Navigator.pushNamedAndRemoveUntil(
             context, routeName, (_) => false);

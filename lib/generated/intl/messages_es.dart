@@ -141,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "messageNotConnection" : MessageLookupByLibrary.simpleMessage("Por favor revise su conexión a internet"),
     "messagePIPHasBeenSave" : MessageLookupByLibrary.simpleMessage("Se ha guardado el PIP"),
     "messagePhoneIsAlreadyInUse" : MessageLookupByLibrary.simpleMessage("El teléfono ya se encuentra en uso"),
+    "messageProgramDoesNotHaveCurrentParts" : MessageLookupByLibrary.simpleMessage("El programa no tiene las partes actuales"),
+    "messageProgramDoesNotHaveDeltaTimes" : MessageLookupByLibrary.simpleMessage("El programa no tiene los timepos delta"),
     "messageProgramDoesNotMeetAllRecords" : MessageLookupByLibrary.simpleMessage("El programa actual no cumple con los registros para finalizar"),
     "messageTimeOutException" : MessageLookupByLibrary.simpleMessage("La solicitud ha tardado mucho, inténtelo nuevamente"),
     "messageUnexpectedError" : MessageLookupByLibrary.simpleMessage("Ocurrió un error inesperado, inténtelo nuevamente"),

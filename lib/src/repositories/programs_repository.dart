@@ -61,8 +61,14 @@ class ProgramsRepository {
       if (resp.statusCode == 204) {
         _ProgramsUpdateBoundResource().doOperationInDb(program);
       } else if (resp.statusCode == 400) {
-        if (programDoesNotMeetAllRecords(resp.body)) {
+        final body = resp.body;
+
+        if (programDoesNotMeetAllRecords(body)) {
           return Constants.PROGRAM_DOES_NOT_MEET_ALL_RECORDS;
+        } else if (programDoesHaveCurrentParts(body)) {
+          return Constants.PROGRAM_DOES_NOT_HAVE_CURRENT_PARTS;
+        } else if (programDoesHaveDeltaTimes(body)) {
+          return Constants.PROGRAM_DOES_NOT_HAVE_DELTA_TIMES;
         }
       }
 
@@ -78,6 +84,12 @@ class ProgramsRepository {
 
   bool programDoesNotMeetAllRecords(String body) =>
       body.contains('Current program does not meet records to end');
+
+  bool programDoesHaveCurrentParts(String body) =>
+      body.contains('The program does not have the current parts');
+
+  bool programDoesHaveDeltaTimes(String body) =>
+      body.contains('The program does not have the delta times');
 }
 
 class _ProgramsNetworkBoundResource

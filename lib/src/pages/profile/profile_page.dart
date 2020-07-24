@@ -18,6 +18,7 @@ import 'package:psp_developer/src/widgets/not_authorized_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   static const ROUTE_NAME = 'profile';
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -88,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return InkWell(
         onTap: onTap,
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(15),
           child: Text(
             label,
             style: TextStyle(
@@ -117,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return InputForm(
         initialValue:
             (isFirstName) ? _userModel.firstName : _userModel.lastName,
-        maxLenght: 50,
+        maxLength: 50,
         label: (isFirstName) ? s.labelName : s.labelLastName,
         validator: (value) =>
             (value.trim().length < 3) ? s.inputNameError : null,
@@ -206,9 +207,9 @@ class __ChangePasswordDialogState extends State<_ChangePasswordDialog> {
     return AlertDialog(
         title: Text(s.labelChangePassword),
         actions: _buildDialogOptions(context, s),
-        useMaterialBorderRadius: true,
         content: Container(
-            height: MediaQuery.of(context).size.height * 0.22,
+          margin: EdgeInsets.only(bottom: 6),
+            height: MediaQuery.of(context).size.height * 0.2,
             child: _buildForm(s)));
   }
 
@@ -239,14 +240,14 @@ class __ChangePasswordDialogState extends State<_ChangePasswordDialog> {
 
   List<Widget> _buildDialogOptions(BuildContext context, S s) {
     return [
-      OutlineButton(
+      AlertDialogButton(
+        buttonText: s.dialogButtonCancel,
         onPressed: () => Navigator.pop(context),
-        child: Text(s.dialogButtonCancel),
       ),
       Builder(
-        builder: (ctx) => OutlineButton(
+        builder: (ctx) => AlertDialogButton(
+          buttonText: s.labelChangePassword,
           onPressed: () => _submit(ctx),
-          child: Text(s.labelChangePassword),
         ),
       ),
     ];

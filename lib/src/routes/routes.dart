@@ -14,6 +14,7 @@ import 'package:psp_developer/src/pages/program_plan_summary/program_plan_summar
 import 'package:psp_developer/src/pages/programs/program_info_page.dart';
 import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_page.dart';
 import 'package:psp_developer/src/pages/programs/programs_page.dart';
+import 'package:psp_developer/src/pages/project_module_detail/project_module_detail_page.dart';
 import 'package:psp_developer/src/pages/projects/projects_page.dart';
 import 'package:psp_developer/src/pages/reusable_parts/reusable_part_edit_page.dart';
 import 'package:psp_developer/src/pages/reusable_parts/reusable_parts_page.dart';
@@ -25,6 +26,7 @@ Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
       LoginPage.ROUTE_NAME: (BuildContext context) => LoginPage(),
       ExperiencesPage.ROUTE_NAME: (BuildContext context) => ExperiencesPage(),
       ProjectsPage.ROUTE_NAME: (BuildContext context) => ProjectsPage(),
+      ProjectModuleDetailPage.ROUTE_NAME: (BuildContext context) => ProjectModuleDetailPage(),
       ModulesPage.ROUTE_NAME: (BuildContext context) => ModulesPage(),
       ProgramsPage.ROUTE_NAME: (BuildContext context) => ProgramsPage(),
       ProgramInfoPage.ROUTE_NAME: (BuildContext context) => ProgramInfoPage(),

@@ -75,7 +75,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
-    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+    final isSubmitButtonEnabled = !(Provider.of<BlocProvider>(context)
         .programsBloc
         .hasCurrentProgramEnded());
 
@@ -88,7 +88,7 @@ class __FormState extends State<_Form> {
             _buildInputsForPlannedLines(),
             _buildInputsForCurrentLines(),
             SubmitButton(
-                onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
+                onPressed: (isSubmitButtonEnabled) ? () => _submit() : null)
           ],
         ));
   }
@@ -97,23 +97,23 @@ class __FormState extends State<_Form> {
     final s = S.of(context);
     return Column(
       children: [
-        _builNumericInput(
+        _buildNumericInput(
             s.labelPlannedLinesBase,
             '${widget.basePart?.plannedLinesBase ?? ''}',
             (value) => widget.basePart?.plannedLinesBase = int.tryParse(value),
             isReadOnly: true),
-        _builNumericInput(
+        _buildNumericInput(
             s.labelPlannedLinesDeleted,
             '${widget.basePart?.plannedLinesDeleted ?? ''}',
             (value) =>
                 widget.basePart?.plannedLinesDeleted = int.tryParse(value),
             isReadOnly: true),
-        _builNumericInput(
+        _buildNumericInput(
             s.labelPlannedLinesEdits,
             '${widget.basePart?.plannedLinesEdits ?? ''}',
             (value) => widget.basePart?.plannedLinesEdits = int.tryParse(value),
             isReadOnly: true),
-        _builNumericInput(
+        _buildNumericInput(
             s.labelPlannedLinesAdded,
             '${widget.basePart?.plannedLinesAdded ?? ''}',
             (value) => widget.basePart?.plannedLinesAdded = int.tryParse(value),
@@ -126,22 +126,22 @@ class __FormState extends State<_Form> {
     final s = S.of(context);
     return Column(
       children: [
-        _builNumericInput(
+        _buildNumericInput(
           s.labelCurrentLinesBase,
           '${widget.basePart?.currentLinesBase ?? ''}',
           (value) => widget.basePart?.currentLinesBase = int.tryParse(value),
         ),
-        _builNumericInput(
+        _buildNumericInput(
           s.labelCurrentLinesDeleted,
           '${widget.basePart?.currentLinesDeleted ?? ''}',
           (value) => widget.basePart?.currentLinesDeleted = int.tryParse(value),
         ),
-        _builNumericInput(
+        _buildNumericInput(
           s.labelCurrentLinesEdits,
           '${widget.basePart?.currentLinesEdits ?? ''}',
           (value) => widget.basePart?.currentLinesEdits = int.tryParse(value),
         ),
-        _builNumericInput(
+        _buildNumericInput(
           s.labelCurrentLinesAdded,
           '${widget.basePart?.currentLinesAdded ?? ''}',
           (value) => widget.basePart?.currentLinesAdded = int.tryParse(value),
@@ -149,6 +149,7 @@ class __FormState extends State<_Form> {
       ],
     );
   }
+
 
   Widget _buildBaseProgramDropdownButton() {
     final programBaseName = getProgramNameById();
@@ -169,7 +170,7 @@ class __FormState extends State<_Form> {
     return programTuple.item2;
   }
 
-  Widget _builNumericInput(String label, String text, Function(String) onSaved,
+  Widget _buildNumericInput(String label, String text, Function(String) onSaved,
       {isReadOnly = false}) {
     final controller = TextEditingController();
     controller.text = text;
@@ -185,7 +186,7 @@ class __FormState extends State<_Form> {
             ? null
             : S.of(context).invalidNumber);
       },
-      maxLenght: 10,
+      maxLength: 10,
       keyboardType: TextInputType.number,
     );
   }

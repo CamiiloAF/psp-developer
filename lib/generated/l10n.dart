@@ -633,6 +633,26 @@ class S {
     );
   }
 
+  /// `El programa no tiene las partes actuales`
+  String get messageProgramDoesNotHaveCurrentParts {
+    return Intl.message(
+      'El programa no tiene las partes actuales',
+      name: 'messageProgramDoesNotHaveCurrentParts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `El programa no tiene los timepos delta`
+  String get messageProgramDoesNotHaveDeltaTimes {
+    return Intl.message(
+      'El programa no tiene los timepos delta',
+      name: 'messageProgramDoesNotHaveDeltaTimes',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No hay información`
   String get thereIsNoInformation {
     return Intl.message(

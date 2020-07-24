@@ -11,17 +11,9 @@ import 'package:psp_developer/src/utils/token_handler.dart';
 class SessionRepository with TokenHandler {
   Future<Map<String, dynamic>> doLogin(String email, String password) async {
     try {
-      //TODO Descomentar esto en producción
-      // final authData = {
-      //   'identity' : email,
-      //   'password' : password
-      // };
-      final url = '${Constants.baseUrl}/auth/login';
+      final authData = {'identity': email, 'password': password};
 
-      final authData = {
-        'identity': 'jcagudelo42@misena.edu.co',
-        'password': '123456789'
-      };
+      final url = '${Constants.baseUrl}/auth/login';
 
       final headers = {
         'http_csrf_token': Constants.httpCsrfToken,

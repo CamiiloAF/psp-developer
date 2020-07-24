@@ -67,7 +67,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
-    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+    final isSubmitButtonEnabled = !(Provider.of<BlocProvider>(context)
         .programsBloc
         .hasCurrentProgramEnded());
 
@@ -84,7 +84,7 @@ class __FormState extends State<_Form> {
             _buildPlannedInputs(),
             _buildCurrentInputs(),
             SubmitButton(
-                onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
+                onPressed: (isSubmitButtonEnabled) ? () => _submit() : null)
           ],
         ));
   }
@@ -178,12 +178,7 @@ class __FormState extends State<_Form> {
       margin: EdgeInsets.only(top: 10),
       isReadOnly: isReadOnly,
       onSaved: onSaved,
-      validator: (value) {
-        return (_newPartsBloc.isValidNumber(value)
-            ? null
-            : S.of(context).invalidNumber);
-      },
-      maxLenght: 10,
+      maxLength: 10,
       keyboardType: TextInputType.number,
     );
   }

@@ -220,6 +220,17 @@ class InputDate extends StatefulWidget {
       this.onChanged,
       this.isEnabled = true});
 
+  static Widget buildDisableInputDate(
+      int initialValueInMilliseconds, String label) {
+    return InputDate(
+      initialValue: (initialValueInMilliseconds != null)
+          ? DateTime.fromMillisecondsSinceEpoch(initialValueInMilliseconds)
+          : null,
+      isEnabled: false,
+      labelAndHint: label,
+    );
+  }
+
   @override
   _InputDateState createState() => _InputDateState();
 }
@@ -342,8 +353,7 @@ class InputPhoneWithCountryPicker extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                     labelText: S.of(context).labelPhone,
-                    errorText:
-                        (hasError) ? S.of(context).invalidNumber : null),
+                    errorText: (hasError) ? S.of(context).invalidNumber : null),
                 keyboardType: TextInputType.phone,
                 maxLength: 10,
                 onChanged: onChange,
@@ -360,13 +370,21 @@ class InputPhoneWithCountryPicker extends StatelessWidget {
 
 class InputForm extends StatelessWidget {
   final String initialValue;
-  final int maxLenght;
+
+  final int maxLength;
+  final int maxLines;
+  final int minLines;
+
   final String label;
+  final String helper;
+
   final bool isEnabled;
   final bool isReadOnly;
+
   final TextEditingController controller;
   final TextInputType keyboardType;
   final EdgeInsetsGeometry margin;
+
   final Function(String value) onSaved;
   final String Function(String value) onChanged;
   final String Function(String value) validator;
@@ -375,7 +393,7 @@ class InputForm extends StatelessWidget {
     this.onSaved,
     @required this.label,
     this.initialValue,
-    this.maxLenght,
+    this.maxLength,
     this.isEnabled = true,
     this.isReadOnly = false,
     this.controller,
@@ -383,6 +401,7 @@ class InputForm extends StatelessWidget {
     this.onChanged,
     this.margin,
     this.validator,
+    this.helper, this.maxLines = 10, this.minLines = 1,
   });
 
   @override
@@ -394,16 +413,27 @@ class InputForm extends StatelessWidget {
         controller: controller,
         keyboardType: keyboardType,
         textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          labelText: label,
-        ),
+        decoration: InputDecoration(labelText: label, helperText: helper),
         onSaved: onSaved,
         enabled: isEnabled,
-        maxLength: maxLenght,
+        maxLength: maxLength,
+        maxLines: maxLines,
+        minLines: minLines,
         readOnly: isReadOnly,
         onChanged: onChanged,
+
         validator: (validator != null) ? validator : onChanged,
       ),
+    );
+  }
+
+  static Widget buildReadOnlyInput(String label, String initialValue,
+      {String helper}) {
+    return InputForm(
+      label: label,
+      isReadOnly: true,
+      helper: helper,
+      initialValue: initialValue,
     );
   }
 }

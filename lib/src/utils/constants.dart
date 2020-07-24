@@ -13,8 +13,12 @@ class Constants {
 
   static const PHONE_ALREADY_IN_USE = 53;
   static const EMAIL_ALREADY_IN_USE = 54;
+
   static const MUST_BE_HAVE_AT_LEAST_3_COMPLETED_PROGRAMS = 55;
+
   static const PROGRAM_DOES_NOT_MEET_ALL_RECORDS = 56;
+  static const PROGRAM_DOES_NOT_HAVE_CURRENT_PARTS = 57;
+  static const PROGRAM_DOES_NOT_HAVE_DELTA_TIMES = 58;
 
   //Table names
   static const PROJECTS_TABLE_NAME = 'projects';

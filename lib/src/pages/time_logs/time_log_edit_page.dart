@@ -219,7 +219,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
               paddingHorizontal: 0,
               paddingVertical: 0,
               buttonText: buttonText,
-              onPress: () {
+              onPressed: () {
                 _onPressInterruptionButton(pendingInterruptionStartAt);
               }),
         ],

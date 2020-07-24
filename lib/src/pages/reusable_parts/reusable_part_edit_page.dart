@@ -74,7 +74,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
-    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+    final isSubmitButtonEnabled = !(Provider.of<BlocProvider>(context)
         .programsBloc
         .hasCurrentProgramEnded());
 
@@ -84,17 +84,17 @@ class __FormState extends State<_Form> {
           children: [
             SizedBox(height: 10),
             _buildReusableProgramDropdownButton(),
-            _builNumericInput(S.of(context).labelPlannedLinesBase,
+            _buildNumericInput(S.of(context).labelPlannedLinesBase,
                 '${widget.reusablePart?.plannedLines ?? ''}', null,
                 isReadOnly: true),
-            _builNumericInput(
+            _buildNumericInput(
               S.of(context).labelCurrentLinesBase,
               '${widget.reusablePart?.currentLines ?? ''}',
               (value) =>
                   widget.reusablePart?.currentLines = int.tryParse(value),
             ),
             SubmitButton(
-                onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
+                onPressed: (isSubmitButtonEnabled) ? () => _submit() : null)
           ],
         ));
   }
@@ -119,7 +119,7 @@ class __FormState extends State<_Form> {
     return programTuple.item2;
   }
 
-  Widget _builNumericInput(
+  Widget _buildNumericInput(
       String label, String initialValue, Function(String) onSaved,
       {bool isReadOnly = false}) {
     return InputForm(
@@ -133,7 +133,7 @@ class __FormState extends State<_Form> {
             ? null
             : S.of(context).invalidNumber);
       },
-      maxLenght: 10,
+      maxLength: 10,
       keyboardType: TextInputType.number,
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:psp_developer/generated/l10n.dart';
+import 'package:psp_developer/src/widgets/buttons_widget.dart';
 
 import 'constants.dart';
 
@@ -27,8 +28,8 @@ void showAlertDialog(BuildContext context, {String message, String title}) {
           title: Text(title),
           content: Text(message),
           actions: <Widget>[
-            FlatButton(
-              child: Text(S.of(context).dialogButtonOk),
+            AlertDialogButton(
+              buttonText: S.of(context).dialogButtonOk,
               onPressed: () => Navigator.of(context).pop(),
             )
           ],
@@ -74,6 +75,12 @@ String getRequestResponseMessage(S s, int statusCode) {
       break;
     case Constants.PROGRAM_DOES_NOT_MEET_ALL_RECORDS:
       return s.messageProgramDoesNotMeetAllRecords;
+      break;
+    case Constants.PROGRAM_DOES_NOT_HAVE_CURRENT_PARTS:
+      return s.messageProgramDoesNotHaveCurrentParts;
+      break;
+    case Constants.PROGRAM_DOES_NOT_HAVE_DELTA_TIMES:
+      return s.messageProgramDoesNotHaveDeltaTimes;
       break;
     default:
       return s.messageUnexpectedError;

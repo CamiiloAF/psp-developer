@@ -173,23 +173,23 @@ class __FormState extends State<_Form> {
           children: [
             SizedBox(height: 10),
             _buildBaseProgramDropdownButton(),
-            _builNumericInput(
+            _buildNumericInput(
                 context,
                 S.of(context).labelPlannedLinesBase,
                 '${_basePart?.plannedLinesBase ?? ''}',
                 (value) => _basePart?.plannedLinesBase = int.tryParse(value)),
-            _builNumericInput(
+            _buildNumericInput(
                 context,
                 S.of(context).labelPlannedLinesDeleted,
                 '${_basePart?.plannedLinesDeleted ?? ''}',
                 (value) =>
                     _basePart?.plannedLinesDeleted = int.tryParse(value)),
-            _builNumericInput(
+            _buildNumericInput(
                 context,
                 S.of(context).labelPlannedLinesEdits,
                 '${_basePart?.plannedLinesEdits ?? ''}',
                 (value) => _basePart?.plannedLinesEdits = int.tryParse(value)),
-            _builNumericInput(
+            _buildNumericInput(
                 context,
                 S.of(context).labelPlannedLinesAdded,
                 '${_basePart?.plannedLinesAdded ?? ''}',
@@ -232,7 +232,7 @@ class __FormState extends State<_Form> {
     return items;
   }
 
-  Widget _builNumericInput(BuildContext context, String label, String text,
+  Widget _buildNumericInput(BuildContext context, String label, String text,
       Function(String) onSaved) {
     final controller = TextEditingController();
     controller.text = text;
@@ -248,7 +248,7 @@ class __FormState extends State<_Form> {
             ? null
             : S.of(context).invalidNumber);
       },
-      maxLenght: 10,
+      maxLength: 10,
       keyboardType: TextInputType.number,
     );
   }

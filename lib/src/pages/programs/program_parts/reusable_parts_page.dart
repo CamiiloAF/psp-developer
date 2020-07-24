@@ -170,7 +170,7 @@ class __FormState extends State<_Form> {
           children: [
             SizedBox(height: 10),
             _buildReusableProgramDropdownButton(),
-            _builNumericInput(
+            _buildNumericInput(
                 context,
                 S.of(context).labelPlannedLinesBase,
                 '${_reusablePart?.plannedLines ?? ''}',
@@ -217,7 +217,7 @@ class __FormState extends State<_Form> {
     return items;
   }
 
-  Widget _builNumericInput(BuildContext context, String label, String text,
+  Widget _buildNumericInput(BuildContext context, String label, String text,
       Function(String) onSaved) {
     final controller = TextEditingController();
     controller.text = text;
@@ -233,7 +233,7 @@ class __FormState extends State<_Form> {
             ? null
             : S.of(context).invalidNumber);
       },
-      maxLenght: 10,
+      maxLength: 10,
       keyboardType: TextInputType.number,
     );
   }

@@ -216,7 +216,7 @@ class __FormState extends State<_Form> {
       validator: (value) {
         return (value.length >= 3 ? null : S.of(context).inputNameError);
       },
-      maxLenght: 50,
+      maxLength: 50,
     );
   }
 
@@ -235,7 +235,7 @@ class __FormState extends State<_Form> {
             ? null
             : S.of(context).invalidNumber);
       },
-      maxLenght: 10,
+      maxLength: 10,
       keyboardType: TextInputType.number,
     );
   }

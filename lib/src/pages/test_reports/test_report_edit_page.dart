@@ -87,7 +87,7 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
     return InputForm(
       onSaved: (value) => _testReportModel.testNumber = int.tryParse(value),
       label: s.labelTestNumber,
-      maxLenght: 5,
+      maxLength: 5,
       onChanged: (value) => _testReportsBloc.validateRequiredInput(s, value),
       initialValue: '${_testReportModel.testNumber ?? ''}',
       keyboardType: TextInputType.number,
