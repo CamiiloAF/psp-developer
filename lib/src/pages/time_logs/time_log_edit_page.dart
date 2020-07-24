@@ -42,7 +42,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
 
   int _deltaTime;
 
-  bool isSubmiteButtonEnabled = true;
+  bool isSubmitButtonEnabled = true;
 
   _TimeLogEditPageState(this._timeLogModel);
 
@@ -51,7 +51,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
     _currentPhaseId = _timeLogModel?.phasesId ?? 1;
     _timeLogsBloc = context.read<BlocProvider>().timeLogsBloc;
 
-    isSubmiteButtonEnabled = Preferences().pendingInterruptionStartAt == null;
+    isSubmitButtonEnabled = Preferences().pendingInterruptionStartAt == null;
 
     _inputInterruptionController.text = '${_timeLogModel?.interruption ?? 0}';
     super.initState();
@@ -72,7 +72,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
     if (Provider.of<BlocProvider>(context)
         .programsBloc
         .hasCurrentProgramEnded()) {
-      isSubmiteButtonEnabled = false;
+      isSubmitButtonEnabled = false;
     }
 
     return SingleChildScrollView(
@@ -91,7 +91,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
               _buildStartInterruptionButton(),
               _buildInputComments(),
               SubmitButton(
-                  onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
+                  onPressed: (isSubmitButtonEnabled) ? () => _submit() : null)
             ],
           ),
         ),
@@ -174,7 +174,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _buildInputInterruptionStartAt() {
-    if (_timeLogModel.id == null || !isSubmiteButtonEnabled) return Container();
+    if (_timeLogModel.id == null || !isSubmitButtonEnabled) return Container();
 
     final pendingInterruptionStartAt = Preferences().pendingInterruptionStartAt;
     final timeLogIdWithPendingInterruption =
@@ -198,7 +198,10 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _buildStartInterruptionButton() {
-    if (!isSubmiteButtonEnabled || _timeLogModel.id == null) {
+    final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
+
+    if (_timeLogModel.id == null ||
+        programsBloc.getCurrentProgram().deliveryDate != null) {
       return Container(height: 10);
     }
 
@@ -231,7 +234,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
             DateTime.now().millisecondsSinceEpoch;
         Preferences().timeLogIdWithPendingInterruption = _timeLogModel.id;
 
-        isSubmiteButtonEnabled = false;
+        isSubmitButtonEnabled = false;
         Provider.of<FabModel>(context, listen: false).isShowing = false;
       } else {
         final currentInterruption = utils.getMinutesBetweenTwoDates(
@@ -245,7 +248,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
 
         Preferences().removePendingInterruptionAndTimeLogId();
 
-        isSubmiteButtonEnabled = true;
+        isSubmitButtonEnabled = true;
         Provider.of<FabModel>(context, listen: false).isShowing = true;
       }
     });

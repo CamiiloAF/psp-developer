@@ -55,7 +55,7 @@ class _NewPartsPageState extends State<NewPartsPage>
         title: S.of(context).appBarTitleNewParts,
         searchDelegate: SearchNewParts(_newPartsBloc),
       ),
-      drawer: DrawerProgramItems(programId: _programId),
+      drawer: DrawerProgramItems(programId: _programId, scaffoldKey: _scaffoldKey,),
       body: _body(),
     );
   }

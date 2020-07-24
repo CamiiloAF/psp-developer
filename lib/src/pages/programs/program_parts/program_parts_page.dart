@@ -6,7 +6,7 @@ import 'package:psp_developer/src/models/programs_model.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/base_parts_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/reusable_parts_page.dart';
-import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_time_page.dart';
+import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/added_new_parts_model.dart';
 import 'package:psp_developer/src/utils/token_handler.dart';
@@ -102,6 +102,6 @@ class _ProgramPartsPageState extends State<ProgramPartsPage> {
   }
 
   void _goToPlanningTimes(BuildContext context) =>
-      Navigator.pushNamed(context, ProgramPlanningTimePage.ROUTE_NAME,
+      Navigator.pushNamed(context, ProgramPlanningPage.ROUTE_NAME,
           arguments: widget.program);
 }

@@ -303,11 +303,11 @@ class S {
     );
   }
 
-  /// `Planeación de tiempos`
-  String get appBarTitlePlanningTime {
+  /// `Planeación`
+  String get appBarTitlePlanning {
     return Intl.message(
-      'Planeación de tiempos',
-      name: 'appBarTitlePlanningTime',
+      'Planeación',
+      name: 'appBarTitlePlanning',
       desc: '',
       args: [],
     );
@@ -334,10 +334,10 @@ class S {
   }
 
   /// `NO ESTÁS AUTORIZADO`
-  String get titleNotAutorized {
+  String get titleNotAuthorized {
     return Intl.message(
       'NO ESTÁS AUTORIZADO',
-      name: 'titleNotAutorized',
+      name: 'titleNotAuthorized',
       desc: '',
       args: [],
     );
@@ -608,6 +608,26 @@ class S {
     return Intl.message(
       'El teléfono ya se encuentra en uso',
       name: 'messagePhoneIsAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Al menos debe tener 3 programas finalizados`
+  String get messageYouMustHaveCompletedPrograms {
+    return Intl.message(
+      'Al menos debe tener 3 programas finalizados',
+      name: 'messageYouMustHaveCompletedPrograms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `El programa actual no cumple con los registros para finalizar`
+  String get messageProgramDoesNotMeetAllRecords {
+    return Intl.message(
+      'El programa actual no cumple con los registros para finalizar',
+      name: 'messageProgramDoesNotMeetAllRecords',
       desc: '',
       args: [],
     );
@@ -1263,21 +1283,21 @@ class S {
     );
   }
 
+  /// `Defectos estimados en {phase}`
+  String labelWithPlaceHolderEstimatedDefectsIn(Object phase) {
+    return Intl.message(
+      'Defectos estimados en $phase',
+      name: 'labelWithPlaceHolderEstimatedDefectsIn',
+      desc: '',
+      args: [phase],
+    );
+  }
+
   /// `Finalizar programa`
   String get labelFinishProgram {
     return Intl.message(
       'Finalizar programa',
       name: 'labelFinishProgram',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Número inválido`
-  String get inputPhoneError {
-    return Intl.message(
-      'Número inválido',
-      name: 'inputPhoneError',
       desc: '',
       args: [],
     );

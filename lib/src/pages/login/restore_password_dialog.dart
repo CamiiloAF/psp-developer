@@ -54,7 +54,7 @@ class _RestorePasswordDialogState extends State<RestorePasswordDialog>
             onSaved: (value) => _phone = value,
             validator: (value) => (isValidPhoneNumber(value)
                 ? null
-                : S.of(context).inputPhoneError),
+                : S.of(context).invalidNumber),
           );
   }
 

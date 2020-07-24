@@ -69,19 +69,24 @@ String getRequestResponseMessage(S s, int statusCode) {
     case Constants.PHONE_ALREADY_IN_USE:
       return s.messagePhoneIsAlreadyInUse;
       break;
+    case Constants.MUST_BE_HAVE_AT_LEAST_3_COMPLETED_PROGRAMS:
+      return s.messageYouMustHaveCompletedPrograms;
+      break;
+    case Constants.PROGRAM_DOES_NOT_MEET_ALL_RECORDS:
+      return s.messageProgramDoesNotMeetAllRecords;
+      break;
     default:
       return s.messageUnexpectedError;
   }
 }
 
 Future<void> showSnackBar(
-  BuildContext context,
-  ScaffoldState scaffoldState,
-  int statusCode,
-) async {
+    BuildContext context, ScaffoldState scaffoldState, int statusCode,
+    {int durationInMilliseconds = 1500}) async {
   if (statusCode != 404) {
-    final snackBar =
-        buildSnackbar(Text(getRequestResponseMessage(S.of(context), statusCode)));
+    final snackBar = buildSnackbar(
+        Text(getRequestResponseMessage(S.of(context), statusCode)),
+        durationInMilliseconds: durationInMilliseconds);
 
     //Este delay es para que no genere un error. (Este error sólo se vé en la consola)
     await Future.delayed(Duration(milliseconds: 1));

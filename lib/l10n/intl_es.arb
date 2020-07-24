@@ -26,10 +26,10 @@
   "appBarTitleProgramParts": "Partes del programa",
   "appBarTitlePIP": "PIP",
   "appBarTitleProfile": "Perfil",
-  "appBarTitlePlanningTime": "Planeación de tiempos",
+  "appBarTitlePlanning": "Planeación",
   "appBarTitleAnalysisTools": "Herramientas de análisis",
   "appBarTitleProgramSummary": "Resumen del programa",
-  "titleNotAutorized": "NO ESTÁS AUTORIZADO",
+  "titleNotAuthorized": "NO ESTÁS AUTORIZADO",
   "titleProgramSizeSummary": "RESUMEN TAMAÑO DEL PROGRAMA",
   "titleTimeInPhase": "Tiempo por fase (min)",
   "titleDefectsInjectedByPhase": "Defectos inyectados por fase",
@@ -57,6 +57,8 @@
   "messageNoNegativeDifferenceBetweenDates": "No puede haber una diferencia negativa entre fechas",
   "messageEmailIsAlreadyInUse": "El correo electrónico ya se encuentra en uso",
   "messagePhoneIsAlreadyInUse": "El teléfono ya se encuentra en uso",
+  "messageYouMustHaveCompletedPrograms": "Al menos debe tener 3 programas finalizados",
+  "messageProgramDoesNotMeetAllRecords": "El programa actual no cumple con los registros para finalizar",
   "thereIsNoInformation": "No hay información",
   "labelName": "Nombre",
   "inputNameError": "Debe tener al menos 3 carateres",
@@ -122,8 +124,8 @@
   "labelLanguage": "Lenguaje",
   "labelSystemLanguage": "Lenguaje del sistema",
   "labelWithPlaceHolderEstimatedTimeIn": "Tiempo estimado en {phase}",
+  "labelWithPlaceHolderEstimatedDefectsIn": "Defectos estimados en {phase}",
   "labelFinishProgram": "Finalizar programa",
-  "inputPhoneError": "Número inválido",
   "helperInputDate": "Mantenga presionado el icono para poner la fecha y hora actual",
   "helperTimeInMinutes": "Tiempo en minutos",
   "buttonStartInterruption": "Iniciar la interrupción",
@@ -132,10 +134,5 @@
   "optionLogOut": "Cerrar sesión",
   "optionSettings": "Ajustes",
   "darkMode": "Modo oscuro",
-
-
-
-
-
   "lightMode": "Modo claro"
 }

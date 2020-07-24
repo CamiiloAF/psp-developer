@@ -54,7 +54,7 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
   }
 
   Widget _createBody() {
-    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+    final isSubmitButtonEnabled = !(Provider.of<BlocProvider>(context)
         .programsBloc
         .hasCurrentProgramEnded());
 
@@ -73,7 +73,7 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
               _buildInputTestDescription(),
               _buildInputObjective(),
               SubmitButton(
-                  onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
+                  onPressed: (isSubmitButtonEnabled) ? () => _submit() : null)
             ],
           ),
         ),

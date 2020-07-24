@@ -63,7 +63,7 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
   }
 
   Widget _createBody() {
-    final isSubmiteButtonEnabled = (Provider.of<BlocProvider>(context)
+    final isSubmitButtonEnabled = !(Provider.of<BlocProvider>(context)
         .programsBloc
         .hasCurrentProgramEnded());
 
@@ -84,7 +84,7 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
               _buildInputFinishDate(),
               _buildInputTimeForRepair(),
               SubmitButton(
-                  onPressed: (isSubmiteButtonEnabled) ? () => _submit() : null)
+                  onPressed: (isSubmitButtonEnabled) ? () => _submit() : null)
             ],
           ),
         ),
@@ -158,7 +158,7 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
       onChanged: (value) {
         setState(() {
           (isPhaseAdded)
-              ? _currentAddedPhaseId = value
+              ? {_currentAddedPhaseId = value}
               : _currentRemovedPhaseId = value;
         });
       },
@@ -232,6 +232,7 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
           _defectLogModel.finishDate = value?.millisecondsSinceEpoch;
           setTimeForRepair();
         },
+        isEnabled: _currentRemovedPhaseId != -1,
         onSaved: (DateTime value) =>
             _defectLogModel.finishDate = value?.millisecondsSinceEpoch);
   }
@@ -274,7 +275,12 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
 
     _formKey.currentState.save();
 
-    if (!_isValidTimeForRepair()) return;
+    if (_currentRemovedPhaseId == -1) _removeFinishDateAndTimeForRepair();
+
+    if (!_isValidTimeForRepair()) {
+      utils.showSnackBarIncorrectDates(context, _scaffoldKey.currentState);
+      return;
+    }
 
     final progressDialog =
         utils.getProgressDialog(context, S.of(context).progressDialogSaving);
@@ -308,11 +314,11 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
     }
   }
 
-  bool _isValidTimeForRepair() {
-    if (_defectLogModel.timeForRepair == null ||
-        _defectLogModel.timeForRepair >= 0) return true;
-
-    utils.showSnackBarIncorrectDates(context, _scaffoldKey.currentState);
-    return false;
+  void _removeFinishDateAndTimeForRepair() {
+    _defectLogModel.finishDate = null;
+    _defectLogModel.timeForRepair = null;
   }
+
+  bool _isValidTimeForRepair() => (_defectLogModel.timeForRepair == null ||
+      _defectLogModel.timeForRepair >= 0);
 }

@@ -10,8 +10,9 @@ import 'package:psp_developer/src/pages/new_parts/new_part_edit_page.dart';
 import 'package:psp_developer/src/pages/new_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
+import 'package:psp_developer/src/pages/program_plan_summary/program_plan_summary_page.dart';
 import 'package:psp_developer/src/pages/programs/program_info_page.dart';
-import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_time_page.dart';
+import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_page.dart';
 import 'package:psp_developer/src/pages/programs/programs_page.dart';
 import 'package:psp_developer/src/pages/projects/projects_page.dart';
 import 'package:psp_developer/src/pages/reusable_parts/reusable_part_edit_page.dart';
@@ -41,8 +42,10 @@ Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
           ReusablePartsPage(),
       ReusablePartEditPage.ROUTE_NAME: (BuildContext context) =>
           ReusablePartEditPage(),
-      ProgramPlanningTimePage.ROUTE_NAME: (BuildContext context) =>
-          ProgramPlanningTimePage(),
+      ProgramPlanningPage.ROUTE_NAME: (BuildContext context) =>
+          ProgramPlanningPage(),
       AnalysisToolsPage.ROUTE_NAME: (BuildContext context) =>
           AnalysisToolsPage(),
+      ProgramPlanSummary.ROUTE_NAME: (BuildContext context) =>
+          ProgramPlanSummary(),
     };

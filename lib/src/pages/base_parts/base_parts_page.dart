@@ -56,7 +56,7 @@ class _BasePartsPageState extends State<BasePartsPage>
         title: S.of(context).appBarTitleBaseParts,
         searchDelegate: SearchBaseParts(_basePartsBloc),
       ),
-      drawer: DrawerProgramItems(programId: _programId),
+      drawer: DrawerProgramItems(programId: _programId, scaffoldKey: _scaffoldKey,),
       body: _body(),
     );
   }

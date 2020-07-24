@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
+import 'package:psp_developer/src/pages/program_plan_summary/program_plan_summary_page.dart';
 import 'package:psp_developer/src/pages/programs/program_info_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/program_parts_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
@@ -32,8 +33,11 @@ mixin ProgramsPageAndSearchMixing {
     if (program.totalLines == null) {
       navigatorPush(context, ProgramPartsPage(program: program));
     } else {
-      Navigator.pushNamed(context, TimeLogsPage.ROUTE_NAME,
-          arguments: program.id);
+      final routeName = (program.deliveryDate == null)
+          ? TimeLogsPage.ROUTE_NAME
+          : ProgramPlanSummary.ROUTE_NAME;
+
+      Navigator.pushNamed(context, routeName, arguments: program.id);
     }
   }
 }

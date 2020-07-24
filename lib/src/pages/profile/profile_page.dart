@@ -151,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
       onChangeCountryPicker: (value) => countryCode = value.dialCode,
       validator: (value) => _usersBloc.isValidPhoneNumber(value)
           ? null
-          : S.of(context).inputPhoneError,
+          : S.of(context).invalidNumber,
       onSaved: (value) => _userModel.phone = '$countryCode-$value',
     );
   }

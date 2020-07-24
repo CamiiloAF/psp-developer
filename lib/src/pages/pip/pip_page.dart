@@ -58,7 +58,7 @@ class _PIPPageState extends State<PIPPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomAppBar(title: S.of(context).appBarTitlePIP),
-      drawer: DrawerProgramItems(programId: _programId),
+      drawer: DrawerProgramItems(programId: _programId, scaffoldKey: _scaffoldKey,),
       body: _createBody(),
     );
   }

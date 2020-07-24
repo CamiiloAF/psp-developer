@@ -22,7 +22,14 @@ class AnalysisToolsBloc {
   void getAnalysisTools(int userId) async {
     final analysisToolsWithStatusCode =
         await _analysisToolsRepository.getAnalysisTools(userId);
-    _analysisToolsController.sink.add(analysisToolsWithStatusCode);
+
+    if (analysisToolsWithStatusCode.item1 == 404) {
+      _analysisToolsController.sink.add(Tuple2(
+          Constants.MUST_BE_HAVE_AT_LEAST_3_COMPLETED_PROGRAMS,
+          analysisToolsWithStatusCode.item2));
+    } else {
+      _analysisToolsController.sink.add(analysisToolsWithStatusCode);
+    }
   }
 
   List<GraphicsItemModel> getTotalSizesByProgram() {

@@ -56,7 +56,7 @@ class _ReusablePartsPageState extends State<ReusablePartsPage>
         title: S.of(context).appBarTitleReusableParts,
         searchDelegate: SearchReusableParts(_reusablePartsBloc),
       ),
-      drawer: DrawerProgramItems(programId: _programId),
+      drawer: DrawerProgramItems(programId: _programId, scaffoldKey: _scaffoldKey,),
       body: _body(),
     );
   }

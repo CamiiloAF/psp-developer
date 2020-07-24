@@ -30,7 +30,6 @@ class _DefectLogsPageState extends State<DefectLogsPage>
   @override
   void initState() {
     _defectLogsBloc = context.read<BlocProvider>().defectLogsBloc;
-
     super.initState();
   }
 
@@ -65,7 +64,7 @@ class _DefectLogsPageState extends State<DefectLogsPage>
       create: (_) => FabModel(),
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: DrawerProgramItems(programId: _programId),
+        drawer: DrawerProgramItems(programId: _programId, scaffoldKey: _scaffoldKey,),
         appBar: CustomAppBar(
           title: S.of(context).appBarTitleDefectLogs,
           searchDelegate: SearchDefectLogs(_defectLogsBloc, _programId),

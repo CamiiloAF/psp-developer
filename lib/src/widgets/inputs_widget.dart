@@ -343,7 +343,7 @@ class InputPhoneWithCountryPicker extends StatelessWidget {
                 decoration: InputDecoration(
                     labelText: S.of(context).labelPhone,
                     errorText:
-                        (hasError) ? S.of(context).inputPhoneError : null),
+                        (hasError) ? S.of(context).invalidNumber : null),
                 keyboardType: TextInputType.phone,
                 maxLength: 10,
                 onChanged: onChange,

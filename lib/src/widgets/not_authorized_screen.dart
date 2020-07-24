@@ -18,7 +18,7 @@ class NotAuthorizedScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      S.of(context).titleNotAutorized,
+                      S.of(context).titleNotAuthorized,
                       style: TextStyle(fontSize: 35.0),
                     ),
                     SizedBox(

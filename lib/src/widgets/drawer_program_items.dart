@@ -10,19 +10,23 @@ import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
 import 'package:psp_developer/src/pages/new_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
+import 'package:psp_developer/src/pages/program_plan_summary/program_plan_summary_page.dart';
 import 'package:psp_developer/src/pages/reusable_parts/reusable_parts_page.dart';
 import 'package:psp_developer/src/pages/test_reports/test_reports_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
 import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/theme/theme_changer.dart';
+import 'package:psp_developer/src/utils/utils.dart';
 
 import 'custom_list_tile.dart';
 
 class DrawerProgramItems extends StatelessWidget {
   final int programId;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const DrawerProgramItems({@required this.programId});
+  const DrawerProgramItems(
+      {@required this.programId, @required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,10 @@ class DrawerProgramItems extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             _buildCircleAvatar(context),
-            CustomListTile(title: s.appBarTitleProgramSummary, onTap: () {}),
+            CustomListTile(
+                title: s.appBarTitleProgramSummary,
+                onTap: () =>
+                    navigateTo(context, ProgramPlanSummary.ROUTE_NAME)),
             Divider(),
             CustomListTile(
                 title: s.appBarTitleTimeLogs,
@@ -73,7 +80,12 @@ class DrawerProgramItems extends StatelessWidget {
                 title: s.appBarTitleReusableParts,
                 onTap: () => navigateTo(context, ReusablePartsPage.ROUTE_NAME)),
             Divider(),
-            CustomListTile(title: s.labelFinishProgram, onTap: () {}),
+            CustomListTile(
+                title: s.labelFinishProgram,
+                isEnable:
+                    (programsBloc.getCurrentProgram().deliveryDate == null),
+                onTap: () => _endProgram(
+                    context, DateTime.now().millisecondsSinceEpoch)),
             Divider(),
             ListTile(
               leading: Icon(Icons.brightness_4),
@@ -116,6 +128,29 @@ class DrawerProgramItems extends StatelessWidget {
     final lastName = currentUser['last_name'].toString().trimLeft();
 
     return '${firstName[0]}${lastName[0]}';
+  }
+
+  void _endProgram(BuildContext context, int deliveryDateInMilliseconds) async {
+    final programsBloc =
+        Provider.of<BlocProvider>(context, listen: false).programsBloc;
+
+    final progressDialog =
+        getProgressDialog(context, S.of(context).progressDialogSaving);
+
+    await progressDialog.show();
+
+    final statusCode =
+        await programsBloc.endProgram(deliveryDateInMilliseconds);
+
+    await progressDialog.hide();
+
+    if (statusCode == 204) {
+      navigateTo(context, ProgramPlanSummary.ROUTE_NAME);
+    } else {
+      Navigator.pop(context);
+      await showSnackBar(context, scaffoldKey.currentState, statusCode,
+          durationInMilliseconds: 3500);
+    }
   }
 
   void navigateTo(BuildContext context, String routeName) {

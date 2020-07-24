@@ -72,34 +72,25 @@ class ProgramsBloc with Validators {
     final statusCode = await _programsRepository.updateProgram(program);
 
     if (statusCode == 204) {
-      final tempProgramsByModuleId =
-          lastValueProgramsByModuleIdController.item2;
-
-      final indexOfOldProgramByModuleId = tempProgramsByModuleId
-          .indexWhere((element) => element.id == program.id);
-
-      if (indexOfOldProgramByModuleId != -1) {
-        tempProgramsByModuleId[indexOfOldProgramByModuleId] = program;
-      }
-
-      _programsByModuleIdController.sink
-          .add(Tuple2(200, tempProgramsByModuleId));
+      _updateProgramsByModuleIdController(program);
     }
     return statusCode;
   }
 
-  int _getProgramTotalLines(ProgramPartsModel programParts) {
+  double _getProgramTotalLines(ProgramPartsModel programParts) {
     final basePartsTotalLines = _getBasePartsTotalLines(programParts.baseParts);
+
     final reusablePartsTotalLines =
         _getReusableAndNewPartsTotalLines(programParts.reusableParts);
+
     final newPartsTotalLines =
         _getReusableAndNewPartsTotalLines(programParts.newParts);
 
     return basePartsTotalLines + reusablePartsTotalLines + newPartsTotalLines;
   }
 
-  int _getBasePartsTotalLines(List<BasePartModel> baseParts) {
-    var totalLines = 0;
+  double _getBasePartsTotalLines(List<BasePartModel> baseParts) {
+    var totalLines = 0.0;
 
     if (isNullOrEmpty(baseParts)) return totalLines;
 
@@ -112,8 +103,8 @@ class ProgramsBloc with Validators {
     return totalLines;
   }
 
-  int _getReusableAndNewPartsTotalLines(List<dynamic> parts) {
-    var totalLines = 0;
+  double _getReusableAndNewPartsTotalLines(List<dynamic> parts) {
+    var totalLines = 0.0;
 
     if (isNullOrEmpty(parts)) return totalLines;
 
@@ -122,6 +113,35 @@ class ProgramsBloc with Validators {
     });
 
     return totalLines;
+  }
+
+  Future<int> endProgram(int deliveryDateInMilliseconds) async {
+    _currentProgram.deliveryDate = deliveryDateInMilliseconds;
+
+    final statusCode = await _programsRepository.endProgram(_currentProgram);
+
+    if (statusCode == 204) {
+      _updateProgramsByModuleIdController(_currentProgram);
+    } else {
+      _currentProgram.deliveryDate = null;
+    }
+
+    return statusCode;
+  }
+
+  void _updateProgramsByModuleIdController(ProgramModel program) {
+    if (program == null) return;
+
+    final tempProgramsByModuleId = lastValueProgramsByModuleIdController.item2;
+
+    final indexOfOldProgramByModuleId = tempProgramsByModuleId
+        .indexWhere((element) => element.id == program.id);
+
+    if (indexOfOldProgramByModuleId != -1) {
+      tempProgramsByModuleId[indexOfOldProgramByModuleId] = program;
+    }
+
+    _programsByModuleIdController.sink.add(Tuple2(200, tempProgramsByModuleId));
   }
 
   void dispose() {

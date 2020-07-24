@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:psp_developer/src/models/time_logs_model.dart';
 import 'package:psp_developer/src/pages/time_logs/time_log_edit_page.dart';
+import 'package:psp_developer/src/providers/bloc_provider.dart';
 import 'package:psp_developer/src/providers/models/time_log_pending_interruption.dart';
 import 'package:psp_developer/src/shared_preferences/shared_preferences.dart';
 import 'package:psp_developer/src/utils/constants.dart';
@@ -12,8 +13,14 @@ import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 mixin TimeLogsPageAndSearchMixing {
   Widget buildItemList(BuildContext context, TimeLogModel timeLog,
       {Function closeSearch}) {
+    final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
+
     var isEnabled =
         Provider.of<TimelogPendingInterruptionModel>(context).isListItemsEnable;
+
+    if(!isEnabled && programsBloc.getCurrentProgram().deliveryDate != null){
+      isEnabled = true;
+    }
 
     if (!isEnabled &&
         Preferences().timeLogIdWithPendingInterruption == timeLog.id) {

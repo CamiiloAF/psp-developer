@@ -19,7 +19,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
-  static m0(phase) => "Tiempo estimado en ${phase}";
+  static m0(phase) => "Defectos estimados en ${phase}";
+
+  static m1(phase) => "Tiempo estimado en ${phase}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -30,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appBarTitleModules" : MessageLookupByLibrary.simpleMessage("Modulos"),
     "appBarTitleNewParts" : MessageLookupByLibrary.simpleMessage("Partes nuevas"),
     "appBarTitlePIP" : MessageLookupByLibrary.simpleMessage("PIP"),
-    "appBarTitlePlanningTime" : MessageLookupByLibrary.simpleMessage("Planeación de tiempos"),
+    "appBarTitlePlanning" : MessageLookupByLibrary.simpleMessage("Planeación"),
     "appBarTitleProfile" : MessageLookupByLibrary.simpleMessage("Perfil"),
     "appBarTitleProgramParts" : MessageLookupByLibrary.simpleMessage("Partes del programa"),
     "appBarTitleProgramSummary" : MessageLookupByLibrary.simpleMessage("Resumen del programa"),
@@ -50,7 +52,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "helperTimeInMinutes" : MessageLookupByLibrary.simpleMessage("Tiempo en minutos"),
     "hintEmail" : MessageLookupByLibrary.simpleMessage("ejemplo@correo.com"),
     "inputNameError" : MessageLookupByLibrary.simpleMessage("Debe tener al menos 3 carateres"),
-    "inputPhoneError" : MessageLookupByLibrary.simpleMessage("Número inválido"),
     "inputRequiredError" : MessageLookupByLibrary.simpleMessage("Este campo es obligatorio"),
     "invalidConfirmPassword" : MessageLookupByLibrary.simpleMessage("Las contraseñas no coinciden"),
     "invalidEmail" : MessageLookupByLibrary.simpleMessage("Email inválido"),
@@ -114,7 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelTimeForRepair" : MessageLookupByLibrary.simpleMessage("Tiempo en reparar"),
     "labelType" : MessageLookupByLibrary.simpleMessage("Tipo"),
     "labelUpdateDate" : MessageLookupByLibrary.simpleMessage("Fecha de actualización"),
-    "labelWithPlaceHolderEstimatedTimeIn" : m0,
+    "labelWithPlaceHolderEstimatedDefectsIn" : m0,
+    "labelWithPlaceHolderEstimatedTimeIn" : m1,
     "labelYearsConfiguration" : MessageLookupByLibrary.simpleMessage("Años en configuración"),
     "labelYearsDesign" : MessageLookupByLibrary.simpleMessage("Años en diseño"),
     "labelYearsGenerals" : MessageLookupByLibrary.simpleMessage("Años en general"),
@@ -139,10 +141,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "messageNotConnection" : MessageLookupByLibrary.simpleMessage("Por favor revise su conexión a internet"),
     "messagePIPHasBeenSave" : MessageLookupByLibrary.simpleMessage("Se ha guardado el PIP"),
     "messagePhoneIsAlreadyInUse" : MessageLookupByLibrary.simpleMessage("El teléfono ya se encuentra en uso"),
+    "messageProgramDoesNotMeetAllRecords" : MessageLookupByLibrary.simpleMessage("El programa actual no cumple con los registros para finalizar"),
     "messageTimeOutException" : MessageLookupByLibrary.simpleMessage("La solicitud ha tardado mucho, inténtelo nuevamente"),
     "messageUnexpectedError" : MessageLookupByLibrary.simpleMessage("Ocurrió un error inesperado, inténtelo nuevamente"),
     "messageWeHaveSentEmail" : MessageLookupByLibrary.simpleMessage("¡Te hemos enviado un email!"),
     "messageWeHaveSentSMS" : MessageLookupByLibrary.simpleMessage("¡Te hemos enviado un SMS!"),
+    "messageYouMustHaveCompletedPrograms" : MessageLookupByLibrary.simpleMessage("Al menos debe tener 3 programas finalizados"),
     "optionLogOut" : MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
     "optionSettings" : MessageLookupByLibrary.simpleMessage("Ajustes"),
     "progressDialogLoading" : MessageLookupByLibrary.simpleMessage("Cargando"),
@@ -151,7 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "thereIsNoInformation" : MessageLookupByLibrary.simpleMessage("No hay información"),
     "titleDefectsInjectedByPhase" : MessageLookupByLibrary.simpleMessage("Defectos inyectados por fase"),
     "titleDefectsRemovedByPhase" : MessageLookupByLibrary.simpleMessage("Defectos removidos por fase"),
-    "titleNotAutorized" : MessageLookupByLibrary.simpleMessage("NO ESTÁS AUTORIZADO"),
+    "titleNotAuthorized" : MessageLookupByLibrary.simpleMessage("NO ESTÁS AUTORIZADO"),
     "titleProgramSizeSummary" : MessageLookupByLibrary.simpleMessage("RESUMEN TAMAÑO DEL PROGRAMA"),
     "titleSizeOfPrograms" : MessageLookupByLibrary.simpleMessage("Tamaños de los programas"),
     "titleTimeInPhase" : MessageLookupByLibrary.simpleMessage("Tiempo por fase (min)"),

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:psp_developer/src/models/program_parts_model.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
@@ -16,11 +19,7 @@ class ProgramsRepository {
 
     final response = await networkBoundResource.execute(isRefreshing);
 
-    if (response.item2 == null) {
-      return Tuple2(response.item1, []);
-    } else {
-      return response;
-    }
+    return (response.item2 == null) ? Tuple2(response.item1, []) : response;
   }
 
   Future<Tuple2<int, List<Tuple2<int, String>>>> getAllProgramsByOrganization(
@@ -49,6 +48,36 @@ class ProgramsRepository {
         .executeInsert(programPartsModelToJson(programParts), url);
     return result.item1;
   }
+
+  Future<int> endProgram(ProgramModel program) async {
+    try {
+      final url = '${Constants.baseUrl}/programs/end/${program.id}';
+
+      final body = json.encode({'delivery_date': program.deliveryDate});
+
+      final resp =
+          await http.patch(url, headers: Constants.getHeaders(), body: body);
+
+      if (resp.statusCode == 204) {
+        _ProgramsUpdateBoundResource().doOperationInDb(program);
+      } else if (resp.statusCode == 400) {
+        if (programDoesNotMeetAllRecords(resp.body)) {
+          return Constants.PROGRAM_DOES_NOT_MEET_ALL_RECORDS;
+        }
+      }
+
+      return resp.statusCode;
+    } on SocketException catch (e) {
+      return e.osError.errorCode;
+    } on http.ClientException catch (_) {
+      return 7;
+    } catch (e) {
+      return -1;
+    }
+  }
+
+  bool programDoesNotMeetAllRecords(String body) =>
+      body.contains('Current program does not meet records to end');
 }
 
 class _ProgramsNetworkBoundResource
@@ -83,8 +112,9 @@ class _ProgramsNetworkBoundResource
       rateLimiter.shouldFetch(_allPrograms, Duration(minutes: 10));
 
   @override
-  Future<List<ProgramModel>> loadFromLocalStorage() async => _getProgramsFromJson(
-      await DBProvider.db.getAllProgramsByModuleId(moduleId));
+  Future<List<ProgramModel>> loadFromLocalStorage() async =>
+      _getProgramsFromJson(
+          await DBProvider.db.getAllProgramsByModuleId(moduleId));
 
   List<ProgramModel> _getProgramsFromJson(List<Map<String, dynamic>> res) {
     return res.isNotEmpty
@@ -107,6 +137,7 @@ class _ProgramsByOrganizationNetworkBoundResource
   List<Tuple2<int, String>> callResult;
 
   final int _currentProgramId;
+
   _ProgramsByOrganizationNetworkBoundResource(this._currentProgramId);
 
   @override

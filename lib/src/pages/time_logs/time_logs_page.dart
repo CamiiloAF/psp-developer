@@ -82,7 +82,7 @@ class _TimeLogsPageState extends State<TimeLogsPage>
   Scaffold _buildScaffold(BuildContext context, bool isShowing) {
     return Scaffold(
         key: _scaffoldKey,
-        drawer: DrawerProgramItems(programId: _programId),
+        drawer: DrawerProgramItems(programId: _programId, scaffoldKey: _scaffoldKey,),
         appBar: CustomAppBar(
           title: S.of(context).appBarTitleTimeLogs,
           searchDelegate: SearchTimeLogs(_timeLogsBloc),

@@ -67,7 +67,7 @@ class _TestReportsPageState extends State<TestReportsPage>
       create: (_) => FabModel(),
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: DrawerProgramItems(programId: _programId),
+        drawer: DrawerProgramItems(programId: _programId, scaffoldKey: _scaffoldKey,),
         appBar: CustomAppBar(
           title: S.of(context).appBarTitleTestReports,
           searchDelegate: SearchTestReports(_testReportsBloc, _programId),

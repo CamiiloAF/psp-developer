@@ -11,8 +11,10 @@ class Constants {
   static const TIME_OUT_EXCEPTION_CODE = 1001;
   static const TIME_OUT_SECONDS = 30;
 
-  static const EMAIL_ALREADY_IN_USE = 54;
   static const PHONE_ALREADY_IN_USE = 53;
+  static const EMAIL_ALREADY_IN_USE = 54;
+  static const MUST_BE_HAVE_AT_LEAST_3_COMPLETED_PROGRAMS = 55;
+  static const PROGRAM_DOES_NOT_MEET_ALL_RECORDS = 56;
 
   //Table names
   static const PROJECTS_TABLE_NAME = 'projects';
@@ -79,7 +81,7 @@ class Constants {
       'modules_id INT(11) NOT NULL,'
       'name VARCHAR (50) NOT NULL,'
       'description TEXT NOT NULL,'
-      'total_lines INT DEFAULT NULL,'
+      'total_lines DOUBLE DEFAULT NULL,'
       'planning_date VARCHAR NOT NULL,'
       'start_date VARCHAR NOT NULL,'
       'delivery_date VARCHAR NULL);';

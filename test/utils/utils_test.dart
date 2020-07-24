@@ -19,6 +19,10 @@ void main() {
         'The request took a long time, please try again';
     final messageEmailIsAlreadyInUse = 'Email is already in use';
     final messagePhoneIsAlreadyInUse = 'Phone is already in use';
+    final messageYouMustHaveCompletedPrograms =
+        'You must have at least 3 completed programs';
+    final messageProgramDoesNotMeetAllRecords =
+        'Current program does not meet records to end';
 
     final mockS = _MockS();
 
@@ -34,6 +38,10 @@ void main() {
         .thenReturn(messagePhoneIsAlreadyInUse);
     when(mockS.messageEmailIsAlreadyInUse)
         .thenReturn(messageEmailIsAlreadyInUse);
+    when(mockS.messageYouMustHaveCompletedPrograms)
+        .thenReturn(messageYouMustHaveCompletedPrograms);
+    when(mockS.messageProgramDoesNotMeetAllRecords)
+        .thenReturn(messageProgramDoesNotMeetAllRecords);
 
     String getStatusCodeMessage(int statusCodeToTest) =>
         utils.getRequestResponseMessage(mockS, statusCodeToTest);
@@ -76,6 +84,14 @@ void main() {
 
     test('getRequestResponseMessage with code 54', () {
       expect(getStatusCodeMessage(54), messageEmailIsAlreadyInUse);
+    });
+
+    test('getRequestResponseMessage with code 55', () {
+      expect(getStatusCodeMessage(55), messageYouMustHaveCompletedPrograms);
+    });
+
+    test('getRequestResponseMessage with code 56', () {
+      expect(getStatusCodeMessage(56), messageProgramDoesNotMeetAllRecords);
     });
   });
 

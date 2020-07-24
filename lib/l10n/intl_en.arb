@@ -26,10 +26,10 @@
   "appBarTitleProgramParts": "Program parts",
   "appBarTitlePIP": "PIP",
   "appBarTitleProfile": "Profile",
-  "appBarTitlePlanningTime": "Time´s planning",
+  "appBarTitlePlanning": "Planning",
   "appBarTitleAnalysisTools": "Analysis tools",
   "appBarTitleProgramSummary": "Program summary",
-  "titleNotAutorized": "YOU ARE NOT AUTHORIZED",
+  "titleNotAuthorized": "YOU ARE NOT AUTHORIZED",
   "titleProgramSizeSummary": "PROGRAM SIZE SUMMARY",
   "titleTimeInPhase": "Time in phase (min)",
   "titleDefectsInjectedByPhase": "Defects injected by phase",
@@ -56,6 +56,8 @@
   "messageNoNegativeDifferenceBetweenDates": "There can be no negative difference between dates",
   "messageEmailIsAlreadyInUse": "Email is already in use",
   "messagePhoneIsAlreadyInUse": "Phone is already in use",
+  "messageYouMustHaveCompletedPrograms": "You must have at least 3 completed programs",
+  "messageProgramDoesNotMeetAllRecords": "Current program does not meet records to end",
   "thereIsNoInformation": "There is no information",
   "inputNameError": "Must be at least 3 characters",
   "inputRequiredError": "This input is required",
@@ -120,7 +122,8 @@
   "labelLoading": "Loading...",
   "labelLanguage": "Language",
   "labelSystemLanguage": "System language",
-  "labelWithPlaceHolderEstimatedTimeIn": "Tiempo estimado en {phase}",
+  "labelWithPlaceHolderEstimatedTimeIn": "Estimated time in {phase}",
+  "labelWithPlaceHolderEstimatedDefectsIn": "Estimated defects in {phase}",
   "labelFinishProgram": "Finish program",
   "helperInputDate": "Press and hold the icon to set the current date and time",
   "helperTimeInMinutes": "Time in minutes",
@@ -131,5 +134,4 @@
   "optionSettings": "Settings",
   "darkMode": "Dark mode",
   "lightMode": "Light mode"
-
 }

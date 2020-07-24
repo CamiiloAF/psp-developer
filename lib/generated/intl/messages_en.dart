@@ -19,7 +19,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m0(phase) => "Tiempo estimado en ${phase}";
+  static m0(phase) => "Estimated defects in ${phase}";
+
+  static m1(phase) => "Estimated time in ${phase}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -30,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appBarTitleModules" : MessageLookupByLibrary.simpleMessage("Modules"),
     "appBarTitleNewParts" : MessageLookupByLibrary.simpleMessage("New parts"),
     "appBarTitlePIP" : MessageLookupByLibrary.simpleMessage("PIP"),
-    "appBarTitlePlanningTime" : MessageLookupByLibrary.simpleMessage("Time´s planning"),
+    "appBarTitlePlanning" : MessageLookupByLibrary.simpleMessage("Planning"),
     "appBarTitleProfile" : MessageLookupByLibrary.simpleMessage("Profile"),
     "appBarTitleProgramParts" : MessageLookupByLibrary.simpleMessage("Program parts"),
     "appBarTitleProgramSummary" : MessageLookupByLibrary.simpleMessage("Program summary"),
@@ -113,7 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelTimeForRepair" : MessageLookupByLibrary.simpleMessage("Time to repair"),
     "labelType" : MessageLookupByLibrary.simpleMessage("Type"),
     "labelUpdateDate" : MessageLookupByLibrary.simpleMessage("Update date"),
-    "labelWithPlaceHolderEstimatedTimeIn" : m0,
+    "labelWithPlaceHolderEstimatedDefectsIn" : m0,
+    "labelWithPlaceHolderEstimatedTimeIn" : m1,
     "labelYearsConfiguration" : MessageLookupByLibrary.simpleMessage("Years in configuration"),
     "labelYearsDesign" : MessageLookupByLibrary.simpleMessage("Years in design"),
     "labelYearsGenerals" : MessageLookupByLibrary.simpleMessage("Years in general"),
@@ -137,10 +140,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "messageNotConnection" : MessageLookupByLibrary.simpleMessage("Please check your internet connection"),
     "messagePIPHasBeenSave" : MessageLookupByLibrary.simpleMessage("The PIP has been saved"),
     "messagePhoneIsAlreadyInUse" : MessageLookupByLibrary.simpleMessage("Phone is already in use"),
+    "messageProgramDoesNotMeetAllRecords" : MessageLookupByLibrary.simpleMessage("Current program does not meet records to end"),
     "messageTimeOutException" : MessageLookupByLibrary.simpleMessage("The request took a long time, please try again"),
     "messageUnexpectedError" : MessageLookupByLibrary.simpleMessage("Has been occurred an unexpected error, try again"),
     "messageWeHaveSentEmail" : MessageLookupByLibrary.simpleMessage("¡We\'ve sent you an email!"),
     "messageWeHaveSentSMS" : MessageLookupByLibrary.simpleMessage("¡We\'ve sent you a SMS!"),
+    "messageYouMustHaveCompletedPrograms" : MessageLookupByLibrary.simpleMessage("You must have at least 3 completed programs"),
     "optionLogOut" : MessageLookupByLibrary.simpleMessage("Log out"),
     "optionSettings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "progressDialogLoading" : MessageLookupByLibrary.simpleMessage("Loading"),
@@ -149,7 +154,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "thereIsNoInformation" : MessageLookupByLibrary.simpleMessage("There is no information"),
     "titleDefectsInjectedByPhase" : MessageLookupByLibrary.simpleMessage("Defects injected by phase"),
     "titleDefectsRemovedByPhase" : MessageLookupByLibrary.simpleMessage("Defects removed by phase"),
-    "titleNotAutorized" : MessageLookupByLibrary.simpleMessage("YOU ARE NOT AUTHORIZED"),
+    "titleNotAuthorized" : MessageLookupByLibrary.simpleMessage("YOU ARE NOT AUTHORIZED"),
     "titleProgramSizeSummary" : MessageLookupByLibrary.simpleMessage("PROGRAM SIZE SUMMARY"),
     "titleSizeOfPrograms" : MessageLookupByLibrary.simpleMessage("Size of programs"),
     "titleTimeInPhase" : MessageLookupByLibrary.simpleMessage("Time in phase (min)"),
