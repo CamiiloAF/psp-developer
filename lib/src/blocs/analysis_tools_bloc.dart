@@ -32,7 +32,7 @@ class AnalysisToolsBloc {
     }
   }
 
-  List<GraphicsItemModel> getTotalSizesByProgram() {
+  List<GraphicsItemModel> getTotalSizesPerProgram() {
     final items = <GraphicsItemModel>[];
 
     if (!isNullOrEmpty(lastValueAnalysisToolsModelController.item2)) {
@@ -45,7 +45,7 @@ class AnalysisToolsBloc {
     return items;
   }
 
-  List<GraphicsItemModel> getTotalTimesByProgram() {
+  List<GraphicsItemModel> getTotalTimesPerProgram() {
     final items = <GraphicsItemModel>[];
 
     if (!isNullOrEmpty(lastValueAnalysisToolsModelController.item2)) {
@@ -58,7 +58,7 @@ class AnalysisToolsBloc {
     return items;
   }
 
-  List<GraphicsItemModel> getTotalDefectsByProgram() {
+  List<GraphicsItemModel> getTotalDefectsPerProgram() {
     final items = <GraphicsItemModel>[];
 
     if (!isNullOrEmpty(lastValueAnalysisToolsModelController.item2)) {
@@ -71,7 +71,7 @@ class AnalysisToolsBloc {
     return items;
   }
 
-  List<GraphicsItemModel> getDefectsInjectedByPhase() {
+  List<GraphicsItemModel> getDefectsInjectedPerPhase() {
     var defectsInjected = <DefectsModel>[];
 
     if (!isNullOrEmpty(lastValueAnalysisToolsModelController.item2)) {
@@ -85,7 +85,7 @@ class AnalysisToolsBloc {
     return _getTotalDefectsInPhase(defectsInjected);
   }
 
-  List<GraphicsItemModel> getDefectsRemovedByPhase() {
+  List<GraphicsItemModel> getDefectsRemovedPerPhase() {
     var defectsRemoved = <DefectsModel>[];
 
     if (!isNullOrEmpty(lastValueAnalysisToolsModelController.item2)) {

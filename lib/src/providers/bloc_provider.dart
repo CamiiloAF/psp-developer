@@ -6,7 +6,7 @@ import 'package:psp_developer/src/blocs/login_bloc.dart';
 import 'package:psp_developer/src/blocs/modules_bloc.dart';
 import 'package:psp_developer/src/blocs/new_parts_bloc.dart';
 import 'package:psp_developer/src/blocs/pip_bloc.dart';
-import 'package:psp_developer/src/blocs/program_plan_summary_bloc.dart';
+import 'package:psp_developer/src/blocs/program_summary_bloc.dart';
 import 'package:psp_developer/src/blocs/programs_bloc.dart';
 import 'package:psp_developer/src/blocs/projects_bloc.dart';
 import 'package:psp_developer/src/blocs/reusable_parts_bloc.dart';
@@ -37,7 +37,7 @@ class BlocProvider {
 
   final _userBloc = UsersBloc();
 
-  final _programPlanSummaryBloc = ProgramPlanSummaryBloc();
+  final _programSummaryBloc = ProgramSummaryBloc();
   final _analysisToolsBloc = AnalysisToolsBloc();
 
   LoginBloc get loginBloc {
@@ -71,6 +71,6 @@ class BlocProvider {
 
   UsersBloc get userBloc => _userBloc;
 
-  ProgramPlanSummaryBloc get programPlanSummaryBloc => _programPlanSummaryBloc;
+  ProgramSummaryBloc get programSummaryBloc => _programSummaryBloc;
   AnalysisToolsBloc get analysisToolsBloc => _analysisToolsBloc;
 }

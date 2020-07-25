@@ -48,7 +48,9 @@ class MyApp extends StatelessWidget {
             ? ProjectsPage.ROUTE_NAME
             : LoginPage.ROUTE_NAME,
         routes: getApplicationRoutes(),
-        theme: Provider.of<ThemeChanger>(context).currentTheme,
+        theme: Provider
+            .of<ThemeChanger>(context)
+            .currentTheme,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -56,7 +58,9 @@ class MyApp extends StatelessWidget {
           S.delegate,
           LocaleNamesLocalizationsDelegate(),
         ],
-        locale: Provider.of<SystemLanguageModel>(context).locale,
+        locale: Provider
+            .of<SystemLanguageModel>(context)
+            .locale,
         supportedLocales: S.delegate.supportedLocales);
   }
 }

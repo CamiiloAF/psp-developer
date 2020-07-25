@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:psp_developer/src/models/programs_model.dart';
-import 'package:psp_developer/src/pages/program_plan_summary/program_plan_summary_page.dart';
+import 'package:psp_developer/src/pages/program_summary/program_summary_page.dart';
 import 'package:psp_developer/src/pages/programs/program_info_page.dart';
 import 'package:psp_developer/src/pages/programs/program_parts/program_parts_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
@@ -35,7 +35,7 @@ mixin ProgramsPageAndSearchMixing {
     } else {
       final routeName = (program.deliveryDate == null)
           ? TimeLogsPage.ROUTE_NAME
-          : ProgramPlanSummary.ROUTE_NAME;
+          : ProgramSummary.ROUTE_NAME;
 
       Navigator.pushNamed(context, routeName, arguments: program.id);
     }

@@ -41,18 +41,22 @@ class NewPartModel {
   int currentLines;
   int numberMethodsCurrent;
 
-  factory NewPartModel.fromJson(Map<String, dynamic> json) => NewPartModel(
+  factory NewPartModel.fromJson(Map<String, dynamic> json) =>
+      NewPartModel(
         id: json['id'],
         programsId: json['programs_id'],
         typesSizesId: json['types_sizes_id'],
         name: json['name'],
-        plannedLines: json['planned_lines'],
+        plannedLines: (json['planned_lines'] is int)
+            ? (json['planned_lines'] as int).toDouble()
+            : json['planned_lines'],
         numberMethodsPlanned: json['number_methods_planned'],
         currentLines: json['current_lines'],
         numberMethodsCurrent: json['number_methods_current'],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         'id': id,
         'programs_id': programsId,
         'types_sizes_id': typesSizesId,

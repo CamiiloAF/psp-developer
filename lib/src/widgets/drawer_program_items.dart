@@ -10,7 +10,7 @@ import 'package:psp_developer/src/pages/defect_logs/defect_logs_page.dart';
 import 'package:psp_developer/src/pages/new_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
-import 'package:psp_developer/src/pages/program_plan_summary/program_plan_summary_page.dart';
+import 'package:psp_developer/src/pages/program_summary/program_summary_page.dart';
 import 'package:psp_developer/src/pages/reusable_parts/reusable_parts_page.dart';
 import 'package:psp_developer/src/pages/test_reports/test_reports_page.dart';
 import 'package:psp_developer/src/pages/time_logs/time_logs_page.dart';
@@ -45,7 +45,7 @@ class DrawerProgramItems extends StatelessWidget {
             CustomListTile(
                 title: s.appBarTitleProgramSummary,
                 onTap: () =>
-                    navigateTo(context, ProgramPlanSummary.ROUTE_NAME)),
+                    navigateTo(context, ProgramSummary.ROUTE_NAME)),
             Divider(),
             CustomListTile(
                 title: s.appBarTitleTimeLogs,
@@ -66,7 +66,7 @@ class DrawerProgramItems extends StatelessWidget {
                 padding: EdgeInsets.only(top: 8, bottom: 8, left: 16),
                 child: Text(
                   s.appBarTitleProgramParts,
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.black45),
                 ),
               ),
             ),
@@ -145,7 +145,7 @@ class DrawerProgramItems extends StatelessWidget {
     await progressDialog.hide();
 
     if (statusCode == 204) {
-      navigateTo(context, ProgramPlanSummary.ROUTE_NAME);
+      navigateTo(context, ProgramSummary.ROUTE_NAME);
     } else {
       Navigator.pop(context);
       await showSnackBar(context, scaffoldKey.currentState, statusCode,

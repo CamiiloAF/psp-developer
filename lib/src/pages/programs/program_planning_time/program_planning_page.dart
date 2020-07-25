@@ -52,8 +52,6 @@ class _ProgramPlanningPageState extends State<ProgramPlanningPage> {
   }
 
   Widget _createBody() {
-    final phases = Constants.PHASES;
-
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(15.0),
@@ -250,11 +248,10 @@ class _ProgramPlanningPageState extends State<ProgramPlanningPage> {
     final planning = _buildPlanningModels();
 
     return ProgramPartsModel(
-      baseParts: baseParts,
-      reusableParts: reusableParts,
-      newParts: newParts,
-      planning: planning
-    );
+        baseParts: baseParts,
+        reusableParts: reusableParts,
+        newParts: newParts,
+        planning: planning);
   }
 
   List<PlanningModel> _buildPlanningModels() {

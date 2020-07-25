@@ -10,7 +10,7 @@ import 'package:psp_developer/src/pages/new_parts/new_part_edit_page.dart';
 import 'package:psp_developer/src/pages/new_parts/new_parts_page.dart';
 import 'package:psp_developer/src/pages/pip/pip_page.dart';
 import 'package:psp_developer/src/pages/profile/profile_page.dart';
-import 'package:psp_developer/src/pages/program_plan_summary/program_plan_summary_page.dart';
+import 'package:psp_developer/src/pages/program_summary/program_summary_page.dart';
 import 'package:psp_developer/src/pages/programs/program_info_page.dart';
 import 'package:psp_developer/src/pages/programs/program_planning_time/program_planning_page.dart';
 import 'package:psp_developer/src/pages/programs/programs_page.dart';
@@ -48,6 +48,6 @@ Map<String, WidgetBuilder> getApplicationRoutes() => <String, WidgetBuilder>{
           ProgramPlanningPage(),
       AnalysisToolsPage.ROUTE_NAME: (BuildContext context) =>
           AnalysisToolsPage(),
-      ProgramPlanSummary.ROUTE_NAME: (BuildContext context) =>
-          ProgramPlanSummary(),
+      ProgramSummary.ROUTE_NAME: (BuildContext context) =>
+          ProgramSummary(),
     };
