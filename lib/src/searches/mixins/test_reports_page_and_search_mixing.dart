@@ -27,7 +27,7 @@ mixin TestReportsPageAndSearchMixing {
         if (closeSearch != null) closeSearch();
         navigateToEditPage(context, testReport, testReport.programsId);
       },
-      isEnable: isEnabled,
+      isEnabled: isEnabled,
       subtitle: testReport.objective,
     );
   }

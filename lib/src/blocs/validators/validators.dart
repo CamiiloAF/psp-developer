@@ -47,9 +47,8 @@ class Validators {
           ? s.inputRequiredError
           : null;
 
-  bool isValidNumber(String number) {
+  bool isValidNumber(String number, {bool allowNegatives = true}) {
     if (number == null || number.isEmpty) return false;
-
     Pattern pattern = r'^[0-9]*$';
 
     var regExp = RegExp(pattern);

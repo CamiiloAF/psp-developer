@@ -21,7 +21,7 @@ mixin DefectLogsPageAndSearchMixing {
 
     return CustomListTile(
       title: 'id: ${defectLog.id}',
-      isEnable: isEnabled,
+      isEnabled: isEnabled,
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () {
         if (closeSearch != null) closeSearch();

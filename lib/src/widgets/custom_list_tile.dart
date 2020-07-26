@@ -8,7 +8,7 @@ class CustomListTile extends StatelessWidget {
   final Widget leading;
   final Widget trailing;
 
-  final bool isEnable;
+  final bool isEnabled;
   final bool isAnimated;
 
   final Function() onTap;
@@ -18,7 +18,7 @@ class CustomListTile extends StatelessWidget {
     this.subtitle = '',
     this.leading,
     this.trailing,
-    this.isEnable = true,
+    this.isEnabled = true,
     this.isAnimated = true,
     @required this.onTap,
   });
@@ -26,7 +26,7 @@ class CustomListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var listTile = ListTile(
-      enabled: isEnable,
+      enabled: isEnabled,
       title: Text(title),
       leading: leading,
       trailing: trailing,

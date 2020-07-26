@@ -42,7 +42,7 @@ class NewPartsBloc with Validators {
   }
 
   double calculatePlanningLines(int typeSizesId, int methodsPlanned) =>
-      methodsPlanned * Constants.TYPES_SIZE_VALUES[typeSizesId];
+      double.parse((methodsPlanned * Constants.TYPES_SIZE_VALUES[typeSizesId]).toStringAsFixed(2));
 
   void dispose() {
     addedNewParts.clear();

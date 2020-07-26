@@ -75,7 +75,7 @@
   "labelInterruption": "Interruption",
   "labelNumber": "Number:",
   "labelPhase": "Phase:",
-  "labelChainedDefectLog": "Unchain it:",
+  "labelIdChainedDefectLog": "ID of the defect that unchained it:",
   "labelPhaseAdded": "Added in:",
   "labelPhaseRemoved": "Removed in:",
   "labelStandardDefect": "Standard defect:",

@@ -127,6 +127,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
             ? DateTime.fromMillisecondsSinceEpoch(_timeLogModel.startDate)
             : null,
         isRequired: true,
+        isEnabled: (_timeLogModel.startDate == null),
         labelAndHint: S.of(context).labelStartDate,
         onChanged: (value) {
           _timeLogModel.startDate = value?.millisecondsSinceEpoch;
@@ -142,6 +143,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
             ? DateTime.fromMillisecondsSinceEpoch(_timeLogModel.finishDate)
             : null,
         labelAndHint: S.of(context).labelFinishDate,
+        isEnabled: (_timeLogModel.finishDate == null),
         onChanged: (value) {
           _timeLogModel.finishDate = value?.millisecondsSinceEpoch;
           _setDeltaTime();
@@ -174,7 +176,7 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   }
 
   Widget _buildInputInterruptionStartAt() {
-    if (_timeLogModel.id == null || !isSubmitButtonEnabled) return Container();
+    if (_timeLogModel.id == null) return Container();
 
     final pendingInterruptionStartAt = Preferences().pendingInterruptionStartAt;
     final timeLogIdWithPendingInterruption =
@@ -186,9 +188,9 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
             DateTime.fromMillisecondsSinceEpoch(pendingInterruptionStartAt))
         : '';
 
+    if (initialValue.isEmpty) return Container();
+
     return Container(
-      width: (initialValue.isEmpty) ? 0 : null,
-      height: (initialValue.isEmpty) ? 0 : null,
       child: InputForm(
           initialValue: initialValue,
           onSaved: (value) {},
@@ -219,9 +221,10 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
               paddingHorizontal: 0,
               paddingVertical: 0,
               buttonText: buttonText,
-              onPressed: () {
-                _onPressInterruptionButton(pendingInterruptionStartAt);
-              }),
+              onPressed: (_timeLogModel?.finishDate != null)
+                  ? null
+                  : () =>
+                      _onPressInterruptionButton(pendingInterruptionStartAt)),
         ],
       ),
     );
@@ -230,30 +233,38 @@ class _TimeLogEditPageState extends State<TimeLogEditPage> {
   void _onPressInterruptionButton(int pendingInterruptionStartAt) {
     setState(() {
       if (pendingInterruptionStartAt == null) {
-        Preferences().pendingInterruptionStartAt =
-            DateTime.now().millisecondsSinceEpoch;
-        Preferences().timeLogIdWithPendingInterruption = _timeLogModel.id;
-
-        isSubmitButtonEnabled = false;
-        Provider.of<FabModel>(context, listen: false).isShowing = false;
+        _startInterruption();
       } else {
-        final currentInterruption = utils.getMinutesBetweenTwoDates(
-            DateTime.fromMillisecondsSinceEpoch(pendingInterruptionStartAt),
-            DateTime.now());
-
-        final totalInterruption =
-            currentInterruption + _timeLogModel.interruption;
-
-        _inputInterruptionController.text = '$totalInterruption';
-
-        Preferences().removePendingInterruptionAndTimeLogId();
-
-        isSubmitButtonEnabled = true;
-        Provider.of<FabModel>(context, listen: false).isShowing = true;
+        _stopInterruption(pendingInterruptionStartAt);
       }
     });
     Provider.of<TimelogPendingInterruptionModel>(context, listen: false)
         .isListItemsEnable = Preferences().pendingInterruptionStartAt == null;
+  }
+
+  void _startInterruption() {
+    Preferences().pendingInterruptionStartAt =
+        DateTime.now().millisecondsSinceEpoch;
+    Preferences().timeLogIdWithPendingInterruption = _timeLogModel.id;
+
+    isSubmitButtonEnabled = false;
+    Provider.of<FabModel>(context, listen: false).isShowing = false;
+  }
+
+  void _stopInterruption(int pendingInterruptionStartAt) {
+    final currentInterruption = utils.getMinutesBetweenTwoDates(
+        DateTime.fromMillisecondsSinceEpoch(pendingInterruptionStartAt),
+        DateTime.now());
+
+    final totalInterruption = currentInterruption + _timeLogModel.interruption;
+
+    _inputInterruptionController.text = '$totalInterruption';
+
+    Preferences().removePendingInterruptionAndTimeLogId();
+
+    isSubmitButtonEnabled = true;
+    Provider.of<FabModel>(context, listen: false).isShowing = true;
+
   }
 
   Widget _buildInputComments() {

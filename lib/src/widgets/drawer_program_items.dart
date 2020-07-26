@@ -44,8 +44,7 @@ class DrawerProgramItems extends StatelessWidget {
             _buildCircleAvatar(context),
             CustomListTile(
                 title: s.appBarTitleProgramSummary,
-                onTap: () =>
-                    navigateTo(context, ProgramSummary.ROUTE_NAME)),
+                onTap: () => navigateTo(context, ProgramSummary.ROUTE_NAME)),
             Divider(),
             CustomListTile(
                 title: s.appBarTitleTimeLogs,
@@ -57,7 +56,7 @@ class DrawerProgramItems extends StatelessWidget {
                 title: s.appBarTitleTestReports,
                 onTap: () => navigateTo(context, TestReportsPage.ROUTE_NAME)),
             CustomListTile(
-                isEnable: programsBloc.hasCurrentProgramEnded(),
+                isEnabled: programsBloc.hasCurrentProgramEnded(),
                 title: s.appBarTitlePIP,
                 onTap: () => navigateTo(context, PIPPage.ROUTE_NAME)),
             Divider(),
@@ -66,7 +65,7 @@ class DrawerProgramItems extends StatelessWidget {
                 padding: EdgeInsets.only(top: 8, bottom: 8, left: 16),
                 child: Text(
                   s.appBarTitleProgramParts,
-                  style: TextStyle(color: Colors.black45),
+                  style: TextStyle(color: (appTheme.isDarkTheme)? Colors.grey: Colors.black45),
                 ),
               ),
             ),
@@ -82,8 +81,9 @@ class DrawerProgramItems extends StatelessWidget {
             Divider(),
             CustomListTile(
                 title: s.labelFinishProgram,
-                isEnable:
-                    (programsBloc.getCurrentProgram().deliveryDate == null),
+                isEnabled:
+                    (programsBloc.getCurrentProgram().deliveryDate == null &&
+                        Preferences().pendingInterruptionStartAt == null),
                 onTap: () => _endProgram(
                     context, DateTime.now().millisecondsSinceEpoch)),
             Divider(),

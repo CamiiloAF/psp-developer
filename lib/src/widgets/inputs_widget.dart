@@ -168,6 +168,7 @@ class InputMultiline extends StatelessWidget {
   final String label;
 
   final bool isReadOnly;
+  final bool isEnabled;
 
   final String Function(String value) onChanged;
   final Function(String value) onSaved;
@@ -179,6 +180,7 @@ class InputMultiline extends StatelessWidget {
     this.onSaved,
     this.initialValue,
     this.isReadOnly = false,
+    this.isEnabled = true,
   });
 
   @override
@@ -193,6 +195,7 @@ class InputMultiline extends StatelessWidget {
             errorText: errorText),
         keyboardType: TextInputType.multiline,
         readOnly: isReadOnly,
+        enabled: isEnabled,
         onChanged: onChanged,
         validator: onChanged,
         onSaved: onSaved,
@@ -401,7 +404,9 @@ class InputForm extends StatelessWidget {
     this.onChanged,
     this.margin,
     this.validator,
-    this.helper, this.maxLines = 10, this.minLines = 1,
+    this.helper,
+    this.maxLines = 10,
+    this.minLines = 1,
   });
 
   @override
@@ -421,7 +426,6 @@ class InputForm extends StatelessWidget {
         minLines: minLines,
         readOnly: isReadOnly,
         onChanged: onChanged,
-
         validator: (validator != null) ? validator : onChanged,
       ),
     );

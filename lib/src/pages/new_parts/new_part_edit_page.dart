@@ -81,6 +81,8 @@ class __FormState extends State<_Form> {
             _buildInputName(
               '${widget.newPart?.name ?? ''}',
             ),
+            SizedBox(height: 10),
+
             _buildPlannedInputs(),
             _buildCurrentInputs(),
             SubmitButton(
@@ -178,6 +180,8 @@ class __FormState extends State<_Form> {
       margin: EdgeInsets.only(top: 10),
       isReadOnly: isReadOnly,
       onSaved: onSaved,
+      validator: (onSaved!=null)? (String value) =>
+          (!_newPartsBloc.isValidNumber(value)) ? S.of(context).invalidNumber : null : null,
       maxLength: 10,
       keyboardType: TextInputType.number,
     );

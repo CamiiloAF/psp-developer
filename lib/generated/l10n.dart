@@ -643,10 +643,10 @@ class S {
     );
   }
 
-  /// `El programa no tiene los timepos delta`
+  /// `El programa no tiene los tiempos delta`
   String get messageProgramDoesNotHaveDeltaTimes {
     return Intl.message(
-      'El programa no tiene los timepos delta',
+      'El programa no tiene los tiempos delta',
       name: 'messageProgramDoesNotHaveDeltaTimes',
       desc: '',
       args: [],
@@ -803,11 +803,11 @@ class S {
     );
   }
 
-  /// `Lo desencadenó:`
-  String get labelChainedDefectLog {
+  /// `ID del defecto que lo desencadenó:`
+  String get labelIdChainedDefectLog {
     return Intl.message(
-      'Lo desencadenó:',
-      name: 'labelChainedDefectLog',
+      'ID del defecto que lo desencadenó:',
+      name: 'labelIdChainedDefectLog',
       desc: '',
       args: [],
     );

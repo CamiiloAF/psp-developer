@@ -13,38 +13,43 @@ import 'package:psp_developer/src/widgets/custom_list_tile.dart';
 mixin TimeLogsPageAndSearchMixing {
   Widget buildItemList(BuildContext context, TimeLogModel timeLog,
       {Function closeSearch}) {
-    final programsBloc = Provider.of<BlocProvider>(context).programsBloc;
+
+    final blocProvider = Provider.of<BlocProvider>(context);
 
     var isEnabled =
-        Provider.of<TimelogPendingInterruptionModel>(context).isListItemsEnable;
+        Provider
+            .of<TimelogPendingInterruptionModel>(context)
+            .isListItemsEnable && blocProvider.timeLogsBloc.allowCreateTimeLog;
 
-    if(!isEnabled && programsBloc.getCurrentProgram().deliveryDate != null){
+    if (!isEnabled && blocProvider.programsBloc
+        .getCurrentProgram()
+        .deliveryDate != null) {
       isEnabled = true;
     }
 
     if (!isEnabled &&
-        Preferences().timeLogIdWithPendingInterruption == timeLog.id) {
+        Preferences().timeLogIdWithPendingInterruption == timeLog.id|| timeLog.finishDate == null) {
       isEnabled = true;
     }
 
     return ChangeNotifierProvider(
       create: (_) => TimelogPendingInterruptionModel(),
       child: CustomListTile(
-        title: 'id: ${timeLog.id}',
+        title: Constants.PHASES[timeLog.phasesId-1].name,
         trailing: Icon(Icons.keyboard_arrow_right),
         onTap: () {
           if (closeSearch != null) closeSearch();
           navigateToEditPage(context, timeLog, timeLog.programsId);
         },
-        isEnable: isEnabled,
+        isEnabled: isEnabled,
         subtitle: Constants.format
             .format(DateTime.fromMillisecondsSinceEpoch(timeLog.startDate)),
       ),
     );
   }
 
-  void navigateToEditPage(
-      BuildContext context, TimeLogModel timeLog, int programId) {
+  void navigateToEditPage(BuildContext context, TimeLogModel timeLog,
+      int programId) {
     final page = TimeLogEditPage(
       programId: programId,
       timeLog: timeLog,

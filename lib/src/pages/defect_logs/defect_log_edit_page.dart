@@ -94,7 +94,7 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
 
   Widget _buildChainedDefectLogDropdownButton() {
     return Spinner(
-      label: S.of(context).labelChainedDefectLog,
+      label: S.of(context).labelIdChainedDefectLog,
       items: getChainedDefectDropDownMenuItems(),
       value: _currentChainedDefectId,
       onChanged: (value) {
@@ -202,6 +202,8 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
     return InputMultiline(
       initialValue: _defectLogModel.solution,
       label: S.of(context).labelSolution,
+      isEnabled: _currentRemovedPhaseId != -1,
+
       onSaved: (value) =>
           _defectLogModel.solution = (value.isEmpty) ? null : value,
     );
@@ -275,7 +277,10 @@ class _DefectLogEditPageState extends State<DefectLogEditPage> {
 
     _formKey.currentState.save();
 
-    if (_currentRemovedPhaseId == -1) _removeFinishDateAndTimeForRepair();
+    if (_currentRemovedPhaseId == -1) {
+      _removeFinishDateAndTimeForRepair();
+      _defectLogModel.solution = null;
+    }
 
     if (!_isValidTimeForRepair()) {
       utils.showSnackBarIncorrectDates(context, _scaffoldKey.currentState);

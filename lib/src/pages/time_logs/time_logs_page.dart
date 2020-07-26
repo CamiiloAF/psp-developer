@@ -89,7 +89,7 @@ class _TimeLogsPageState extends State<TimeLogsPage>
         ),
         floatingActionButton: FAB(
           isShowing: isShowing,
-          onPressed: () => navigateToEditPage(context, null, _programId),
+          onPressed:() => (_timeLogsBloc.allowCreateTimeLog) ?  navigateToEditPage(context, null, _programId) : null,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: _body());
