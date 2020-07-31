@@ -113,7 +113,7 @@ flutter_intl:
   # Optional
   # Default: en
   # <language code>[_<script code>][_<country code>]
-  main_locale: es
+  main_locale: en
   
   # Optional
   # Default: S

@@ -142,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "message400" : MessageLookupByLibrary.simpleMessage("Request created incorrectly"),
     "message401" : MessageLookupByLibrary.simpleMessage("Not authorized to request resources"),
     "message403" : MessageLookupByLibrary.simpleMessage("There are not enough permissions"),
+    "message404" : MessageLookupByLibrary.simpleMessage("Resource not found"),
     "message500" : MessageLookupByLibrary.simpleMessage("Internal server error"),
     "messageAlreadyExistTestNumber" : MessageLookupByLibrary.simpleMessage("There is already a test with that number, try another"),
     "messageEmailIsAlreadyInUse" : MessageLookupByLibrary.simpleMessage("Email is already in use"),

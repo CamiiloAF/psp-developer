@@ -35,6 +35,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void dispose() {
+    _loginBloc.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (preferences.loginLastAttempAt != null) {
       _loginBloc.tryRestoreLoginAttemps();
@@ -111,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: (isInputEmail)
               ? InputEmail(
-                  hasError: snapshot.hasError,
+                  hasError: snapshot.hasError ,
                   onChange: _loginBloc.onEmailChange)
               : InputPassword(
                   hasError: snapshot.hasError,
@@ -147,12 +153,13 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response['ok']) {
       final routeName = await _loginBloc.getNextRouteName();
+
       if (routeName != null) {
         await Navigator.pushNamedAndRemoveUntil(
             context, routeName, (_) => false);
       }
-      await progressDialog.hide();
 
+      await progressDialog.hide();
       preferences.restoreLoginAttemps();
     } else {
       await progressDialog.hide();

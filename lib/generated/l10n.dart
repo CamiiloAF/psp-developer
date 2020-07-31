@@ -33,250 +33,250 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Ingreso Desarrollador`
+  /// `Developer Login`
   String get loginFormTitle {
     return Intl.message(
-      'Ingreso Desarrollador',
+      'Developer Login',
       name: 'loginFormTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ingresar`
+  /// `Login`
   String get loginButton {
     return Intl.message(
-      'Ingresar',
+      'Login',
       name: 'loginButton',
       desc: '',
       args: [],
     );
   }
 
-  /// `ejemplo@correo.com`
+  /// `exmaple@mail.com`
   String get hintEmail {
     return Intl.message(
-      'ejemplo@correo.com',
+      'exmaple@mail.com',
       name: 'hintEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Correo electrónico`
+  /// `Email`
   String get labelEmail {
     return Intl.message(
-      'Correo electrónico',
+      'Email',
       name: 'labelEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Contraseña`
+  /// `Password`
   String get labelPassword {
     return Intl.message(
-      'Contraseña',
+      'Password',
       name: 'labelPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Confirmar Contraseña`
+  /// `Confirm Password`
   String get labelConfirmPassword {
     return Intl.message(
-      'Confirmar Contraseña',
+      'Confirm Password',
       name: 'labelConfirmPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Email inválido`
+  /// `Invalid email`
   String get invalidEmail {
     return Intl.message(
-      'Email inválido',
+      'Invalid email',
       name: 'invalidEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Se requieren 8 o más caractéres`
+  /// `8 or more characters are required`
   String get invalidPassword {
     return Intl.message(
-      'Se requieren 8 o más caractéres',
+      '8 or more characters are required',
       name: 'invalidPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Las contraseñas no coinciden`
+  /// `Passwords do not match`
   String get invalidConfirmPassword {
     return Intl.message(
-      'Las contraseñas no coinciden',
+      'Passwords do not match',
       name: 'invalidConfirmPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Número inválido`
+  /// `Invalid number`
   String get invalidNumber {
     return Intl.message(
-      'Número inválido',
+      'Invalid number',
       name: 'invalidNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Falló el login`
+  /// `Login Failed`
   String get dialogTitleLoginFailed {
     return Intl.message(
-      'Falló el login',
+      'Login Failed',
       name: 'dialogTitleLoginFailed',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aceptar`
+  /// `Ok`
   String get dialogButtonOk {
     return Intl.message(
-      'Aceptar',
+      'Ok',
       name: 'dialogButtonOk',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cancelar`
+  /// `Cancel`
   String get dialogButtonCancel {
     return Intl.message(
-      'Cancelar',
+      'Cancel',
       name: 'dialogButtonCancel',
       desc: '',
       args: [],
     );
   }
 
-  /// `Recuperar`
+  /// `Recover`
   String get dialogButtonRecover {
     return Intl.message(
-      'Recuperar',
+      'Recover',
       name: 'dialogButtonRecover',
       desc: '',
       args: [],
     );
   }
 
-  /// `Experiencias`
+  /// `Experiences`
   String get appBarTitleExperiences {
     return Intl.message(
-      'Experiencias',
+      'Experiences',
       name: 'appBarTitleExperiences',
       desc: '',
       args: [],
     );
   }
 
-  /// `Proyectos`
+  /// `Projects`
   String get appBarTitleProjects {
     return Intl.message(
-      'Proyectos',
+      'Projects',
       name: 'appBarTitleProjects',
       desc: '',
       args: [],
     );
   }
 
-  /// `Módulos`
+  /// `Modules`
   String get appBarTitleModules {
     return Intl.message(
-      'Módulos',
+      'Modules',
       name: 'appBarTitleModules',
       desc: '',
       args: [],
     );
   }
 
-  /// `Programas`
+  /// `Programs`
   String get appBarTitlePrograms {
     return Intl.message(
-      'Programas',
+      'Programs',
       name: 'appBarTitlePrograms',
       desc: '',
       args: [],
     );
   }
 
-  /// `Partes base`
+  /// `Base parts`
   String get appBarTitleBaseParts {
     return Intl.message(
-      'Partes base',
+      'Base parts',
       name: 'appBarTitleBaseParts',
       desc: '',
       args: [],
     );
   }
 
-  /// `Partes nuevas`
+  /// `New parts`
   String get appBarTitleNewParts {
     return Intl.message(
-      'Partes nuevas',
+      'New parts',
       name: 'appBarTitleNewParts',
       desc: '',
       args: [],
     );
   }
 
-  /// `Partes reutilizables`
+  /// `Reusable parts`
   String get appBarTitleReusableParts {
     return Intl.message(
-      'Partes reutilizables',
+      'Reusable parts',
       name: 'appBarTitleReusableParts',
       desc: '',
       args: [],
     );
   }
 
-  /// `Log de Defectos`
+  /// `Defect log`
   String get appBarTitleDefectLogs {
     return Intl.message(
-      'Log de Defectos',
+      'Defect log',
       name: 'appBarTitleDefectLogs',
       desc: '',
       args: [],
     );
   }
 
-  /// `Log de tiempos`
+  /// `Time log`
   String get appBarTitleTimeLogs {
     return Intl.message(
-      'Log de tiempos',
+      'Time log',
       name: 'appBarTitleTimeLogs',
       desc: '',
       args: [],
     );
   }
 
-  /// `Reportes de prueba`
+  /// `Test reports`
   String get appBarTitleTestReports {
     return Intl.message(
-      'Reportes de prueba',
+      'Test reports',
       name: 'appBarTitleTestReports',
       desc: '',
       args: [],
     );
   }
 
-  /// `Partes del programa`
+  /// `Program parts`
   String get appBarTitleProgramParts {
     return Intl.message(
-      'Partes del programa',
+      'Program parts',
       name: 'appBarTitleProgramParts',
       desc: '',
       args: [],
@@ -293,1050 +293,1050 @@ class S {
     );
   }
 
-  /// `Perfil`
+  /// `Profile`
   String get appBarTitleProfile {
     return Intl.message(
-      'Perfil',
+      'Profile',
       name: 'appBarTitleProfile',
       desc: '',
       args: [],
     );
   }
 
-  /// `Planeación`
+  /// `Planning`
   String get appBarTitlePlanning {
     return Intl.message(
-      'Planeación',
+      'Planning',
       name: 'appBarTitlePlanning',
       desc: '',
       args: [],
     );
   }
 
-  /// `Herramientas de análisis`
+  /// `Analysis tools`
   String get appBarTitleAnalysisTools {
     return Intl.message(
-      'Herramientas de análisis',
+      'Analysis tools',
       name: 'appBarTitleAnalysisTools',
       desc: '',
       args: [],
     );
   }
 
-  /// `Resumen del programa`
+  /// `Program summary`
   String get appBarTitleProgramSummary {
     return Intl.message(
-      'Resumen del programa',
+      'Program summary',
       name: 'appBarTitleProgramSummary',
       desc: '',
       args: [],
     );
   }
 
-  /// `NO ESTÁS AUTORIZADO`
+  /// `YOU ARE NOT AUTHORIZED`
   String get titleNotAuthorized {
     return Intl.message(
-      'NO ESTÁS AUTORIZADO',
+      'YOU ARE NOT AUTHORIZED',
       name: 'titleNotAuthorized',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tiempo por fase (min)`
-  String get titleTimePerPhase {
-    return Intl.message(
-      'Tiempo por fase (min)',
-      name: 'titleTimePerPhase',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Defectos inyectados por fase`
-  String get titleDefectsInjectedPerPhase {
-    return Intl.message(
-      'Defectos inyectados por fase',
-      name: 'titleDefectsInjectedPerPhase',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Defectos removidos por fase`
-  String get titleDefectsRemovedPerPhase {
-    return Intl.message(
-      'Defectos removidos por fase',
-      name: 'titleDefectsRemovedPerPhase',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tamaños de los programas`
-  String get titleSizeOfPrograms {
-    return Intl.message(
-      'Tamaños de los programas',
-      name: 'titleSizeOfPrograms',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tamaño del programa`
+  /// `Program size`
   String get titleProgramSize {
     return Intl.message(
-      'Tamaño del programa',
+      'Program size',
       name: 'titleProgramSize',
       desc: '',
       args: [],
     );
   }
 
-  /// `Total de defectos`
+  /// `Time per phase (min)`
+  String get titleTimePerPhase {
+    return Intl.message(
+      'Time per phase (min)',
+      name: 'titleTimePerPhase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Defects injected per phase`
+  String get titleDefectsInjectedPerPhase {
+    return Intl.message(
+      'Defects injected per phase',
+      name: 'titleDefectsInjectedPerPhase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Defects removed per phase`
+  String get titleDefectsRemovedPerPhase {
+    return Intl.message(
+      'Defects removed per phase',
+      name: 'titleDefectsRemovedPerPhase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Size of programs`
+  String get titleSizeOfPrograms {
+    return Intl.message(
+      'Size of programs',
+      name: 'titleSizeOfPrograms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total defects`
   String get titleTotalDefects {
     return Intl.message(
-      'Total de defectos',
+      'Total defects',
       name: 'titleTotalDefects',
       desc: '',
       args: [],
     );
   }
 
-  /// `Total de tiempos`
+  /// `Total times`
   String get titleTotalTimes {
     return Intl.message(
-      'Total de tiempos',
+      'Total times',
       name: 'titleTotalTimes',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cargando`
+  /// `Loading`
   String get progressDialogLoading {
     return Intl.message(
-      'Cargando',
+      'Loading',
       name: 'progressDialogLoading',
       desc: '',
       args: [],
     );
   }
 
-  /// `Guardando`
+  /// `Saving`
   String get progressDialogSaving {
     return Intl.message(
-      'Guardando',
+      'Saving',
       name: 'progressDialogSaving',
       desc: '',
       args: [],
     );
   }
 
-  /// `Por favor revise su conexión a internet`
+  /// `Please check your internet connection`
   String get messageNotConnection {
     return Intl.message(
-      'Por favor revise su conexión a internet',
+      'Please check your internet connection',
       name: 'messageNotConnection',
       desc: '',
       args: [],
     );
   }
 
-  /// `Actualizado con éxito`
+  /// `Updated successfully`
   String get message204Update {
     return Intl.message(
-      'Actualizado con éxito',
+      'Updated successfully',
       name: 'message204Update',
       desc: '',
       args: [],
     );
   }
 
-  /// `Solicitud creada incorrectamente`
+  /// `Request created incorrectly`
   String get message400 {
     return Intl.message(
-      'Solicitud creada incorrectamente',
+      'Request created incorrectly',
       name: 'message400',
       desc: '',
       args: [],
     );
   }
 
-  /// `No autorizado para solicitar recursos`
+  /// `Not authorized to request resources`
   String get message401 {
     return Intl.message(
-      'No autorizado para solicitar recursos',
+      'Not authorized to request resources',
       name: 'message401',
       desc: '',
       args: [],
     );
   }
 
-  /// `No tienes suficientes permisos`
+  /// `There are not enough permissions`
   String get message403 {
     return Intl.message(
-      'No tienes suficientes permisos',
+      'There are not enough permissions',
       name: 'message403',
       desc: '',
       args: [],
     );
   }
 
-  /// `No se encontró información`
+  /// `Resource not found`
   String get message404 {
     return Intl.message(
-      'No se encontró información',
+      'Resource not found',
       name: 'message404',
       desc: '',
       args: [],
     );
   }
 
-  /// `Error interno del servidor`
+  /// `Internal server error`
   String get message500 {
     return Intl.message(
-      'Error interno del servidor',
+      'Internal server error',
       name: 'message500',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ocurrió un error inesperado, inténtelo nuevamente`
+  /// `Has been occurred an unexpected error, try again`
   String get messageUnexpectedError {
     return Intl.message(
-      'Ocurrió un error inesperado, inténtelo nuevamente',
+      'Has been occurred an unexpected error, try again',
       name: 'messageUnexpectedError',
       desc: '',
       args: [],
     );
   }
 
-  /// `Credenciales incorrectas`
+  /// `Bad credentials`
   String get messageIncorrectCredentials {
     return Intl.message(
-      'Credenciales incorrectas',
+      'Bad credentials',
       name: 'messageIncorrectCredentials',
       desc: '',
       args: [],
     );
   }
 
-  /// `Excedió el número máximo de intentos de sesión por hora`
+  /// `Exceeded maximum number of session attempts per hour`
   String get messageExceededMaximumNumberSessionAttempts {
     return Intl.message(
-      'Excedió el número máximo de intentos de sesión por hora',
+      'Exceeded maximum number of session attempts per hour',
       name: 'messageExceededMaximumNumberSessionAttempts',
       desc: '',
       args: [],
     );
   }
 
-  /// `¡Te hemos enviado un email!`
+  /// `¡We've sent you an email!`
   String get messageWeHaveSentEmail {
     return Intl.message(
-      '¡Te hemos enviado un email!',
+      '¡We\'ve sent you an email!',
       name: 'messageWeHaveSentEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `¡Te hemos enviado un SMS!`
+  /// `¡We've sent you a SMS!`
   String get messageWeHaveSentSMS {
     return Intl.message(
-      '¡Te hemos enviado un SMS!',
+      '¡We\'ve sent you a SMS!',
       name: 'messageWeHaveSentSMS',
       desc: '',
       args: [],
     );
   }
 
-  /// `Se ha guardado el PIP`
+  /// `The PIP has been saved`
   String get messagePIPHasBeenSave {
     return Intl.message(
-      'Se ha guardado el PIP',
+      'The PIP has been saved',
       name: 'messagePIPHasBeenSave',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ya existe un test con ese número, pruebe con otro`
+  /// `There is already a test with that number, try another`
   String get messageAlreadyExistTestNumber {
     return Intl.message(
-      'Ya existe un test con ese número, pruebe con otro',
+      'There is already a test with that number, try another',
       name: 'messageAlreadyExistTestNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `La solicitud ha tardado mucho, inténtelo nuevamente`
+  /// `The request took a long time, please try again`
   String get messageTimeOutException {
     return Intl.message(
-      'La solicitud ha tardado mucho, inténtelo nuevamente',
+      'The request took a long time, please try again',
       name: 'messageTimeOutException',
       desc: '',
       args: [],
     );
   }
 
-  /// `No puede haber una diferencia negativa entre fechas`
+  /// `There can be no negative difference between dates`
   String get messageNoNegativeDifferenceBetweenDates {
     return Intl.message(
-      'No puede haber una diferencia negativa entre fechas',
+      'There can be no negative difference between dates',
       name: 'messageNoNegativeDifferenceBetweenDates',
       desc: '',
       args: [],
     );
   }
 
-  /// `El correo electrónico ya se encuentra en uso`
+  /// `Email is already in use`
   String get messageEmailIsAlreadyInUse {
     return Intl.message(
-      'El correo electrónico ya se encuentra en uso',
+      'Email is already in use',
       name: 'messageEmailIsAlreadyInUse',
       desc: '',
       args: [],
     );
   }
 
-  /// `El teléfono ya se encuentra en uso`
+  /// `Phone is already in use`
   String get messagePhoneIsAlreadyInUse {
     return Intl.message(
-      'El teléfono ya se encuentra en uso',
+      'Phone is already in use',
       name: 'messagePhoneIsAlreadyInUse',
       desc: '',
       args: [],
     );
   }
 
-  /// `Al menos debe tener 3 programas finalizados`
+  /// `You must have at least 3 completed programs`
   String get messageYouMustHaveCompletedPrograms {
     return Intl.message(
-      'Al menos debe tener 3 programas finalizados',
+      'You must have at least 3 completed programs',
       name: 'messageYouMustHaveCompletedPrograms',
       desc: '',
       args: [],
     );
   }
 
-  /// `El programa actual no cumple con los registros para finalizar`
+  /// `Current program does not meet records to end`
   String get messageProgramDoesNotMeetAllRecords {
     return Intl.message(
-      'El programa actual no cumple con los registros para finalizar',
+      'Current program does not meet records to end',
       name: 'messageProgramDoesNotMeetAllRecords',
       desc: '',
       args: [],
     );
   }
 
-  /// `El programa no tiene las partes actuales`
+  /// `The program does not have the current parts`
   String get messageProgramDoesNotHaveCurrentParts {
     return Intl.message(
-      'El programa no tiene las partes actuales',
+      'The program does not have the current parts',
       name: 'messageProgramDoesNotHaveCurrentParts',
       desc: '',
       args: [],
     );
   }
 
-  /// `El programa no tiene los tiempos delta`
+  /// `The program does not have the delta times`
   String get messageProgramDoesNotHaveDeltaTimes {
     return Intl.message(
-      'El programa no tiene los tiempos delta',
+      'The program does not have the delta times',
       name: 'messageProgramDoesNotHaveDeltaTimes',
       desc: '',
       args: [],
     );
   }
 
-  /// `No hay información`
+  /// `There is no information`
   String get thereIsNoInformation {
     return Intl.message(
-      'No hay información',
+      'There is no information',
       name: 'thereIsNoInformation',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nombre`
-  String get labelName {
-    return Intl.message(
-      'Nombre',
-      name: 'labelName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Debe tener al menos 3 carateres`
+  /// `Must be at least 3 characters`
   String get inputNameError {
     return Intl.message(
-      'Debe tener al menos 3 carateres',
+      'Must be at least 3 characters',
       name: 'inputNameError',
       desc: '',
       args: [],
     );
   }
 
-  /// `Descripción`
-  String get labelDescription {
-    return Intl.message(
-      'Descripción',
-      name: 'labelDescription',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Este campo es obligatorio`
+  /// `This input is required`
   String get inputRequiredError {
     return Intl.message(
-      'Este campo es obligatorio',
+      'This input is required',
       name: 'inputRequiredError',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha de planeación`
+  /// `Name`
+  String get labelName {
+    return Intl.message(
+      'Name',
+      name: 'labelName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get labelDescription {
+    return Intl.message(
+      'Description',
+      name: 'labelDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Planning date`
   String get labelPlanningDate {
     return Intl.message(
-      'Fecha de planeación',
+      'Planning date',
       name: 'labelPlanningDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha de inicio`
-  String get labelStartDate {
-    return Intl.message(
-      'Fecha de inicio',
-      name: 'labelStartDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Fecha de actualización`
+  /// `Update date`
   String get labelUpdateDate {
     return Intl.message(
-      'Fecha de actualización',
+      'Update date',
       name: 'labelUpdateDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha de entrega`
+  /// `Delivery date`
   String get labelDeliveryDate {
     return Intl.message(
-      'Fecha de entrega',
+      'Delivery date',
       name: 'labelDeliveryDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha de finalización`
+  /// `Start date`
+  String get labelStartDate {
+    return Intl.message(
+      'Start date',
+      name: 'labelStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finish date`
   String get labelFinishDate {
     return Intl.message(
-      'Fecha de finalización',
+      'Finish date',
       name: 'labelFinishDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Teléfono`
+  /// `Phone`
   String get labelPhone {
     return Intl.message(
-      'Teléfono',
+      'Phone',
       name: 'labelPhone',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tiempo Delta`
+  /// `Delta time`
   String get labelDeltaTime {
     return Intl.message(
-      'Tiempo Delta',
+      'Delta time',
       name: 'labelDeltaTime',
       desc: '',
       args: [],
     );
   }
 
-  /// `Interrupción`
+  /// `Interruption`
   String get labelInterruption {
     return Intl.message(
-      'Interrupción',
+      'Interruption',
       name: 'labelInterruption',
       desc: '',
       args: [],
     );
   }
 
-  /// `Número:`
+  /// `Number:`
   String get labelNumber {
     return Intl.message(
-      'Número:',
+      'Number:',
       name: 'labelNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fase:`
+  /// `Phase:`
   String get labelPhase {
     return Intl.message(
-      'Fase:',
+      'Phase:',
       name: 'labelPhase',
       desc: '',
       args: [],
     );
   }
 
-  /// `ID del defecto que lo desencadenó:`
+  /// `ID of the defect that unchained it:`
   String get labelIdChainedDefectLog {
     return Intl.message(
-      'ID del defecto que lo desencadenó:',
+      'ID of the defect that unchained it:',
       name: 'labelIdChainedDefectLog',
       desc: '',
       args: [],
     );
   }
 
-  /// `Añadido en:`
+  /// `Added in:`
   String get labelPhaseAdded {
     return Intl.message(
-      'Añadido en:',
+      'Added in:',
       name: 'labelPhaseAdded',
       desc: '',
       args: [],
     );
   }
 
-  /// `Removido en:`
+  /// `Removed in:`
   String get labelPhaseRemoved {
     return Intl.message(
-      'Removido en:',
+      'Removed in:',
       name: 'labelPhaseRemoved',
       desc: '',
       args: [],
     );
   }
 
-  /// `Defecto estándar:`
+  /// `Standard defect:`
   String get labelStandardDefect {
     return Intl.message(
-      'Defecto estándar:',
+      'Standard defect:',
       name: 'labelStandardDefect',
       desc: '',
       args: [],
     );
   }
 
-  /// `No aplica`
+  /// `Does not apply`
   String get labelNone {
     return Intl.message(
-      'No aplica',
+      'Does not apply',
       name: 'labelNone',
       desc: '',
       args: [],
     );
   }
 
-  /// `Comentarios`
+  /// `Comments`
   String get labelComments {
     return Intl.message(
-      'Comentarios',
+      'Comments',
       name: 'labelComments',
       desc: '',
       args: [],
     );
   }
 
-  /// `Solución`
+  /// `Solution`
   String get labelSolution {
     return Intl.message(
-      'Solución',
+      'Solution',
       name: 'labelSolution',
       desc: '',
       args: [],
     );
   }
 
-  /// `Inicio de la interrupción`
+  /// `Start of interruption`
   String get labelInterruptionStartAt {
     return Intl.message(
-      'Inicio de la interrupción',
+      'Start of interruption',
       name: 'labelInterruptionStartAt',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tiempo en reparar`
+  /// `Time to repair`
   String get labelTimeForRepair {
     return Intl.message(
-      'Tiempo en reparar',
+      'Time to repair',
       name: 'labelTimeForRepair',
       desc: '',
       args: [],
     );
   }
 
-  /// `Condiciones`
+  /// `Conditions`
   String get labelConditions {
     return Intl.message(
-      'Condiciones',
+      'Conditions',
       name: 'labelConditions',
       desc: '',
       args: [],
     );
   }
 
-  /// `Resultado esperado`
+  /// `Expected result`
   String get labelExpectedResult {
     return Intl.message(
-      'Resultado esperado',
+      'Expected result',
       name: 'labelExpectedResult',
       desc: '',
       args: [],
     );
   }
 
-  /// `Resultado actual`
+  /// `Current result`
   String get labelCurrentResult {
     return Intl.message(
-      'Resultado actual',
+      'Current result',
       name: 'labelCurrentResult',
       desc: '',
       args: [],
     );
   }
 
-  /// `Objetivo`
+  /// `Objective`
   String get labelObjective {
     return Intl.message(
-      'Objetivo',
+      'Objective',
       name: 'labelObjective',
       desc: '',
       args: [],
     );
   }
 
-  /// `Número del test`
+  /// `Test number`
   String get labelTestNumber {
     return Intl.message(
-      'Número del test',
+      'Test number',
       name: 'labelTestNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas base planeadas`
+  /// `Planned base lines`
   String get labelPlannedLinesBase {
     return Intl.message(
-      'Líneas base planeadas',
+      'Planned base lines',
       name: 'labelPlannedLinesBase',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas borradas planeadas`
+  /// `Planned deleted lines`
   String get labelPlannedLinesDeleted {
     return Intl.message(
-      'Líneas borradas planeadas',
+      'Planned deleted lines',
       name: 'labelPlannedLinesDeleted',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas editadas planeadas`
+  /// `Planned edited lines`
   String get labelPlannedLinesEdits {
     return Intl.message(
-      'Líneas editadas planeadas',
+      'Planned edited lines',
       name: 'labelPlannedLinesEdits',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas añadidas planeadas`
+  /// `Planned added lines`
   String get labelPlannedLinesAdded {
     return Intl.message(
-      'Líneas añadidas planeadas',
+      'Planned added lines',
       name: 'labelPlannedLinesAdded',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas planeadas:`
+  /// `Planned lines:`
   String get labelPlannedLines {
     return Intl.message(
-      'Líneas planeadas:',
+      'Planned lines:',
       name: 'labelPlannedLines',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas base actuales`
+  /// `Current base lines`
   String get labelCurrentLinesBase {
     return Intl.message(
-      'Líneas base actuales',
+      'Current base lines',
       name: 'labelCurrentLinesBase',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas borradas actuales`
+  /// `Current deleted lines`
   String get labelCurrentLinesDeleted {
     return Intl.message(
-      'Líneas borradas actuales',
+      'Current deleted lines',
       name: 'labelCurrentLinesDeleted',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas editadas actuales`
+  /// `Current edited lines`
   String get labelCurrentLinesEdits {
     return Intl.message(
-      'Líneas editadas actuales',
+      'Current edited lines',
       name: 'labelCurrentLinesEdits',
       desc: '',
       args: [],
     );
   }
 
-  /// `Líneas añadidas actuales`
+  /// `Current added lines`
   String get labelCurrentLinesAdded {
     return Intl.message(
-      'Líneas añadidas actuales',
+      'Current added lines',
       name: 'labelCurrentLinesAdded',
       desc: '',
       args: [],
     );
   }
 
-  /// `Programa Base:`
+  /// `Base Program:`
   String get labelBaseProgram {
     return Intl.message(
-      'Programa Base:',
+      'Base Program:',
       name: 'labelBaseProgram',
       desc: '',
       args: [],
     );
   }
 
-  /// `Programa Reutilizable:`
+  /// `Reusable Program:`
   String get labelReusableProgram {
     return Intl.message(
-      'Programa Reutilizable:',
+      'Reusable Program:',
       name: 'labelReusableProgram',
       desc: '',
       args: [],
     );
   }
 
-  /// `No hay otros programas`
+  /// `There are no other programs`
   String get labelDoNotHavePrograms {
     return Intl.message(
-      'No hay otros programas',
+      'There are no other programs',
       name: 'labelDoNotHavePrograms',
       desc: '',
       args: [],
     );
   }
 
-  /// `Métodos planeados`
+  /// `Planned methods`
   String get labelMethodsPlanned {
     return Intl.message(
-      'Métodos planeados',
+      'Planned methods',
       name: 'labelMethodsPlanned',
       desc: '',
       args: [],
     );
   }
 
-  /// `Métodos actuales`
+  /// `Current methods`
   String get labelMethodsCurrent {
     return Intl.message(
-      'Métodos actuales',
+      'Current methods',
       name: 'labelMethodsCurrent',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tipo`
+  /// `Type`
   String get labelType {
     return Intl.message(
-      'Tipo',
+      'Type',
       name: 'labelType',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tamaño`
+  /// `Size`
   String get labelSize {
     return Intl.message(
-      'Tamaño',
+      'Size',
       name: 'labelSize',
       desc: '',
       args: [],
     );
   }
 
-  /// `Recuperar contraseña mediante email`
+  /// `Restore password by email`
   String get labelRestorePasswordByEmail {
     return Intl.message(
-      'Recuperar contraseña mediante email',
+      'Restore password by email',
       name: 'labelRestorePasswordByEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Recuperar contraseña mediante número telefónico`
+  /// `Restore password by phone number`
   String get labelRestorePasswordByPhoneNumber {
     return Intl.message(
-      'Recuperar contraseña mediante número telefónico',
+      'Restore password by phone number',
       name: 'labelRestorePasswordByPhoneNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Recuperar contraseña`
+  /// `Restore password`
   String get labelRestorePassword {
     return Intl.message(
-      'Recuperar contraseña',
+      'Restore password',
       name: 'labelRestorePassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Propuestas`
+  /// `Proposals`
   String get labelProposals {
     return Intl.message(
-      'Propuestas',
+      'Proposals',
       name: 'labelProposals',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha`
+  /// `Date`
   String get labelDate {
     return Intl.message(
-      'Fecha',
+      'Date',
       name: 'labelDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Apellido`
+  /// `Last name`
   String get labelLastName {
     return Intl.message(
-      'Apellido',
+      'Last name',
       name: 'labelLastName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cambiar contraseña`
+  /// `Change password`
   String get labelChangePassword {
     return Intl.message(
-      'Cambiar contraseña',
+      'Change password',
       name: 'labelChangePassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Posiciones`
+  /// `Positions`
   String get labelPositions {
     return Intl.message(
-      'Posiciones',
+      'Positions',
       name: 'labelPositions',
       desc: '',
       args: [],
     );
   }
 
-  /// `Organización`
+  /// `Organization`
   String get labelOrganization {
     return Intl.message(
-      'Organización',
+      'Organization',
       name: 'labelOrganization',
       desc: '',
       args: [],
     );
   }
 
-  /// `Años en general`
+  /// `Years in general`
   String get labelYearsGenerals {
     return Intl.message(
-      'Años en general',
+      'Years in general',
       name: 'labelYearsGenerals',
       desc: '',
       args: [],
     );
   }
 
-  /// `Años en configuración`
+  /// `Years in configuration`
   String get labelYearsConfiguration {
     return Intl.message(
-      'Años en configuración',
+      'Years in configuration',
       name: 'labelYearsConfiguration',
       desc: '',
       args: [],
     );
   }
 
-  /// `Años en integración`
+  /// `Years in integration`
   String get labelYearsIntegration {
     return Intl.message(
-      'Años en integración',
+      'Years in integration',
       name: 'labelYearsIntegration',
       desc: '',
       args: [],
     );
   }
 
-  /// `Años en requerimientos`
+  /// `Years in requirements`
   String get labelYearsRequirements {
     return Intl.message(
-      'Años en requerimientos',
+      'Years in requirements',
       name: 'labelYearsRequirements',
       desc: '',
       args: [],
     );
   }
 
-  /// `Años en diseño`
+  /// `Years in design`
   String get labelYearsDesign {
     return Intl.message(
-      'Años en diseño',
+      'Years in design',
       name: 'labelYearsDesign',
       desc: '',
       args: [],
     );
   }
 
-  /// `Años en tests`
+  /// `Years in tests`
   String get labelYearsTests {
     return Intl.message(
-      'Años en tests',
+      'Years in tests',
       name: 'labelYearsTests',
       desc: '',
       args: [],
     );
   }
 
-  /// `Años en soporte`
+  /// `Years in support`
   String get labelYearsSupport {
     return Intl.message(
-      'Años en soporte',
+      'Years in support',
       name: 'labelYearsSupport',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cargando...`
+  /// `Loading...`
   String get labelLoading {
     return Intl.message(
-      'Cargando...',
+      'Loading...',
       name: 'labelLoading',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lenguaje`
+  /// `Language`
   String get labelLanguage {
     return Intl.message(
-      'Lenguaje',
+      'Language',
       name: 'labelLanguage',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lenguaje del sistema`
+  /// `System language`
   String get labelSystemLanguage {
     return Intl.message(
-      'Lenguaje del sistema',
+      'System language',
       name: 'labelSystemLanguage',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tiempo estimado en {phase}`
+  /// `Estimated time in {phase}`
   String labelWithPlaceHolderEstimatedTimeIn(Object phase) {
     return Intl.message(
-      'Tiempo estimado en $phase',
+      'Estimated time in $phase',
       name: 'labelWithPlaceHolderEstimatedTimeIn',
       desc: '',
       args: [phase],
     );
   }
 
-  /// `Defectos estimados en {phase}`
+  /// `Estimated defects in {phase}`
   String labelWithPlaceHolderEstimatedDefectsIn(Object phase) {
     return Intl.message(
-      'Defectos estimados en $phase',
+      'Estimated defects in $phase',
       name: 'labelWithPlaceHolderEstimatedDefectsIn',
       desc: '',
       args: [phase],
     );
   }
 
-  /// `Finalizar programa`
+  /// `Finish program`
   String get labelFinishProgram {
     return Intl.message(
-      'Finalizar programa',
+      'Finish program',
       name: 'labelFinishProgram',
       desc: '',
       args: [],
     );
   }
 
-  /// `Planeado`
+  /// `Planned`
   String get labelPlanned {
     return Intl.message(
-      'Planeado',
+      'Planned',
       name: 'labelPlanned',
       desc: '',
       args: [],
     );
   }
 
-  /// `Actual`
+  /// `Current`
   String get labelCurrent {
     return Intl.message(
-      'Actual',
+      'Current',
       name: 'labelCurrent',
       desc: '',
       args: [],
@@ -1353,70 +1353,70 @@ class S {
     );
   }
 
-  /// `Borrado`
+  /// `Deleted`
   String get labelDeleted {
     return Intl.message(
-      'Borrado',
+      'Deleted',
       name: 'labelDeleted',
       desc: '',
       args: [],
     );
   }
 
-  /// `Modificado`
+  /// `Modified`
   String get labelModified {
     return Intl.message(
-      'Modificado',
+      'Modified',
       name: 'labelModified',
       desc: '',
       args: [],
     );
   }
 
-  /// `Añadido`
+  /// `Added`
   String get labelAdded {
     return Intl.message(
-      'Añadido',
+      'Added',
       name: 'labelAdded',
       desc: '',
       args: [],
     );
   }
 
-  /// `Reusado`
+  /// `Reused`
   String get labelReused {
     return Intl.message(
-      'Reusado',
+      'Reused',
       name: 'labelReused',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nuevo`
+  /// `New`
   String get labelNew {
     return Intl.message(
-      'Nuevo',
+      'New',
       name: 'labelNew',
       desc: '',
       args: [],
     );
   }
 
-  /// `A la fecha`
+  /// `To date`
   String get labelToDate {
     return Intl.message(
-      'A la fecha',
+      'To date',
       name: 'labelToDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Porcentaje`
+  /// `Percent`
   String get labelPercent {
     return Intl.message(
-      'Porcentaje',
+      'Percent',
       name: 'labelPercent',
       desc: '',
       args: [],
@@ -1433,90 +1433,90 @@ class S {
     );
   }
 
-  /// `Mantenga presionado el icono para poner la fecha y hora actual`
+  /// `Press and hold the icon to set the current date and time`
   String get helperInputDate {
     return Intl.message(
-      'Mantenga presionado el icono para poner la fecha y hora actual',
+      'Press and hold the icon to set the current date and time',
       name: 'helperInputDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tiempo en minutos`
+  /// `Time in minutes`
   String get helperTimeInMinutes {
     return Intl.message(
-      'Tiempo en minutos',
+      'Time in minutes',
       name: 'helperTimeInMinutes',
       desc: '',
       args: [],
     );
   }
 
-  /// `Iniciar la interrupción`
+  /// `Start interruption`
   String get buttonStartInterruption {
     return Intl.message(
-      'Iniciar la interrupción',
+      'Start interruption',
       name: 'buttonStartInterruption',
       desc: '',
       args: [],
     );
   }
 
-  /// `Detener la interrupción`
+  /// `Stop interruption`
   String get buttonStopInterruption {
     return Intl.message(
-      'Detener la interrupción',
+      'Stop interruption',
       name: 'buttonStopInterruption',
       desc: '',
       args: [],
     );
   }
 
-  /// `Guardar`
+  /// `Save`
   String get save {
     return Intl.message(
-      'Guardar',
+      'Save',
       name: 'save',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cerrar sesión`
+  /// `Log out`
   String get optionLogOut {
     return Intl.message(
-      'Cerrar sesión',
+      'Log out',
       name: 'optionLogOut',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ajustes`
+  /// `Settings`
   String get optionSettings {
     return Intl.message(
-      'Ajustes',
+      'Settings',
       name: 'optionSettings',
       desc: '',
       args: [],
     );
   }
 
-  /// `Modo oscuro`
+  /// `Dark mode`
   String get darkMode {
     return Intl.message(
-      'Modo oscuro',
+      'Dark mode',
       name: 'darkMode',
       desc: '',
       args: [],
     );
   }
 
-  /// `Modo claro`
+  /// `Light mode`
   String get lightMode {
     return Intl.message(
-      'Modo claro',
+      'Light mode',
       name: 'lightMode',
       desc: '',
       args: [],
@@ -1529,8 +1529,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'es'),
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'es'),
     ];
   }
 

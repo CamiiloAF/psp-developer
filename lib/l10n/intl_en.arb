@@ -44,6 +44,7 @@
   "message400": "Request created incorrectly",
   "message401": "Not authorized to request resources",
   "message403": "There are not enough permissions",
+  "message404": "Resource not found",
   "message500": "Internal server error",
   "messageUnexpectedError": "Has been occurred an unexpected error, try again",
   "messageIncorrectCredentials": "Bad credentials",

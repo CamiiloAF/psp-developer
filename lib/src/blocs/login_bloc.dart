@@ -13,20 +13,26 @@ class LoginBloc with Validators {
   final _passwordController = BehaviorSubject<String>();
 
   ExperiencesBloc _experiencesBloc;
+
   set experiencesBloc(ExperiencesBloc value) => _experiencesBloc = value;
 
   Stream<String> get emailStream =>
       _emailController.stream.transform(validateEmail);
+
   Stream<String> get passwordStream =>
       _passwordController.stream.transform(validatePassword);
 
   Stream<bool> get formValidateStream =>
       Rx.combineLatest2(emailStream, passwordStream, (es, ps) => true);
 
+  set formValidateStream(Stream<bool> value) => formValidateStream = value;
+
   Function(String) get onEmailChange => _emailController.sink.add;
+
   Function(String) get onPasswordChange => _passwordController.sink.add;
 
   String get email => _emailController.value;
+
   String get password => _passwordController.value;
 
   void addLoginAttemp() {
@@ -69,7 +75,7 @@ class LoginBloc with Validators {
   }
 
   void dispose() {
-    _emailController?.close();
-    _passwordController?.close();
+    _emailController?.sink?.add('');
+    _passwordController?.sink?.add('');
   }
 }

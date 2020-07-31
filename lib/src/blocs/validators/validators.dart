@@ -43,11 +43,9 @@ class Validators {
           : false;
 
   String validateRequiredInput(S s, String value) =>
-      (value == null || value.isEmpty)
-          ? s.inputRequiredError
-          : null;
+      (value == null || value.isEmpty) ? s.inputRequiredError : null;
 
-  bool isValidNumber(String number, {bool allowNegatives = true}) {
+  bool isValidNumber(String number) {
     if (number == null || number.isEmpty) return false;
     Pattern pattern = r'^[0-9]*$';
 
