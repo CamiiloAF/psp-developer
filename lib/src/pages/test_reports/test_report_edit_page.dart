@@ -88,7 +88,8 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
       onSaved: (value) => _testReportModel.testNumber = int.tryParse(value),
       label: s.labelTestNumber,
       maxLength: 5,
-      onChanged: (value) => _testReportsBloc.validateRequiredInput(s, value),
+      onChanged: (value) =>
+          (_testReportsBloc.isValidNumber(value)) ? null : s.invalidNumber,
       initialValue: '${_testReportModel.testNumber ?? ''}',
       keyboardType: TextInputType.number,
     );
@@ -154,8 +155,7 @@ class _TestReportEditPageState extends State<TestReportEditPage> {
     return InputMultiline(
         initialValue: _testReportModel.objective,
         label: s.labelObjective,
-        onChanged: (value) =>
-            _testReportsBloc.validateRequiredInput(s, value),
+        onChanged: (value) => _testReportsBloc.validateRequiredInput(s, value),
         onSaved: (value) =>
             _testReportModel.objective = (value.isNotEmpty) ? value : null);
   }
